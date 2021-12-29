@@ -1,0 +1,8 @@
+DATETIME, REPOSITORY_URL, SCORE, LEVEL, RESULT
+---
+2021/12/28_20:59:17, https://github.com/seigot/tetris, 58, 1, SUCCESS
+2021/12/29_3:06:33, https://github.com/seigot/tetris, 54, 1, SUCCESS
+2021/12/29_3:06:54, https://github.com/seigot/tetriss, 0, -, github_url_access_NG
+2021/12/29_3:07:22, https://github.com/seigot/tetris, 52, 1, SUCCESS
+2021/12/29_3:07:37, hogehogetest, 0, -, github_url_string_NG
+2021/12/29_14:37:54, https://github.com/seigot/tetris, 53, 1, SUCCESS

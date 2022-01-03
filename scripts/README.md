@@ -10,20 +10,6 @@ sudo apt install -y git curl
 sudo apt install -y docker.io
 sudo usermod -aG docker ubuntu  # logout/loginによりsudo dockerを不要にする
 sudo apt install -y jq
-
-# 必要に応じて追加
-cd /usr/bin/
-sudo ln -s python3 python
-
-# 必要に応じて追加
-sudo apt-get install -y python3-pip
-pip3 install --upgrade pip
-pip3 install numpy
-pip3 install pyqt5
-
-sudo apt install -y xvfb
-export DISPLAY=:1
-nohup Xvfb -ac ${DISPLAY} -screen 0 1280x780x24 &
 ```
 
 ## 設定ファイル準備
@@ -48,6 +34,32 @@ API_KEY (google spread sheetにアクセスするための)
 ```
 echo "export API_KEY=XXXX" >> ~/.bashrc
 source ~/.bashrc
+```
+
+### swapの設定
+
+必要に応じてやる。以下を参考にする。
+> [NTTPCのVPS「Indigo」でスワップの設定](https://qiita.com/mmmmmmmmmmmmm/items/7e6648ecb6874441f995)
+
+```
+sudo fallocate -l 4G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+```
+
+`/etc/fstab`の設定
+
+```
+# vi /etc/fstab
+LABEL=cloudimg-rootfs   /        ext4   defaults        0 0
+LABEL=UEFI      /boot/efi       vfat    defaults        0 0
+# add here
+/swapfile       swap    swap    defaults        0 0
+```
+
+```
+swapon -a              # -aで/etc/fstabの内容にしたがってスワップを有効にします
+free -m                # swapが有効になっていることを確認mする
 ```
 
 ## 実行

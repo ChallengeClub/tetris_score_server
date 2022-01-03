@@ -50,7 +50,7 @@ echo "export API_KEY=XXXX" >> ~/.bashrc
 source ~/.bashrc
 ```
 
-##
+## 実行
 
 ```
 git clone https://github.com/seigot/tetris
@@ -61,5 +61,11 @@ git clone https://github.com/seigot/tetris_game_autotest
 ```
 # google spread sheet上のどの行まで評価を進めたかを格納するファイル
 # 適切な値に設定する、初めからする場合は"0"を設定する
-echo "0" >> current_idx.txt
+echo 0 >> current_idx.txt
+```
+
+main処理を実行
+
+```
+nohup bash gameserver.sh &
 ```

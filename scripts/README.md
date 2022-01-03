@@ -48,3 +48,9 @@ echo "export API_KEY=XXXX" >> ~/.bashrc
 source ~/.bashrc
 ```
 
+`git config`
+
+```
+git config --global user.email "s.takada.3o3@gmail.com"
+git config --global user.name "seigot"
+```

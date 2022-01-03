@@ -33,7 +33,7 @@ git clone https://github.com/seigot/tetris_game_autotest
 
 ## 設定ファイル準備
 
-`~/.netrc`
+`~/.netrc` (github.comにアクセスするための)
 
 ```
 machine github.com
@@ -41,16 +41,17 @@ login xxxxx
 password xxxxx
 ```
 
-API_KEY
+`git config` (git commitするための)
+
+```
+git config --global user.email "s.takada.3o3@gmail.com"
+git config --global user.name "seigot"
+```
+
+API_KEY (google spread sheetにアクセスするための)
 
 ```
 echo "export API_KEY=XXXX" >> ~/.bashrc
 source ~/.bashrc
 ```
 
-`git config`
-
-```
-git config --global user.email "s.takada.3o3@gmail.com"
-git config --global user.name "seigot"
-```

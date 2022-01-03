@@ -9,6 +9,7 @@ sudo apt install -y git curl
 # 追加インストール
 sudo apt install -y docker.io
 sudo usermod -aG docker ubuntu  # logout/loginによりsudo dockerを不要にする
+sudo apt install -y jq
 
 # 必要に応じて追加
 cd /usr/bin/
@@ -23,12 +24,6 @@ pip3 install pyqt5
 sudo apt install -y xvfb
 export DISPLAY=:1
 nohup Xvfb -ac ${DISPLAY} -screen 0 1280x780x24 &
-```
-
-```
-git clone https://github.com/seigot/tetris
-git clone https://github.com/seigot/tetris_score_server
-git clone https://github.com/seigot/tetris_game_autotest
 ```
 
 ## 設定ファイル準備
@@ -55,3 +50,14 @@ echo "export API_KEY=XXXX" >> ~/.bashrc
 source ~/.bashrc
 ```
 
+##
+
+```
+git clone https://github.com/seigot/tetris
+git clone https://github.com/seigot/tetris_score_server
+git clone https://github.com/seigot/tetris_game_autotest
+```
+
+```
+echo "0" >> current_idx.txt
+```

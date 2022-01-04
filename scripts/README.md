@@ -58,8 +58,8 @@ LABEL=UEFI      /boot/efi       vfat    defaults        0 0
 ```
 
 ```
-swapon -a              # -aで/etc/fstabの内容にしたがってスワップを有効にします
-free -m                # swapが有効になっていることを確認mする
+sudo swapon -a              # -aで/etc/fstabの内容にしたがってスワップを有効にします
+free -h                     # swapが有効になっていることを確認mする
 ```
 
 ## 実行
@@ -81,7 +81,10 @@ echo 0 >> current_idx.txt
 main処理を実行
 
 ```
+# 本番の場合
 nohup bash gameserver.sh -m RELEASE &
+# debugの場合
+bash gameserver.sh -m DEBUG
 ```
 
 処理停止する場合は、`process kill`する

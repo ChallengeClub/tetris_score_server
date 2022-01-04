@@ -7,9 +7,10 @@
 sudo apt install -y git curl
 
 # 追加インストール
-sudo apt install -y docker.io
-sudo usermod -aG docker ubuntu  # logout/loginによりsudo dockerを不要にする
 sudo apt install -y jq
+sudo apt install -y docker.io
+sudo usermod -aG docker ubuntu  
+### logout/loginによりsudo dockerを不要にする設定を有効にする
 ```
 
 ## 設定ファイル準備

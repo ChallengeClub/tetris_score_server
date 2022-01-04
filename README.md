@@ -8,6 +8,13 @@ tetris_score_server for https://github.com/seigot/tetris
 
 ### 評価結果は以下に出力されます
 
-xxx.log  
+[評価結果一覧](./log/result.csv)  
+[level1の評価結果](./log/result_ranking_level_1.log)  
+[level2の評価結果](./log/result_ranking_level_2.log)  
+[level3の評価結果](./log/result_ranking_level_3.log)  
 
 ※数十分ほど掛かることがあります
+
+# サーバ稼働期間
+
+2022/1/1-2022/3/31 とする予定

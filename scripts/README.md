@@ -64,10 +64,12 @@ free -m                # swapが有効になっていることを確認mする
 
 ## 実行
 
+関係するリポジトリ、ファイルを準備する
+
 ```
 git clone https://github.com/seigot/tetris
 git clone https://github.com/seigot/tetris_score_server
-git clone https://github.com/seigot/tetris_game_autotest
+cd tetris_score_server/log
 ```
 
 ```
@@ -79,5 +81,13 @@ echo 0 >> current_idx.txt
 main処理を実行
 
 ```
-nohup bash gameserver.sh &
+nohup bash gameserver.sh -m RELEASE &
+```
+
+処理停止する場合は、`process kill`する
+
+```
+$ ps -aux | grep bash 
+ubuntu     44970  0.0  0.1   9004  3884 ?        S    Jan03   0:00 bash gameserver.sh
+$ kill 44970
 ```

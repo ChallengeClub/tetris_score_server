@@ -87,6 +87,7 @@ nohup bash gameserver.sh -m RELEASE &
 処理停止する場合は、`process kill`する
 
 ```
+## process kill する時の例
 $ ps -aux | grep bash 
 ubuntu     44970  0.0  0.1   9004  3884 ?        S    Jan03   0:00 bash gameserver.sh
 $ kill 44970

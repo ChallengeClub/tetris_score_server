@@ -1,5 +1,0 @@
-DATETIME, REPOSITORY_URL, SCORE, LEVEL, RESULT
----
-2022/01/04_4:06:37    https://github.com/seigot/tetris   57      2   SUCCESS
-2022/01/04_13:07:37   https://github.com/seigot/tetris   -1937   2   SUCCESS
-2022/01/04_4:06:37    https://github.com/seigot/tetris   -2048   2   SUCCESS

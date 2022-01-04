@@ -35,22 +35,22 @@ function update_result(){
     STR="${DATETIME}, ${REPOSITORY_URL}, ${SCORE}, ${LEVEL}, ${RESULT}"    
 
     ## update result file
-    RESULT_CSV="result.csv"
-    RESULT_LEVEL_LOG="result_level_${LEVEL}.log"
-    RESULT_RANKING_LOG="result_ranking_level_${LEVEL}.log"
+    RESULT_LOG="result.csv"
+    RESULT_LEVEL_LOG="result_level_${LEVEL}.csv"
+    RESULT_RANKING_LOG="result_ranking_level_${LEVEL}.csv"
 
-    echo $STR >> ${RESULT_CSV}
+    echo $STR >> ${RESULT_LOG}
 
     if [ "${RESULT}" == "SUCCESS" ]; then
 	if [ ! -e ${RESULT_LEVEL_LOG} ]; then
 	    echo "DATETIME, REPOSITORY_URL, SCORE, LEVEL, RESULT" >> ${RESULT_LEVEL_LOG}
 	fi
 	echo $STR >> ${RESULT_LEVEL_LOG}
-	cat <(head -1 ${RESULT_LEVEL_LOG} | column -t -s,) <(tail -n +2 ${RESULT_LEVEL_LOG} | sort -nr -t, -k3 | column -t -s,) > ${RESULT_RANKING_LOG}
+	cat <(head -1 ${RESULT_LEVEL_LOG}) <(tail -n +2 ${RESULT_LEVEL_LOG} | sort -nr -t, -k3) > ${RESULT_RANKING_LOG}
     fi
 	
     echo "--"
-    cat ${RESULT_CSV}
+    cat ${RESULT_LOG}
     echo "--"
     cat ${RESULT_LEVEL_LOG}
     echo "--"
@@ -67,7 +67,7 @@ function update_result(){
     #git clone https://github.com/seigot/tetris_score_server
     #pushd tetris_score_server/logs
     git pull
-    git add ${RESULT_CSV}
+    git add ${RESULT_LOG}
     git add ${RESULT_LEVEL_LOG}
     git add ${RESULT_RANKING_LOG}
     git commit -m "update result"

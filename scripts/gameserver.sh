@@ -127,12 +127,12 @@ function do_tetris(){
     # exec command
     docker exec ${CONTAINER_NAME} bash -c "${PRE_COMMAND}"
     if [ $? -ne 0 ]; then
-	error_result "${DATETIME}" "${REPOSITORY_URL}" "0" "-" "pip3_install_-r_requirements.txt_NG"
+	error_result "${DATETIME}" "${REPOSITORY_URL}" "0" "${LEVEL}" "pip3_install_-r_requirements.txt_NG"
 	return 0
     fi
     docker exec ${CONTAINER_NAME} bash -c "${DO_COMMAND}"
     if [ $? -ne 0 ]; then
-	error_result "${DATETIME}" "${REPOSITORY_URL}" "0" "-" "python_start.py_NG"
+	error_result "${DATETIME}" "${REPOSITORY_URL}" "0" "${LEVEL}" "python_start.py_NG"
 	return 0
     fi
     docker exec ${CONTAINER_NAME} bash -c "${POST_COMMAND}" > ${TMP_LOG}    
@@ -197,17 +197,17 @@ function do_polling(){
 	    VALUE_URL1=`jq .values[${idx}][1] ${JSONFILE}`
 	    VALUE_URL2=`echo ${VALUE_URL1} | cut -d' ' -f 1`
 	    VALUE_URL=${VALUE_URL2//"\""/""}  # "
-	    if [[ "$VALUE_URL" =~ "http".*"://github.com/".*"tetris" ]]; then
+	    if [[ "$VALUE_URL" =~ "http".*"://github.com/".*"tetris"$ ]]; then
 		echo "url string OK"
 	    else
-		error_result "${VALUE_TIME}" "${VALUE_URL}" "0" "1" "github_url_string_NG"
+		error_result "${VALUE_TIME}" "${VALUE_URL}" "0" "-" "github_url_string_NG"
 		continue
 	    fi
 	    git ls-remote ${VALUE_URL} > /dev/null
 	    RET=$?
 	    if [ $RET -ne 0 ]; then
 		echo "git ls-remote NG"
-		error_result "${VALUE_TIME}" "${VALUE_URL}" "0" "1" "github_url_access_NG"
+		error_result "${VALUE_TIME}" "${VALUE_URL}" "0" "-" "github_url_access_NG"
 		continue
 	    fi
 

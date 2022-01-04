@@ -9,9 +9,9 @@ tetris_score_server for https://github.com/seigot/tetris
 ### 評価結果は以下に出力されます
 
 [評価結果一覧](./log/result.csv)  
-[level1の評価結果](./log/result_ranking_level_1.log)  
-[level2の評価結果](./log/result_ranking_level_2.log)  
-[level3の評価結果](./log/result_ranking_level_3.log)  
+[level1の評価結果](./log/result_ranking_level_1.csv)  
+[level2の評価結果](./log/result_ranking_level_2.csv)  
+[level3の評価結果](./log/result_ranking_level_3.csv)  
 
 ※数十分ほど掛かることがあります
 

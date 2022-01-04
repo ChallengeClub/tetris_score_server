@@ -44,10 +44,9 @@ function update_result(){
     if [ "${RESULT}" == "SUCCESS" ]; then
 	if [ ! -e ${RESULT_LEVEL_LOG} ]; then
 	    echo "DATETIME, REPOSITORY_URL, SCORE, LEVEL, RESULT" >> ${RESULT_LEVEL_LOG}
-	    echo "---" >> ${RESULT_LEVEL_LOG}
 	fi
 	echo $STR >> ${RESULT_LEVEL_LOG}
-	cat <(head -2 ${RESULT_LEVEL_LOG}) <(tail -n +3 ${RESULT_LEVEL_LOG} | sort -nr -t, -k3 | column -t -s,) > ${RESULT_RANKING_LOG}
+	cat <(head -1 ${RESULT_LEVEL_LOG} | column -t -s,) <(tail -n +2 ${RESULT_LEVEL_LOG} | sort -nr -t, -k3 | column -t -s,) > ${RESULT_RANKING_LOG}
     fi
 	
     echo "--"

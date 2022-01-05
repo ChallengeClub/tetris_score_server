@@ -26,6 +26,7 @@ password xxxxx
 `git config` (git commitするための)
 
 ```
+## 例
 git config --global user.email "s.takada.3o3@gmail.com"
 git config --global user.name "seigot"
 ```

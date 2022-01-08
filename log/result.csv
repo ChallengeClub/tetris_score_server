@@ -6,3 +6,4 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL
 2021/12/29_3:07:37, hogehogetest, -, 0, -, github_url_string_NG, -
 2021/12/29_14:37:54, https://github.com/seigot/tetris, master, -1641, 1, SUCCESS, 1000
 2021/12/29_22:06:41, https://github.com/seigot/tetris, master, -1509, 1, SUCCESS, 1000
+null, null, -, 0, -, github_url_string_NG, -

@@ -52,7 +52,7 @@ function update_result(){
 	    echo "${HEADER_STR}" >> ${RESULT_LEVEL_LOG}
 	fi
 	echo $STR >> ${RESULT_LEVEL_LOG}
-	cat <(head -1 ${RESULT_LEVEL_LOG}) <(tail -n +2 ${RESULT_LEVEL_LOG} | sort -nr -t, -k3) > ${RESULT_RANKING_LOG}
+	cat <(head -1 ${RESULT_LEVEL_LOG}) <(tail -n +2 ${RESULT_LEVEL_LOG} | sort -nr -t, -k4) > ${RESULT_RANKING_LOG}
     fi
 	
     echo "--"

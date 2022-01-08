@@ -34,18 +34,22 @@ function update_result(){
     local LEVEL="$5"
     local RESULT="$6"
     local DROP_INTERVAL="$7"
+    local HEADER_STR="DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL"
     local STR="${DATETIME}, ${REPOSITORY_URL}, ${BRANCH}, ${SCORE}, ${LEVEL}, ${RESULT}, ${DROP_INTERVAL}"
-
+    
     ## update result file
     local RESULT_LOG="result.csv"
     local RESULT_LEVEL_LOG="result_level_${LEVEL}.csv"
     local RESULT_RANKING_LOG="result_ranking_level_${LEVEL}.csv"
 
+    if [ ! -e ${RESULT_LOG} ]; then
+	echo "${HEADER_STR}" >> ${RESULT_LOG}
+    fi
     echo $STR >> ${RESULT_LOG}
 
     if [ "${RESULT}" == "SUCCESS" ]; then
 	if [ ! -e ${RESULT_LEVEL_LOG} ]; then
-	    echo "DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL" >> ${RESULT_LEVEL_LOG}
+	    echo "${HEADER_STR}" >> ${RESULT_LEVEL_LOG}
 	fi
 	echo $STR >> ${RESULT_LEVEL_LOG}
 	cat <(head -1 ${RESULT_LEVEL_LOG}) <(tail -n +2 ${RESULT_LEVEL_LOG} | sort -nr -t, -k3) > ${RESULT_RANKING_LOG}

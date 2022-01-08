@@ -161,6 +161,7 @@ function do_tetris(){
 	error_result "${DATETIME}" "${REPOSITORY_URL}" "${BRANCH}" "0" "${LEVEL}" "pip3_install_-r_requirements.txt_NG" "${DROP_INTERVAL}"
 	return 0
     fi
+    docker network disconnect bridge ${CONTAINER_NAME}
     docker exec ${CONTAINER_NAME} bash -c "${DO_COMMAND}"
     if [ $? -ne 0 ]; then
 	error_result "${DATETIME}" "${REPOSITORY_URL}" "${BRANCH}" "0" "${LEVEL}" "python_start.py_NG" "${DROP_INTERVAL}"

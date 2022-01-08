@@ -142,9 +142,9 @@ function do_tetris(){
 
     local PRE_COMMAND="cd ~ && rm -rf tetris && git clone ${REPOSITORY_URL} -b ${BRANCH} && cd ~/tetris && pip3 install -r requirements.txt"
     local DO_COMMAND="cd ~/tetris && export DISPLAY=:1 && python3 start.py -l ${LEVEL} -t ${GAME_TIME} -d ${DROP_INTERVAL} && jq . result.json"
-    local POST_COMMAND="cd ~/tetris && jq .judge_info.score result.json"
+    local POST_COMMAND="cd ~/tetris && jq . result.json"
 
-    TMP_LOG="tmp.log"
+    TMP_LOG="tmp.json"
     CONTAINER_NAME="tetris_docker"
 
     # run docker with detached state
@@ -169,7 +169,7 @@ function do_tetris(){
     docker exec ${CONTAINER_NAME} bash -c "${POST_COMMAND}" > ${TMP_LOG}    
 
     # get result score
-    SCORE=`cat ${TMP_LOG} | tail -1`
+    SCORE=`jq .judge_info.score ${TMP_LOG}`
     echo $SCORE
     success_result "${DATETIME}" "${REPOSITORY_URL}" "${BRANCH}" "${SCORE}" "${LEVEL}" "SUCCESS" "${DROP_INTERVAL}"
 }

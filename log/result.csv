@@ -21,3 +21,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -
 2022/01/08_23:14:24, https://github.com/seigot/tetris, master, -17782, 1, SUCCESS, 100, 300, 0, 0, 0, -37000
 2022/01/08_23:14:42, https://github.com/seigot/tetris, master, 0, -, check_drop_interval_value_NG, -1, -, -, -, -, -
 2022/01/08_23:14:54, https://github.com/seigot/tetris, master, 0, -, check_drop_interval_value_NG, 0, -, -, -, -, -
+2022/01/11_14:10:39, https://github.com/seigot/tetris, master, -1586, 2, SUCCESS, 1000, 0, 0, 0, 0, -3500

@@ -18,3 +18,18 @@
 # サーバ稼働期間
 
 2022/1/1-2022/3/31 とする予定
+
+# サーバスペック
+
+`2 cpu`, `2GB memory(swap 4GB)`, `40GB virtual storage`
+
+```
+$ grep cpu.cores /proc/cpuinfo | sort -u
+cpu cores	: 2
+$ free -h
+              total        used        free      shared  buff/cache   available
+Mem:          1.9Gi       363Mi       103Mi       3.0Mi       1.5Gi       1.4Gi
+Swap:         4.0Gi        23Mi       4.0Gi
+$ df -h | grep /dev/vda1
+/dev/vda1        39G   12G   27G  31% /
+```

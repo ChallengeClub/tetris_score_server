@@ -39,8 +39,10 @@ function update_result(){
     local LINE3_SCORE="${10}"
     local LINE4_SCORE="${11}"
     local GAMEOVER_SCORE="${12}"
-    local HEADER_STR="DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, 1LINE_SCORE, 2LINE_SCORE, 3LINE_SCORE, 4LINE_SCORE, GAMEOVER_SCORE"
-    local STR="${DATETIME}, ${REPOSITORY_URL}, ${BRANCH}, ${SCORE}, ${LEVEL}, ${RESULT}, ${DROP_INTERVAL}, ${LINE1_SCORE}, ${LINE2_SCORE}, ${LINE3_SCORE}, ${LINE4_SCORE}, ${GAMEOVER_SCORE}"
+    local DROPDOWN_SCORE="${13}"
+    local BLOCK_NO="${14}"
+    local HEADER_STR="DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, 1LINE_SCORE, 2LINE_SCORE, 3LINE_SCORE, 4LINE_SCORE, GAMEOVER_SCORE, DROPDOWN_SCORE, BLOCK_NO"
+    local STR="${DATETIME}, ${REPOSITORY_URL}, ${BRANCH}, ${SCORE}, ${LEVEL}, ${RESULT}, ${DROP_INTERVAL}, ${LINE1_SCORE}, ${LINE2_SCORE}, ${LINE3_SCORE}, ${LINE4_SCORE}, ${GAMEOVER_SCORE}, ${DROPDOWN_SCORE}, ${BLOCK_NO}"
     
     ## update result file
     local RESULT_LOG="result.csv"
@@ -95,7 +97,7 @@ function error_result(){
     #RESULT="$5"
     #STR="${DATETIME}, ${REPOSITORY_URL}, ${SCORE}, ${LEVEL}, ${RESULT}"
     #update_result "${STR}"
-    update_result "$1" "$2" "$3" "$4" "$5" "$6" "$7" "-" "-" "-" "-" "-"
+    update_result "$1" "$2" "$3" "$4" "$5" "$6" "$7" "-" "-" "-" "-" "-" "-" "-"
 }
 
 function success_result(){
@@ -106,7 +108,7 @@ function success_result(){
     #LEVEL="$4"
     #STR="${DATETIME}, ${REPOSITORY_URL}, ${SCORE}, ${LEVEL}, SUCCESS"
     #update_result "${STR}"
-    update_result "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" "${10}" "${11}" "${12}"
+    update_result "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" "${10}" "${11}" "${12}" "${13}" "${14}"
 }
 
 function check_drop_interval_value(){
@@ -191,12 +193,16 @@ function do_tetris(){
     LINE4=`jq .debug_info.line_score.line4 ${TMP_LOG}`
     STAT_GAMEOVER=`jq .debug_info.line_score.gameover ${TMP_LOG}`
     GAMEOVER=`jq .judge_info.gameover_count ${TMP_LOG}`
+    BLOCK_NO=`jq .judge_info.block_index  ${TMP_LOG}`
+
     LINE1_SCORE=$(( STAT_LINE1 * LINE1 ))
     LINE2_SCORE=$(( STAT_LINE2 * LINE2 ))
     LINE3_SCORE=$(( STAT_LINE3 * LINE3 ))
     LINE4_SCORE=$(( STAT_LINE4 * LINE4 ))
     GAMEOVER_SCORE=$(( STAT_GAMEOVER * GAMEOVER ))
-    success_result "${DATETIME}" "${REPOSITORY_URL}" "${BRANCH}" "${SCORE}" "${LEVEL}" "SUCCESS" "${DROP_INTERVAL}" "${LINE1_SCORE}" "${LINE2_SCORE}" "${LINE3_SCORE}" "${LINE4_SCORE}" "${GAMEOVER_SCORE}"
+    DROPDOWN_SCORE=$(( SCORE - LINE1_SCORE - LINE2_SCORE - LINE3_SCORE - LINE4_SCORE - GAMEOVER_SCORE ))
+    
+    success_result "${DATETIME}" "${REPOSITORY_URL}" "${BRANCH}" "${SCORE}" "${LEVEL}" "SUCCESS" "${DROP_INTERVAL}" "${LINE1_SCORE}" "${LINE2_SCORE}" "${LINE3_SCORE}" "${LINE4_SCORE}" "${GAMEOVER_SCORE}" "${DROPDOWN_SCORE}" "${BLOCK_NO}"
 }
 
 function do_polling(){

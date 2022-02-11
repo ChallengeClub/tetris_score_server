@@ -41,9 +41,14 @@ function update_result(){
     local GAMEOVER_SCORE="${12}"
     local DROPDOWN_SCORE="${13}"
     local BLOCK_NO="${14}"
-    local HEADER_STR="DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, 1LINE_SCORE, 2LINE_SCORE, 3LINE_SCORE, 4LINE_SCORE, GAMEOVER_SCORE, DROPDOWN_SCORE, BLOCK_NO"
-    local STR="${DATETIME}, ${REPOSITORY_URL}, ${BRANCH}, ${SCORE}, ${LEVEL}, ${RESULT}, ${DROP_INTERVAL}, ${LINE1_SCORE}, ${LINE2_SCORE}, ${LINE3_SCORE}, ${LINE4_SCORE}, ${GAMEOVER_SCORE}, ${DROPDOWN_SCORE}, ${BLOCK_NO}"
-    
+    local MEAN="${15}"
+    local STDEV="${16}"
+    local MAX="${17}"
+    local MIN="${18}"
+    local TRIAL_NUM="${19}"
+    local HEADER_STR="DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, 1LINE_SCORE, 2LINE_SCORE, 3LINE_SCORE, 4LINE_SCORE, GAMEOVER_SCORE, DROPDOWN_SCORE, BLOCK_NO, MEAN, STDEV, MAX, MIN, TRIAL_NUM"
+    local STR="${DATETIME}, ${REPOSITORY_URL}, ${BRANCH}, ${SCORE}, ${LEVEL}, ${RESULT}, ${DROP_INTERVAL}, ${LINE1_SCORE}, ${LINE2_SCORE}, ${LINE3_SCORE}, ${LINE4_SCORE}, ${GAMEOVER_SCORE}, ${DROPDOWN_SCORE}, ${BLOCK_NO}, ${MEAN}, ${STDEV}, ${MAX}, ${MIN}, ${TRIAL_NUM}"
+
     ## update result file
     local RESULT_LOG="result.csv"
     local RESULT_LEVEL_LOG="result_level_${LEVEL}.csv"
@@ -97,7 +102,7 @@ function error_result(){
     #RESULT="$5"
     #STR="${DATETIME}, ${REPOSITORY_URL}, ${SCORE}, ${LEVEL}, ${RESULT}"
     #update_result "${STR}"
-    update_result "$1" "$2" "$3" "$4" "$5" "$6" "$7" "-" "-" "-" "-" "-" "-" "-"
+    update_result "$1" "$2" "$3" "$4" "$5" "$6" "$7" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-" "-"
 }
 
 function success_result(){
@@ -108,7 +113,7 @@ function success_result(){
     #LEVEL="$4"
     #STR="${DATETIME}, ${REPOSITORY_URL}, ${SCORE}, ${LEVEL}, SUCCESS"
     #update_result "${STR}"
-    update_result "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" "${10}" "${11}" "${12}" "${13}" "${14}"
+    update_result "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" "${10}" "${11}" "${12}" "${13}" "${14}" "${15}" "${16}" "${17}" "${18}" "${19}"
 }
 
 function check_drop_interval_value(){
@@ -141,6 +146,7 @@ function check_drop_interval_value(){
 
 function do_tetris(){
 
+    # parameter declaration
     local DATETIME="$1"
     local REPOSITORY_URL="$2"
     local BRANCH="$3"
@@ -155,8 +161,10 @@ function do_tetris(){
     local DO_COMMAND="cd ~/tetris && export DISPLAY=:1 && python3 start.py -l ${LEVEL} -t ${GAME_TIME} -d ${DROP_INTERVAL} && jq . result.json"
     local POST_COMMAND="cd ~/tetris && jq . result.json"
 
-    TMP_LOG="tmp.json"
-    CONTAINER_NAME="tetris_docker"
+    local TMP_LOG="tmp.json"
+    local TMP2_LOG="tmp2.log"
+    local OUTPUTJSON="output.json"
+    local CONTAINER_NAME="tetris_docker"
 
     # run docker with detached state
     RET=`docker ps -a | grep ${CONTAINER_NAME} | wc -l`
@@ -173,27 +181,50 @@ function do_tetris(){
 	return 0
     fi
     docker network disconnect bridge ${CONTAINER_NAME}
-    docker exec ${CONTAINER_NAME} bash -c "${DO_COMMAND}"
-    if [ $? -ne 0 ]; then
-	error_result "${DATETIME}" "${REPOSITORY_URL}" "${BRANCH}" "0" "${LEVEL}" "python_start.py_NG" "${DROP_INTERVAL}"
-	return 0
-    fi
-    docker exec ${CONTAINER_NAME} bash -c "${POST_COMMAND}" > ${TMP_LOG}    
+
+    # exec loop
+    local LOOP_MAX=10
+    local SCORE_MAX=-10000000000
+    local SCORE_MAX_INDEX=1
+    local SCORE_ARRAY=()
+    echo {} | jq . > ${OUTPUTJSON}
+    for N in `seq 1 ${LOOP_MAX}`; do    
+	# do command
+	docker exec ${CONTAINER_NAME} bash -c "${DO_COMMAND}"
+	if [ $? -ne 0 ]; then
+	    error_result "${DATETIME}" "${REPOSITORY_URL}" "${BRANCH}" "0" "${LEVEL}" "python_start.py_NG" "${DROP_INTERVAL}"
+	    return 0
+	fi
+	# get result
+	docker exec ${CONTAINER_NAME} bash -c "${POST_COMMAND}" > ${TMP_LOG}
+
+	# check if max score
+	CURRENT_SCORE=`jq .judge_info.score ${TMP_LOG}`
+	if [ ${CURRENT_SCORE} -ge ${SCORE_MAX} ];then
+            SCORE_MAX=${CURRENT_SCORE}
+            SCORE_MAX_INDEX=${N}
+        fi
+	SCORE_ARRAY+=("${CURRENT_SCORE}")
+
+	# merge result to ${OUTPUTJSON}
+	RESULT_JSON_STR=`jq . ${TMP_LOG}`
+	jq ".index${N} = ${RESULT_JSON_STR}" ${OUTPUTJSON} > tmp && mv tmp ${OUTPUTJSON}
+    done
 
     # get result score
-    SCORE=`jq .judge_info.score ${TMP_LOG}`
+    SCORE=`jq .index${SCORE_MAX_INDEX}.judge_info.score ${OUTPUTJSON}`
     echo $SCORE
-    STAT_LINE1=`jq .debug_info.line_score_stat[0] ${TMP_LOG}`
-    LINE1=`jq .debug_info.line_score.line1 ${TMP_LOG}`
-    STAT_LINE2=`jq .debug_info.line_score_stat[1] ${TMP_LOG}`
-    LINE2=`jq .debug_info.line_score.line2 ${TMP_LOG}`
-    STAT_LINE3=`jq .debug_info.line_score_stat[2] ${TMP_LOG}`
-    LINE3=`jq .debug_info.line_score.line3 ${TMP_LOG}`
-    STAT_LINE4=`jq .debug_info.line_score_stat[3] ${TMP_LOG}`
-    LINE4=`jq .debug_info.line_score.line4 ${TMP_LOG}`
-    STAT_GAMEOVER=`jq .debug_info.line_score.gameover ${TMP_LOG}`
-    GAMEOVER=`jq .judge_info.gameover_count ${TMP_LOG}`
-    BLOCK_NO=`jq .judge_info.block_index  ${TMP_LOG}`
+    STAT_LINE1=`jq .index${SCORE_MAX_INDEX}.debug_info.line_score_stat[0] ${OUTPUTJSON}`
+    LINE1=`jq .index${SCORE_MAX_INDEX}.debug_info.line_score.line1 ${OUTPUTJSON}`
+    STAT_LINE2=`jq .index${SCORE_MAX_INDEX}.debug_info.line_score_stat[1] ${OUTPUTJSON}`
+    LINE2=`jq .index${SCORE_MAX_INDEX}.debug_info.line_score.line2 ${OUTPUTJSON}`
+    STAT_LINE3=`jq .index${SCORE_MAX_INDEX}.debug_info.line_score_stat[2] ${OUTPUTJSON}`
+    LINE3=`jq .index${SCORE_MAX_INDEX}.debug_info.line_score.line3 ${OUTPUTJSON}`
+    STAT_LINE4=`jq .index${SCORE_MAX_INDEX}.debug_info.line_score_stat[3] ${OUTPUTJSON}`
+    LINE4=`jq .index${SCORE_MAX_INDEX}.debug_info.line_score.line4 ${OUTPUTJSON}`
+    STAT_GAMEOVER=`jq .index${SCORE_MAX_INDEX}.debug_info.line_score.gameover ${OUTPUTJSON}`
+    GAMEOVER=`jq .index${SCORE_MAX_INDEX}.judge_info.gameover_count ${OUTPUTJSON}`
+    BLOCK_NO=`jq .index${SCORE_MAX_INDEX}.judge_info.block_index  ${OUTPUTJSON}`
 
     LINE1_SCORE=$(( STAT_LINE1 * LINE1 ))
     LINE2_SCORE=$(( STAT_LINE2 * LINE2 ))
@@ -201,8 +232,15 @@ function do_tetris(){
     LINE4_SCORE=$(( STAT_LINE4 * LINE4 ))
     GAMEOVER_SCORE=$(( STAT_GAMEOVER * GAMEOVER ))
     DROPDOWN_SCORE=$(( SCORE - LINE1_SCORE - LINE2_SCORE - LINE3_SCORE - LINE4_SCORE - GAMEOVER_SCORE ))
-    
-    success_result "${DATETIME}" "${REPOSITORY_URL}" "${BRANCH}" "${SCORE}" "${LEVEL}" "SUCCESS" "${DROP_INTERVAL}" "${LINE1_SCORE}" "${LINE2_SCORE}" "${LINE3_SCORE}" "${LINE4_SCORE}" "${GAMEOVER_SCORE}" "${DROPDOWN_SCORE}" "${BLOCK_NO}"
+    # get statistics value
+    echo ${SCORE_ARRAY[@]} | python get_statistics.py > ${TMP2_LOG}
+    MEAN=`cat ${TMP2_LOG} | grep "mean" | cut -d' ' -f2`
+    STDEV=`cat ${TMP2_LOG} | grep "stdev" | cut -d' ' -f2`
+    MAX=`cat ${TMP2_LOG} | grep "max" | cut -d' ' -f2`
+    MIN=`cat ${TMP2_LOG} | grep "min" | cut -d' ' -f2`
+    TRIAL_NUM=`cat ${TMP2_LOG} | grep "num" | cut -d' ' -f2`
+
+    success_result "${DATETIME}" "${REPOSITORY_URL}" "${BRANCH}" "${SCORE}" "${LEVEL}" "SUCCESS" "${DROP_INTERVAL}" "${LINE1_SCORE}" "${LINE2_SCORE}" "${LINE3_SCORE}" "${LINE4_SCORE}" "${GAMEOVER_SCORE}" "${DROPDOWN_SCORE}" "${BLOCK_NO}" "${MEAN}" "${STDEV}" "${MAX}" "${MIN}" "${TRIAL_NUM}"
 }
 
 function do_polling(){

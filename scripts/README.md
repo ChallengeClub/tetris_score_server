@@ -85,6 +85,10 @@ main処理を実行
 ```
 # 本番の場合
 nohup bash gameserver.sh -m RELEASE &
+
+# ログ出力を無効にする場合(ログサイズが気になる場合)
+nohup bash gameserver.sh -m RELEASE >/dev/null 2>&1 &
+
 # debugの場合
 bash gameserver.sh -m DEBUG
 ```

@@ -1,4 +1,4 @@
-DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, 1LINE_SCORE, 2LINE_SCORE, 3LINE_SCORE, 4LINE_SCORE, GAMEOVER_SCORE, DROPDOWN_SCORE, BLOCK_NO, MEAN, STDEV, MAX, MIN, TRIAL_NUM
+DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, 1LINE_SCORE, 2LINE_SCORE, 3LINE_SCORE, 4LINE_SCORE, GAMEOVER_SCORE, DROPDOWN_SCORE, BLOCK_NO, TRIAL_NUM, SCORE_MEAN, SCORE_STDEV, SCORE_MAX, SCORE_MIN
 2021/12/28_20:59:17, https://github.com/seigot/tetris, master, -2114, 1, SUCCESS, 1000, 0, 0, 0, 0, -4000, -, -, -, -, -, -, -
 2021/12/29_3:06:33, https://github.com/seigot/tetris, master, -1572, 1, SUCCESS, 1000, 0, 0, 0, 0, -3500, -, -, -, -, -, -, -
 2021/12/29_3:07:22, https://github.com/seigot/tetris, master, -1914, 1, SUCCESS, 1000, 0, 0, 0, 0, -4000, -, -, -, -, -, -, -
@@ -13,4 +13,4 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, 1LINE_SCO
 2022/01/22_22:23:17, https://github.com/seigot/tetris, master, -1569, 1, SUCCESS, 1000, 0, 0, 0, 0, -3500, 1931, 180, -, -, -, -, -
 2022/01/25_17:23:17, https://github.com/seigot/tetris, master, -2078, 1, SUCCESS, 1000, 0, 0, 0, 0, -4000, 1922, 180, -, -, -, -, -
 2022/02/05_21:58:02, https://github.com/isshy-you/tetris, ish04f, 15746, 1, SUCCESS, 1000, 1800, 4200, 2800, 3900, 0, 3046, 180, -, -, -, -, -
-2022/02/12_1:03:56, https://github.com/seigot/tetris, master, -1504, 1, SUCCESS, 1000, 0, 0, 0, 0, -3500, 1996, 180, -1696.90, 206.70, -1504, -2078, 10
+2022/02/12_1:03:56, https://github.com/seigot/tetris, master, -1504, 1, SUCCESS, 1000, 0, 0, 0, 0, -3500, 1996, 180, 10, -1696.90, 206.70, -1504, -2078

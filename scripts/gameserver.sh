@@ -41,13 +41,13 @@ function update_result(){
     local GAMEOVER_SCORE="${12}"
     local DROPDOWN_SCORE="${13}"
     local BLOCK_NO="${14}"
-    local MEAN="${15}"
-    local STDEV="${16}"
-    local MAX="${17}"
-    local MIN="${18}"
-    local TRIAL_NUM="${19}"
-    local HEADER_STR="DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, 1LINE_SCORE, 2LINE_SCORE, 3LINE_SCORE, 4LINE_SCORE, GAMEOVER_SCORE, DROPDOWN_SCORE, BLOCK_NO, MEAN, STDEV, MAX, MIN, TRIAL_NUM"
-    local STR="${DATETIME}, ${REPOSITORY_URL}, ${BRANCH}, ${SCORE}, ${LEVEL}, ${RESULT}, ${DROP_INTERVAL}, ${LINE1_SCORE}, ${LINE2_SCORE}, ${LINE3_SCORE}, ${LINE4_SCORE}, ${GAMEOVER_SCORE}, ${DROPDOWN_SCORE}, ${BLOCK_NO}, ${MEAN}, ${STDEV}, ${MAX}, ${MIN}, ${TRIAL_NUM}"
+    local TRIAL_NUM="${15}"
+    local SCORE_MEAN="${16}"
+    local SCORE_STDEV="${17}"
+    local SCORE_MAX="${18}"
+    local SCORE_MIN="${19}"
+    local HEADER_STR="DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, 1LINE_SCORE, 2LINE_SCORE, 3LINE_SCORE, 4LINE_SCORE, GAMEOVER_SCORE, DROPDOWN_SCORE, BLOCK_NO, TRIAL_NUM, SCORE_MEAN, SCORE_STDEV, SCORE_MAX, SCORE_MIN"
+    local STR="${DATETIME}, ${REPOSITORY_URL}, ${BRANCH}, ${SCORE}, ${LEVEL}, ${RESULT}, ${DROP_INTERVAL}, ${LINE1_SCORE}, ${LINE2_SCORE}, ${LINE3_SCORE}, ${LINE4_SCORE}, ${GAMEOVER_SCORE}, ${DROPDOWN_SCORE}, ${BLOCK_NO}, ${TRIAL_NUM}, ${SCORE_MEAN}, ${SCORE_STDEV}, ${SCORE_MAX}, ${SCORE_MIN}"
 
     ## update result file
     local RESULT_LOG="result.csv"
@@ -234,13 +234,13 @@ function do_tetris(){
     DROPDOWN_SCORE=$(( SCORE - LINE1_SCORE - LINE2_SCORE - LINE3_SCORE - LINE4_SCORE - GAMEOVER_SCORE ))
     # get statistics value
     echo ${SCORE_ARRAY[@]} | python get_statistics.py > ${TMP2_LOG}
+    TRIAL_NUM=`cat ${TMP2_LOG} | grep "num" | cut -d' ' -f2`
     MEAN=`cat ${TMP2_LOG} | grep "mean" | cut -d' ' -f2`
     STDEV=`cat ${TMP2_LOG} | grep "stdev" | cut -d' ' -f2`
     MAX=`cat ${TMP2_LOG} | grep "max" | cut -d' ' -f2`
     MIN=`cat ${TMP2_LOG} | grep "min" | cut -d' ' -f2`
-    TRIAL_NUM=`cat ${TMP2_LOG} | grep "num" | cut -d' ' -f2`
 
-    success_result "${DATETIME}" "${REPOSITORY_URL}" "${BRANCH}" "${SCORE}" "${LEVEL}" "SUCCESS" "${DROP_INTERVAL}" "${LINE1_SCORE}" "${LINE2_SCORE}" "${LINE3_SCORE}" "${LINE4_SCORE}" "${GAMEOVER_SCORE}" "${DROPDOWN_SCORE}" "${BLOCK_NO}" "${MEAN}" "${STDEV}" "${MAX}" "${MIN}" "${TRIAL_NUM}"
+    success_result "${DATETIME}" "${REPOSITORY_URL}" "${BRANCH}" "${SCORE}" "${LEVEL}" "SUCCESS" "${DROP_INTERVAL}" "${LINE1_SCORE}" "${LINE2_SCORE}" "${LINE3_SCORE}" "${LINE4_SCORE}" "${GAMEOVER_SCORE}" "${DROPDOWN_SCORE}" "${BLOCK_NO}" "${TRIAL_NUM}" "${MEAN}" "${STDEV}" "${MAX}" "${MIN}"
 }
 
 function do_polling(){

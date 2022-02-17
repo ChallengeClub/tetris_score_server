@@ -70,3 +70,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/02/18_0:28:00, https://github.com/isshy-you/tetris, master, 0, -, check_drop_interval_value_NG, １, -, -, -, -, -, -, -, -, -, -, -, -
 2022/02/18_0:28:10, https://github.com/isshy-you/tetris, master, 0, -, check_drop_interval_value_NG, １, -, -, -, -, -, -, -, -, -, -, -, -
 2022/02/18_0:35:54, https://github.com/isshy-you/tetris\t, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
+2022/02/18_0:36:04, https://github.com/isshy-you/tetris, master, 817980, 2, SUCCESS, 1, 115600, 163500, 154000, 266500, -78500, 196880, 15161, 10, 795498.20, 15953.60, 817980, 767070

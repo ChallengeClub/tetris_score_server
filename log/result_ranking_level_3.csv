@@ -9,6 +9,7 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, 1LINE_SCO
 2022/01/22_18:32:01, https://github.com/isshy-you/tetris, master, 50205, 3, SUCCESS, 1, 74900, 84900, 56000, 45500, -320500, -, -, -, -, -, -, -
 2022/02/18_0:53:51, https://github.com/isshy-you/tetris, master, 39186, 3, SUCCESS, 3, 69300, 77400, 44100, 45500, -297000, 99886, 14992, 10, 17607.80, 15399.76, 39186, -14139
 2022/02/06_0:13:22, https://github.com/isshy-you/tetris, master, 18859, 3, SUCCESS, 1, 66100, 71100, 40600, 46800, -307000, 101259, 15182, -, -, -, -, -
+2022/02/18_21:06:21, https://github.com/yuin0/tetris, master, 13327, 3, SUCCESS, 1000, 2900, 3600, 2100, 2600, 0, 2127, 180, 10, 10940.70, 1675.44, 13327, 8089
 2022/01/21_18:32:23, https://github.com/yuin0/tetris, master, 9658, 3, SUCCESS, 1000, 4700, 2700, 700, 0, 0, -, -, -, -, -, -, -
 2022/01/22_1:13:44, https://github.com/isshy-you/tetris, master, 9210, 3, SUCCESS, 1000, 1200, 3000, 0, 5200, -1500, -, -, -, -, -, -, -
 2022/02/14_0:41:08, https://github.com/isshy-you/tetris, ish04e, 5618, 3, SUCCESS, 1000, 2100, 3000, 700, 0, -1500, 1318, 180, 10, 2140.90, 1929.14, 5618, -921

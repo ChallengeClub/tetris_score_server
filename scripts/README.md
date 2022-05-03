@@ -3,6 +3,9 @@
 ## ツールインストール
 
 ```
+# update
+sudo apt update -y
+
 # 既にあればOK
 sudo apt install -y git curl
 
@@ -100,4 +103,14 @@ bash gameserver.sh -m DEBUG
 $ ps -aux | grep bash 
 ubuntu     44970  0.0  0.1   9004  3884 ?        S    Jan03   0:00 bash gameserver.sh
 $ kill 44970
+```
+
+# 追加
+
+`csvtomd(csv-->markdown変換ツール)`をインストールする場合
+
+```
+sudo apt update -y
+sudo apt install -y python3-pip
+sudo pip3 install csvtomd
 ```

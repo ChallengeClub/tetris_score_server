@@ -49,6 +49,7 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, 1LINE_SCO
 2022/02/12_1:37:00, https://github.com/seigot/tetris, master, -4858, 3, SUCCESS, 1000, 100, 0, 0, 0, -6000, 1042, 180, 10, -5267.10, 375.14, -4858, -6017
 2022/02/23_2:04:52, https://github.com/seigot/tetris, master, -4873, 3, SUCCESS, 1000, 100, 0, 0, 0, -6000, 1027, 180, 10, -5536.90, 540.59, -4873, -6414
 2022/05/08_0:33:25, https://github.com/seigot/tetris, master, -4881, 3, SUCCESS, 1000, 100, 0, 0, 0, -6000, 1019, 180, , , , ,
+2022/05/08_15:49:58, https://github.com/seigot/tetris, master, -5387, 3, SUCCESS, 1000, 100, 0, 0, 0, -6500, 1013, 180, , , , ,
 2022/01/25_17:23:29, https://github.com/seigot/tetris, master, -5443, 3, SUCCESS, 1000, 0, 0, 0, 0, -6500, 1057, 180, -, -, -, -, -
 2022/01/04_13:07:25, https://github.com/seigot/tetris, master, -5469, 3, SUCCESS, 1000, 0, 0, 0, 0, -6500, -, -, -, -, -, -, -
 2022/01/22_22:23:31, https://github.com/seigot/tetris, master, -5477, 3, SUCCESS, 1000, 0, 0, 0, 0, -6500, 1023, 180, -, -, -, -, -

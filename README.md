@@ -1,20 +1,45 @@
 # tetris_score_server
+
 スコアアタック用サーバ for https://github.com/seigot/tetris  
 総当たり戦用サーバへの登録も兼ねています https://github.com/seigot/tetris_battle_server
 
 # 使い方
 
-### 以下にリポジトリURLを入力して下さい
-[2022/3_Tetrisスコアアタック用サーバ（Google フォームを使用しています）](https://docs.google.com/forms/d/e/1FAIpQLSdrJJlzrF0DWrHv9JYQTbsoYHws0mKdU-9LBbN3z1iHDuSzGg/viewform?vc=0&c=0&w=1&flr=0&usp=mail_form_link)
+### 以下にリポジトリ URL を入力して下さい
+
+[2022/3_Tetris スコアアタック用サーバ（Google フォームを使用しています）](https://docs.google.com/forms/d/e/1FAIpQLSdrJJlzrF0DWrHv9JYQTbsoYHws0mKdU-9LBbN3z1iHDuSzGg/viewform?vc=0&c=0&w=1&flr=0&usp=mail_form_link)
 
 ### 評価結果は以下に出力されます
 
 [評価結果一覧](./log/result.csv)  
-[level1の評価結果](./log/result_ranking_level_1.csv)  
-[level2の評価結果](./log/result_ranking_level_2.csv)  
-[level3の評価結果](./log/result_ranking_level_3.csv)  
+[level1 の評価結果](./log/result_ranking_level_1.csv)  
+[level2 の評価結果](./log/result_ranking_level_2.csv)  
+[level3 の評価結果](./log/result_ranking_level_3.csv)
 
 ※数十分ほど掛かることがあります
+
+# システム構成
+
+```mermaid
+  graph TD
+
+  subgraph Google
+    A1[GoogleFrom] --new query--> A2[GoogleSpreadSheet]
+  end
+
+  subgraph Server
+    subgraph gameserver.sh
+        C1("polling(do_polling) 5min interval") ---->A2
+        C1 --> C2{is there new query?}
+        C2 --Yes--> C3("evaluate score(do_tetris)")
+        C3 --result--> C4("update result")
+    end
+  end
+
+  subgraph Github
+    C4 --result.csv-->D1[tetris_score_server/log]
+  end
+```
 
 # サーバ稼働期間
 

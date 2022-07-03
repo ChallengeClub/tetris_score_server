@@ -21,25 +21,24 @@
 # システム構成
 
 ```mermaid
-  graph TD;
+  graph TD
+
   subgraph Google
-  A1[GoogleFrom] --new query--> A2[GoogleSpreadSheet]
+    A1[GoogleFrom] --new query--> A2[GoogleSpreadSheet]
   end
+
   subgraph Server
-  subgraph gameserver.sh
-  C1("polling(do_polling) 5min interval") ---->A2
-  C1 --> C2{is there new query?}
-  C2 --Yes--> C3("score evaluation(do_tetris)")
-  C3 --result--> C4("update result")
-  end
+    subgraph gameserver.sh
+        C1("polling(do_polling) 5min interval") ---->A2
+        C1 --> C2{is there new query?}
+        C2 --Yes--> C3("evaluate score(do_tetris)")
+        C3 --result--> C4("update result")
+    end
   end
 
   subgraph Github
-  C4 --result.csv-->D1[tetris_score_server/log]
+    C4 --result.csv-->D1[tetris_score_server/log]
   end
-
-
-
 ```
 
 # サーバ稼働期間

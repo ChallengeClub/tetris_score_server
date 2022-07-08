@@ -1,0 +1,11 @@
+version: '0'
+services:
+  frontend:
+    image: "cirrusci/flutter:latest"
+    volumes:
+      - type: bind
+        source: ./app
+        target: /app
+    env_file: .env
+    ports:
+      - "$WEB_SERVER_PORT:$WEB_SERVER_PORT"

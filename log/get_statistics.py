@@ -1,1 +1,0 @@
-../scripts/get_statistics.py

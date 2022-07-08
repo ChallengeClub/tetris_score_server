@@ -161,11 +161,12 @@ function do_tetris(){
     local GAME_TIME="180"
     if [ "${EXEC_MODE}" != "RELEASE" ]; then
 	GAME_TIME="3" # debug value
-    fi 
+    fi
 
+    local RESULT_JSON="result.json"
     local PRE_COMMAND="cd ~ && rm -rf tetris && git clone ${REPOSITORY_URL} -b ${BRANCH} && cd ~/tetris && pip3 install -r requirements.txt"
-    local DO_COMMAND="cd ~/tetris && export DISPLAY=:1 && python3 start.py -l ${LEVEL} -t ${GAME_TIME} -d ${DROP_INTERVAL} -m ${VALUE_MODE} --predict_weight ${VALUE_PREDICT_WEIGHT} && jq . result.json"
-    local POST_COMMAND="cd ~/tetris && jq . result.json"
+    local DO_COMMAND="cd ~/tetris && export DISPLAY=:1 && python3 start.py -l ${LEVEL} -t ${GAME_TIME} -d ${DROP_INTERVAL} -m ${VALUE_MODE} --predict_weight ${VALUE_PREDICT_WEIGHT} && jq . ${RESULT_JSON}"
+    local POST_COMMAND="cd ~/tetris && jq . ${RESULT_JSON}"
 
     local TMP_LOG="tmp.json"
     local TMP2_LOG="tmp2.log"
@@ -196,10 +197,18 @@ function do_tetris(){
     echo {} | jq . > ${OUTPUTJSON}
     for N in `seq 1 ${LOOP_MAX}`; do    
 	# do command
+	rm -rf ${TMP_LOG}
 	docker exec ${CONTAINER_NAME} bash -c "${DO_COMMAND}"
 	if [ $? -ne 0 ]; then
-	    error_result "${DATETIME}" "${REPOSITORY_URL}" "${BRANCH}" "0" "${LEVEL}" "python_start.py_NG" "${DROP_INTERVAL}" "${VALUE_MODE}" "${VALUE_PREDICT_WEIGHT}"
-	    return 0
+	    # check score not to get value successfully.."cd ~/tetris && jq . ${RESULT_JSON}"
+	    docker exec ${CONTAINER_NAME} bash -c "${POST_COMMAND}" > ${TMP_LOG}
+	    CURRENT_SCORE=`jq .judge_info.score ${TMP_LOG}`
+	    if [ "${CURRENT_SCORE}" == "0" -o "${CURRENT_SCORE}" == "" ]; then
+		echo "end with error.."
+		error_result "${DATETIME}" "${REPOSITORY_URL}" "${BRANCH}" "0" "${LEVEL}" "python_start.py_NG" "${DROP_INTERVAL}" "${VALUE_MODE}" "${VALUE_PREDICT_WEIGHT}"
+		return 0
+	    fi
+	    echo "skip error, maybe okay."
 	fi
 	# get result
 	docker exec ${CONTAINER_NAME} bash -c "${POST_COMMAND}" > ${TMP_LOG}

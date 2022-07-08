@@ -176,4 +176,10 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/06/30_22:51:13, https://github.com/isshy-you/tetris, ish05h3, 989660, 3, SUCCESS, 1, -, -, 268500, 300300, 217700, 143000, -118000, 178160, 20971, , , , ,
 2022/07/08_23:59:38, https://github.com/seigot/tetris, master, 0, 2, python_start.py_NG, 1000, predict_sample, predict_sample, -, -, -, -, -, -, -, -, -, -, -, -
 2022/07/08_23:59:38, https://github.com/seigot/tetris, master, 0, 2, python_start.py_NG, 1000, predict_sample, weight/DQN/sample_weight.pt, -, -, -, -, -, -, -, -, -, -, -, -
+2022/07/08_23:59:38, https://github.com/seigot/tetris, master, 0, 2, python_start.py_NG, 1000, predict_sample, weight/DQN/sample_weight.pt, -, -, -, -, -, -, -, -, -, -, -, -
 2022/07/09_0:27:17, https://github.com/seigot/tetris, master, 0, 2, python_start.py_NG, 1000, predict_sample2, weight/MLP/sample_weight.pt, -, -, -, -, -, -, -, -, -, -, -, -
+2022/06/30_22:51:13, https://github.com/isshy-you/tetris, ish05h3, 0, 3, python_start.py_NG, 1, default, outputs/latest/best_weight.pt, -, -, -, -, -, -, -, -, -, -, -, -
+2022/06/30_22:51:13, https://github.com/isshy-you/tetris, ish05h3, 0, 3, python_start.py_NG, 1, default, outputs/latest/best_weight.pt, -, -, -, -, -, -, -, -, -, -, -, -
+2022/06/30_22:51:13, https://github.com/isshy-you/tetris, ish05h3, 0, 3, python_start.py_NG, 1, default, outputs/latest/best_weight.pt, -, -, -, -, -, -, -, -, -, -, -, -
+2022/07/08_23:59:38, https://github.com/seigot/tetris, master, 60, 2, SUCCESS, 1000, predict_sample, weight/DQN/sample_weight.pt, 0, 0, 0, 0, 0, 60, 3, , , , ,
+2022/07/09_0:27:17, https://github.com/seigot/tetris, master, 60, 2, SUCCESS, 1000, predict_sample2, weight/MLP/sample_weight.pt, 0, 0, 0, 0, 0, 60, 3, , , , ,

@@ -1,29 +1,29 @@
 DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, VALUE_MODE, VALUE_PREDICT_WEIGHT, 1LINE_SCORE, 2LINE_SCORE, 3LINE_SCORE, 4LINE_SCORE, GAMEOVER_SCORE, DROPDOWN_SCORE, BLOCK_NO, TRIAL_NUM, SCORE_MEAN, SCORE_STDEV, SCORE_MAX, SCORE_MIN
-2022/01/04_4:06:48, https://github.com/seigot/tetris, master, -5532, 3, SUCCESS, 1000, -, -, 0, 0, 0, 0, -6500, -, -, -, -, -, -, -
-2022/01/04_13:07:25, https://github.com/seigot/tetris, master, -5469, 3, SUCCESS, 1000, -, -, 0, 0, 0, 0, -6500, -, -, -, -, -, -, -
-2022/01/21_18:32:23, https://github.com/yuin0/tetris, master, 9658, 3, SUCCESS, 1000, -, -, 4700, 2700, 700, 0, 0, -, -, -, -, -, -, -
-2022/01/21_19:00:26, https://github.com/yuin0/tetris, master, 90851, 3, SUCCESS, 1, -, -, 14500, 13500, 11200, 39000, 0, -, -, -, -, -, -, -
-2022/01/22_1:13:44, https://github.com/isshy-you/tetris, master, 9210, 3, SUCCESS, 1000, -, -, 1200, 3000, 0, 5200, -1500, -, -, -, -, -, -, -
-2022/01/22_18:32:01, https://github.com/isshy-you/tetris, master, 50205, 3, SUCCESS, 1, -, -, 74900, 84900, 56000, 45500, -320500, -, -, -, -, -, -, -
-2022/01/22_22:23:31, https://github.com/seigot/tetris, master, -5477, 3, SUCCESS, 1000, -, -, 0, 0, 0, 0, -6500, 1023, 180, -, -, -, -, -
-2022/01/25_17:23:29, https://github.com/seigot/tetris, master, -5443, 3, SUCCESS, 1000, -, -, 0, 0, 0, 0, -6500, 1057, 180, -, -, -, -, -
-2022/01/29_20:11:23, https://github.com/isshy-you/tetris, master, 88932, 3, SUCCESS, 1, -, -, 76200, 81300, 51800, 61100, -282500, 101032, 15210, -, -, -, -, -
-2022/01/30_21:41:52, https://github.com/isshy-you/tetris, ish04e, 230027, 3, SUCCESS, 1, -, -, 189300, 101400, 39900, 22100, -238500, 115827, 16913, -, -, -, -, -
-2022/02/05_21:58:33, https://github.com/isshy-you/tetris, ish04f, 451, 3, SUCCESS, 1000, -, -, 1200, 300, 700, 0, -3000, 1251, 180, -, -, -, -, -
-2022/02/05_23:25:08, https://github.com/isshy-you/tetris, ish04f, 1540, 3, SUCCESS, 1000, -, -, 1500, 600, 700, 0, -2500, 1240, 180, -, -, -, -, -
-2022/02/05_23:25:52, https://github.com/isshy-you/tetris, ish04e, 3200, 3, SUCCESS, 1000, -, -, 2400, 600, 1400, 0, -2500, 1300, 180, -, -, -, -, -
-2022/02/06_0:13:22, https://github.com/isshy-you/tetris, master, 18859, 3, SUCCESS, 1, -, -, 66100, 71100, 40600, 46800, -307000, 101259, 15182, -, -, -, -, -
-2022/02/06_0:13:34, https://github.com/isshy-you/tetris, ish04e, 224021, 3, SUCCESS, 1, -, -, 189400, 105300, 37800, 10400, -231500, 112621, 16569, -, -, -, -, -
-2022/02/06_18:28:17, https://github.com/isshy-you/tetris, ish04f, 3589, 3, SUCCESS, 1000, -, -, 2700, 1500, 0, 0, -2000, 1389, 180, -, -, -, -, -
-2022/02/06_19:02:00, https://github.com/isshy-you/tetris, ish04f, 230161, 3, SUCCESS, 1, -, -, 134500, 118500, 62300, 18200, -206500, 103161, 15008, -, -, -, -, -
-2022/02/12_1:36:22, https://github.com/seigot/tetris, master, -891529, 3, SUCCESS, 1, -, -, 2900, 0, 0, 0, -1048000, 153571, 27515, 10, -919975.20, 15466.78, -891529, -947633
-2022/02/12_1:36:30, https://github.com/seigot/tetris, master, -4394, 3, SUCCESS, 1000, -, -, 100, 0, 0, 0, -5500, 1006, 180, 10, -5602.50, 611.61, -4394, -6488
-2022/02/12_1:37:00, https://github.com/seigot/tetris, master, -4858, 3, SUCCESS, 1000, -, -, 100, 0, 0, 0, -6000, 1042, 180, 10, -5267.10, 375.14, -4858, -6017
-2022/02/12_22:50:11, https://github.com/isshy-you/tetris, master, 2396, 3, SUCCESS, 1000, -, -, 800, 1200, 2100, 0, -3000, 1296, 180, 10, -454.50, 1538.11, 2396, -2988
-2022/02/14_0:41:08, https://github.com/isshy-you/tetris, ish04e, 5618, 3, SUCCESS, 1000, -, -, 2100, 3000, 700, 0, -1500, 1318, 180, 10, 2140.90, 1929.14, 5618, -921
-2022/02/18_0:36:11, https://github.com/isshy-you/tetris, master, 63026, 3, SUCCESS, 1, -, -, 70600, 69600, 53900, 58500, -290500, 100926, 15013, 10, 19524.10, 26185.46, 63026, -29374
-2022/02/18_0:53:51, https://github.com/isshy-you/tetris, master, 39186, 3, SUCCESS, 3, -, -, 69300, 77400, 44100, 45500, -297000, 99886, 14992, 10, 17607.80, 15399.76, 39186, -14139
-2022/02/18_20:47:59, https://github.com/isshy-you/tetris, ish04e, 240951, 3, SUCCESS, 1, -, -, 189000, 96000, 52500, 13000, -221000, 111451, 16188, 10, 213337.20, 18787.69, 240951, 178243
+2022/01/04_4:06:48, https://github.com/seigot/tetris, master, -5532, 3, SUCCESS, 1000, -, -, -, -, 0, 0, 0, 0, -6500, -, -, -, -, -, -, -
+2022/01/04_13:07:25, https://github.com/seigot/tetris, master, -5469, 3, SUCCESS, 1000, -, -, -, -, 0, 0, 0, 0, -6500, -, -, -, -, -, -, -
+2022/01/21_18:32:23, https://github.com/yuin0/tetris, master, 9658, 3, SUCCESS, 1000, -, -, -, -, 4700, 2700, 700, 0, 0, -, -, -, -, -, -, -
+2022/01/21_19:00:26, https://github.com/yuin0/tetris, master, 90851, 3, SUCCESS, 1, -, -, -, -, 14500, 13500, 11200, 39000, 0, -, -, -, -, -, -, -
+2022/01/22_1:13:44, https://github.com/isshy-you/tetris, master, 9210, 3, SUCCESS, 1000, -, -, -, -, 1200, 3000, 0, 5200, -1500, -, -, -, -, -, -, -
+2022/01/22_18:32:01, https://github.com/isshy-you/tetris, master, 50205, 3, SUCCESS, 1, -, -, -, -, 74900, 84900, 56000, 45500, -320500, -, -, -, -, -, -, -
+2022/01/22_22:23:31, https://github.com/seigot/tetris, master, -5477, 3, SUCCESS, 1000, -, -, -, -, 0, 0, 0, 0, -6500, 1023, 180, -, -, -, -, -
+2022/01/25_17:23:29, https://github.com/seigot/tetris, master, -5443, 3, SUCCESS, 1000, -, -, -, -, 0, 0, 0, 0, -6500, 1057, 180, -, -, -, -, -
+2022/01/29_20:11:23, https://github.com/isshy-you/tetris, master, 88932, 3, SUCCESS, 1, -, -, -, -, 76200, 81300, 51800, 61100, -282500, 101032, 15210, -, -, -, -, -
+2022/01/30_21:41:52, https://github.com/isshy-you/tetris, ish04e, 230027, 3, SUCCESS, 1, -, -, -, -, 189300, 101400, 39900, 22100, -238500, 115827, 16913, -, -, -, -, -
+2022/02/05_21:58:33, https://github.com/isshy-you/tetris, ish04f, 451, 3, SUCCESS, 1000, -, -, -, -, 1200, 300, 700, 0, -3000, 1251, 180, -, -, -, -, -
+2022/02/05_23:25:08, https://github.com/isshy-you/tetris, ish04f, 1540, 3, SUCCESS, 1000, -, -, -, -, 1500, 600, 700, 0, -2500, 1240, 180, -, -, -, -, -
+2022/02/05_23:25:52, https://github.com/isshy-you/tetris, ish04e, 3200, 3, SUCCESS, 1000, -, -, -, -, 2400, 600, 1400, 0, -2500, 1300, 180, -, -, -, -, -
+2022/02/06_0:13:22, https://github.com/isshy-you/tetris, master, 18859, 3, SUCCESS, 1, -, -, -, -, 66100, 71100, 40600, 46800, -307000, 101259, 15182, -, -, -, -, -
+2022/02/06_0:13:34, https://github.com/isshy-you/tetris, ish04e, 224021, 3, SUCCESS, 1, -, -, -, -, 189400, 105300, 37800, 10400, -231500, 112621, 16569, -, -, -, -, -
+2022/02/06_18:28:17, https://github.com/isshy-you/tetris, ish04f, 3589, 3, SUCCESS, 1000, -, -, -, -, 2700, 1500, 0, 0, -2000, 1389, 180, -, -, -, -, -
+2022/02/06_19:02:00, https://github.com/isshy-you/tetris, ish04f, 230161, 3, SUCCESS, 1, -, -, -, -, 134500, 118500, 62300, 18200, -206500, 103161, 15008, -, -, -, -, -
+2022/02/12_1:36:22, https://github.com/seigot/tetris, master, -891529, 3, SUCCESS, 1, -, -, -, -, 2900, 0, 0, 0, -1048000, 153571, 27515, 10, -919975.20, 15466.78, -891529, -947633
+2022/02/12_1:36:30, https://github.com/seigot/tetris, master, -4394, 3, SUCCESS, 1000, -, -, -, -, 100, 0, 0, 0, -5500, 1006, 180, 10, -5602.50, 611.61, -4394, -6488
+2022/02/12_1:37:00, https://github.com/seigot/tetris, master, -4858, 3, SUCCESS, 1000, -, -, -, -, 100, 0, 0, 0, -6000, 1042, 180, 10, -5267.10, 375.14, -4858, -6017
+2022/02/12_22:50:11, https://github.com/isshy-you/tetris, master, 2396, 3, SUCCESS, 1000, -, -, -, -, 800, 1200, 2100, 0, -3000, 1296, 180, 10, -454.50, 1538.11, 2396, -2988
+2022/02/14_0:41:08, https://github.com/isshy-you/tetris, ish04e, 5618, 3, SUCCESS, 1000, -, -, -, -, 2100, 3000, 700, 0, -1500, 1318, 180, 10, 2140.90, 1929.14, 5618, -921
+2022/02/18_0:36:11, https://github.com/isshy-you/tetris, master, 63026, 3, SUCCESS, 1, -, -, -, -, 70600, 69600, 53900, 58500, -290500, 100926, 15013, 10, 19524.10, 26185.46, 63026, -29374
+2022/02/18_0:53:51, https://github.com/isshy-you/tetris, master, 39186, 3, SUCCESS, 3, -, -, -, -, 69300, 77400, 44100, 45500, -297000, 99886, 14992, 10, 17607.80, 15399.76, 39186, -14139
+2022/02/18_20:47:59, https://github.com/isshy-you/tetris, ish04e, 240951, 3, SUCCESS, 1, -, -, -, -, 189000, 96000, 52500, 13000, -221000, 111451, 16188, 10, 213337.20, 18787.69, 240951, 178243
 2022/02/18_21:06:21, https://github.com/yuin0/tetris, master, 13327, 3, SUCCESS, 1000, -, -, 2900, 3600, 2100, 2600, 0, 2127, 180, 10, 10940.70, 1675.44, 13327, 8089
 2022/02/19_21:55:27, https://github.com/isshy-you/tetris, ish04e, 5445, 3, SUCCESS, 1000, -, -, 2200, 1500, 700, 1300, -1500, 1245, 180, 10, 2966.90, 1959.20, 5445, -910
 2022/02/19_21:55:41, https://github.com/isshy-you/tetris, ish04f, 303472, 3, SUCCESS, 1, -, -, 151100, 141600, 60200, 24700, -179000, 104872, 14748, 10, 258086.60, 28781.18, 303472, 208657

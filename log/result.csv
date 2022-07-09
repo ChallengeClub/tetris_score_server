@@ -202,3 +202,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/07/09_1:58:50, https://github.com/seigot/tetris, master, 16582, 2, SUCCESS, 1000, predict_sample2, weight/MLP/sample_weight.pt, 1700, 1800, 4900, 5200, 0, 2982, 180, 10, 13835.20, 2081.64, 16582, 9962
 2022/07/09_23:04:13, https://github.com/seigot/tetris, master, 10292, 3, SUCCESS, 1000, predict_sample, weight/DQN/sample_weight.pt, 5700, 2400, 0, 0, 0, 2192, 180, 10, 9461.10, 779.52, 10292, 7706
 2022/07/09_23:04:39, https://github.com/seigot/tetris, master, 11085, 3, SUCCESS, 1000, predict_sample2, weight/MLP/sample_weight.pt, 4000, 4800, 0, 0, 0, 2285, 180, 10, 5701.20, 2025.89, 11085, 3970
+2022/07/09_23:05:03, https://github.com/seigot/tetris, master, 0, 3, python_start.py_NG, 1, predict_sample2, https://github.com/seigot/tetris, -, -, -, -, -, -, -, -, -, -, -, -

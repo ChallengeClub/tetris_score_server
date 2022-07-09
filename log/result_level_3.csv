@@ -68,3 +68,4 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, VALUE_MOD
 2022/07/09_23:04:13, https://github.com/seigot/tetris, master, 10292, 3, SUCCESS, 1000, predict_sample, weight/DQN/sample_weight.pt, 5700, 2400, 0, 0, 0, 2192, 180, 10, 9461.10, 779.52, 10292, 7706
 2022/07/09_23:04:39, https://github.com/seigot/tetris, master, 11085, 3, SUCCESS, 1000, predict_sample2, weight/MLP/sample_weight.pt, 4000, 4800, 0, 0, 0, 2285, 180, 10, 5701.20, 2025.89, 11085, 3970
 2022/07/09_23:05:24, https://github.com/seigot/tetris, master, 1564216, 3, SUCCESS, 1, predict_sample, weight/DQN/sample_weight.pt, 846500, 291900, 44100, 9100, -4500, 377116, 26857, 10, 1507246.20, 44676.91, 1564216, 1452608
+2022/07/10_1:30:54, https://github.com/seigot/tetris, master, 662235, 3, SUCCESS, 1, predict_sample2, weight/MLP/sample_weight.pt, 386600, 120300, 49700, 48100, -89500, 147035, 16846, 10, 529693.60, 60265.85, 662235, 450272

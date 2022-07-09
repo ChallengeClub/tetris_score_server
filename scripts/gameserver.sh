@@ -248,7 +248,7 @@ function do_tetris(){
     GAMEOVER_SCORE=$(( STAT_GAMEOVER * GAMEOVER ))
     DROPDOWN_SCORE=$(( SCORE - LINE1_SCORE - LINE2_SCORE - LINE3_SCORE - LINE4_SCORE - GAMEOVER_SCORE ))
     # get statistics value
-    echo ${SCORE_ARRAY[@]} | python get_statistics.py > ${TMP2_LOG}
+    echo ${SCORE_ARRAY[@]} | python3 get_statistics.py > ${TMP2_LOG}
     TRIAL_NUM=`cat ${TMP2_LOG} | grep "num" | cut -d' ' -f2`
     MEAN=`cat ${TMP2_LOG} | grep "mean" | cut -d' ' -f2`
     STDEV=`cat ${TMP2_LOG} | grep "stdev" | cut -d' ' -f2`

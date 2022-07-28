@@ -8,8 +8,4 @@ resource "aws_sqs_queue" "score_evaluation_queue" {
 
 resource "aws_sqs_queue" "score_evaluation_queue_deadletter" {
   name = "score-evaluation-deadletter-queue"
-  redrive_allow_policy = jsonencode({
-    redrivePermission = "byQueue",
-    sourceQueueArns   = [aws_sqs_queue.score_evaluation_queue.arn]
-  })
 }

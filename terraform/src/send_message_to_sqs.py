@@ -1,10 +1,13 @@
 import boto3
 import json
+import os
+
+sqs_url = os.environ["SQS_URL"]
 
 def lambda_handler(event: dict, context):
     client = boto3.client("sqs")
     response = client.send_message(
-        QueueUrl="https://sqs.ap-northeast-1.amazonaws.com/086656038367/score-evaluation-queue",
+        QueueUrl=sqs_url,
         MessageBody=json.dumps(event)
     )
     return response

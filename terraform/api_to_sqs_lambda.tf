@@ -25,9 +25,9 @@ resource "aws_iam_role" "lambda_role" {
 
 resource "aws_lambda_function" "function" {
   function_name = local.function_name
-  handler       = "lambda.handler"
+  handler       = "send_message_to_sqs.lambda_handler"
   role          = aws_iam_role.lambda_role.arn
-  runtime       = "nodejs16.x"
+  runtime       = "python3.9"
 
   filename         = data.archive_file.function_source.output_path
   source_code_hash = data.archive_file.function_source.output_base64sha256

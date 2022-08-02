@@ -7,6 +7,15 @@ resource "aws_apigatewayv2_stage" "tetris_api_stage" {
     api_id = aws_apigatewayv2_api.tetris_api.id
     name = "tetris_api_stage"
     auto_deploy = true
+    route_settings {
+      route_key = "GET /score_evaluation"
+      logging_level = "ERROR"
+      detailed_metrics_enabled = true
+    }
+    access_log_settings {
+      destination_arn = aws_cloudwatch_log_group.apigateway_accesslog.arn
+      format = "$context.identity.sourceIp $context.identity.caller $context.identity.user [$context.requestTime] \"$context.httpMethod $context.resourcePath $context.protocol\" $context.status $context.responseLength $context.requestId"
+    }
 }
 
 resource "aws_apigatewayv2_integration" "send_message_to_sqs_lambda_integration" {

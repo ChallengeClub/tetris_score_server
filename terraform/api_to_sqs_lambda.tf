@@ -58,7 +58,7 @@ resource "aws_lambda_function" "function" {
 resource "aws_lambda_permission" "api_gw" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.function.function_name
+  function_name = "${aws_lambda_function.function.function_name}"
   principal     = "apigateway.amazonaws.com"
-  source_arn = "${aws_apigatewayv2_api.tetris_api.execution_arn}/*"
+  source_arn = "${aws_apigatewayv2_api.tetris_api.execution_arn}/*/*/score_evaluation"
 }

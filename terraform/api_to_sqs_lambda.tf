@@ -54,3 +54,11 @@ resource "aws_lambda_function" "function" {
   filename         = data.archive_file.function_source.output_path
   source_code_hash = data.archive_file.function_source.output_base64sha256
 }
+
+resource "aws_lambda_permission" "api_gw" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = "${aws_lambda_function.function.function_name}"
+  principal     = "apigateway.amazonaws.com"
+  source_arn = "${aws_apigatewayv2_api.tetris_api.execution_arn}/*/*/score_evaluation"
+}

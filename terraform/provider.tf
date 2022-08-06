@@ -11,6 +11,7 @@ terraform {
     key = "terraform.tfstate"
     encrypt = true
   }
+  
 }
 
 provider "aws" {

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package tutorial;
+
+message ScoreEvaluationMessage {
+  string repository_url = 1;
+  GameLevel game_level = 2;
+  string branch_name = 3;
+  int32 drop_interval = 4;
+  MachineLearningMode machine_learning_mode = 5;
+  string predict_weight_path = 6;
+  enum MachineLearningMode {
+    DEFAULT = 0;
+    PREDICT = 1;
+    PREDICT_SAMPLE = 2;
+    PREDICT_SAMPLE2 = 3;
+  }
+  enum GameLevel {
+    EASY = 0;
+    MIDIUM = 1;
+    HARD = 2;
+  }
+}

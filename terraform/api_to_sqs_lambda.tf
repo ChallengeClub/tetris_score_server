@@ -8,6 +8,12 @@ data "archive_file" "function_source" {
   output_path = "archive/api_to_sqs_lambda_function_function.zip"
 }
 
+data "archive_file" "layer_zip" {
+  type        = "zip"
+  source_dir  = "lambda_layer/packages"
+  output_path = "archive/lambda_layer.zip"
+}
+
 data "aws_iam_policy_document" "assume_role" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -22,12 +28,12 @@ data "aws_iam_policy_document" "assume_role" {
 
 data "aws_iam_policy_document" "message_to_sqs_policy_doc" {
   statement {
-    actions = ["sqs:SendMessage"]
+    actions   = ["sqs:SendMessage"]
     resources = [aws_sqs_queue.score_evaluation_queue.arn]
   }
 }
 resource "aws_iam_policy" "send_message_to_sqs_policy" {
-  name = "SendMessageToSQSPolicy"
+  name   = "SendMessageToSQSPolicy"
   policy = data.aws_iam_policy_document.message_to_sqs_policy_doc.json
 }
 resource "aws_iam_role" "send_message_to_sqs_lambda_role" {
@@ -36,7 +42,7 @@ resource "aws_iam_role" "send_message_to_sqs_lambda_role" {
 }
 
 resource "aws_iam_role_policy_attachment" "attachment" {
-  role = aws_iam_role.send_message_to_sqs_lambda_role.name
+  role       = aws_iam_role.send_message_to_sqs_lambda_role.name
   policy_arn = aws_iam_policy.send_message_to_sqs_policy.arn
 }
 
@@ -53,12 +59,21 @@ resource "aws_lambda_function" "function" {
 
   filename         = data.archive_file.function_source.output_path
   source_code_hash = data.archive_file.function_source.output_base64sha256
+  layers           = ["${aws_lambda_layer_version.lambda_layer.arn}"]
+}
+
+resource "aws_lambda_layer_version" "lambda_layer" {
+  layer_name               = "lambda_layer"
+  filename                 = data.archive_file.layer_zip.output_path
+  source_code_hash         = data.archive_file.layer_zip.output_base64sha256
+  compatible_runtimes      = ["python3.9"]
+  compatible_architectures = ["x86_64"]
 }
 
 resource "aws_lambda_permission" "api_gw" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
-  function_name = "${aws_lambda_function.function.function_name}"
+  function_name = aws_lambda_function.function.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn = "${aws_apigatewayv2_api.tetris_api.execution_arn}/*/*/score_evaluation"
+  source_arn    = "${aws_apigatewayv2_api.tetris_api.execution_arn}/*/*/score_evaluation"
 }

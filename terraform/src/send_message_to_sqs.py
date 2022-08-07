@@ -1,5 +1,4 @@
 import boto3
-import json
 import os
 from score_evaluation_message_pb2 import ScoreEvaluationMessage
 

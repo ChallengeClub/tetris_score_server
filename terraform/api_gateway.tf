@@ -1,11 +1,11 @@
 resource "aws_apigatewayv2_api" "tetris_api" {
-  name          = "tetris_api"
+  name          = var.api_gateway_name
   protocol_type = "HTTP"
 }
 
 resource "aws_apigatewayv2_stage" "tetris_api_stage" {
     api_id = aws_apigatewayv2_api.tetris_api.id
-    name = "tetris_api_stage"
+    name = var.api_gateway_stage_name
     auto_deploy = true
     route_settings {
       route_key = "POST /score_evaluation"
@@ -15,7 +15,7 @@ resource "aws_apigatewayv2_stage" "tetris_api_stage" {
     }
     access_log_settings {
       destination_arn = aws_cloudwatch_log_group.apigateway_accesslog.arn
-      format = "$context.identity.sourceIp $context.identity.caller $context.identity.user [$context.requestTime] \"$context.httpMethod $context.resourcePath $context.protocol\" $context.status $context.responseLength $context.requestId"
+      format = var.api_gateway_access_log_format
     }
 }
 

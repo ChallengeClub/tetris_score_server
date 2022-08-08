@@ -4,14 +4,14 @@ locals {
 
 data "archive_file" "function_source" {
   type        = "zip"
-  source_dir  = "src"
-  output_path = "archive/api_to_sqs_lambda_function_function.zip"
+  source_dir  = var.function_src_dir
+  output_path = var.function_zip_output_path
 }
 
 data "archive_file" "layer_zip" {
   type        = "zip"
-  source_dir  = "lambda_layer/packages"
-  output_path = "archive/lambda_layer.zip"
+  source_dir  = var.layer_src_dir
+  output_path = var.layer_zip_output_path
 }
 
 data "aws_iam_policy_document" "assume_role" {
@@ -33,11 +33,11 @@ data "aws_iam_policy_document" "message_to_sqs_policy_doc" {
   }
 }
 resource "aws_iam_policy" "send_message_to_sqs_policy" {
-  name   = "SendMessageToSQSPolicy"
+  name   = var.lambda_policy_send_message_to_sqs
   policy = data.aws_iam_policy_document.message_to_sqs_policy_doc.json
 }
 resource "aws_iam_role" "send_message_to_sqs_lambda_role" {
-  name               = "SendMessageToSQSLambdaRole"
+  name               = var.lambda_role_send_message_to_sqs
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
@@ -47,8 +47,8 @@ resource "aws_iam_role_policy_attachment" "attachment" {
 }
 
 resource "aws_lambda_function" "function" {
-  function_name = local.function_name
-  handler       = "send_message_to_sqs.lambda_handler"
+  function_name = var.send_message_to_sqs_function_name
+  handler       = var.send_message_to_sqs_handler
   role          = aws_iam_role.send_message_to_sqs_lambda_role.arn
   runtime       = "python3.9"
   environment {
@@ -63,7 +63,7 @@ resource "aws_lambda_function" "function" {
 }
 
 resource "aws_lambda_layer_version" "lambda_layer" {
-  layer_name               = "lambda_layer"
+  layer_name               = var.lambda_protobuf_layer_name
   filename                 = data.archive_file.layer_zip.output_path
   source_code_hash         = data.archive_file.layer_zip.output_base64sha256
   compatible_runtimes      = ["python3.9"]

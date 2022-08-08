@@ -15,7 +15,7 @@ resource "aws_apigatewayv2_stage" "tetris_api_stage" {
     }
     access_log_settings {
       destination_arn = aws_cloudwatch_log_group.apigateway_accesslog.arn
-      format = "$context.identity.sourceIp $context.identity.caller $context.identity.user [$context.requestTime] \"$context.httpMethod $context.resourcePath $context.protocol\" $context.status $context.responseLength $context.requestId"
+      format = var.api_gateway_access_log_format
     }
 }
 

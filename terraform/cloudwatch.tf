@@ -1,5 +1,5 @@
 resource "aws_iam_role" "apigateway_putlog" {
-  name = "apigateway_putlog"
+  name = var.cloudwatch_role_api_gateway_putlog
 
   assume_role_policy = <<EOF
 {
@@ -28,5 +28,5 @@ resource "aws_api_gateway_account" "score_evaluation_apigateway_account" {
 }
 
 resource "aws_cloudwatch_log_group" "apigateway_accesslog" {
-  name = "score_evaluation_apigateway_accesslog"
+  name = var.cloudwatch_log_group_name
 }

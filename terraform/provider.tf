@@ -6,12 +6,11 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "tetris-score-server-terraform-state" # 作成したS3バケット
+    bucket = "tetris-score-server-terraform-state"
     region = "ap-northeast-1"
     key = "terraform.tfstate"
     encrypt = true
   }
-  
 }
 
 provider "aws" {

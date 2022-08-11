@@ -53,3 +53,4 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, VALUE_MOD
 2022/08/03_21:39:19, https://github.com/seigot/tetris, master, -1534, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 0, -3500, 1966, 180, 10, -1630.50, 171.48, -1534, -2110
 2022/08/04_21:04:19, https://github.com/seigot/tetris, master, -1482, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 0, -3500, 2018, 180, 10, -1693.20, 257.41, -1482, -2157
 2022/08/04_21:42:20, https://github.com/seigot/tetris, master, -1542, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 0, -3500, 1958, 180, 10, -1867.40, 208.27, -1542, -2107
+2022/08/11_23:49:25, https://github.com/TsuchiyaYosuke/tetris, master, -1346, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 100, 0, 0, 0, -3500, 2054, 180, 10, -1836.50, 314.66, -1346, -2157

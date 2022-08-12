@@ -1,0 +1,16 @@
+version: '1'
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    command: python3 manage.py runserver 0.0.0.0:$WEB_SERVER_PORT
+    volumes:
+      - type: bind
+        source: "./server"
+        target: "/server"
+    env_file: .env
+    ports:
+      - "$WEB_SERVER_PORT:$WEB_SERVER_PORT"
+    tty: true

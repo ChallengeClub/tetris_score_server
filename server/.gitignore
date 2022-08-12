@@ -1,0 +1,6 @@
+secret_setting.py
+*.log
+*.pyc
+__pycache__/
+db-volumes/
+db.sqlite3

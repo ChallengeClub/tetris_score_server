@@ -217,3 +217,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/08/11_23:35:52, https://github.com/TsuchiyaYosuke/tetris, master, -1464, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 0, -3500, 2036, 180, 10, -1587.00, 121.11, -1464, -1903
 2022/08/11_23:49:25, https://github.com/TsuchiyaYosuke/tetris, master, -1346, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 100, 0, 0, 0, -3500, 2054, 180, 10, -1836.50, 314.66, -1346, -2157
 2022/08/12_0:49:37, https://github.com/TsuchiyaYosuke/tetris, master, -1404, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 0, -3500, 2096, 180, 10, -1613.40, 239.54, -1404, -2069
+2022/08/13_21:44:13, https://github.com/AtsutoshiNaraki/tetris/, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -, -, -

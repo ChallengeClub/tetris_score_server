@@ -1,8 +1,6 @@
-from curses import resetty
 import os
 import shutil
 import subprocess
-from urllib import response
 
 def clone_repository(url: str, branch: str):
     """
@@ -15,7 +13,7 @@ def clone_repository(url: str, branch: str):
         shutil.rmtree("tetris")
     git_clone_command = f"git clone {url} -b {branch} tetris --depth=1" # --depth=1: clone only head
     result = subprocess.run(git_clone_command.split(), capture_output=True, encoding='utf-8')
-
+    print(result)
 
 def tetris_start(level=1, game_time=180, drop_interval=1000, value_mode="sample", value_predict_weight=""):
     os.chdir("/home/tetris")
@@ -24,7 +22,6 @@ def tetris_start(level=1, game_time=180, drop_interval=1000, value_mode="sample"
         tetris_start_command = f"xvfb-run python start.py -l {level} -t {game_time} -d {drop_interval} -m {value_mode}"
     else:
         tetris_start_command = f"xvfb-run python start.py -l {level} -t {game_time} -d {drop_interval} -m {value_mode} --predict_weight {value_predict_weight}"
-    # tetris_start_command = "QT_QPA_PLATFORM=offscreen && " + tetris_start_command
 
     result = subprocess.run(tetris_start_command.split(), capture_output=True, encoding='utf-8')
     print(result)

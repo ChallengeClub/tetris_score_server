@@ -21,9 +21,9 @@ def tetris_start(level=1, game_time=180, drop_interval=1000, value_mode="sample"
     os.chdir("/home/tetris")
     os.environ["QT_QPA_PLATFORM"]="offscreen"
     if value_predict_weight == "":
-        tetris_start_command = f"python start.py -l {level} -t {game_time} -d {drop_interval} -m {value_mode}"
+        tetris_start_command = f"xvfb-run python start.py -l {level} -t {game_time} -d {drop_interval} -m {value_mode}"
     else:
-        tetris_start_command = f"python start.py -l {level} -t {game_time} -d {drop_interval} -m {value_mode} --predict_weight {value_predict_weight}"
+        tetris_start_command = f"xvfb-run python start.py -l {level} -t {game_time} -d {drop_interval} -m {value_mode} --predict_weight {value_predict_weight}"
     # tetris_start_command = "QT_QPA_PLATFORM=offscreen && " + tetris_start_command
 
     result = subprocess.run(tetris_start_command.split(), capture_output=True, encoding='utf-8')
@@ -31,4 +31,4 @@ def tetris_start(level=1, game_time=180, drop_interval=1000, value_mode="sample"
 
 if __name__=="__main__":
     clone_repository(url="https://github.com/seigot/tetris", branch="master")
-    tetris_start()
+    tetris_start(game_time=10)

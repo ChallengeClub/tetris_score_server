@@ -24,7 +24,7 @@ def tetris_start(level=1, game_time=180, drop_interval=1000, value_mode="default
     result = subprocess.run(tetris_start_command.split(), capture_output=True, encoding='utf-8')
     return result
 
-def test_strategy(url: str, branch: str, repeet: int, ):
+def test_strategy():
     url = "https://github.com/seigot/tetris"
     branch = "master"
     repeet = 5

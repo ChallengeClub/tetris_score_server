@@ -222,3 +222,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/08/14_0:33:40, https://github.com/AtsutoshiNaraki/tetris, Level1, 25401, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 100, 300, 0, 22100, 0, 2901, 180, 10, 25401.00, 0.00, 25401, 25401
 2022/08/14_1:03:46, https://github.com/AtsutoshiNaraki/tetris, master, 25401, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 100, 300, 0, 22100, 0, 2901, 180, 10, 25401.00, 0.00, 25401, 25401
 -, -, -, 0, -, curl_google_speadsheet_NG, -, -, -, -, -, -, -, -, -, -, -, -, -, -, -
+2022/08/15_21:30:21, https://github.com/AtsutoshiNaraki/tetris, master, 16103, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 14300, 0, 1803, 114, 10, 14836.00, 445.32, 16103, 14684

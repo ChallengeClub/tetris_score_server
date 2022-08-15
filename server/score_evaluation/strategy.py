@@ -23,11 +23,7 @@ def tetris_start(level=1, game_time=180, drop_interval=1000, value_mode="default
     result = subprocess.run(tetris_start_command.split(), capture_output=True, encoding='utf-8')
     return result
 
-def test_strategy():
-    url = "https://github.com/seigot/tetris"
-    branch = "master"
-    repeet = 5
-    game_time = 10
+def strategy(url: str, branch: str, repeet: 10, level=1, game_time=180, drop_interval=1000, value_mode="default", value_predict_weight=""):
     log_folder = "/server/log"
     res = clone_repository(url=url, branch=branch)
     if res.returncode:
@@ -37,12 +33,18 @@ def test_strategy():
     futures = []
     with ThreadPoolExecutor() as pool:
         for i in range(repeet):
-            future = pool.submit(tetris_start, game_time=game_time, log_file=f"{log_folder}/result-{i}.json")
+            future = pool.submit(
+                tetris_start, 
+                game_time=game_time, 
+                log_file=f"{log_folder}/result-{i}.json", 
+                level=level,
+                drop_interval=drop_interval,
+                value_mode=value_mode,
+                value_predict_weight=value_predict_weight,
+                )
             futures.append(future)
     for i, future in enumerate(futures):
         with open(f"{log_folder}/result-{i}.log", 'w', encoding='utf-8') as f:
             f.write(future.result().stdout)
-
-
-if __name__=="__main__":
-    test_strategy()
+    
+    return "succeeded"

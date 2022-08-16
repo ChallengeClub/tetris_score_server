@@ -1,7 +1,11 @@
+from faulthandler import cancel_dump_traceback_later
 import os
 import shutil
+from datetime import datetime
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
+
+from .models import EvaluationResult
 
 def clone_repository(url: str, branch: str):
     """
@@ -23,16 +27,30 @@ def tetris_start(level=1, game_time=180, drop_interval=1000, value_mode="default
     result = subprocess.run(tetris_start_command.split(), capture_output=True, encoding='utf-8')
     return result
 
-def strategy(url: str, branch: str, repeet: 10, level=1, game_time=180, drop_interval=1000, value_mode="default", value_predict_weight=""):
+def strategy(url: str, branch: str, trial_num: 10, level=1, game_time=180, drop_interval=1000, value_mode="default", value_predict_weight=""):
     log_folder = "/server/log"
+
+    # create EvaluationResult instance 
+    eval_res = EvaluationResult(
+        created_at = str(datetime.now()),
+        repository_url = url,
+        branch = branch,
+        level = level,
+        game_time = game_time,
+        drop_interval = drop_interval,
+        value_mode = value_mode,
+        trial_num = trial_num,
+    )
     res = clone_repository(url=url, branch=branch)
     if res.returncode:
-        return res
+        eval_res.status = "ER"
+        eval_res.error_message = res.stderr
+        return eval_res
     
     # execute tetris_start asynchronously
     futures = []
     with ThreadPoolExecutor() as pool:
-        for i in range(repeet):
+        for i in range(trial_num):
             future = pool.submit(
                 tetris_start, 
                 game_time=game_time, 
@@ -46,5 +64,7 @@ def strategy(url: str, branch: str, repeet: 10, level=1, game_time=180, drop_int
     for i, future in enumerate(futures):
         with open(f"{log_folder}/result-{i}.log", 'w', encoding='utf-8') as f:
             f.write(future.result().stdout)
-    
-    return "succeeded"
+    eval_res.ended_at = str(datetime.now())    
+    eval_res.status = "S"
+
+    return eval_res

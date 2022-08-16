@@ -7,8 +7,8 @@ class ScoreEvaluationTests(TestCase):
         result = strategy(
             url="https://github.com/seigot/tetris",
             branch="master",
-            repeet=5,
+            trial_num=5,
             level=1,
-            game_time=10
+            game_time=20
         )
-        self.assertEqual(result, "succeeded")
+        self.assertEqual(result.status, "S")

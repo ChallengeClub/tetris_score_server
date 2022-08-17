@@ -15,7 +15,7 @@ class EvaluationResult(models.Model):
         EVALUATING = 'EV', ('evaluating')
         SUCCESS = 'S', ('evaluation successfully ended')
         ERROR = 'ER', ('evaluation ended with error')
-    error_message = models.CharField(max_length=100, default="")
+    error_message = models.TextField(default="")
     status = models.CharField(max_length=2, choices=EvaluationStatus.choices, default=EvaluationStatus.WAIT)
     drop_interval = models.IntegerField()
     value_mode = models.CharField(max_length=10)

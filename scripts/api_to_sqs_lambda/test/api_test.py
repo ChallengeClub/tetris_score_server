@@ -1,9 +1,6 @@
-from datetime import date
 import unittest
-from urllib import response
 import requests
 import json
-import base64
 
 from ..src import score_evaluation_message_pb2
 

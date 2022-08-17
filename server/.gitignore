@@ -1,5 +1,7 @@
 *.log
-!result-sample.log
+!sample-result.log
+log/*.json
+!sample-result.json
 *.pyc
 __pycache__/
 db-volumes/

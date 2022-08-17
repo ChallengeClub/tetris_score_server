@@ -11,7 +11,6 @@ class ScoreEvaluationTests(TestCase):
             level=1,
             game_time=2
         )
-        print(result.to_json())
         self.assertEqual(result.status, "S")
 
     def test_error_branch(self):
@@ -22,5 +21,4 @@ class ScoreEvaluationTests(TestCase):
             level=1,
             game_time=2
         )
-        print(result.to_json())
         self.assertEqual(result.status, "ER")

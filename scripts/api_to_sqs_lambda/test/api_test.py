@@ -1,5 +1,6 @@
 from datetime import date
 import unittest
+from urllib import response
 import requests
 import json
 import base64
@@ -21,13 +22,8 @@ class TestPostAPI(unittest.TestCase):
         msg.drop_interval = 1000
         msg.machine_learning_mode = 1
         res = requests.post(f'{self.infra["api_endpoint_url"]["value"]}/score_evaluation', data=msg.SerializeToString())
-        print(res.text)
-    
-    # def test_read_message(self):
-    #     msg = score_evaluation_message_pb2.ScoreEvaluationMessage()
-    #     with open("api_to_sqs_lambda/message.txt", 'rb') as f:
-    #         msg.ParseFromString(f.read())
-    #     print(msg)
-        
+        response = json.loads(res.text)
+        self.assertEqual(response["code"], 200)
+
 if __name__ == '__main__':
     unittest.main()

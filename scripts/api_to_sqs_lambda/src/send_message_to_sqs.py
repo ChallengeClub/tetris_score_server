@@ -28,12 +28,17 @@ def lambda_handler(event: dict, context):
             QueueUrl=sqs_url,
             MessageBody=message
         )
+        response = {
+                "message": "successfully sent message to SQS",
+                "body": response,
+                "code": 200
+        }
     except:
         response = {
             "error": {
                 "message": "failed to send message to SQS",
                 "body": message,
-                "type": "SQSCliend",
+                "type": "SQSClientError",
                 "code": 501
             }            
         }

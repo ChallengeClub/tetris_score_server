@@ -14,11 +14,16 @@ Python 3.10.6
 CompletedProcess(args='python --version', returncode=0, stderr='')
 =================================================>
 {'block_info': {'currentDirection': 0,
+<<<<<<< HEAD:server/log/result-sample.log
                 'currentShape': {'class': <board_manager.Shape object at 0x7f224370aaa0>,
+=======
+                'currentShape': {'class': <board_manager.Shape object at 0x7f2091b9ea40>,
+>>>>>>> main:server/log/sample-result.log
                                  'direction_range': (0, 1),
                                  'index': 1},
                 'currentX': 5,
                 'currentY': 1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'nextShape': {'class': <board_manager.Shape object at 0x7f224370ae00>,
                               'direction_range': (0, 1, 2,
                                                   3),
@@ -28,27 +33,53 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                                                                    1),
                                                'index': 1},
                                   'element1': {'class': <board_manager.Shape object at 0x7f224370ae00>,
+=======
+                'nextShape': {'class': <board_manager.Shape object at 0x7f2091b9eda0>,
+                              'direction_range': (0, 1, 2,
+                                                  3),
+                              'index': 2},
+                'nextShapeList': {'element0': {'class': <board_manager.Shape object at 0x7f2091b9ea40>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 1},
+                                  'element1': {'class': <board_manager.Shape object at 0x7f2091b9eda0>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 2},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element2': {'class': <board_manager.Shape object at 0x7f224370ae60>,
+=======
+                                  'element2': {'class': <board_manager.Shape object at 0x7f2091b9ee00>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 3},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element3': {'class': <board_manager.Shape object at 0x7f224370aec0>,
+=======
+                                  'element3': {'class': <board_manager.Shape object at 0x7f2091b9ee60>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 4},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element4': {'class': <board_manager.Shape object at 0x7f224370af20>,
                                                'direction_range': (0,),
                                                'index': 5},
                                   'element5': {'class': <board_manager.Shape object at 0x7f224370af80>,
+=======
+                                  'element4': {'class': <board_manager.Shape object at 0x7f2091b9eec0>,
+                                               'direction_range': (0,),
+                                               'index': 5},
+                                  'element5': {'class': <board_manager.Shape object at 0x7f2091b9ef20>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1),
                                                'index': 6}}},
@@ -135,38 +166,64 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                 'line': 0,
                 'mode': 'default',
                 'score': 0}}
+<<<<<<< HEAD:server/log/result-sample.log
 === 0:00:00.007950
 {'strategy': {'direction': 2, 'x': 7, 'y_operation': 1, 'y_moveblocknum': 5}, 'option': {'reset_callback_function_addr': None, 'reset_all_field': None, 'force_reset_field': None}}
 =================================================>
 {'block_info': {'currentDirection': 0,
                 'currentShape': {'class': <board_manager.Shape object at 0x7f224370ae00>,
+=======
+=== 0:00:00.008740
+{'strategy': {'direction': 1, 'x': 2, 'y_operation': 1, 'y_moveblocknum': 1}, 'option': {'reset_callback_function_addr': None, 'reset_all_field': None, 'force_reset_field': None}}
+###### SAMPLE CODE ######
+=================================================>
+{'block_info': {'currentDirection': 0,
+                'currentShape': {'class': <board_manager.Shape object at 0x7f2091b9eda0>,
+>>>>>>> main:server/log/sample-result.log
                                  'direction_range': (0, 1, 2,
                                                      3),
                                  'index': 2},
                 'currentX': 5,
                 'currentY': 1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'nextShape': {'class': <board_manager.Shape object at 0x7f224370ae60>,
                               'direction_range': (0, 1, 2,
                                                   3),
                               'index': 3},
                 'nextShapeList': {'element0': {'class': <board_manager.Shape object at 0x7f224370ae00>,
+=======
+                'nextShape': {'class': <board_manager.Shape object at 0x7f2091b9ee00>,
+                              'direction_range': (0, 1, 2,
+                                                  3),
+                              'index': 3},
+                'nextShapeList': {'element0': {'class': <board_manager.Shape object at 0x7f2091b9eda0>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 2},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element1': {'class': <board_manager.Shape object at 0x7f224370ae60>,
+=======
+                                  'element1': {'class': <board_manager.Shape object at 0x7f2091b9ee00>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 3},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element2': {'class': <board_manager.Shape object at 0x7f224370aec0>,
+=======
+                                  'element2': {'class': <board_manager.Shape object at 0x7f2091b9ee60>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 4},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element3': {'class': <board_manager.Shape object at 0x7f224370af20>,
                                                'direction_range': (0,),
                                                'index': 5},
@@ -175,6 +232,16 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                                                                    1),
                                                'index': 6},
                                   'element5': {'class': <board_manager.Shape object at 0x7f2243762170>,
+=======
+                                  'element3': {'class': <board_manager.Shape object at 0x7f2091b9eec0>,
+                                               'direction_range': (0,),
+                                               'index': 5},
+                                  'element4': {'class': <board_manager.Shape object at 0x7f2091b9ef20>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 6},
+                                  'element5': {'class': <board_manager.Shape object at 0x7f2091bf5e10>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1),
                                                'index': 7}}},
@@ -255,6 +322,7 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                               0]},
  'judge_info': {'block_index': 2,
                 'block_num_max': -1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'elapsed_time': 1.996,
                 'game_time': 10,
                 'gameover_count': 0,
@@ -266,27 +334,54 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
 =================================================>
 {'block_info': {'currentDirection': 0,
                 'currentShape': {'class': <board_manager.Shape object at 0x7f224370ae60>,
+=======
+                'elapsed_time': 2.077,
+                'game_time': 10,
+                'gameover_count': 0,
+                'line': 0,
+                'mode': 'sample',
+                'score': 20}}
+=== 0:00:00.010916
+{'strategy': {'direction': 3, 'x': 5, 'y_operation': 1, 'y_moveblocknum': 1}, 'option': {'reset_callback_function_addr': None, 'reset_all_field': None, 'force_reset_field': None}}
+###### SAMPLE CODE ######
+=================================================>
+{'block_info': {'currentDirection': 0,
+                'currentShape': {'class': <board_manager.Shape object at 0x7f2091b9ee00>,
+>>>>>>> main:server/log/sample-result.log
                                  'direction_range': (0, 1, 2,
                                                      3),
                                  'index': 3},
                 'currentX': 5,
                 'currentY': 1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'nextShape': {'class': <board_manager.Shape object at 0x7f224370aec0>,
                               'direction_range': (0, 1, 2,
                                                   3),
                               'index': 4},
                 'nextShapeList': {'element0': {'class': <board_manager.Shape object at 0x7f224370ae60>,
+=======
+                'nextShape': {'class': <board_manager.Shape object at 0x7f2091b9ee60>,
+                              'direction_range': (0, 1, 2,
+                                                  3),
+                              'index': 4},
+                'nextShapeList': {'element0': {'class': <board_manager.Shape object at 0x7f2091b9ee00>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 3},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element1': {'class': <board_manager.Shape object at 0x7f224370aec0>,
+=======
+                                  'element1': {'class': <board_manager.Shape object at 0x7f2091b9ee60>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 4},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element2': {'class': <board_manager.Shape object at 0x7f224370af20>,
                                                'direction_range': (0,),
                                                'index': 5},
@@ -299,6 +394,20 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                                                                    1),
                                                'index': 7},
                                   'element5': {'class': <board_manager.Shape object at 0x7f2243760df0>,
+=======
+                                  'element2': {'class': <board_manager.Shape object at 0x7f2091b9eec0>,
+                                               'direction_range': (0,),
+                                               'index': 5},
+                                  'element3': {'class': <board_manager.Shape object at 0x7f2091b9ef20>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 6},
+                                  'element4': {'class': <board_manager.Shape object at 0x7f2091bf5e10>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 7},
+                                  'element5': {'class': <board_manager.Shape object at 0x7f2091bf5de0>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1),
                                                'index': 1}}},
@@ -379,6 +488,7 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                               0]},
  'judge_info': {'block_index': 3,
                 'block_num_max': -1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'elapsed_time': 2.997,
                 'game_time': 10,
                 'gameover_count': 0,
@@ -390,20 +500,42 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
 =================================================>
 {'block_info': {'currentDirection': 0,
                 'currentShape': {'class': <board_manager.Shape object at 0x7f224370aec0>,
+=======
+                'elapsed_time': 3.077,
+                'game_time': 10,
+                'gameover_count': 0,
+                'line': 0,
+                'mode': 'sample',
+                'score': 40}}
+=== 0:00:00.015594
+{'strategy': {'direction': 1, 'x': 8, 'y_operation': 1, 'y_moveblocknum': 1}, 'option': {'reset_callback_function_addr': None, 'reset_all_field': None, 'force_reset_field': None}}
+###### SAMPLE CODE ######
+=================================================>
+{'block_info': {'currentDirection': 0,
+                'currentShape': {'class': <board_manager.Shape object at 0x7f2091b9ee60>,
+>>>>>>> main:server/log/sample-result.log
                                  'direction_range': (0, 1, 2,
                                                      3),
                                  'index': 4},
                 'currentX': 5,
                 'currentY': 1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'nextShape': {'class': <board_manager.Shape object at 0x7f224370af20>,
                               'direction_range': (0,),
                               'index': 5},
                 'nextShapeList': {'element0': {'class': <board_manager.Shape object at 0x7f224370aec0>,
+=======
+                'nextShape': {'class': <board_manager.Shape object at 0x7f2091b9eec0>,
+                              'direction_range': (0,),
+                              'index': 5},
+                'nextShapeList': {'element0': {'class': <board_manager.Shape object at 0x7f2091b9ee60>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 4},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element1': {'class': <board_manager.Shape object at 0x7f224370af20>,
                                                'direction_range': (0,),
                                                'index': 5},
@@ -420,6 +552,24 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                                                                    1),
                                                'index': 1},
                                   'element5': {'class': <board_manager.Shape object at 0x7f224370add0>,
+=======
+                                  'element1': {'class': <board_manager.Shape object at 0x7f2091b9eec0>,
+                                               'direction_range': (0,),
+                                               'index': 5},
+                                  'element2': {'class': <board_manager.Shape object at 0x7f2091b9ef20>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 6},
+                                  'element3': {'class': <board_manager.Shape object at 0x7f2091bf5e10>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 7},
+                                  'element4': {'class': <board_manager.Shape object at 0x7f2091bf5de0>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 1},
+                                  'element5': {'class': <board_manager.Shape object at 0x7f2091b9eda0>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
@@ -502,6 +652,7 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                               0]},
  'judge_info': {'block_index': 4,
                 'block_num_max': -1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'elapsed_time': 3.996,
                 'game_time': 10,
                 'gameover_count': 0,
@@ -513,10 +664,25 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
 =================================================>
 {'block_info': {'currentDirection': 0,
                 'currentShape': {'class': <board_manager.Shape object at 0x7f224370af20>,
+=======
+                'elapsed_time': 4.077,
+                'game_time': 10,
+                'gameover_count': 0,
+                'line': 1,
+                'mode': 'sample',
+                'score': 160}}
+=== 0:00:00.015075
+{'strategy': {'direction': 1, 'x': 8, 'y_operation': 1, 'y_moveblocknum': 1}, 'option': {'reset_callback_function_addr': None, 'reset_all_field': None, 'force_reset_field': None}}
+###### SAMPLE CODE ######
+=================================================>
+{'block_info': {'currentDirection': 0,
+                'currentShape': {'class': <board_manager.Shape object at 0x7f2091b9eec0>,
+>>>>>>> main:server/log/sample-result.log
                                  'direction_range': (0,),
                                  'index': 5},
                 'currentX': 5,
                 'currentY': 1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'nextShape': {'class': <board_manager.Shape object at 0x7f224370af80>,
                               'direction_range': (0, 1),
                               'index': 6},
@@ -536,12 +702,37 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                                                                    1),
                                                'index': 1},
                                   'element4': {'class': <board_manager.Shape object at 0x7f224370add0>,
+=======
+                'nextShape': {'class': <board_manager.Shape object at 0x7f2091b9ef20>,
+                              'direction_range': (0, 1),
+                              'index': 6},
+                'nextShapeList': {'element0': {'class': <board_manager.Shape object at 0x7f2091b9eec0>,
+                                               'direction_range': (0,),
+                                               'index': 5},
+                                  'element1': {'class': <board_manager.Shape object at 0x7f2091b9ef20>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 6},
+                                  'element2': {'class': <board_manager.Shape object at 0x7f2091bf5e10>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 7},
+                                  'element3': {'class': <board_manager.Shape object at 0x7f2091bf5de0>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 1},
+                                  'element4': {'class': <board_manager.Shape object at 0x7f2091b9eda0>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 2},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element5': {'class': <board_manager.Shape object at 0x7f224370ae30>,
+=======
+                                  'element5': {'class': <board_manager.Shape object at 0x7f2091b9ee00>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
@@ -624,6 +815,7 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                               0]},
  'judge_info': {'block_index': 5,
                 'block_num_max': -1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'elapsed_time': 4.996,
                 'game_time': 10,
                 'gameover_count': 0,
@@ -635,10 +827,25 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
 =================================================>
 {'block_info': {'currentDirection': 0,
                 'currentShape': {'class': <board_manager.Shape object at 0x7f224370af80>,
+=======
+                'elapsed_time': 5.077,
+                'game_time': 10,
+                'gameover_count': 0,
+                'line': 1,
+                'mode': 'sample',
+                'score': 179}}
+=== 0:00:00.009030
+{'strategy': {'direction': 0, 'x': 0, 'y_operation': 1, 'y_moveblocknum': 1}, 'option': {'reset_callback_function_addr': None, 'reset_all_field': None, 'force_reset_field': None}}
+###### SAMPLE CODE ######
+=================================================>
+{'block_info': {'currentDirection': 0,
+                'currentShape': {'class': <board_manager.Shape object at 0x7f2091b9ef20>,
+>>>>>>> main:server/log/sample-result.log
                                  'direction_range': (0, 1),
                                  'index': 6},
                 'currentX': 5,
                 'currentY': 1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'nextShape': {'class': <board_manager.Shape object at 0x7f2243762170>,
                               'direction_range': (0, 1),
                               'index': 7},
@@ -655,18 +862,44 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                                                                    1),
                                                'index': 1},
                                   'element3': {'class': <board_manager.Shape object at 0x7f224370add0>,
+=======
+                'nextShape': {'class': <board_manager.Shape object at 0x7f2091bf5e10>,
+                              'direction_range': (0, 1),
+                              'index': 7},
+                'nextShapeList': {'element0': {'class': <board_manager.Shape object at 0x7f2091b9ef20>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 6},
+                                  'element1': {'class': <board_manager.Shape object at 0x7f2091bf5e10>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 7},
+                                  'element2': {'class': <board_manager.Shape object at 0x7f2091bf5de0>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 1},
+                                  'element3': {'class': <board_manager.Shape object at 0x7f2091b9eda0>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 2},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element4': {'class': <board_manager.Shape object at 0x7f224370ae30>,
+=======
+                                  'element4': {'class': <board_manager.Shape object at 0x7f2091b9ee00>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 3},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element5': {'class': <board_manager.Shape object at 0x7f224370ae60>,
+=======
+                                  'element5': {'class': <board_manager.Shape object at 0x7f2091b9ee60>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
@@ -749,6 +982,7 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                               0]},
  'judge_info': {'block_index': 6,
                 'block_num_max': -1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'elapsed_time': 5.996,
                 'game_time': 10,
                 'gameover_count': 0,
@@ -760,10 +994,25 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
 =================================================>
 {'block_info': {'currentDirection': 0,
                 'currentShape': {'class': <board_manager.Shape object at 0x7f2243762170>,
+=======
+                'elapsed_time': 6.077,
+                'game_time': 10,
+                'gameover_count': 0,
+                'line': 1,
+                'mode': 'sample',
+                'score': 199}}
+=== 0:00:00.008689
+{'strategy': {'direction': 0, 'x': 5, 'y_operation': 1, 'y_moveblocknum': 1}, 'option': {'reset_callback_function_addr': None, 'reset_all_field': None, 'force_reset_field': None}}
+###### SAMPLE CODE ######
+=================================================>
+{'block_info': {'currentDirection': 0,
+                'currentShape': {'class': <board_manager.Shape object at 0x7f2091bf5e10>,
+>>>>>>> main:server/log/sample-result.log
                                  'direction_range': (0, 1),
                                  'index': 7},
                 'currentX': 5,
                 'currentY': 1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'nextShape': {'class': <board_manager.Shape object at 0x7f2243760df0>,
                               'direction_range': (0, 1),
                               'index': 1},
@@ -776,24 +1025,50 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                                                                    1),
                                                'index': 1},
                                   'element2': {'class': <board_manager.Shape object at 0x7f224370add0>,
+=======
+                'nextShape': {'class': <board_manager.Shape object at 0x7f2091bf5de0>,
+                              'direction_range': (0, 1),
+                              'index': 1},
+                'nextShapeList': {'element0': {'class': <board_manager.Shape object at 0x7f2091bf5e10>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 7},
+                                  'element1': {'class': <board_manager.Shape object at 0x7f2091bf5de0>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 1},
+                                  'element2': {'class': <board_manager.Shape object at 0x7f2091b9eda0>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 2},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element3': {'class': <board_manager.Shape object at 0x7f224370ae30>,
+=======
+                                  'element3': {'class': <board_manager.Shape object at 0x7f2091b9ee00>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 3},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element4': {'class': <board_manager.Shape object at 0x7f224370ae60>,
+=======
+                                  'element4': {'class': <board_manager.Shape object at 0x7f2091b9ee60>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 4},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element5': {'class': <board_manager.Shape object at 0x7f224370aec0>,
+=======
+                                  'element5': {'class': <board_manager.Shape object at 0x7f2091b9eec0>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,),
                                                'index': 5}}},
  'debug_info': {'dropdownscore': 109,
@@ -873,6 +1148,7 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                               0]},
  'judge_info': {'block_index': 7,
                 'block_num_max': -1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'elapsed_time': 6.996,
                 'game_time': 10,
                 'gameover_count': 0,
@@ -884,10 +1160,25 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
 =================================================>
 {'block_info': {'currentDirection': 0,
                 'currentShape': {'class': <board_manager.Shape object at 0x7f2243760df0>,
+=======
+                'elapsed_time': 7.077,
+                'game_time': 10,
+                'gameover_count': 0,
+                'line': 1,
+                'mode': 'sample',
+                'score': 219}}
+=== 0:00:00.008837
+{'strategy': {'direction': 1, 'x': 3, 'y_operation': 1, 'y_moveblocknum': 1}, 'option': {'reset_callback_function_addr': None, 'reset_all_field': None, 'force_reset_field': None}}
+###### SAMPLE CODE ######
+=================================================>
+{'block_info': {'currentDirection': 0,
+                'currentShape': {'class': <board_manager.Shape object at 0x7f2091bf5de0>,
+>>>>>>> main:server/log/sample-result.log
                                  'direction_range': (0, 1),
                                  'index': 1},
                 'currentX': 5,
                 'currentY': 1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'nextShape': {'class': <board_manager.Shape object at 0x7f224370add0>,
                               'direction_range': (0, 1, 2,
                                                   3),
@@ -897,27 +1188,53 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                                                                    1),
                                                'index': 1},
                                   'element1': {'class': <board_manager.Shape object at 0x7f224370add0>,
+=======
+                'nextShape': {'class': <board_manager.Shape object at 0x7f2091b9eda0>,
+                              'direction_range': (0, 1, 2,
+                                                  3),
+                              'index': 2},
+                'nextShapeList': {'element0': {'class': <board_manager.Shape object at 0x7f2091bf5de0>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 1},
+                                  'element1': {'class': <board_manager.Shape object at 0x7f2091b9eda0>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 2},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element2': {'class': <board_manager.Shape object at 0x7f224370ae30>,
+=======
+                                  'element2': {'class': <board_manager.Shape object at 0x7f2091b9ee00>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 3},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element3': {'class': <board_manager.Shape object at 0x7f224370ae60>,
+=======
+                                  'element3': {'class': <board_manager.Shape object at 0x7f2091b9ee60>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 4},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element4': {'class': <board_manager.Shape object at 0x7f224370aec0>,
                                                'direction_range': (0,),
                                                'index': 5},
                                   'element5': {'class': <board_manager.Shape object at 0x7f224370af20>,
+=======
+                                  'element4': {'class': <board_manager.Shape object at 0x7f2091b9eec0>,
+                                               'direction_range': (0,),
+                                               'index': 5},
+                                  'element5': {'class': <board_manager.Shape object at 0x7f2091b9ef20>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1),
                                                'index': 6}}},
@@ -998,6 +1315,7 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                               0]},
  'judge_info': {'block_index': 8,
                 'block_num_max': -1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'elapsed_time': 7.996,
                 'game_time': 10,
                 'gameover_count': 0,
@@ -1009,33 +1327,64 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
 =================================================>
 {'block_info': {'currentDirection': 0,
                 'currentShape': {'class': <board_manager.Shape object at 0x7f224370add0>,
+=======
+                'elapsed_time': 8.077,
+                'game_time': 10,
+                'gameover_count': 0,
+                'line': 1,
+                'mode': 'sample',
+                'score': 238}}
+=== 0:00:00.010784
+{'strategy': {'direction': 0, 'x': 2, 'y_operation': 1, 'y_moveblocknum': 1}, 'option': {'reset_callback_function_addr': None, 'reset_all_field': None, 'force_reset_field': None}}
+###### SAMPLE CODE ######
+=================================================>
+{'block_info': {'currentDirection': 0,
+                'currentShape': {'class': <board_manager.Shape object at 0x7f2091b9eda0>,
+>>>>>>> main:server/log/sample-result.log
                                  'direction_range': (0, 1, 2,
                                                      3),
                                  'index': 2},
                 'currentX': 5,
                 'currentY': 1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'nextShape': {'class': <board_manager.Shape object at 0x7f224370ae30>,
                               'direction_range': (0, 1, 2,
                                                   3),
                               'index': 3},
                 'nextShapeList': {'element0': {'class': <board_manager.Shape object at 0x7f224370add0>,
+=======
+                'nextShape': {'class': <board_manager.Shape object at 0x7f2091b9ee00>,
+                              'direction_range': (0, 1, 2,
+                                                  3),
+                              'index': 3},
+                'nextShapeList': {'element0': {'class': <board_manager.Shape object at 0x7f2091b9eda0>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 2},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element1': {'class': <board_manager.Shape object at 0x7f224370ae30>,
+=======
+                                  'element1': {'class': <board_manager.Shape object at 0x7f2091b9ee00>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 3},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element2': {'class': <board_manager.Shape object at 0x7f224370ae60>,
+=======
+                                  'element2': {'class': <board_manager.Shape object at 0x7f2091b9ee60>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 4},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element3': {'class': <board_manager.Shape object at 0x7f224370aec0>,
                                                'direction_range': (0,),
                                                'index': 5},
@@ -1044,6 +1393,16 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                                                                    1),
                                                'index': 6},
                                   'element5': {'class': <board_manager.Shape object at 0x7f2243762170>,
+=======
+                                  'element3': {'class': <board_manager.Shape object at 0x7f2091b9eec0>,
+                                               'direction_range': (0,),
+                                               'index': 5},
+                                  'element4': {'class': <board_manager.Shape object at 0x7f2091b9ef20>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 6},
+                                  'element5': {'class': <board_manager.Shape object at 0x7f2091bf5e10>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1),
                                                'index': 7}}},
@@ -1124,6 +1483,7 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                               0]},
  'judge_info': {'block_index': 9,
                 'block_num_max': -1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'elapsed_time': 8.996,
                 'game_time': 10,
                 'gameover_count': 0,
@@ -1135,27 +1495,54 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
 =================================================>
 {'block_info': {'currentDirection': 0,
                 'currentShape': {'class': <board_manager.Shape object at 0x7f224370ae30>,
+=======
+                'elapsed_time': 9.077,
+                'game_time': 10,
+                'gameover_count': 0,
+                'line': 2,
+                'mode': 'sample',
+                'score': 356}}
+=== 0:00:00.012041
+{'strategy': {'direction': 2, 'x': 9, 'y_operation': 1, 'y_moveblocknum': 1}, 'option': {'reset_callback_function_addr': None, 'reset_all_field': None, 'force_reset_field': None}}
+###### SAMPLE CODE ######
+=================================================>
+{'block_info': {'currentDirection': 0,
+                'currentShape': {'class': <board_manager.Shape object at 0x7f2091b9ee00>,
+>>>>>>> main:server/log/sample-result.log
                                  'direction_range': (0, 1, 2,
                                                      3),
                                  'index': 3},
                 'currentX': 5,
                 'currentY': 1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'nextShape': {'class': <board_manager.Shape object at 0x7f224370ae60>,
                               'direction_range': (0, 1, 2,
                                                   3),
                               'index': 4},
                 'nextShapeList': {'element0': {'class': <board_manager.Shape object at 0x7f224370ae30>,
+=======
+                'nextShape': {'class': <board_manager.Shape object at 0x7f2091b9ee60>,
+                              'direction_range': (0, 1, 2,
+                                                  3),
+                              'index': 4},
+                'nextShapeList': {'element0': {'class': <board_manager.Shape object at 0x7f2091b9ee00>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 3},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element1': {'class': <board_manager.Shape object at 0x7f224370ae60>,
+=======
+                                  'element1': {'class': <board_manager.Shape object at 0x7f2091b9ee60>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1,
                                                                    2,
                                                                    3),
                                                'index': 4},
+<<<<<<< HEAD:server/log/result-sample.log
                                   'element2': {'class': <board_manager.Shape object at 0x7f224370aec0>,
                                                'direction_range': (0,),
                                                'index': 5},
@@ -1168,6 +1555,20 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                                                                    1),
                                                'index': 7},
                                   'element5': {'class': <board_manager.Shape object at 0x7f2243760df0>,
+=======
+                                  'element2': {'class': <board_manager.Shape object at 0x7f2091b9eec0>,
+                                               'direction_range': (0,),
+                                               'index': 5},
+                                  'element3': {'class': <board_manager.Shape object at 0x7f2091b9ef20>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 6},
+                                  'element4': {'class': <board_manager.Shape object at 0x7f2091bf5e10>,
+                                               'direction_range': (0,
+                                                                   1),
+                                               'index': 7},
+                                  'element5': {'class': <board_manager.Shape object at 0x7f2091bf5de0>,
+>>>>>>> main:server/log/sample-result.log
                                                'direction_range': (0,
                                                                    1),
                                                'index': 1}}},
@@ -1248,6 +1649,7 @@ CompletedProcess(args='python --version', returncode=0, stderr='')
                               0]},
  'judge_info': {'block_index': 10,
                 'block_num_max': -1,
+<<<<<<< HEAD:server/log/result-sample.log
                 'elapsed_time': 9.996,
                 'game_time': 10,
                 'gameover_count': 0,
@@ -1260,6 +1662,21 @@ game finish!! elapsed time: 10.003/game_time: 10, current_block_index: 10/BlockN
 
 ##### YOUR_RESULT #####
 score:163,line:0,gameover:0,time[s]:10.003
+=======
+                'elapsed_time': 10.076,
+                'game_time': 10,
+                'gameover_count': 0,
+                'line': 3,
+                'mode': 'sample',
+                'score': 475}}
+=== 0:00:00.011678
+{'strategy': {'direction': 1, 'x': 6, 'y_operation': 1, 'y_moveblocknum': 1}, 'option': {'reset_callback_function_addr': None, 'reset_all_field': None, 'force_reset_field': None}}
+###### SAMPLE CODE ######
+game finish!! elapsed time: 10.088/game_time: 10, current_block_index: 10/BlockNumMax: -1
+
+##### YOUR_RESULT #####
+score:495,line:3,gameover:0,time[s]:10.088
+>>>>>>> main:server/log/sample-result.log
 
 ##### SCORE DETAIL #####
   1 line: 100 * 0 = 0

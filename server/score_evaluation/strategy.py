@@ -1,5 +1,3 @@
-from asyncio.subprocess import STDOUT
-from faulthandler import cancel_dump_traceback_later
 import os
 import shutil
 import json
@@ -27,7 +25,7 @@ def tetris_start(level=1, game_time=180, drop_interval=1000, value_mode="default
     tetris_start_command = f"xvfb-run -a python start.py -l {level} -t {game_time} -d {drop_interval} -m {value_mode} -f {log_file}"
     if value_predict_weight != "":
         tetris_start_command += f" --predict_weight {value_predict_weight}"
-    result = subprocess.run(tetris_start_command.split(), stdout=subprocess.PIPE, stderr=STDOUT, encoding='utf-8')
+    result = subprocess.run(tetris_start_command.split(), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding='utf-8')
     return result
 
 def strategy(url: str, branch: str, trial_num=10, level=1, game_time=180, drop_interval=1000, value_mode="default", value_predict_weight=""):

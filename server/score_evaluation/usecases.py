@@ -39,7 +39,13 @@ class ScoreEvaluationUsecase:
         scores = []
         for i, future in enumerate(futures):
             with open(f"{log_folder}/result-{i}.log", 'w', encoding='utf-8') as f:
-                f.write(future.result().stdout)
+                result = future.result(timeout=self.evaluation.time_out)                
+                f.write(result.stdout)
+                if result.returncode:
+                    self.evaluation.status = "ER"
+                    self.evaluation.error_message = result.stdout
+                    self.evaluation.ended_at = str(datetime.now())
+                    return self.evaluation
             with open(f"{log_folder}/result-{i}.json", 'r', encoding='utf-8') as f:
                 res = json.load(f)
                 scores.append(int(res["judge_info"]["score"]))

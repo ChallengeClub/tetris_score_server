@@ -4,7 +4,7 @@ from uuid import uuid4
 from datetime import datetime
 
 class Evaluation(models.Model):
-    id = models.UUIDField(primary_key=True, default=str(uuid4), editable=False) # Object of type UUID is not JSON serializable
+    id = models.UUIDField(primary_key=True, default=str(uuid4()), editable=False) # Object of type UUID is not JSON serializable
     created_at = models.DateTimeField(default=str(datetime.now())) # Object of type datetime is not JSON serializable
     ended_at = models.DateTimeField()
     repository_url = models.CharField(max_length=100)
@@ -12,6 +12,7 @@ class Evaluation(models.Model):
     level = models.IntegerField(default=1)
     score = models.IntegerField(default=0)
     game_time = models.IntegerField(default=180)
+    time_out = models.IntegerField(default=200)
 
     class EvaluationStatus(models.TextChoices):
         WAIT = 'W', ('waiting in queue')

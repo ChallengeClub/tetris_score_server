@@ -1,14 +1,21 @@
 from django.db import models
 import json
+from uuid import uuid4
+from datetime import datetime
 
-class EvaluationResult(models.Model):
-    created_at = models.DateTimeField()
+class Evaluation(models.Model):
+    id = models.UUIDField(primary_key=True, default=str(uuid4()), editable=False) # Object of type UUID is not JSON serializable
+    created_at = models.DateTimeField(default=str(datetime.now())) # Object of type datetime is not JSON serializable
     ended_at = models.DateTimeField()
     repository_url = models.CharField(max_length=100)
     branch = models.CharField(max_length=50)
-    level = models.IntegerField(default=1)
-    score = models.IntegerField(default=0)
+    drop_interval = models.IntegerField(default=1000)
+    level = models.IntegerField(default=1)    
+    game_mode = models.CharField(max_length=50, default="default")
     game_time = models.IntegerField(default=180)
+    timeout = models.IntegerField(default=200)
+    value_predict_weight = models.CharField(max_length=100, default="")
+
 
     class EvaluationStatus(models.TextChoices):
         WAIT = 'W', ('waiting in queue')
@@ -17,9 +24,6 @@ class EvaluationResult(models.Model):
         ERROR = 'ER', ('evaluation ended with error')
     error_message = models.TextField(default="")
     status = models.CharField(max_length=2, choices=EvaluationStatus.choices, default=EvaluationStatus.WAIT)
-    drop_interval = models.IntegerField()
-    value_mode = models.CharField(max_length=10)
-    value_predict_weight = models.CharField(max_length=100, default="")
     trial_num = models.IntegerField(default=1)
     score_mean = models.FloatField(default=0)
     score_stdev = models.FloatField(default=0)
@@ -28,7 +32,7 @@ class EvaluationResult(models.Model):
 
     def to_json(self):
         data = {
-            "id": self.id,
+            "id": self.id, 
             "created_at": self.created_at,
             "ended_at": self.ended_at,
             "repository_url": self.repository_url,

@@ -12,7 +12,7 @@ class Evaluation(models.Model):
     level = models.IntegerField(default=1)
     score = models.IntegerField(default=0)
     game_time = models.IntegerField(default=180)
-    time_out = models.IntegerField(default=200)
+    timeout = models.IntegerField(default=200)
 
     class EvaluationStatus(models.TextChoices):
         WAIT = 'W', ('waiting in queue')

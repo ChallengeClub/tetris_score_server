@@ -6,6 +6,7 @@ from datetime import datetime
 from statistics import mean, stdev
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
+from sys import stdout
 
 from .models import Evaluation
 
@@ -34,13 +35,17 @@ class ScoreEvaluationUsecase:
                     drop_interval=self.evaluation.drop_interval,
                     value_mode=self.evaluation.value_mode,
                     value_predict_weight=self.evaluation.value_predict_weight,
+                    timeout=self.evaluation.timeout
                     )
                 futures.append(future)
         scores = []
         for i, future in enumerate(futures):
             with open(f"{log_folder}/result-{i}.log", 'w', encoding='utf-8') as f:
-                result = future.result(timeout=self.evaluation.time_out)                
-                f.write(result.stdout)
+                result = future.result()
+                if result.stdout is not None:
+                    f.write(result.stdout)
+                else:
+                    f.write(result.stderr)
                 if result.returncode:
                     self.evaluation.status = "ER"
                     self.evaluation.error_message = result.stdout
@@ -74,10 +79,23 @@ def clone_repository(url: str, branch: str):
     result = subprocess.run(git_clone_command.split(), capture_output=True, encoding='utf-8')
     return result
 
-def tetris_start(level=1, game_time=180, drop_interval=1000, value_mode="default", value_predict_weight="", log_file="result.json"):
+def tetris_start(level: int, game_time: int, drop_interval: int, value_mode: str, value_predict_weight: str, timeout: int, log_file="result.json"):
     os.chdir("/home/tetris")
     tetris_start_command = f"xvfb-run -a python start.py -l {level} -t {game_time} -d {drop_interval} -m {value_mode} -f {log_file}"
     if value_predict_weight != "":
         tetris_start_command += f" --predict_weight {value_predict_weight}"
-    result = subprocess.run(tetris_start_command.split(), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, encoding='utf-8')
+    try:
+        result = subprocess.run(
+            tetris_start_command.split(),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            encoding='utf-8',
+            timeout=timeout
+        )
+    except subprocess.SubprocessError as e:
+        result = subprocess.CalledProcessError(
+            returncode=10,
+            cmd=tetris_start_command.split(),
+            stderr=str(e)
+        )
     return result

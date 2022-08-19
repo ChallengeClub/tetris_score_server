@@ -54,11 +54,10 @@ class ScoreEvaluationTests(TestCase):
         eval = Evaluation(
             repository_url="https://github.com/seigot/tetris",
             branch="master",
-            value_mode = "",
             trial_num=1,
             level=1,
             game_time=10,
-            time_out=1
+            timeout=1
         )
         usecase = ScoreEvaluationUsecase(eval)
         eval = usecase.evaluate()

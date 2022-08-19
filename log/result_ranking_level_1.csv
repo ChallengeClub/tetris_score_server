@@ -6,6 +6,7 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, VALUE_MOD
 2022/05/11_23:37:43, https://github.com/mattshamrock/tetris, master, 25402, 1, SUCCESS, 1000, -, -, 100, 300, 0, 22100, 0, 2902, 180, , , , ,
 2022/08/14_1:03:46, https://github.com/AtsutoshiNaraki/tetris, master, 25401, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 100, 300, 0, 22100, 0, 2901, 180, 10, 25401.00, 0.00, 25401, 25401
 2022/08/14_0:33:40, https://github.com/AtsutoshiNaraki/tetris, Level1, 25401, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 100, 300, 0, 22100, 0, 2901, 180, 10, 25401.00, 0.00, 25401, 25401
+2022/08/20_0:58:31, https://github.com/AtsutoshiNaraki/tetris, master, 24804, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 22100, 0, 2704, 179, 10, 24804.00, 0.00, 24804, 24804
 2022/08/16_18:43:08, https://github.com/AtsutoshiNaraki/tetris, master, 23453, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 20800, 0, 2653, 179, 10, 23317.60, 428.17, 23453, 22099
 2022/03/16_18:12:31, https://github.com/yuin0/tetris, master, 20477, 1, SUCCESS, 1000, -, -, 800, 1200, 1400, 14300, 0, 2777, 180, 10, 20477.00, 0.00, 20477, 20477
 2022/03/13_19:50:02, https://github.com/usamin24/tetris, master, 20359, 1, SUCCESS, 1000, -, -, 600, 1800, 2100, 13000, 0, 2859, 180, 10, 20359.00, 0.00, 20359, 20359

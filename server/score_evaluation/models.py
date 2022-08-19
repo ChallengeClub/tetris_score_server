@@ -9,26 +9,25 @@ class Evaluation(models.Model):
     ended_at = models.DateTimeField()
     repository_url = models.CharField(max_length=100)
     branch = models.CharField(max_length=50)
-    level = models.IntegerField(default=1)
-    score = models.IntegerField(default=0)
+    drop_interval = models.IntegerField(default=1000)
+    level = models.IntegerField(default=1)    
+    game_mode = models.CharField(max_length=50, default="default")
     game_time = models.IntegerField(default=180)
     timeout = models.IntegerField(default=200)
-
+    value_predict_weight = models.CharField(max_length=100, default="")
+    error_message = models.TextField(default="")
     class EvaluationStatus(models.TextChoices):
         WAIT = 'W', ('waiting in queue')
         EVALUATING = 'EV', ('evaluating')
         SUCCESS = 'S', ('evaluation successfully ended')
         ERROR = 'ER', ('evaluation ended with error')
-    error_message = models.TextField(default="")
     status = models.CharField(max_length=2, choices=EvaluationStatus.choices, default=EvaluationStatus.WAIT)
-    drop_interval = models.IntegerField(default=1000)
-    value_mode = models.CharField(max_length=10, default="default")
-    value_predict_weight = models.CharField(max_length=100, default="")
     trial_num = models.IntegerField(default=1)
     score_mean = models.FloatField(default=0)
     score_stdev = models.FloatField(default=0)
     score_max = models.FloatField(default=0)
     score_min = models.FloatField(default=0)
+    
 
     def to_json(self):
         data = {

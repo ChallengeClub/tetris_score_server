@@ -14,10 +14,14 @@ class TestPostAPI(unittest.TestCase):
     def test_normal(self):
         msg = score_evaluation_message_pb2.ScoreEvaluationMessage()
         msg.repository_url = "https://github.com/seigot/tetris"
-        msg.branch_name = "master"
-        msg.game_level = 1
+        msg.branch = "master"
         msg.drop_interval = 1000
-        msg.machine_learning_mode = 1
+        msg.level = 1
+        msg.game_mode = "default"
+        msg.game_time=10
+        msg.timeout=200
+        msg.trial_num=1
+        
         res = requests.post(f'{self.infra["api_endpoint_url"]["value"]}/score_evaluation', data=msg.SerializeToString())
         response = json.loads(res.text)
         self.assertEqual(response["code"], 200)

@@ -38,7 +38,7 @@ class ScoreEvaluationTests(TestCase):
         eval = Evaluation(
             repository_url="https://github.com/seigot/tetris",
             branch="master",
-            value_mode = "",
+            game_mode = "",
             trial_num=1,
             level=1,
             game_time=2

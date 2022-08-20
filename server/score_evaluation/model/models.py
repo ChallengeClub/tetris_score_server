@@ -5,6 +5,7 @@ from datetime import datetime
 
 class Evaluation(models.Model):
     id = models.UUIDField(primary_key=True, default=str(uuid4()), editable=False) # Object of type UUID is not JSON serializable
+    receipt_handle = models.CharField(max_length=500)
     created_at = models.DateTimeField(default=str(datetime.now())) # Object of type datetime is not JSON serializable
     ended_at = models.DateTimeField()
     repository_url = models.CharField(max_length=100)

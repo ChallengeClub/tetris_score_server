@@ -7,7 +7,7 @@ from statistics import mean, stdev
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
 
-from .models import Evaluation
+from ..model.models import Evaluation
 
 class ScoreEvaluationUsecase:
     def __init__(self, evaluation: Evaluation) -> None:

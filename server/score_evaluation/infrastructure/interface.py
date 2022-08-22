@@ -19,10 +19,11 @@ class EvaluationMessageRepositoryInterface(EvaluationMessageRepository):
         )
         
         msg = ScoreEvaluationMessage()
-        message = response["Messages"][0]['Body'][2:-1]
+        message = response["Messages"][0]['Body']
         print(message)
-        message = message.encode('utf-8')
+        message = bytes(message)
         print(message)
+        print(type(message))
         msg.ParseFromString(message)
         
         return msg

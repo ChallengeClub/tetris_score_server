@@ -1,2 +1,2 @@
 test:
-	python manage.py test score_evaluation.test
+	python manage.py test score_evaluation.tests

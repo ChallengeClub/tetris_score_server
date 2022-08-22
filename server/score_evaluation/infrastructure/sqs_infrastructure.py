@@ -1,3 +1,4 @@
+import base64
 import boto3
 import os
 import json
@@ -18,12 +19,9 @@ class EvaluationMessageRepositoryInterface(EvaluationMessageRepository):
             QueueUrl=self.sqs_url            
         )
         
-        msg = ScoreEvaluationMessage()
-        message = response["Messages"][0]['Body']
-        print(message)
-        message = bytes(message)
-        print(message)
-        print(type(message))
+        msg = ScoreEvaluationMessage() # receive base64 encoded str message
+        message = response["Messages"][0]['Body'][2:-1] # remove b'' from message
+        message = base64.b64decode(message) # base64 decode
         msg.ParseFromString(message)
         
         return msg

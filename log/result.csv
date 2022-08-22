@@ -239,3 +239,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/08/21_22:09:24, https://github.com/cookie4869/tetris, cookie_branch, 12788, 2, SUCCESS, 1000, predict, outputs/2022-08-16-23-07-28/trained_model/tetris_epoch192_score176400.pt, 3200, 3600, 2800, 0, 0, 3188, 180, 10, 11917.60, 739.09, 12788, 10387
 2022/08/22_23:33:29, https://github.com/isshy-you/tetris/, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/08/22_23:47:37, https://github.com/isshy-you/tetris, ish06b, 14085, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 2300, 3300, 700, 5200, 0, 2585, 180, 10, 9696.80, 2584.24, 14085, 6123
+2022/08/22_23:55:52, https://github.com/isshy-you/tetris, ish06b, 13707, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 2900, 2400, 2800, 2600, 0, 3007, 180, 10, 10663.00, 1770.42, 13707, 8416

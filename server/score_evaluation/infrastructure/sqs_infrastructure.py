@@ -10,9 +10,9 @@ from ..repository.evaluation_result_repository import EvaluationResultRepository
 from ..model.score_evaluation_message_pb2 import ScoreEvaluationMessage
 
 class EvaluationMessageRepositoryInterface(EvaluationMessageRepository):
-    def __init__(self) -> None:
+    def __init__(self, sqs_url=os.environ["sqs_url"]) -> None:
         self.sqs = boto3.client('sqs', region_name='ap-northeast-1')
-        self.sqs_url = os.environ["sqs_url"]
+        self.sqs_url = sqs_url
         
     def fetch_message(self)-> ScoreEvaluationMessage:
         response = self.sqs.receive_message(

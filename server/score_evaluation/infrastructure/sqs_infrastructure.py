@@ -1,7 +1,6 @@
 import base64
 import boto3
 import os
-import json
 
 from ..model.models import Evaluation
 from ..repository.evaluation_message_repository import EvaluationMessageRepository

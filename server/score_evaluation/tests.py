@@ -1,7 +1,6 @@
 from django.test import TestCase
 import base64
 import boto3
-import os
 
 from .usecase.usecases import ScoreEvaluationUsecase
 from .infrastructure.sqs_infrastructure import EvaluationMessageRepositoryInterface

@@ -43,3 +43,4 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, VALUE_MOD
 2022/08/15_22:55:44, https://github.com/AtsutoshiNaraki/tetris, master, 17977, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 300, 0, 15600, -500, 2577, 180, 10, 17977.00, 0.00, 17977, 17977
 2022/08/16_18:43:08, https://github.com/AtsutoshiNaraki/tetris, master, 23453, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 20800, 0, 2653, 179, 10, 23317.60, 428.17, 23453, 22099
 2022/08/20_0:58:31, https://github.com/AtsutoshiNaraki/tetris, master, 24804, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 22100, 0, 2704, 179, 10, 24804.00, 0.00, 24804, 24804
+2022/08/23_20:19:30, https://github.com/isshy-you/tetris, ish06b, 7835, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 3300, 1500, 1400, 0, -500, 2135, 180, 10, 7806.50, 90.12, 7835, 7550

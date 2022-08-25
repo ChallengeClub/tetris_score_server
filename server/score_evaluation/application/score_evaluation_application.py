@@ -7,9 +7,9 @@ from statistics import mean, stdev
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
 
-from ..model.models import Evaluation
+from ..domain.model.entity import Evaluation
 
-class ScoreEvaluationUsecase:
+class ScoreEvaluationApplication:
     def __init__(self, evaluation: Evaluation) -> None:
         self.evaluation = evaluation
 

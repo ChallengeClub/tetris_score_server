@@ -42,7 +42,7 @@ class Evaluation(models.Model):
             "error_message": self.error_message,
             "status": self.status,
             "drop_interval": self.drop_interval,
-            "value_mode": self.value_mode,
+            "game_mode": self.game_mode,
             "value_predict_weight": self.value_predict_weight,
             "trial_num": self.trial_num,
             "score_mean": self.score_mean,

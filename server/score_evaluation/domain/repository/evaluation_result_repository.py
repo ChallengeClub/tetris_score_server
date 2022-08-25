@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from ..model.models import Evaluation
+from ..model.entity import Evaluation
 
 class EvaluationResultRepository(metaclass=ABCMeta):
     @abstractmethod

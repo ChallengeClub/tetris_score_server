@@ -1,4 +1,3 @@
-from mimetypes import init
 import os
 import shutil
 import json

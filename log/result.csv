@@ -245,3 +245,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/08/25_20:34:21, https://github.com/cookie4869/tetris, cookie_branch, 11237, 3, SUCCESS, 1000, predict, outputs/2022-08-17-20-41-25/trained_model/tetris_epoch949_score203900.pt, 4400, 3600, 0, 1300, 0, 1937, 180, 10, 9708.90, 1069.15, 11237, 8126
 2022/08/26_20:33:44, https://github.com/RogerTokunaga/tetris, master, 15924, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 100, 0, 1400, 13000, -1000, 2424, 177, 10, 11629.40, 2793.58, 15924, 7037
 2022/08/26_20:39:04, https://github.com/obo-koki/tetris, genetic_algorithm, 15803, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 2200, 1800, 2800, 6500, 0, 2503, 180, 10, 15803.00, 0.00, 15803, 15803
+2022/08/26_22:38:06, https://github.com/koro298/tetris, -, 0, -, github_url_access_NG, -, -, -, -, -, -, -, -, -, -, -, -, -, -, -

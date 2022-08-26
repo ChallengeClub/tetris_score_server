@@ -248,3 +248,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/08/26_22:38:06, https://github.com/koro298/tetris, -, 0, -, github_url_access_NG, -, -, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/08/26_23:09:52, https://github.com/koro298/tetris, ikemi1, -1081, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 0, -3000, 1919, 180, 10, -1602.90, 275.94, -1081, -2045
 2022/08/26_23:33:55, https://github.com/isshy-you/tetris, ish06c, 10179, 3, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 2100, 900, 6300, 0, -500, 1379, 180, 10, 7040.30, 1879.14, 10179, 5114
+2022/08/26_23:35:50, https://github.com/koro298/tetris\t, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -, -, -

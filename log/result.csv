@@ -246,3 +246,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/08/26_20:33:44, https://github.com/RogerTokunaga/tetris, master, 15924, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 100, 0, 1400, 13000, -1000, 2424, 177, 10, 11629.40, 2793.58, 15924, 7037
 2022/08/26_20:39:04, https://github.com/obo-koki/tetris, genetic_algorithm, 15803, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 2200, 1800, 2800, 6500, 0, 2503, 180, 10, 15803.00, 0.00, 15803, 15803
 2022/08/26_22:38:06, https://github.com/koro298/tetris, -, 0, -, github_url_access_NG, -, -, -, -, -, -, -, -, -, -, -, -, -, -, -
+2022/08/26_23:09:52, https://github.com/koro298/tetris, ikemi1, -1081, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 0, -3000, 1919, 180, 10, -1602.90, 275.94, -1081, -2045

@@ -21,7 +21,6 @@ class TestPostAPI(unittest.TestCase):
         msg.game_time=10
         msg.timeout=200
         msg.trial_num=1
-        
         res = requests.post(f'{self.infra["api_endpoint_url"]["value"]}/score_evaluation', data=msg.SerializeToString())
         response = json.loads(res.text)
         self.assertEqual(response["code"], 200)

@@ -5,6 +5,7 @@ from datetime import datetime
 
 class Evaluation(models.Model):
     id = models.UUIDField(primary_key=True, default=str(uuid4()), editable=False) # Object of type UUID is not JSON serializable
+    receipt_handle = models.CharField(max_length=500)
     created_at = models.DateTimeField(default=str(datetime.now())) # Object of type datetime is not JSON serializable
     ended_at = models.DateTimeField()
     repository_url = models.CharField(max_length=100)
@@ -15,20 +16,19 @@ class Evaluation(models.Model):
     game_time = models.IntegerField(default=180)
     timeout = models.IntegerField(default=200)
     value_predict_weight = models.CharField(max_length=100, default="")
-
-
+    error_message = models.TextField(default="")
     class EvaluationStatus(models.TextChoices):
         WAIT = 'W', ('waiting in queue')
         EVALUATING = 'EV', ('evaluating')
         SUCCESS = 'S', ('evaluation successfully ended')
         ERROR = 'ER', ('evaluation ended with error')
-    error_message = models.TextField(default="")
     status = models.CharField(max_length=2, choices=EvaluationStatus.choices, default=EvaluationStatus.WAIT)
     trial_num = models.IntegerField(default=1)
     score_mean = models.FloatField(default=0)
     score_stdev = models.FloatField(default=0)
     score_max = models.FloatField(default=0)
     score_min = models.FloatField(default=0)
+    
 
     def to_json(self):
         data = {
@@ -42,7 +42,7 @@ class Evaluation(models.Model):
             "error_message": self.error_message,
             "status": self.status,
             "drop_interval": self.drop_interval,
-            "value_mode": self.value_mode,
+            "game_mode": self.game_mode,
             "value_predict_weight": self.value_predict_weight,
             "trial_num": self.trial_num,
             "score_mean": self.score_mean,

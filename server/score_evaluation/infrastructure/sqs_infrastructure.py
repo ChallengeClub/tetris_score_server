@@ -20,13 +20,15 @@ class EvaluationMessageRepositoryInterface(EvaluationMessageRepository):
         )
         
         msg = ScoreEvaluationMessage() # receive base64 encoded str message
-        message = response["Messages"][0]['Body'][2:-1] # remove b'' from message
-        message = base64.b64decode(message) # base64 decode
-        msg.ParseFromString(message)
-        eval = protobuf_message_to_django_model(msg)
-        eval.status = "W"
-        eval.receipt_handle = response["Messages"][0]['ReceiptHandle']
-
+        try:
+            message = response["Messages"][0]['Body'][2:-1] # remove b'' from message
+            message = base64.b64decode(message) # base64 decode
+            msg.ParseFromString(message)
+            eval = protobuf_message_to_django_model(msg)
+            eval.status = "EV"
+            eval.receipt_handle = response["Messages"][0]['ReceiptHandle']
+        except KeyError:
+            eval = Evaluation()
         return eval
 
     def delete_message(self, eval: Evaluation):

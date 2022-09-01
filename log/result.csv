@@ -254,3 +254,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/08/31_22:18:33, https://github.com/obo-koki/tetris, level1, 17685, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 1400, 1200, 3500, 9100, 0, 2485, 180, 10, 17685.00, 0.00, 17685, 17685
 2022/08/31_22:43:06, https://github.com/cookie4869/tetris, -, 0, -, github_url_access_NG, -, -, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/08/31_23:25:54, https://github.com/cookie4869/tetris, cookie2_branch, 17414, 2, SUCCESS, 1000, predict, outputs/2022-08-31-08-05-53/trained_model/tetris_epoch1701_score189000.pt, 2000, 2700, 700, 9100, 0, 2914, 179, 10, 15142.20, 2273.46, 17414, 10331
+2022/09/01_22:58:54, https://github.com/cookie4869/tetris/, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -, -, -

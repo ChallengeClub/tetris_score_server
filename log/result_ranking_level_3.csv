@@ -30,6 +30,7 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, VALUE_MOD
 2022/03/21_2:19:52, https://github.com/isshy-you/tetris, ish05f, 12939, 3, SUCCESS, 1000, -, -, 2200, 4200, 2100, 2600, 0, 1839, 180, 10, 7384.00, 3805.75, 12939, 1266
 2022/03/15_1:12:49, https://github.com/isshy-you/tetris, ish05c, 12131, 3, SUCCESS, 1000, -, -, 1500, 4200, 2800, 2600, -500, 1531, 180, 10, 6776.60, 2909.04, 12131, 2935
 2022/03/22_2:11:01, https://github.com/isshy-you/tetris, ish05g3, 12101, 3, SUCCESS, 1000, -, -, 2900, 3000, 2800, 1300, 0, 2101, 180, 10, 7159.60, 2415.37, 12101, 3093
+2022/09/01_22:59:57, https://github.com/cookie4869/tetris, cookie2_branch, 11938, 3, SUCCESS, 1000, predict, outputs/2022-08-31-08-05-53/trained_model/tetris_epoch1701_score189000.pt, 4200, 3300, 2100, 0, 0, 2338, 180, 10, 11349.90, 636.70, 11938, 10130
 2022/03/23_23:47:00, https://github.com/isshy-you/tetris, ish05h3, 11928, 3, SUCCESS, 1000, -, -, 3700, 2100, 700, 3900, 0, 1528, 180, 10, 6344.40, 3119.38, 11928, 2256
 2022/03/22_22:45:50, https://github.com/usamin24/tetris, Lv3, 11329, 3, SUCCESS, 1000, -, -, 4200, 2400, 2800, 0, 0, 1929, 180, 10, 9227.00, 1281.14, 11329, 7270
 2022/08/25_20:34:21, https://github.com/cookie4869/tetris, cookie_branch, 11237, 3, SUCCESS, 1000, predict, outputs/2022-08-17-20-41-25/trained_model/tetris_epoch949_score203900.pt, 4400, 3600, 0, 1300, 0, 1937, 180, 10, 9708.90, 1069.15, 11237, 8126

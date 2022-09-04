@@ -85,12 +85,17 @@ function update_result(){
     fi
 
     ## update to score server
+    ##  - result*.log
+    ##  - detail/*.json
+    ##
     #git clone https://github.com/seigot/tetris_score_server
     #pushd tetris_score_server/logs
+    DETAIL_LOGDIR_NAME="detail"
     git pull
     git add ${RESULT_LOG}
     git add ${RESULT_LEVEL_LOG}
     git add ${RESULT_RANKING_LOG}
+    git add ${DETAIL_LOGDIR_NAME}/*.json
     git commit -m "update result"
     git push
     #popd
@@ -224,6 +229,13 @@ function do_tetris(){
 	# merge result to ${OUTPUTJSON}
 	RESULT_JSON_STR=`jq . ${TMP_LOG}`
 	jq ".index${N} = ${RESULT_JSON_STR}" ${OUTPUTJSON} > tmp && mv tmp ${OUTPUTJSON}
+
+	# store log result
+	DETAIL_LOGDIR_NAME="detail"
+	mkdir -p ${DETAIL_LOGDIR_NAME}
+	LOGNAME="${DATETIME}_${REPOSITORY_URL}_${BRANCH}_${LEVEL}_${DROP_INTERVAL}_${VALUE_MODE}_${VALUE_PREDICT_WEIGHT}_${N}.json"
+	LOGNAME_MOD=`echo ${LOGNAME} | tr '/' '_'`
+	cp ${TMP_LOG} ${DETAIL_LOGDIR_NAME}/${LOGNAME_MOD}
     done
 
     # get result score

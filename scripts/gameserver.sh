@@ -234,7 +234,7 @@ function do_tetris(){
 	DETAIL_LOGDIR_NAME="detail"
 	mkdir -p ${DETAIL_LOGDIR_NAME}
 	LOGNAME="${DATETIME}_${REPOSITORY_URL}_${BRANCH}_${LEVEL}_${DROP_INTERVAL}_${VALUE_MODE}_${VALUE_PREDICT_WEIGHT}_${N}.json"
-	LOGNAME_MOD=`echo ${LOGNAME} | tr '/' '_'`
+	LOGNAME_MOD=`echo ${LOGNAME} | tr '/' '_' | tr ':' '_'`
 	cp ${TMP_LOG} ${DETAIL_LOGDIR_NAME}/${LOGNAME_MOD}
     done
 

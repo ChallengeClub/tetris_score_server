@@ -29,3 +29,8 @@ SQS
 */
 sqs_score_evaluation_name            = "score-evaluation-queue"
 sqs_score_evaluation_deadletter_name = "score-evaluation-deadletter-queue"
+
+/* 
+ECS
+*/
+ecs_cluster_score_evaluation_name = "score_evaluation_cluster"

@@ -29,3 +29,8 @@ SQS
 */
 variable "sqs_score_evaluation_name" {}
 variable "sqs_score_evaluation_deadletter_name" {}
+
+/* 
+ECS
+*/
+variable "ecs_cluster_score_evaluation_name" {}

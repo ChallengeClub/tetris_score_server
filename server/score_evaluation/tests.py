@@ -111,9 +111,3 @@ class InterfaceTests(TestCase):
         eval = self.msg_if.fetch_message()
         res = self.msg_if.delete_message(eval)
         self.assertEqual(res["ResponseMetadata"]['HTTPStatusCode'], 200)
-
-class UseCaseTests(TestCase):
-    def test_evaluate(self):
-        usecase = ScoreEvaluationUsecase()
-        result = usecase.execute()
-        print(result.to_json())

@@ -269,3 +269,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/06_22:55:32, https://github.com/cookie4869/tetris, -, 0, -, github_url_access_NG, -, -, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/06_22:57:41, https://github.com/cookie4869/tetris, cookie3_branch, 14483, 3, SUCCESS, 1000, predict, outputs/2022-09-06-08-01-43/trained_model/tetris_epoch2577_score71800.pt, 2300, 4200, 2100, 3900, 0, 1983, 180, 10, 12595.20, 976.04, 14483, 11091
 2022/09/06_23:01:14, https://github.com/cookie4869/tetris, cookie3_branch, 12377, 3, SUCCESS, 1000, predict, outputs/2022-09-04-15-33-43/trained_model/tetris_epoch1392_score103500.pt, 4700, 1800, 2100, 1300, 0, 2477, 180, 10, 11375.80, 519.28, 12377, 10472
+2022/09/06_23:03:55, https://github.com/cookie4869/tetris, -, 0, -, github_url_access_NG, -, -, -, -, -, -, -, -, -, -, -, -, -, -, -

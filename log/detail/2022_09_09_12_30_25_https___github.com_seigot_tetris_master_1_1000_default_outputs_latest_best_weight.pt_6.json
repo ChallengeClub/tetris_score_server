@@ -59,10 +59,10 @@
     ]
   },
   "judge_info": {
-    "elapsed_time": 180.139,
+    "elapsed_time": 179.833,
     "game_time": 180,
     "gameover_count": 7,
-    "score": -1511,
+    "score": -1540,
     "line": 0,
     "block_index": 180,
     "block_num_max": -1,

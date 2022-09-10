@@ -184,7 +184,7 @@ function do_tetris(){
 	docker stop ${CONTAINER_NAME}
 	docker rm ${CONTAINER_NAME}
     fi
-    docker run -d --name ${CONTAINER_NAME} -p 6080:80 --shm-size=512m seigott/tetris_docker
+    docker run -d --name ${CONTAINER_NAME} -p 8080:80 --shm-size=512m seigott/tetris_docker
 
     # exec command
     docker exec ${CONTAINER_NAME} bash -c "${PRE_COMMAND}"

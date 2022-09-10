@@ -176,7 +176,7 @@ function do_tetris(){
     local TMP_LOG="tmp.json"
     local TMP2_LOG="tmp2.log"
     local OUTPUTJSON="output.json"
-    local CONTAINER_NAME="tetris_docker"
+    local CONTAINER_NAME="tetris_docker_gameserver"
 
     # run docker with detached state
     RET=`docker ps -a | grep ${CONTAINER_NAME} | wc -l`

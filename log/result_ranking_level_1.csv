@@ -29,6 +29,7 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, VALUE_MOD
 2022/08/10_11:44:56, https://github.com/obo-koki/tetris, genetic_algorithm, 11722, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 5300, 1800, 0, 1300, 0, 3322, 180, 10, 11722.00, 0.00, 11722, 11722
 2022/08/29_21:22:05, https://github.com/koro298/tetris, ikemi1, 8813, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 3600, 1500, 0, 1300, -500, 2913, 180, 10, 8813.00, 0.00, 8813, 8813
 2022/08/23_20:19:30, https://github.com/isshy-you/tetris, ish06b, 7835, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 3300, 1500, 1400, 0, -500, 2135, 180, 10, 7806.50, 90.12, 7835, 7550
+2022/09/11_15:05:01, https://github.com/seigot/tetris, master, -1045, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 100, 0, 0, 0, -3000, 1855, 180, 10, -1539.70, 296.05, -1045, -1912
 2022/09/09_12:30:25, https://github.com/seigot/tetris, master, -1068, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 0, -3000, 1932, 180, 10, -1546.50, 240.46, -1068, -2052
 2022/09/10_12:22:58, https://github.com/seigot/tetris, master, -1110, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 0, -3000, 1890, 178, 10, -1434.60, 182.43, -1110, -1646
 2022/09/09_12:29:58, https://github.com/seigot/tetris, master, -1147, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 0, -3000, 1853, 180, 10, -1732.50, 308.68, -1147, -2108

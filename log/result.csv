@@ -308,3 +308,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/11_11:12:54, https://github.com/cookie4869/tetris, cookie2_branch, 21129, 2, SUCCESS, 1000, predict, outputs/2022-08-31-08-05-53/trained_model/tetris_epoch1701_score189000.pt, 1200, 1200, 1400, 14300, 0, 3029, 180, 10, 16745.30, 2146.57, 21129, 14299
 2022/09/11_12:25:53, https://github.com/seigot/tetris, master, -1278, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 100, 0, 0, 0, -3500, 2122, 180, 10, -1671.40, 274.36, -1278, -2096
 2022/09/11_15:04:38, https://github.com/seigot/tetris, master, -1119, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 0, -3000, 1881, 180, 10, -1623.60, 307.14, -1119, -2156
+2022/09/11_15:05:01, https://github.com/seigot/tetris, master, -1497, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 0, -3500, 2003, 180, 10, -1722.40, 232.05, -1497, -2077

@@ -54,17 +54,17 @@
       26,
       26,
       26,
-      25,
+      26,
       25
     ]
   },
   "judge_info": {
-    "elapsed_time": 180.037,
+    "elapsed_time": 180.177,
     "game_time": 180,
     "gameover_count": 8,
-    "score": -1975,
+    "score": -2050,
     "line": 0,
-    "block_index": 179,
+    "block_index": 180,
     "block_num_max": -1,
     "mode": "default"
   }

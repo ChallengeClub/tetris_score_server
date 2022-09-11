@@ -42,29 +42,29 @@
       }
     },
     "line_score_stat": [
-      284,
-      26,
-      1,
-      0
+      598,
+      71,
+      5,
+      1
     ],
     "shape_info_stat": [
-      55,
-      301,
-      311,
-      257,
-      287,
-      304,
-      297,
-      303
+      125,
+      677,
+      682,
+      653,
+      669,
+      710,
+      673,
+      622
     ]
   },
   "judge_info": {
-    "elapsed_time": 179.54,
+    "elapsed_time": 179.536,
     "game_time": 180,
-    "gameover_count": 55,
-    "score": 23148,
-    "line": 339,
-    "block_index": 2059,
+    "gameover_count": 125,
+    "score": 55425,
+    "line": 759,
+    "block_index": 4685,
     "block_num_max": -1,
     "mode": "default"
   }

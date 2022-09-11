@@ -42,28 +42,28 @@
       }
     },
     "line_score_stat": [
-      0,
+      1,
       0,
       0,
       0
     ],
     "shape_info_stat": [
       7,
-      36,
-      23,
-      17,
-      26,
-      23,
+      25,
+      34,
+      14,
       27,
-      29
+      29,
+      27,
+      25
     ]
   },
   "judge_info": {
-    "elapsed_time": 180.439,
+    "elapsed_time": 180.175,
     "game_time": 180,
     "gameover_count": 7,
-    "score": -1540,
-    "line": 0,
+    "score": -1278,
+    "line": 1,
     "block_index": 180,
     "block_num_max": -1,
     "mode": "default"

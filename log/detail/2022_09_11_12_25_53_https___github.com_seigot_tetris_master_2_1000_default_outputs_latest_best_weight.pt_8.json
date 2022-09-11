@@ -48,23 +48,23 @@
       0
     ],
     "shape_info_stat": [
-      7,
-      26,
-      13,
-      20,
-      26,
+      8,
       32,
+      34,
+      27,
+      26,
       22,
-      30
+      21,
+      19
     ]
   },
   "judge_info": {
-    "elapsed_time": 179.511,
+    "elapsed_time": 180.13,
     "game_time": 180,
-    "gameover_count": 7,
-    "score": -1694,
+    "gameover_count": 8,
+    "score": -1958,
     "line": 0,
-    "block_index": 168,
+    "block_index": 180,
     "block_num_max": -1,
     "mode": "default"
   }

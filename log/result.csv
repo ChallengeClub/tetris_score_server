@@ -326,3 +326,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/12_15:36:59, https://github.com/seigot/tetris, master, 0, 1, pip3_install_-r_requirements.txt_NG, 1, default, outputs/latest/best_weight.pt, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/12_22:08:41, https://github.com/isshy-you/tetris, ish06c, 0, 3, python_start.py_NG, 1, default, outputs/latest/best_weight.pt, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/12_22:08:41, https://github.com/isshy-you/tetris, ish06c, 1230675, 3, SUCCESS, 1, default, outputs/latest/best_weight.pt, 366800, 377100, 254100, 158600, -142000, 216075, 26566, 10, 1158156.30, 40017.10, 1230675, 1105061
+2022/09/12_23:09:04, https://github.com/isshy-you/tetris, ish07b_lv2, 0, 2, python_start.py_NG, 1000, default, outputs/latest/best_weight.pt, -, -, -, -, -, -, -, -, -, -, -, -

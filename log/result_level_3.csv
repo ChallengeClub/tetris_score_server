@@ -94,3 +94,4 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, VALUE_MOD
 2022/09/11_23:08:24, https://github.com/AtsutoshiNaraki/tetris, Ryuoh, 1152222, 3, SUCCESS, 1, default, outputs/latest/best_weight.pt, 1218400, 430800, 95900, 26000, -1265000, 646122, 94750, 10, 1055392.00, 89171.34, 1152222, 901862
 2022/09/12_9:30:16, https://github.com/isshy-you/tetris, ish06c, 10022, 3, SUCCESS, 1, default, outputs/latest/best_weight.pt, 2700, 3000, 2100, 1300, -500, 1422, 180, 10, 6751.90, 1820.00, 10022, 3132
 2022/09/12_9:49:40, https://github.com/isshy-you/tetris, ish06c, 9900, 3, SUCCESS, 1, default, outputs/latest/best_weight.pt, 2700, 2700, 2100, 1300, -500, 1600, 180, 10, 7310.70, 2588.32, 9900, 3062
+2022/09/12_10:00:40, https://github.com/isshy-you/tetris, ish06c, 8777, 3, SUCCESS, 1, default, outputs/latest/best_weight.pt, 2600, 1200, 2100, 2600, -1000, 1277, 180, 10, 7201.60, 1064.07, 8777, 5455

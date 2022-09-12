@@ -317,3 +317,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/11_23:08:24, https://github.com/AtsutoshiNaraki/tetris, Ryuoh, 1152222, 3, SUCCESS, 1, default, outputs/latest/best_weight.pt, 1218400, 430800, 95900, 26000, -1265000, 646122, 94750, 10, 1055392.00, 89171.34, 1152222, 901862
 2022/09/12_0:08:30, https://github.com/isshy-you/tetris, ish06c, 0, 3, pip3_install_-r_requirements.txt_NG, 1, default, outputs/latest/best_weight.pt, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/12_0:52:50, https://github.com/isshy-you/tetris, ish07b_lv1, 0, -, github_url_branch_access_NG, -, -, -, -, -, -, -, -, -, -, -, -, -, -, -
+2022/09/12_8:31:01, https://github.com/isshy-you/tetris, ish07b_lv1, 19238, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 1200, 1500, 2100, 11700, 0, 2738, 180, 10, 19238.00, 0.00, 19238, 19238

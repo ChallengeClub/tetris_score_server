@@ -332,3 +332,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/15_1:07:05, https://github.com/isshy-you/tetris, ish06c, 14327, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 2400, 3300, 3500, 2600, 0, 2527, 180, 10, 9894.40, 2489.19, 14327, 6331
 2022/09/15_1:08:18, https://github.com/isshy-you/tetris, ish07b_lv3, 797499, 3, SUCCESS, 10, default, outputs/latest/best_weight.pt, 199800, 251400, 189700, 127400, -109000, 138199, 17540, 10, 738805.60, 28859.93, 797499, 704656
 2022/09/15_1:09:38, https://github.com/isshy-you/tetris, ish07b _lv2, 0, -, github_url_branch_access_NG, -, -, -, -, -, -, -, -, -, -, -, -, -, -, -
+2022/09/15_7:59:27, https://github.com/isshy-you/tetris, ish07b_lv2, 12001, 3, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 1400, 3000, 1400, 5200, -500, 1501, 180, 10, 7587.60, 3658.47, 12001, 3151

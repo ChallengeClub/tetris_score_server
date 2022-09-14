@@ -32,6 +32,7 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, VALUE_MOD
 2022/09/12_23:09:04, https://github.com/isshy-you/tetris, ish07b_lv2, 15391, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 1400, 2400, 4900, 3900, 0, 2791, 180, 10, 11571.80, 2337.88, 15391, 8580
 2022/07/09_1:58:50, https://github.com/seigot/tetris, master, 15094, 2, SUCCESS, 1000, predict_sample2, weight/MLP/sample_weight.pt, 2600, 3000, 2800, 3900, 0, 2794, 180, , , , ,
 2022/02/27_0:07:56, https://github.com/isshy-you/tetris, ish05a, 14558, 2, SUCCESS, 1000, -, -, 2000, 3600, 2100, 3900, 0, 2958, 180, 10, 10285.00, 2566.88, 14558, 7088
+2022/09/15_1:07:05, https://github.com/isshy-you/tetris, ish06c, 14327, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 2400, 3300, 3500, 2600, 0, 2527, 180, 10, 9894.40, 2489.19, 14327, 6331
 2022/09/06_22:55:32, https://github.com/cookie4869/tetris, cookie3_branch, 14287, 2, SUCCESS, 1000, predict, outputs/2022-09-03-11-40-46/trained_model/tetris_epoch754_score17400.pt, 2900, 3300, 3500, 1300, 0, 3287, 180, 10, 12539.70, 821.12, 14287, 11592
 2022/03/15_5:34:07, https://github.com/yuin0/tetris, develop, 14159, 2, SUCCESS, 1000, -, -, 3000, 3600, 700, 3900, 0, 2959, 180, 10, 12439.20, 684.88, 14159, 11860
 2022/08/22_23:47:37, https://github.com/isshy-you/tetris, ish06b, 14085, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 2300, 3300, 700, 5200, 0, 2585, 180, 10, 9696.80, 2584.24, 14085, 6123

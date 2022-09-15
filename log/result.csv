@@ -342,3 +342,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/15_16:20:55, https://github.com/isshy-you/tetris, ish07b_lv3, 1495973, 3, SUCCESS, 5, default, outputs/latest/best_weight.pt, 395500, 456000, 348600, 249600, -227000, 273273, 34255, 10, 1454110.90, 25477.37, 1495973, 1417433
 2022/09/16_4:26:56, https://github.com/koro298/tetris, ikemi3, 21771, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 500, 2100, 700, 15600, 0, 2871, 180, 10, 21771.00, 0.00, 21771, 21771
 2022/09/16_5:33:43, https://github.com/koro298/tetris, ikemi3, 18812, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 800, 1800, 4200, 9100, 0, 2912, 180, 10, 16122.30, 2334.39, 18812, 11561
+2022/09/16_6:13:26, https://github.com/koro298/tetris, LV2チューニング, 19759, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 1200, 600, 2100, 13000, 0, 2859, 180, 10, 14807.90, 3864.84, 19759, 7999

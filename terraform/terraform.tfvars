@@ -34,3 +34,5 @@ sqs_score_evaluation_deadletter_name = "score-evaluation-deadletter-queue"
 ECS
 */
 ecs_cluster_score_evaluation_name = "score_evaluation_cluster"
+ecs_task_definition_family        = "score_evaluation_family"
+ecs_task_definition_image         = "endonrak/tetris_score_server"

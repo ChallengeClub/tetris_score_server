@@ -34,3 +34,5 @@ variable "sqs_score_evaluation_deadletter_name" {}
 ECS
 */
 variable "ecs_cluster_score_evaluation_name" {}
+variable "ecs_task_definition_family" {}
+variable "ecs_task_definition_image" {}

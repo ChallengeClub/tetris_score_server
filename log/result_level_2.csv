@@ -88,3 +88,4 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, VALUE_MOD
 2022/09/15_1:07:05, https://github.com/isshy-you/tetris, ish06c, 14327, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 2400, 3300, 3500, 2600, 0, 2527, 180, 10, 9894.40, 2489.19, 14327, 6331
 2022/09/16_5:33:43, https://github.com/koro298/tetris, ikemi3, 18812, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 800, 1800, 4200, 9100, 0, 2912, 180, 10, 16122.30, 2334.39, 18812, 11561
 2022/09/16_6:13:26, https://github.com/koro298/tetris, LV2チューニング, 19759, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 1200, 600, 2100, 13000, 0, 2859, 180, 10, 14807.90, 3864.84, 19759, 7999
+2022/09/16_22:49:55, https://github.com/AtsutoshiNaraki/tetris, master, 18930, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 100, 900, 2800, 13000, 0, 2130, 177, 10, 13192.10, 3374.42, 18930, 7133

@@ -345,3 +345,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/16_6:13:26, https://github.com/koro298/tetris, LV2チューニング, 19759, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 1200, 600, 2100, 13000, 0, 2859, 180, 10, 14807.90, 3864.84, 19759, 7999
 2022/09/16_18:47:44, https://github.com/isshy-you/tetris, ish04d1, 58859, 3, SUCCESS, 10, default, outputs/latest/best_weight.pt, 70800, 80400, 52500, 41600, -287000, 100559, 15000, 10, 29111.30, 17654.03, 58859, -7070
 2022/09/16_22:49:55, https://github.com/AtsutoshiNaraki/tetris, master, 18930, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 100, 900, 2800, 13000, 0, 2130, 177, 10, 13192.10, 3374.42, 18930, 7133
+2022/09/16_22:50:16, https://github.com/AtsutoshiNaraki/tetris, master, 16590, 3, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 2000, 1200, 1400, 10400, 0, 1590, 171, 10, 9146.50, 3344.56, 16590, 6032

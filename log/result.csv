@@ -347,3 +347,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/16_22:49:55, https://github.com/AtsutoshiNaraki/tetris, master, 18930, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 100, 900, 2800, 13000, 0, 2130, 177, 10, 13192.10, 3374.42, 18930, 7133
 2022/09/16_22:50:16, https://github.com/AtsutoshiNaraki/tetris, master, 16590, 3, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 2000, 1200, 1400, 10400, 0, 1590, 171, 10, 9146.50, 3344.56, 16590, 6032
 2022/09/16_22:51:53, https://github.com/AtsutoshiNaraki/tetris, Ryuoh, 934092, 3, SUCCESS, 1, default, outputs/latest/best_weight.pt, 637300, 477000, 135100, 71500, -805500, 418692, 60511, 10, 875387.20, 30066.36, 934092, 834303
+2022/09/17_18:22:38, https://github.com/isshy-you/tetris, ish07b_lv3, 1885386, 3, SUCCESS, 1, default, outputs/latest/best_weight.pt, 480300, 583800, 453600, 305500, -263500, 325686, 41873, 10, 1784146.20, 49408.18, 1885386, 1721253

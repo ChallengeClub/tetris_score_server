@@ -16,12 +16,16 @@ class EvaluationMessageRepositoryInterface(EvaluationMessageRepository):
         
     def fetch_message(self)-> Evaluation:
         response = self.sqs.receive_message(
-            QueueUrl=self.sqs_url            
+            QueueUrl=self.sqs_url
         )
         
         msg = ScoreEvaluationMessage() # receive base64 encoded str message
-        message = response["Messages"][0]['Body'][2:-1] # remove b'' from message
-        message = base64.b64decode(message) # base64 decode
+        message = response.get("Messages", "")
+        if message=="": # if there is no message in sqs
+            return None
+        message = response["Messages"][0]['Body']
+        message = message[2:-1] # remove b'' from message 
+        message = base64.b64decode(message.encode("utf-8")) # base64 decode
         msg.ParseFromString(message)
         eval = protobuf_message_to_django_model(msg)
         eval.status = "W"

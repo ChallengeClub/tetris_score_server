@@ -14,15 +14,15 @@ def lambda_handler(event: dict, context):
     except:
         response = {
             "error": {
-                "message": "including invalid fields in request",
+                "message": "failed to parse request",
                 "body": event["body"],
                 "type": "ProtobufException",
-                "code": 501
-            }            
+            },
+            "code": 401
         }
         return response
         
-    message = str(msg.SerializeToString())
+    message = str(base64.b64encode(msg.SerializeToString()))
     try:
         response = client.send_message(
             QueueUrl=sqs_url,
@@ -33,13 +33,13 @@ def lambda_handler(event: dict, context):
                 "body": response,
                 "code": 200
         }
-    except:
+    except Exception as e:
         response = {
             "error": {
                 "message": "failed to send message to SQS",
-                "body": message,
+                "body": e,
                 "type": "SQSClientError",
-                "code": 501
-            }            
+            },
+            "code": 501
         }
     return response

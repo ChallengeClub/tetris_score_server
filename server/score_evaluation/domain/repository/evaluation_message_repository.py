@@ -10,3 +10,4 @@ class EvaluationMessageRepository(metaclass=ABCMeta):
     @abstractmethod
     def delete_message(self: Evaluation):
         raise NotImplementedError
+    

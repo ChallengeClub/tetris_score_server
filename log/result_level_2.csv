@@ -95,3 +95,4 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, VALUE_MOD
 2022/09/18_14:00:15, https://github.com/Jumpeipei/tetris, test, 17342, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 2200, 900, 3500, 7800, 0, 2942, 180, 10, 12277.40, 3625.15, 17342, 6298
 2022/09/19_0:20:53, https://github.com/cookie4869/tetris, Final_Lv2a, 12427, 2, SUCCESS, 1000, predict, outputs/latest/best_weight.pt, 4300, 2100, 2800, 0, 0, 3227, 178, 10, 11653.90, 454.50, 12427, 10919
 2022/09/19_0:22:03, https://github.com/cookie4869/tetris, Final_Lv2a, 18547, 2, SUCCESS, 1000, predict, ./outputs/2022-08-31-08-05-53/trained_model/tetris_epoch1701_score189000.pt, 1400, 1800, 2100, 10400, 0, 2847, 179, 10, 16193.40, 2077.22, 18547, 12235
+2022/09/19_0:22:58, https://github.com/krymt28/tetris, master, 15071, 2, SUCCESS, 1000, predict_sample, ./M2_tetris_epoch68_score192800.pt, 2000, 3000, 4900, 2600, 0, 2571, 180, 10, 13191.40, 1205.15, 15071, 10866

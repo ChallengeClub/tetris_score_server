@@ -355,3 +355,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/18_14:00:45, https://github.com/ryochinbo/tetris, master, 9312, 3, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 2700, 3600, 700, 1300, -1000, 2012, 180, 10, 3981.30, 2680.81, 9312, 284
 2022/09/18_14:01:10, https://github.com/Jumpeipei/tetris, test, 9676, 3, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 1700, 900, 2800, 3900, -1000, 1376, 180, 10, 4549.90, 3271.40, 9676, -1859
 2022/09/18_14:01:38, https://github.com/obo-koki/tetris, level3, 16411, 3, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 2800, 3000, 1400, 6500, 0, 2711, 179, 10, 13452.10, 1693.51, 16411, 11597
+2022/09/18_14:02:10, https://github.com/obo-koki/tetris, ryuou, 10917, 3, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 4800, 2100, 700, 1300, 0, 2017, 180, 10, 7507.40, 1711.14, 10917, 5154

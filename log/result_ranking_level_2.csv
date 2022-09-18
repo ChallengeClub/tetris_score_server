@@ -6,6 +6,7 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, VALUE_MOD
 2022/02/18_0:36:04, https://github.com/isshy-you/tetris, master, 817980, 2, SUCCESS, 1, -, -, 115600, 163500, 154000, 266500, -78500, 196880, 15161, 10, 795498.20, 15953.60, 817980, 767070
 2022/03/15_23:12:09, https://github.com/yuin0/tetris, master, 22508, 2, SUCCESS, 1000, -, -, 800, 0, 700, 18200, 0, 2808, 180, 10, 18352.20, 1804.26, 22508, 16044
 2022/09/11_11:12:54, https://github.com/cookie4869/tetris, cookie2_branch, 21129, 2, SUCCESS, 1000, predict, outputs/2022-08-31-08-05-53/trained_model/tetris_epoch1701_score189000.pt, 1200, 1200, 1400, 14300, 0, 3029, 180, 10, 16745.30, 2146.57, 21129, 14299
+2022/09/18_13:58:41, https://github.com/taika-izumi/tetris, master, 21039, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 900, 1500, 2800, 13000, 0, 2839, 179, 10, 17700.20, 2658.12, 21039, 13405
 2022/03/18_20:57:41, https://github.com/yuin0/tetris, develop, 20352, 2, SUCCESS, 1000, -, -, 1200, 900, 0, 15600, 0, 2652, 180, 10, 17010.40, 2929.09, 20352, 11262
 2022/09/02_0:55:53, https://github.com/AtsutoshiNaraki/tetris, master, 19994, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 600, 600, 3500, 13000, 0, 2294, 180, 10, 12890.20, 3770.93, 19994, 7711
 2022/09/16_6:13:26, https://github.com/koro298/tetris, LV2チューニング, 19759, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 1200, 600, 2100, 13000, 0, 2859, 180, 10, 14807.90, 3864.84, 19759, 7999

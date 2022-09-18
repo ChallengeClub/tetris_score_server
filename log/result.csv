@@ -363,3 +363,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/19_0:23:40, https://github.com/qbi-sui/tetris, master, 12806, 2, SUCCESS, 1000, predict, ./best_weight.pt, 3000, 3000, 2800, 1300, 0, 2706, 180, 10, 11694.70, 613.24, 12806, 10397
 2022/09/19_0:24:24, https://github.com/bushio/tetris, master, 0, 2, python_start.py_NG, 1000, predict_sample, ./weight/DQN/best_weight.pt, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/19_0:25:20, https://github.com/qbi-sui/tetris, master, 11199, 3, SUCCESS, 1000, predict, ./best_weight.pt, 4100, 1500, 2800, 1300, 0, 1499, 180, 10, 9140.70, 1909.62, 11199, 5927
+2022/09/19_0:26:06, https://github.com/bushio/tetris, submit_level2, 0, 3, python_start.py_NG, 1000, predict_sample, ./weight/DQN/best_weight.pt, -, -, -, -, -, -, -, -, -, -, -, -

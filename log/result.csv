@@ -371,3 +371,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/19_0:29:15, https://github.com/AtsutoshiNaraki/tetris, Ryuoh, 935002, 3, SUCCESS, 1, default, outputs/latest/best_weight.pt, 644600, 465000, 159600, 70200, -834000, 429602, 62210, 10, 872938.00, 32400.44, 935002, 821705
 2022/09/19_0:29:59, https://github.com/cookie4869/tetris, Final_Lv3pa, 1030032, 3, SUCCESS, 1, predict, ./outputs/2022-09-13-00-28-28/trained_model/tetris_epoch3741_score138100.pt, 543200, 190200, 28000, 6500, -1500, 263632, 17193, 10, 997907.10, 18784.90, 1030032, 972059
 2022/09/19_0:30:40, https://github.com/bushio/tetris, submit_level2, 0, 3, python_start.py_NG, 1, predict_sample, ./weight/DQN/best_weight.pt, -, -, -, -, -, -, -, -, -, -, -, -
+2022/09/19_1:54:02, https://github.com/usamin24/tetris, master, 0, 2, python_start.py_NG, 1000, default, outputs/latest/best_weight.pt, -, -, -, -, -, -, -, -, -, -, -, -

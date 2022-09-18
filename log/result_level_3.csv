@@ -121,3 +121,4 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, VALUE_MOD
 2022/09/18_14:02:10, https://github.com/obo-koki/tetris, ryuou, 10917, 3, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 4800, 2100, 700, 1300, 0, 2017, 180, 10, 7507.40, 1711.14, 10917, 5154
 2022/09/18_14:02:47, https://github.com/isshy-you/tetris, 3rd_Lv3_2, 10763, 3, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 2000, 2400, 2800, 2600, -500, 1463, 180, 10, 6537.20, 2136.40, 10763, 3196
 2022/09/19_0:25:20, https://github.com/qbi-sui/tetris, master, 11199, 3, SUCCESS, 1000, predict, ./best_weight.pt, 4100, 1500, 2800, 1300, 0, 1499, 180, 10, 9140.70, 1909.62, 11199, 5927
+2022/09/19_0:26:49, https://github.com/krymt28/tetris, master, 9720, 3, SUCCESS, 1000, predict_sample, ./M2_tetris_epoch68_score192800.pt, 2500, 3600, 2800, 0, -500, 1320, 180, 10, 8785.90, 1230.38, 9720, 5586

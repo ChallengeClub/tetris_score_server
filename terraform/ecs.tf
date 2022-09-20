@@ -40,10 +40,9 @@ resource "aws_ecs_task_definition" "score_evaluation_task" {
       logConfiguration = {
         logDriver = "awslogs",
         options = {
-          awslogs-create-group  = "true",
           awslogs-group         = aws_cloudwatch_log_group.ecs_execution_log.name,
           awslogs-region        = "ap-northeast-1",
-          awslogs-stream-prefix = "awslogs-example"
+          awslogs-stream-prefix = "ecsTasklogs"
         }
       }
     }

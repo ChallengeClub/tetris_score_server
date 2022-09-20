@@ -21,8 +21,9 @@ lambda_protobuf_layer_name        = "lambda_protobuf_layer"
 /* 
 CloudWatch
 */
-cloudwatch_role_api_gateway_putlog = "cloudwatch_role_api_gateway_putlog"
-cloudwatch_log_group_name          = "score_evaluation_apigateway_accesslog"
+cloudwatch_role_api_gateway_putlog    = "cloudwatch_role_api_gateway_putlog"
+cloudwatch_api_gateway_log_group_name = "score_evaluation_apigateway_accesslog"
+cloudwatch_ecs_log_group_name         = "score_evaluation_ecs_log"
 
 /* 
 SQS
@@ -35,4 +36,5 @@ ECS
 */
 ecs_cluster_score_evaluation_name = "score_evaluation_cluster"
 ecs_task_definition_family        = "score_evaluation_family"
-ecs_task_definition_image         = "endonrak/tetris_score_server"
+ecs_task_definition_image         = "public.ecr.aws/r2u8u6o1/tetris_score_evaluation:latest"
+ecs_task_definition_role_name     = "ecsTaskExecutionRole"

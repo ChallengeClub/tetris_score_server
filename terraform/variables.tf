@@ -22,7 +22,8 @@ variable "lambda_protobuf_layer_name" {}
 CloudWatch
 */
 variable "cloudwatch_role_api_gateway_putlog" {}
-variable "cloudwatch_log_group_name" {}
+variable "cloudwatch_api_gateway_log_group_name" {}
+variable "cloudwatch_ecs_log_group_name" {}
 
 /* 
 SQS
@@ -36,3 +37,4 @@ ECS
 variable "ecs_cluster_score_evaluation_name" {}
 variable "ecs_task_definition_family" {}
 variable "ecs_task_definition_image" {}
+variable "ecs_task_definition_role_name" {}

@@ -8,7 +8,7 @@ resource "aws_vpc" "tetris_score_server_vpc" {
 resource "aws_subnet" "tetris_score_server_subnet" {
   vpc_id            = aws_vpc.tetris_score_server_vpc.id
   cidr_block        = var.subnet_cidr
-  availability_zone = "ap-northeast-1c"
+  availability_zone = var.subnet_availability_zone
 
   tags = {
     Name = var.vpc_tag

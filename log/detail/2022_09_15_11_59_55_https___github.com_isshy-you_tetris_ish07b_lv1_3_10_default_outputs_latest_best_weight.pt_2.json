@@ -1,0 +1,71 @@
+{
+  "debug_info": {
+    "line_score": {
+      "line1": 100,
+      "line2": 300,
+      "line3": 700,
+      "line4": 1300,
+      "gameover": -500
+    },
+    "shape_info": {
+      "shapeNone": {
+        "index": 0,
+        "color": "none"
+      },
+      "shapeI": {
+        "index": 1,
+        "color": "red"
+      },
+      "shapeL": {
+        "index": 2,
+        "color": "green"
+      },
+      "shapeJ": {
+        "index": 3,
+        "color": "purple"
+      },
+      "shapeT": {
+        "index": 4,
+        "color": "gold"
+      },
+      "shapeO": {
+        "index": 5,
+        "color": "pink"
+      },
+      "shapeS": {
+        "index": 6,
+        "color": "blue"
+      },
+      "shapeZ": {
+        "index": 7,
+        "color": "yellow"
+      }
+    },
+    "line_score_stat": [
+      1714,
+      724,
+      304,
+      123
+    ],
+    "shape_info_stat": [
+      257,
+      2531,
+      2428,
+      2600,
+      2449,
+      2474,
+      2553,
+      2509
+    ]
+  },
+  "judge_info": {
+    "elapsed_time": 179.506,
+    "game_time": 180,
+    "gameover_count": 257,
+    "score": 773222,
+    "line": 4566,
+    "block_index": 17543,
+    "block_num_max": -1,
+    "mode": "default"
+  }
+}

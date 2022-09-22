@@ -29,10 +29,3 @@ SQS
 */
 variable "sqs_score_evaluation_name" {}
 variable "sqs_score_evaluation_deadletter_name" {}
-
-/* 
-VPC
-*/
-variable "vpc_cidr" {}
-variable "subnet_cidr" {}
-variable "subnet_tag" {}

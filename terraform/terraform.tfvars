@@ -33,6 +33,7 @@ sqs_score_evaluation_deadletter_name = "score-evaluation-deadletter-queue"
 /* 
 VPC
 */
-vpc_cidr    = "10.0.0.0/21"
-subnet_cidr = "10.0.0.0/24"
-subnet_tag  = "tetris_score_server_subnet"
+vpc_cidr                 = "10.0.0.0/21"
+vpc_tag                  = "tetris_score_server"
+subnet_cidr              = "10.0.0.0/24"
+subnet_availability_zone = "ap-northeast-1c"

@@ -43,5 +43,6 @@ variable "ecs_task_definition_role_name" {}
 VPC
 */
 variable "vpc_cidr" {}
+variable "vpc_tag" {}
 variable "subnet_cidr" {}
-variable "subnet_tag" {}
+variable "subnet_availability_zone" {}

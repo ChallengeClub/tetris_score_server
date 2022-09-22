@@ -38,3 +38,10 @@ ecs_cluster_score_evaluation_name = "score_evaluation_cluster"
 ecs_task_definition_family        = "score_evaluation_family"
 ecs_task_definition_image         = "public.ecr.aws/r2u8u6o1/tetris_score_evaluation:latest"
 ecs_task_definition_role_name     = "ecsTaskExecutionRole"
+
+/* 
+VPC
+*/
+vpc_cidr    = "10.0.0.0/21"
+subnet_cidr = "10.0.0.0/24"
+subnet_tag  = "tetris_score_server_subnet"

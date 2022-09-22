@@ -38,3 +38,10 @@ variable "ecs_cluster_score_evaluation_name" {}
 variable "ecs_task_definition_family" {}
 variable "ecs_task_definition_image" {}
 variable "ecs_task_definition_role_name" {}
+
+/* 
+VPC
+*/
+variable "vpc_cidr" {}
+variable "subnet_cidr" {}
+variable "subnet_tag" {}

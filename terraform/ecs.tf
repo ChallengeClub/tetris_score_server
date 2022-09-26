@@ -37,6 +37,12 @@ resource "aws_ecs_task_definition" "score_evaluation_task" {
       image  = var.ecs_task_definition_image
       cpu    = 1024
       memory = 2048
+      environment = [
+        {
+          "name" : "sqs_url",
+          "value" : data.aws_sqs_queue.score_evaluation_queue_data.url
+        }
+      ]
       logConfiguration = {
         logDriver = "awslogs",
         options = {

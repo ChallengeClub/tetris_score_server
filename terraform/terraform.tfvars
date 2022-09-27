@@ -37,7 +37,9 @@ ECS
 ecs_cluster_score_evaluation_name = "score_evaluation_cluster"
 ecs_task_definition_family        = "score_evaluation_family"
 ecs_task_definition_image         = "public.ecr.aws/r2u8u6o1/tetris_score_evaluation:latest"
-ecs_task_definition_role_name     = "ecsTaskExecutionRole"
+ecs_task_execution_role_name      = "ecsTaskExecutionRole"
+ecs_task_role_name                = "scoreEvaluationTaskRole"
+ecs_task_role_policy_name         = "scoreEvaluationTaskRolePolicy"
 
 /* 
 VPC

@@ -19,7 +19,7 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "apigateway_putlog" {
-  role       = "${aws_iam_role.apigateway_putlog.name}"
+  role       = aws_iam_role.apigateway_putlog.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
 }
 
@@ -28,5 +28,9 @@ resource "aws_api_gateway_account" "score_evaluation_apigateway_account" {
 }
 
 resource "aws_cloudwatch_log_group" "apigateway_accesslog" {
-  name = var.cloudwatch_log_group_name
+  name = var.cloudwatch_api_gateway_log_group_name
+}
+
+resource "aws_cloudwatch_log_group" "ecs_execution_log" {
+  name = var.cloudwatch_ecs_log_group_name
 }

@@ -40,6 +40,7 @@ ecs_task_definition_image         = "public.ecr.aws/r2u8u6o1/tetris_score_evalua
 ecs_task_execution_role_name      = "ecsTaskExecutionRole"
 ecs_task_role_name                = "scoreEvaluationTaskRole"
 ecs_task_role_policy_name         = "scoreEvaluationTaskRolePolicy"
+ecs_service_name                  = "score_evaluation_service"
 
 /* 
 VPC

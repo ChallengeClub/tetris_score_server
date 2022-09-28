@@ -40,6 +40,7 @@ variable "ecs_task_definition_image" {}
 variable "ecs_task_execution_role_name" {}
 variable "ecs_task_role_name" {}
 variable "ecs_task_role_policy_name" {}
+variable "ecs_service_name" {}
 
 /* 
 VPC

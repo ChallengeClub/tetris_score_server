@@ -49,3 +49,8 @@ vpc_cidr                 = "10.0.0.0/21"
 vpc_tag                  = "tetris_score_server"
 subnet_cidr              = "10.0.0.0/24"
 subnet_availability_zone = "ap-northeast-1c"
+
+/* 
+dynamodb
+*/
+dynamodb_table_name = "tetris_score_table"

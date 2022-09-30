@@ -49,3 +49,8 @@ variable "vpc_cidr" {}
 variable "vpc_tag" {}
 variable "subnet_cidr" {}
 variable "subnet_availability_zone" {}
+
+/* 
+dynamodb
+*/
+variable "dynamodb_table_name" {}

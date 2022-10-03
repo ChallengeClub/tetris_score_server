@@ -6,7 +6,7 @@ from datetime import datetime
 class Evaluation(models.Model):
     id = models.UUIDField(primary_key=True, default=str(uuid4()), editable=False) # Object of type UUID is not JSON serializable
     receipt_handle = models.CharField(max_length=500)
-    created_at = models.DateTimeField(default=str(datetime.now())) # Object of type datetime is not JSON serializable
+    created_at = models.DateTimeField(default=datetime.now().strftime("%Y-%m-%d %H:%M:%S")) # Object of type datetime is not JSON serializable
     ended_at = models.DateTimeField()
     repository_url = models.CharField(max_length=100)
     branch = models.CharField(max_length=50)
@@ -31,26 +31,31 @@ class Evaluation(models.Model):
     
 
     def to_json(self):
-        data = {
-            "id": self.id, 
-            "created_at": self.created_at,
-            "ended_at": self.ended_at,
-            "repository_url": self.repository_url,
-            "branch": self.branch,
-            "game_time": self.game_time,
-            "level": self.level,
-            "error_message": self.error_message,
-            "status": self.status,
-            "drop_interval": self.drop_interval,
-            "game_mode": self.game_mode,
-            "value_predict_weight": self.value_predict_weight,
-            "trial_num": self.trial_num,
-            "score_mean": self.score_mean,
-            "score_stdev": self.score_stdev,
-            "score_max": self.score_max,
-            "score_min": self.score_min
-        }
+        data = self.to_dict()
         return json.dumps(data)
+    
+    def to_dict(self):
+        data = {
+            "Id": self.id, 
+            "CreatedAt": self.created_at,
+            "EndedAt": self.ended_at,
+            "RepositoryURL": self.repository_url,
+            "Branch": self.branch,
+            "GameTime": self.game_time,
+            "Level": self.level,
+            "ErrorMessage": self.error_message,
+            "Status": self.status,
+            "DropInterval": self.drop_interval,
+            "GameMode": self.game_mode,
+            "ValuePredictWeight": self.value_predict_weight,
+            "TrialNum": self.trial_num,
+            "MeanScore": self.score_mean,
+            "StdDevScore": self.score_stdev,
+            "MaxScore": self.score_max,
+            "MinScore": self.score_min
+        }
+        return data
+    
     
     def __str__(self):
         return self.repository_url+ " | " + self.branch

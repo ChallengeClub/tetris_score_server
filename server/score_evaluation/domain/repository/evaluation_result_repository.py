@@ -3,5 +3,5 @@ from ..model.entity import Evaluation
 
 class EvaluationResultRepository(metaclass=ABCMeta):
     @abstractmethod
-    def save_result(self, result: Evaluation):
+    def update(self, result: Evaluation):
         raise NotImplementedError

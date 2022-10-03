@@ -4,7 +4,7 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
   read_capacity  = 1
   write_capacity = 1
   hash_key       = "Id"
-  range_key      = "RegisteredAt"
+  range_key      = "CreatedAt"
 
   attribute {
     name = "Id"
@@ -12,12 +12,12 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
   }
 
   attribute {
-    name = "RegisteredAt"
+    name = "CreatedAt"
     type = "N"
   }
 
   attribute {
-    name = "UserName"
+    name = "RepositoryURL"
     type = "S"
   }
 
@@ -27,14 +27,14 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
   }
 
   attribute {
-    name = "AverageScore"
+    name = "MeanScore"
     type = "N"
   }
 
   global_secondary_index {
-    name            = "UserNameIndex"
-    hash_key        = "UserName"
-    range_key       = "RegisteredAt"
+    name            = "RepositoryIndex"
+    hash_key        = "RepositoryURL"
+    range_key       = "CreatedAt"
     write_capacity  = 1
     read_capacity   = 1
     projection_type = "KEYS_ONLY"
@@ -43,7 +43,7 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
   global_secondary_index {
     name            = "LevelScoreIndex"
     hash_key        = "Level"
-    range_key       = "AverageScore"
+    range_key       = "MeanScore"
     write_capacity  = 1
     read_capacity   = 1
     projection_type = "KEYS_ONLY"

@@ -23,7 +23,7 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
 
   attribute {
     name = "Level"
-    type = "S"
+    type = "N"
   }
 
   attribute {

@@ -1,12 +1,13 @@
 from django.db import models
 import json
 from uuid import uuid4
+from time import time
 from datetime import datetime
 
 class Evaluation(models.Model):
     id = models.UUIDField(primary_key=True, default=str(uuid4()), editable=False) # Object of type UUID is not JSON serializable
     receipt_handle = models.CharField(max_length=500)
-    created_at = models.DateTimeField(default=datetime.now().strftime("%Y-%m-%d %H:%M:%S")) # Object of type datetime is not JSON serializable
+    created_at = models.DateTimeField(default=int(time()))
     ended_at = models.DateTimeField()
     repository_url = models.CharField(max_length=100)
     branch = models.CharField(max_length=50)

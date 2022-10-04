@@ -1,7 +1,6 @@
 import os
 import shutil
 import json
-from datetime import datetime
 from statistics import mean, stdev
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
@@ -18,7 +17,6 @@ class ScoreEvaluationApplication:
         if res.returncode:
             self.evaluation.status = "ER"
             self.evaluation.error_message = res.stderr
-            self.evaluation.ended_at = str(datetime.now())
             return self.evaluation
         
         # execute tetris_start asynchronously
@@ -47,14 +45,12 @@ class ScoreEvaluationApplication:
                 if result.returncode:
                     self.evaluation.status = "ER"
                     self.evaluation.error_message = result.stdout
-                    self.evaluation.ended_at = str(datetime.now())
                     return self.evaluation
             with open(f"{log_folder}/result-{i}.json", 'r', encoding='utf-8') as f:
                 res = json.load(f)
                 scores.append(int(res["judge_info"]["score"]))
 
         # calculate statics
-        self.evaluation.ended_at = str(datetime.now())
         self.evaluation.score_mean = mean(scores)
         self.evaluation.score_max = max(scores)
         self.evaluation.score_min = min(scores)
@@ -62,7 +58,6 @@ class ScoreEvaluationApplication:
             self.evaluation.score_stdev = stdev(scores)
         self.evaluation.status = "S"
         
-
         return self.evaluation
 
 def clone_repository(url: str, branch: str):

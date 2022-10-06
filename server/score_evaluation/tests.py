@@ -1,10 +1,11 @@
-from email import message
 from django.test import TestCase
 import base64
 import boto3
+from time import time
 
 from .application.score_evaluation_application import ScoreEvaluationApplication
 from .infrastructure.sqs_infrastructure import EvaluationMessageRepositoryInterface
+from .infrastructure.dynamodb_infrastructure import EvaluationResultDynamoDBRepositoryInterface
 from .domain.model.entity import Evaluation
 from .domain.model.score_evaluation_message_pb2 import ScoreEvaluationMessage
 from .usecase.score_evaluation_usecase import ScoreEvaluationUsecase
@@ -70,7 +71,7 @@ class ScoreEvaluationTests(TestCase):
         self.assertEqual(eval.status, "ER")
         
 
-class InterfaceTests(TestCase):
+class SQSInterfaceTests(TestCase):
     @classmethod
     def setUpClass(cls):
         cls.sqs_client = boto3.client('sqs', region_name='ap-northeast-1')
@@ -111,3 +112,55 @@ class InterfaceTests(TestCase):
         eval = self.msg_if.fetch_message()
         res = self.msg_if.delete_message(eval)
         self.assertEqual(res["ResponseMetadata"]['HTTPStatusCode'], 200)
+
+class DynamodbInterfaceTests(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.table_name = "test_tetris_score_table"
+        cls.client = boto3.client('dynamodb')
+        cls.resource = boto3.resource('dynamodb')
+        cls.table = cls.resource.create_table(
+            BillingMode='PROVISIONED',
+            ProvisionedThroughput={
+                'ReadCapacityUnits': 1,
+                'WriteCapacityUnits': 1
+            },
+            AttributeDefinitions=[
+                {
+                    'AttributeName': 'Id',
+                    'AttributeType': 'S'
+                },
+                {
+                    'AttributeName': 'CreatedAt',
+                    'AttributeType': 'N'
+                },
+            ],
+            TableName=cls.table_name,
+            KeySchema=[
+                {
+                    'AttributeName': 'Id',
+                    'KeyType': 'HASH'
+                },
+                {
+                    'AttributeName': "CreatedAt",
+                    'KeyType': 'RANGE'
+                }
+            ]
+        )
+        cls.interface = EvaluationResultDynamoDBRepositoryInterface(cls.table_name)
+        cls.table.wait_until_exists()
+        
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.client.delete_table(
+            TableName=cls.table_name
+        )
+    
+    def test_update(self):
+        eval = Evaluation(
+            id = "abcde",
+            created_at = int(time()),
+            repository_url = "https://github.com/setgot/tetris",
+            branch = "master"
+        )
+        self.interface.update(eval)

@@ -38,9 +38,13 @@ data "aws_iam_policy_document" "score_evaluation_task_policy_doc" {
   statement {
     actions = [
       "sqs:ReceiveMessage",
-      "sqs:DeleteMessage"
+      "sqs:DeleteMessage",
+      "dynamodb:PutItem"
     ]
-    resources = [aws_sqs_queue.score_evaluation_queue.arn]
+    resources = [
+      aws_sqs_queue.score_evaluation_queue.arn,
+      aws_dynamodb_table.dynamodb-table.arn
+    ]
   }
 }
 
@@ -77,6 +81,10 @@ resource "aws_ecs_task_definition" "score_evaluation_task" {
         {
           "name" : "sqs_url",
           "value" : data.aws_sqs_queue.score_evaluation_queue_data.url
+        },
+        {
+          "name" : "dynamodb_table",
+          "value" : var.dynamodb_table_name
         }
       ]
       logConfiguration = {

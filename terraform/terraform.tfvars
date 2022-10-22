@@ -32,7 +32,7 @@ lambda_role_get_result_from_dynamodb              = "GetResultsFromDynamoDBLambd
 CloudWatch
 */
 cloudwatch_role_api_gateway_putlog    = "cloudwatch_role_api_gateway_putlog"
-cloudwatch_api_gateway_log_group_name = "score_evaluation_apigateway_accesslog"
+cloudwatch_api_gateway_log_group_name = "tetris_apigateway_accesslog"
 cloudwatch_ecs_log_group_name         = "score_evaluation_ecs_log"
 
 /* 

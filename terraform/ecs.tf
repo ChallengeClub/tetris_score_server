@@ -103,7 +103,7 @@ resource "aws_ecs_service" "score_evaluation_service" {
   name            = var.ecs_service_name
   cluster         = aws_ecs_cluster.score_evaluation_cluster.id
   task_definition = aws_ecs_task_definition.score_evaluation_task.arn
-  desired_count   = 1
+  desired_count   = 0
   launch_type     = "FARGATE"
   network_configuration {
     subnets          = [aws_subnet.tetris_score_server_subnet.id]

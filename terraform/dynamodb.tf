@@ -53,3 +53,7 @@ resource "aws_dynamodb_table" "dynamodb-table" {
     Name = var.dynamodb_table_name
   }
 }
+
+data "aws_dynamodb_table" "dynamodb-table" {
+  name = var.dynamodb_table_name
+}

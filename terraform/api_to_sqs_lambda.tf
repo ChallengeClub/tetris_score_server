@@ -63,7 +63,7 @@ resource "aws_lambda_function" "function" {
 }
 
 resource "aws_lambda_layer_version" "lambda_layer" {
-  layer_name               = var.lambda_protobuf_layer_name
+  layer_name               = var.lambda_send_message_to_sqs_layer_name
   filename                 = data.archive_file.layer_zip.output_path
   source_code_hash         = data.archive_file.layer_zip.output_base64sha256
   compatible_runtimes      = ["python3.9"]

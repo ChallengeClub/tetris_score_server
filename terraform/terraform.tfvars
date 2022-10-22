@@ -8,15 +8,25 @@ api_gateway_access_log_format = "$context.identity.sourceIp $context.identity.ca
 /* 
 Lambda
 */
-send_message_to_sqs_function_name = "lambda_send_message_to_sqs_function"
-send_message_to_sqs_handler       = "send_message_to_sqs.lambda_handler"
-function_src_dir                  = "../scripts/api_to_sqs_lambda/src"
-function_zip_output_path          = "archive/api_to_sqs_lambda_function.zip"
-layer_src_dir                     = "../scripts/api_to_sqs_lambda/layer/packages"
-layer_zip_output_path             = "archive/layer.zip"
-lambda_policy_send_message_to_sqs = "SendMessageToSQSPolicy"
-lambda_role_send_message_to_sqs   = "SendMessageToSQSLambdaRole"
-lambda_protobuf_layer_name        = "lambda_protobuf_layer"
+send_message_to_sqs_function_name     = "lambda_send_message_to_sqs_function"
+send_message_to_sqs_handler           = "send_message_to_sqs.lambda_handler"
+function_src_dir                      = "../scripts/api_to_sqs_lambda/src"
+function_zip_output_path              = "archive/api_to_sqs_lambda_function.zip"
+layer_src_dir                         = "../scripts/api_to_sqs_lambda/layer/packages"
+layer_zip_output_path                 = "archive/layer.zip"
+lambda_policy_send_message_to_sqs     = "SendMessageToSQSPolicy"
+lambda_role_send_message_to_sqs       = "SendMessageToSQSLambdaRole"
+lambda_send_message_to_sqs_layer_name = "lambda_send_message_to_sqs_layer"
+
+get_result_from_dynamodb_function_name            = "lambda_get_results_from_dynamodb_function"
+get_result_from_dynamodb_function_handler         = "get_result_from_dynamodb.lambda_handler"
+get_result_from_dynamodb_function_src_dir         = "../scripts/api_to_dynamodb_lambda/src"
+get_result_from_dynamodb_function_zip_output_path = "archive/get_result_from_dynamodb_lambda_function.zip"
+get_result_from_dynamodb_layer_name               = "lambda_get_result_from_dynamodb_layer"
+get_result_from_dynamodb_layer_src_dir            = "../scripts/api_to_dynamodb_lambda/layer/packages"
+get_result_from_dynamodb_layer_zip_output_path    = "archive/get_result_from_dynamodb_layer.zip"
+lambda_policy_get_result_from_dynamodb            = "GetResultsFromDynamoDBPolicy"
+lambda_role_get_result_from_dynamodb              = "GetResultsFromDynamoDBLambdaRole"
 
 /* 
 CloudWatch

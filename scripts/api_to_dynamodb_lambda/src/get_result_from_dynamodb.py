@@ -8,17 +8,15 @@ def lambda_handler(event: dict, context):
     table = dynamodb.Table(table_name)
     try:
         response = table.scan(
-            IndexName="CreatedAt",
-            Limit=30,            
+            Limit=30,  
         )
-    except:
+    except Exception as e:
         response = {
             "error": {
-                "message": "failed to scan dynamodb",
-                "body": event["body"],
+                "message": "failed to scan dynamodb: " + str(e),
+                "body": event,
                 "type": "dynamodb access exception",
             },
             "code": 501
         }
     return response
-        

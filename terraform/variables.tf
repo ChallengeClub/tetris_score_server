@@ -16,7 +16,17 @@ variable "layer_src_dir" {}
 variable "layer_zip_output_path" {}
 variable "lambda_policy_send_message_to_sqs" {}
 variable "lambda_role_send_message_to_sqs" {}
-variable "lambda_protobuf_layer_name" {}
+variable "lambda_send_message_to_sqs_layer_name" {}
+
+variable "get_result_from_dynamodb_function_name" {}
+variable "get_result_from_dynamodb_function_handler" {}
+variable "get_result_from_dynamodb_function_src_dir" {}
+variable "get_result_from_dynamodb_function_zip_output_path" {}
+variable "get_result_from_dynamodb_layer_name" {}
+variable "get_result_from_dynamodb_layer_src_dir" {}
+variable "get_result_from_dynamodb_layer_zip_output_path" {}
+variable "lambda_policy_get_result_from_dynamodb" {}
+variable "lambda_role_get_result_from_dynamodb" {}
 
 /* 
 CloudWatch

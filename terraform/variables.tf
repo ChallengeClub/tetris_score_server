@@ -4,6 +4,7 @@ API Gateway
 variable "api_gateway_name" {}
 variable "api_gateway_stage_name" {}
 variable "api_gateway_access_log_format" {}
+variable "api_gateway_allow_origins" {}
 
 /* 
 Lambda

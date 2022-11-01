@@ -4,6 +4,7 @@ API Gateway
 api_gateway_name              = "tetris_api"
 api_gateway_stage_name        = "tetris_api_stage"
 api_gateway_access_log_format = "$context.identity.sourceIp $context.identity.caller $context.identity.user [$context.requestTime] \"$context.httpMethod $context.resourcePath $context.protocol\" $context.status $context.responseLength $context.requestId"
+api_gateway_allow_origins     = ["https://d1ya9tc3wcnkn0.cloudfront.net"]
 
 /* 
 Lambda

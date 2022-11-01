@@ -1,6 +1,9 @@
 resource "aws_apigatewayv2_api" "tetris_api" {
   name          = var.api_gateway_name
   protocol_type = "HTTP"
+  cors_configuration {
+    allow_origins = var.api_gateway_allow_origins
+  }
 }
 
 resource "aws_apigatewayv2_stage" "tetris_api_stage" {

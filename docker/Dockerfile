@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.10-bullseye
 RUN apt-get update && apt-get install -y \
     xvfb
 ENV PYTHONUNBUFFERED 1

@@ -4,3 +4,9 @@ pyqt5
 inject==4.3.1
 boto3
 protobuf==4.21.4
+hydra-core
+torch
+torchaudio
+torchvision 
+tensorflow-tensorboard
+tensorboardx

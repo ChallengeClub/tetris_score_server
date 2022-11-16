@@ -22,6 +22,64 @@ class ScoreEvaluationTests(TestCase):
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()
         self.assertEqual(eval.status, "S")
+    
+    def test_default_evaluation_level2(self):
+        eval = Evaluation(
+            repository_url="https://github.com/seigot/tetris",
+            branch="master",
+            trial_num=1,
+            level=2,
+            game_time=5
+        )
+        usecase = ScoreEvaluationApplication(eval)
+        eval = usecase.evaluate()
+        self.assertEqual(eval.status, "S")
+    
+    def test_default_evaluation_level3(self):
+        eval = Evaluation(
+            repository_url="https://github.com/seigot/tetris",
+            branch="master",
+            trial_num=1,
+            level=3,
+            game_time=2
+        )
+        usecase = ScoreEvaluationApplication(eval)
+        eval = usecase.evaluate()
+        self.assertEqual(eval.status, "S")
+
+    def test_DQN_pytorch_predict_sample(self):
+        """
+        test DQN predict mode in pytorch
+        """
+        eval = Evaluation(
+            repository_url="https://github.com/seigot/tetris",
+            branch="master",
+            trial_num=1,
+            game_mode="predict_sample",
+            value_predict_weight="weight/DQN/sample_weight.pt",
+            level=2,
+            game_time=5
+        )
+        usecase = ScoreEvaluationApplication(eval)
+        eval = usecase.evaluate()
+        self.assertEqual(eval.status, "S")
+    
+    def test_MLP_pytorch_predict_sample(self):
+        """
+        test MLP predict mode in pytorch
+        """
+        eval = Evaluation(
+            repository_url="https://github.com/seigot/tetris",
+            branch="master",
+            trial_num=1,
+            game_mode="predict_sample2",
+            value_predict_weight="weight/MLP/sample_weight.pt",
+            level=2,
+            game_time=5
+        )
+        usecase = ScoreEvaluationApplication(eval)
+        eval = usecase.evaluate()
+        self.assertEqual(eval.status, "S")
 
     def test_error_branch(self):
         """

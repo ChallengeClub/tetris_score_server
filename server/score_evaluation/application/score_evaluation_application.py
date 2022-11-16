@@ -19,6 +19,12 @@ class ScoreEvaluationApplication:
             self.evaluation.error_message = res.stderr
             return self.evaluation
         
+        res = pip_install()
+        if res.returncode:
+            self.evaluation.status = "ER"
+            self.evaluation.error_message = res.stderr
+            return self.evaluation
+            
         # execute tetris_start asynchronously
         futures = []
         with ThreadPoolExecutor() as pool:
@@ -91,4 +97,10 @@ def tetris_start(level: int, game_time: int, drop_interval: int, game_mode: str,
             cmd=tetris_start_command.split(),
             stderr=str(e)
         )
+    return result
+
+def pip_install(requiments_file="requirements.txt"):
+    os.chdir("/home/tetris")
+    pip_install_command = f"pip install -r {requiments_file}"
+    result = subprocess.run(pip_install_command.split(), capture_output=True, encoding='utf-8')
     return result

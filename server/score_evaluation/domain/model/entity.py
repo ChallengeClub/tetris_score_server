@@ -50,8 +50,8 @@ class Evaluation(models.Model):
             "GameMode": self.game_mode,
             "ValuePredictWeight": self.value_predict_weight,
             "TrialNum": self.trial_num,
-            "MeanScore": self.score_mean,
-            "StdDevScore": self.score_stdev,
+            "MeanScore": int(self.score_mean),
+            "StdDevScore": int(self.score_stdev),
             "MaxScore": self.score_max,
             "MinScore": self.score_min
         }

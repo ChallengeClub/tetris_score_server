@@ -16,7 +16,7 @@ class TestPostAPI(unittest.TestCase):
         msg.repository_url = "https://github.com/seigot/tetris"
         msg.branch = "master"
         msg.drop_interval = 1000
-        msg.level = 1
+        msg.level = score_evaluation_message_pb2.ScoreEvaluationMessage.ONE
         msg.game_mode = "default"
         msg.game_time=10
         msg.timeout=200

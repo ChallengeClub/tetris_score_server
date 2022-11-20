@@ -14,8 +14,10 @@ message ScoreEvaluationMessage {
   int32 trial_num = 9;
 
   enum GameLevel {
-    EASY = 0;
-    MIDIUM = 1;
-    HARD = 2;
+    ZERO = 0; // endless
+    ONE = 1; // fixed ordered
+    TWO = 2; // random ordered
+    THREE = 3; // random ordered and initial blocks
+    FOUR = 4; // random ordered and 1 ms block drop
   }
 }

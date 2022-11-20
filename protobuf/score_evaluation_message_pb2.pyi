@@ -11,16 +11,18 @@ class ScoreEvaluationMessage(_message.Message):
         __slots__ = []
     BRANCH_FIELD_NUMBER: _ClassVar[int]
     DROP_INTERVAL_FIELD_NUMBER: _ClassVar[int]
-    EASY: ScoreEvaluationMessage.GameLevel
+    FOUR: ScoreEvaluationMessage.GameLevel
     GAME_MODE_FIELD_NUMBER: _ClassVar[int]
     GAME_TIME_FIELD_NUMBER: _ClassVar[int]
-    HARD: ScoreEvaluationMessage.GameLevel
     LEVEL_FIELD_NUMBER: _ClassVar[int]
-    MIDIUM: ScoreEvaluationMessage.GameLevel
+    ONE: ScoreEvaluationMessage.GameLevel
     PREDICT_WEIGHT_PATH_FIELD_NUMBER: _ClassVar[int]
     REPOSITORY_URL_FIELD_NUMBER: _ClassVar[int]
+    THREE: ScoreEvaluationMessage.GameLevel
     TIMEOUT_FIELD_NUMBER: _ClassVar[int]
     TRIAL_NUM_FIELD_NUMBER: _ClassVar[int]
+    TWO: ScoreEvaluationMessage.GameLevel
+    ZERO: ScoreEvaluationMessage.GameLevel
     branch: str
     drop_interval: int
     game_mode: str

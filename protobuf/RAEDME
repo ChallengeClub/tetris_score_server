@@ -1,0 +1,32 @@
+# Protocol Buffers
+公式ドキュメントはこちら → https://developers.google.com/protocol-buffers  
+導入時のpull request → https://github.com/seigot/tetris_score_server/pull/17
+
+## 導入メリット
+言語に依存しないモデル定義ができ、apiに送られたリクエストを事前に検証することができる。  
+将来的にapi公開時には自分が管理しているサービス以外からリクエストが来る可能性もあり、言語に依存しないリクエスト検証ができることでサービスの保守性が向上する。
+
+## 使いかた
+### 1. compilerの導入  
+公式ドキュメント参照 → https://github.com/protocolbuffers/protobuf#protocol-compiler-installation
+
+### 2. コンパイルの実行  
+`.proto`ファイルによって定義が行われており、コンパイルして各言語で利用可能なデータモデルファイルを生成させる。  
+下記コマンドによって`hogehoge_pb2.py`、`hogehoge_pb2_pyi`ファイルが出力される。
+```
+## python用ファイルへのコンパイル
+protoc --python_out=. hogehoge.proto
+protoc --pyi_out=. hogehoge.proto
+```
+
+### 3. コンパイル後ファイルをプログラム内で参照  
+```
+from hogehoge_pb2 import HogeHoge
+hogehoge = Hogehoge()
+```
+
+## 本リポジトリ内における`.proto`ファイル変更時の手順
+1. `.proto`ファイルに変更を加える
+2. `protobuf`ファルダに移動して`make compile`と`make copy`を実行
+3. 変更されたモデルファイルに併せて各スクリプトを変更
+4. [フロントエンド](https://github.com/seigot/tetris_score_server_frontend)でもprotobufを用いているのでそちらにも変更を反映させる

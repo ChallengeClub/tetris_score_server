@@ -13,16 +13,22 @@ class ScoreEvaluationUsecase:
         _eval = self.evaluation_message_repository_interface.fetch_message()
         if _eval is None: # if no message in sqs `None` is returned`
             return None
-        eval_app = ScoreEvaluationApplication(_eval)
-        print("start evaluation:\t", _eval)
-        _eval = eval_app.evaluate()
-        _eval.ended_at = int(time())
-        if _eval.status == "S":
-            self.evaluation_message_repository_interface.delete_message(_eval)
+        
+        if _eval.level==0: # level 0, endless mode is not supported now
+            _eval.error_message = "level 0, endless mode is not supported now"
+            _eval.status = "ER"
+        else:
+            eval_app = ScoreEvaluationApplication(_eval)
+            print("start evaluation:\t", _eval)
+            _eval = eval_app.evaluate()
+            _eval.ended_at = int(time())
+            print("finish evaluation:\t", _eval)
+
+        self.evaluation_message_repository_interface.delete_message(_eval)
         res = self.evaluation_dynamodb_repository_interface.update(_eval)
         if res['ResponseMetadata']['HTTPStatusCode'] != 200:
             print("failed update to dynamodb:\t", res)
-        print("finish evaluation:\t", _eval)
+        
         return _eval
 
     def polling(self, time):

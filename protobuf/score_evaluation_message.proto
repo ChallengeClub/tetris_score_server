@@ -3,6 +3,8 @@ syntax = "proto3";
 package tutorial;
 
 message ScoreEvaluationMessage {
+  optional string id = 10;
+  optional int32 created_at = 11;
   string repository_url = 1;
   string branch = 2;
   int32 drop_interval = 3;

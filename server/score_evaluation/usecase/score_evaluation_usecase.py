@@ -20,6 +20,7 @@ class ScoreEvaluationUsecase:
         else:
             eval_app = ScoreEvaluationApplication(_eval)
             print("start evaluation:\t", _eval)
+            _eval.started_at = int(time())
             _eval = eval_app.evaluate()
             _eval.ended_at = int(time())
             print("finish evaluation:\t", _eval)

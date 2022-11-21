@@ -8,6 +8,7 @@ class Evaluation(models.Model):
     id = models.UUIDField(primary_key=True, default=str(uuid4()), editable=False) # Object of type UUID is not JSON serializable
     receipt_handle = models.CharField(max_length=500)
     created_at = models.DateTimeField(default=int(time()))
+    started_at = models.DateTimeField()
     ended_at = models.DateTimeField()
     repository_url = models.CharField(max_length=100)
     branch = models.CharField(max_length=50)
@@ -39,6 +40,7 @@ class Evaluation(models.Model):
         data = {
             "Id": self.id, 
             "CreatedAt": self.created_at,
+            "StartedAt": self.started_at,
             "EndedAt": self.ended_at,
             "RepositoryURL": self.repository_url,
             "Branch": self.branch,
@@ -59,4 +61,4 @@ class Evaluation(models.Model):
     
     
     def __str__(self):
-        return self.repository_url+ " | " + self.branch
+        return self.repository_url+ " | " + self.branch + " | level" + str(self.level)

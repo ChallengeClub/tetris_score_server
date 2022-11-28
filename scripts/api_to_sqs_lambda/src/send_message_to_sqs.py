@@ -30,6 +30,7 @@ def lambda_handler(event: dict, context):
     table = dynamodb.Table(dynamodb_table_name)
     item = {
         "Id": msg.id, 
+        "Name": msg.name,
         "CreatedAt": msg.created_at,
         "RepositoryURL": msg.repository_url,
         "Branch": msg.branch,

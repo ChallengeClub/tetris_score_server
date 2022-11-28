@@ -10,7 +10,6 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
         self.table = self.dynamo.Table(dynamodb_table_name)        
     
     def update(self, evaluation: Evaluation):
-        print(evaluation.id)
         response = self.table.update_item(
             Key = {
                 "Id": evaluation.id,
@@ -27,7 +26,7 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
                 #MinScore = :score_min\
                 ',
             ExpressionAttributeNames= {
-			    '#StartedAt' : 'StartedAt',
+                '#StartedAt' : 'StartedAt',
                 '#EndedAt' : 'EndedAt',
                 '#ErrorMessage' : 'ErrorMessage',
                 '#Status' : 'Status',

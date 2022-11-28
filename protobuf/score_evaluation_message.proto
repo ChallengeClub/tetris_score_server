@@ -3,6 +3,7 @@ syntax = "proto3";
 package tutorial;
 
 message ScoreEvaluationMessage {
+  optional string name = 12;
   optional string id = 10;
   optional int32 created_at = 11;
   string repository_url = 1;

@@ -5,6 +5,7 @@ def protobuf_message_to_django_model(msg: ScoreEvaluationMessage)-> Evaluation:
     eval = Evaluation()
     eval.id = msg.id
     eval.created_at = msg.created_at
+    eval.name = msg.name
     eval.repository_url = msg.repository_url
     eval.branch = msg.branch
     eval.game_mode = msg.game_mode

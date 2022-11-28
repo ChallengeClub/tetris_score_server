@@ -6,6 +6,7 @@ from datetime import datetime
 
 class Evaluation(models.Model):
     id = models.UUIDField(primary_key=True, default=str(uuid4()), editable=False) # Object of type UUID is not JSON serializable
+    name = models.CharField(max_length=50)
     receipt_handle = models.CharField(max_length=500)
     created_at = models.DateTimeField()
     started_at = models.DateTimeField()
@@ -39,6 +40,7 @@ class Evaluation(models.Model):
     def to_dict(self):
         data = {
             "Id": self.id, 
+            "Name": self.name,
             "CreatedAt": self.created_at,
             "StartedAt": self.started_at,
             "EndedAt": self.ended_at,
@@ -61,4 +63,4 @@ class Evaluation(models.Model):
     
     
     def __str__(self):
-        return self.repository_url+ " | " + self.branch + " | level" + str(self.level)
+        return self.name + " | " + self.repository_url+ " | " + self.branch + " | level" + str(self.level)

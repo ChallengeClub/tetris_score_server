@@ -13,6 +13,7 @@ class TestPostAPI(unittest.TestCase):
     
     def test_normal(self):
         msg = score_evaluation_message_pb2.ScoreEvaluationMessage()
+        msg.name = "seigot"
         msg.repository_url = "https://github.com/seigot/tetris"
         msg.branch = "master"
         msg.drop_interval = 1000

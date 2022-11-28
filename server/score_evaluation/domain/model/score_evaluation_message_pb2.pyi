@@ -6,14 +6,16 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class ScoreEvaluationMessage(_message.Message):
-    __slots__ = ["branch", "drop_interval", "game_mode", "game_time", "level", "name", "predict_weight_path", "repository_url", "timeout", "trial_num"]
+    __slots__ = ["branch", "created_at", "drop_interval", "game_mode", "game_time", "id", "level", "name", "predict_weight_path", "repository_url", "timeout", "trial_num"]
     class GameLevel(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = []
     BRANCH_FIELD_NUMBER: _ClassVar[int]
+    CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     DROP_INTERVAL_FIELD_NUMBER: _ClassVar[int]
     FOUR: ScoreEvaluationMessage.GameLevel
     GAME_MODE_FIELD_NUMBER: _ClassVar[int]
     GAME_TIME_FIELD_NUMBER: _ClassVar[int]
+    ID_FIELD_NUMBER: _ClassVar[int]
     LEVEL_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     ONE: ScoreEvaluationMessage.GameLevel
@@ -25,13 +27,15 @@ class ScoreEvaluationMessage(_message.Message):
     TWO: ScoreEvaluationMessage.GameLevel
     ZERO: ScoreEvaluationMessage.GameLevel
     branch: str
+    created_at: int
     drop_interval: int
     game_mode: str
     game_time: int
+    id: str
     level: ScoreEvaluationMessage.GameLevel
     name: str
     predict_weight_path: str
     repository_url: str
     timeout: int
     trial_num: int
-    def __init__(self, name: _Optional[str] = ..., repository_url: _Optional[str] = ..., branch: _Optional[str] = ..., drop_interval: _Optional[int] = ..., level: _Optional[_Union[ScoreEvaluationMessage.GameLevel, str]] = ..., game_mode: _Optional[str] = ..., game_time: _Optional[int] = ..., timeout: _Optional[int] = ..., predict_weight_path: _Optional[str] = ..., trial_num: _Optional[int] = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., id: _Optional[str] = ..., created_at: _Optional[int] = ..., repository_url: _Optional[str] = ..., branch: _Optional[str] = ..., drop_interval: _Optional[int] = ..., level: _Optional[_Union[ScoreEvaluationMessage.GameLevel, str]] = ..., game_mode: _Optional[str] = ..., game_time: _Optional[int] = ..., timeout: _Optional[int] = ..., predict_weight_path: _Optional[str] = ..., trial_num: _Optional[int] = ...) -> None: ...

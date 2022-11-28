@@ -28,8 +28,14 @@ data "aws_iam_policy_document" "assume_role" {
 
 data "aws_iam_policy_document" "message_to_sqs_policy_doc" {
   statement {
-    actions   = ["sqs:SendMessage"]
-    resources = [aws_sqs_queue.score_evaluation_queue.arn]
+    actions   = [
+      "sqs:SendMessage",
+      "dynamodb:PutItem"
+    ]
+    resources = [
+      aws_sqs_queue.score_evaluation_queue.arn,
+      aws_dynamodb_table.dynamodb-table.arn
+    ]
   }
 }
 resource "aws_iam_policy" "send_message_to_sqs_policy" {
@@ -54,6 +60,7 @@ resource "aws_lambda_function" "function" {
   environment {
     variables = {
       SQS_URL = data.aws_sqs_queue.score_evaluation_queue_data.url
+      DYNAMODB_TABLE_NAME = var.dynamodb_table_name
     }
   }
 

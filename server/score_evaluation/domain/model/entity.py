@@ -25,7 +25,7 @@ class Evaluation(models.Model):
         EVALUATING = 'evaluating', ('evaluating')
         SUCCESS = 'succeeded', ('evaluation successfully ended')
         ERROR = 'error', ('evaluation ended with error')
-    status = models.CharField(max_length=2, choices=EvaluationStatus.choices, default=EvaluationStatus.WAIT)
+    status = models.CharField(max_length=15, choices=EvaluationStatus.choices, default=EvaluationStatus.WAIT)
     trial_num = models.IntegerField(default=1)
     score_mean = models.FloatField(default=0)
     score_stdev = models.FloatField(default=0)

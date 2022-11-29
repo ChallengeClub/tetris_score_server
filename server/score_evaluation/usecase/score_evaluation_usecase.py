@@ -16,7 +16,7 @@ class ScoreEvaluationUsecase:
         
         if _eval.level==0: # level 0, endless mode is not supported now
             _eval.error_message = "level 0, endless mode is not supported now"
-            _eval.status = "ER"
+            _eval.status = "error"
         else:
             eval_app = ScoreEvaluationApplication(_eval)
             print("start evaluation:\t", _eval)

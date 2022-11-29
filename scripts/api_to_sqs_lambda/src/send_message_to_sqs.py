@@ -36,7 +36,7 @@ def lambda_handler(event: dict, context):
         "Branch": msg.branch,
         "GameTime": msg.game_time,
         "Level": msg.level,
-        "Status": "W",
+        "Status": "waiting",
         "DropInterval": msg.drop_interval,
         "GameMode": msg.game_mode,
         "ValuePredictWeight": msg.predict_weight_path,

@@ -15,13 +15,13 @@ class ScoreEvaluationApplication:
         log_folder = "/server/log"
         res = clone_repository(url=self.evaluation.repository_url, branch=self.evaluation.branch)
         if res.returncode:
-            self.evaluation.status = "ER"
+            self.evaluation.status = "error"
             self.evaluation.error_message = res.stderr
             return self.evaluation
         
         res = pip_install()
         if res.returncode:
-            self.evaluation.status = "ER"
+            self.evaluation.status = "error"
             self.evaluation.error_message = res.stderr
             return self.evaluation
             
@@ -49,7 +49,7 @@ class ScoreEvaluationApplication:
                 else:
                     f.write(result.stderr)
                 if result.returncode:
-                    self.evaluation.status = "ER"
+                    self.evaluation.status = "error"
                     self.evaluation.error_message = result.stdout
                     return self.evaluation
             with open(f"{log_folder}/result-{i}.json", 'r', encoding='utf-8') as f:
@@ -62,7 +62,7 @@ class ScoreEvaluationApplication:
         self.evaluation.score_min = min(scores)
         if len(scores) > 1:
             self.evaluation.score_stdev = stdev(scores)
-        self.evaluation.status = "S"
+        self.evaluation.status = "succeeded"
         
         return self.evaluation
 

@@ -21,7 +21,7 @@ class ScoreEvaluationTests(TestCase):
         )
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()
-        self.assertEqual(eval.status, "S")
+        self.assertEqual(eval.status, "succeeded")
     
     def test_default_evaluation_level2(self):
         eval = Evaluation(
@@ -33,7 +33,7 @@ class ScoreEvaluationTests(TestCase):
         )
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()
-        self.assertEqual(eval.status, "S")
+        self.assertEqual(eval.status, "succeeded")
     
     def test_default_evaluation_level3(self):
         eval = Evaluation(
@@ -45,7 +45,7 @@ class ScoreEvaluationTests(TestCase):
         )
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()
-        self.assertEqual(eval.status, "S")
+        self.assertEqual(eval.status, "succeeded")
 
     def test_DQN_pytorch_predict_sample(self):
         """
@@ -62,7 +62,7 @@ class ScoreEvaluationTests(TestCase):
         )
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()
-        self.assertEqual(eval.status, "S")
+        self.assertEqual(eval.status, "succeeded")
     
     def test_MLP_pytorch_predict_sample(self):
         """
@@ -79,7 +79,7 @@ class ScoreEvaluationTests(TestCase):
         )
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()
-        self.assertEqual(eval.status, "S")
+        self.assertEqual(eval.status, "succeeded")
 
     def test_error_branch(self):
         """
@@ -94,7 +94,7 @@ class ScoreEvaluationTests(TestCase):
         )
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()
-        self.assertEqual(eval.status, "ER")
+        self.assertEqual(eval.status, "error")
     
     def test_error_empty_value_mode(self):
         """
@@ -110,7 +110,7 @@ class ScoreEvaluationTests(TestCase):
         )
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()
-        self.assertEqual(eval.status, "ER")
+        self.assertEqual(eval.status, "error")
     
     def test_error_time_out(self):
         """
@@ -126,7 +126,7 @@ class ScoreEvaluationTests(TestCase):
         )
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()
-        self.assertEqual(eval.status, "ER")
+        self.assertEqual(eval.status, "error")
         
 
 class SQSInterfaceTests(TestCase):

@@ -28,7 +28,7 @@ class EvaluationMessageRepositoryInterface(EvaluationMessageRepository):
         message = base64.b64decode(message.encode("utf-8")) # base64 decode
         msg.ParseFromString(message)
         eval = protobuf_message_to_django_model(msg)
-        eval.status = "W"
+        eval.status = "evaluating"
         eval.receipt_handle = response["Messages"][0]['ReceiptHandle']
 
         return eval

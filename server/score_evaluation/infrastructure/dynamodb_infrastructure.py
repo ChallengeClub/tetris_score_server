@@ -1,5 +1,6 @@
 import os
 import boto3
+from decimal import Decimal
 
 from ..domain.repository.evaluation_result_repository import EvaluationResultRepository
 from ..domain.model.entity import Evaluation
@@ -40,10 +41,10 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
                 ':ended_at' : evaluation.ended_at,
                 ':error_message' : evaluation.error_message,
                 ':status' : evaluation.status,
-                ':score_mean' : evaluation.score_mean,
-                ':score_stddev' : evaluation.score_stdev,
-                ':score_max' : evaluation.score_max,
-                ':score_min' : evaluation.score_min
+                ':score_mean' : Decimal(str(evaluation.score_mean)),
+                ':score_stddev' : Decimal(str(evaluation.score_stdev)),
+                ':score_max' : Decimal(str(evaluation.score_max)),
+                ':score_min' : Decimal(str(evaluation.score_min))
             },
         )
         return response

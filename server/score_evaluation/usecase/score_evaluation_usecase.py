@@ -24,11 +24,11 @@ class ScoreEvaluationUsecase:
             _eval = eval_app.evaluate()
             _eval.ended_at = int(time())
             print("finish evaluation:\t", _eval)
-
-        self.evaluation_message_repository_interface.delete_message(_eval)
+        
         res = self.evaluation_dynamodb_repository_interface.update(_eval)
         if res['ResponseMetadata']['HTTPStatusCode'] != 200:
             print("failed update to dynamodb:\t", res)
+        self.evaluation_message_repository_interface.delete_message(_eval)
         
         return _eval
 

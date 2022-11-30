@@ -34,3 +34,19 @@ resource "aws_cloudwatch_log_group" "apigateway_accesslog" {
 resource "aws_cloudwatch_log_group" "ecs_execution_log" {
   name = var.cloudwatch_ecs_log_group_name
 }
+
+resource "aws_cloudwatch_metric_alarm" "sqs_message_count_alarm" {
+  alarm_name          = var.cloudwatch_ecs_scaling_alarm
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "ApproximateNumberOfMessagesVisible"
+  namespace           = "AWS/SQS"
+  period              = "60"
+  statistic           = "Sum"
+  threshold           = "1"
+  dimensions = {
+    QueueName  = aws_sqs_queue.score_evaluation_queue.name
+  }
+
+  alarm_description = "This metric monitors sqs message counts"
+}

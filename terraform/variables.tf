@@ -35,6 +35,7 @@ CloudWatch
 variable "cloudwatch_role_api_gateway_putlog" {}
 variable "cloudwatch_api_gateway_log_group_name" {}
 variable "cloudwatch_ecs_log_group_name" {}
+variable "cloudwatch_ecs_scaling_alarm" {}
 
 /* 
 SQS

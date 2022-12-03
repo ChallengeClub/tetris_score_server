@@ -36,7 +36,7 @@ cloudwatch_role_api_gateway_putlog    = "cloudwatch_role_api_gateway_putlog"
 cloudwatch_api_gateway_log_group_name = "tetris_apigateway_accesslog"
 cloudwatch_ecs_log_group_name         = "score_evaluation_ecs_log"
 cloudwatch_ecs_scaleout_alarm         = "sqs_waiting_message_alarm"
-cloudwatch_ecs_scalein_alarm          = "sqs_no_message_alarm"
+cloudwatch_ecs_scalein_alarm          = "sqs_no_being processed_message_alarm"
 
 /* 
 SQS

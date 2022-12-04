@@ -49,20 +49,10 @@ resource "aws_cloudwatch_metric_alarm" "sqs_waiting_message_alarm" {
   }
 
   alarm_description = "This metric monitors sqs message counts"
-}
-
-resource "aws_cloudwatch_metric_alarm" "sqs_no_message_alarm" {
-  alarm_name          = var.cloudwatch_ecs_scalein_alarm
-  comparison_operator = "LessThanThreshold"
-  evaluation_periods  = "1"
-  metric_name         = "ApproximateNumberOfMessagesNotVisible"
-  namespace           = "AWS/SQS"
-  period              = "60"
-  statistic           = "Sum"
-  threshold           = "1"
-  dimensions = {
-    QueueName  = aws_sqs_queue.score_evaluation_queue.name
-  }
-
-  alarm_description = "This metric monitors sqs being processed message counts"
+  alarm_actions = [
+    aws_appautoscaling_policy.ecs_score_evaluation_scaleout_policy.arn,
+  ]
+  ok_actions = [
+    aws_appautoscaling_policy.ecs_score_evaluation_scalein_policy.arn,
+  ]
 }

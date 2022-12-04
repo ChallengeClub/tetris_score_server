@@ -110,3 +110,53 @@ resource "aws_ecs_service" "score_evaluation_service" {
     assign_public_ip = true
   }
 }
+
+resource "aws_appautoscaling_target" "ecs_score_evaluation_autoscaling_target" {
+  service_namespace  = "ecs"
+  resource_id        = "service/${aws_ecs_cluster.score_evaluation_cluster.name}/${aws_ecs_service.score_evaluation_service.name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  min_capacity       = 0
+  max_capacity       = 1
+}
+
+resource "aws_appautoscaling_policy" "ecs_score_evaluation_scaleout_policy" {
+  name               = "scaleout_policy"
+  service_namespace  = "ecs"
+  policy_type        = "StepScaling"
+  resource_id        = "service/${aws_ecs_cluster.score_evaluation_cluster.name}/${aws_ecs_service.score_evaluation_service.name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+ 
+  step_scaling_policy_configuration {
+    adjustment_type         = "ExactCapacity"
+    cooldown                = 60
+    metric_aggregation_type = "Average"
+    # set the desired ecs service count to 1, when cloud watch alarm switches to alarm state
+    step_adjustment {
+      metric_interval_lower_bound = 0
+      scaling_adjustment          = 1
+    }
+  }
+ 
+  depends_on = [aws_appautoscaling_target.ecs_score_evaluation_autoscaling_target]
+}
+
+resource "aws_appautoscaling_policy" "ecs_score_evaluation_scalein_policy" {
+  name               = "scalein_policy"
+  service_namespace  = "ecs"
+  policy_type        = "StepScaling"
+  resource_id        = "service/${aws_ecs_cluster.score_evaluation_cluster.name}/${aws_ecs_service.score_evaluation_service.name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+ 
+  step_scaling_policy_configuration {
+    adjustment_type         = "ExactCapacity"
+    cooldown                = 60
+    metric_aggregation_type = "Average"
+    # set the desired ecs service count to 1, when cloud watch alarm switches to ok state
+    step_adjustment {
+      metric_interval_upper_bound = 0
+      scaling_adjustment = 0
+    }
+  }
+  depends_on = [aws_appautoscaling_target.ecs_score_evaluation_autoscaling_target]
+}
+

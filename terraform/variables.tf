@@ -23,6 +23,8 @@ variable "lambda_send_message_to_sqs_layer_name" {}
 
 variable "get_result_from_dynamodb_function_name" {}
 variable "get_result_from_dynamodb_function_handler" {}
+variable "get_competition_entries_from_dynamodb_function_name" {}
+variable "get_competition_entries_from_dynamodb_handler" {}
 variable "get_result_from_dynamodb_function_src_dir" {}
 variable "get_result_from_dynamodb_function_zip_output_path" {}
 variable "get_result_from_dynamodb_layer_name" {}

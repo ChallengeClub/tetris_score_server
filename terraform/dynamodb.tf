@@ -80,3 +80,7 @@ resource "aws_dynamodb_table" "dynamodb-competition-table" {
     Name = var.dynamodb_competition_table_name
   }
 }
+
+data "aws_dynamodb_table" "dynamodb-competition-table" {
+  name = var.dynamodb_competition_table_name
+}

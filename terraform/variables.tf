@@ -67,3 +67,4 @@ variable "subnet_availability_zone" {}
 dynamodb
 */
 variable "dynamodb_table_name" {}
+variable "dynamodb_competition_table_name" {}

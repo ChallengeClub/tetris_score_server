@@ -67,3 +67,4 @@ subnet_availability_zone = "ap-northeast-1c"
 dynamodb
 */
 dynamodb_table_name = "tetris_score_table"
+dynamodb_competition_table_name = "tetris_competition_entry_table"

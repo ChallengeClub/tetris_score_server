@@ -10,7 +10,9 @@ api_gateway_allow_origins     = ["https://d1ya9tc3wcnkn0.cloudfront.net"]
 Lambda
 */
 send_message_to_sqs_function_name     = "lambda_send_message_to_sqs_function"
-send_message_to_sqs_handler           = "send_message_to_sqs.lambda_handler"
+send_message_to_sqs_handler           = "register_evaluation_request.lambda_handler"
+entry_to_competition_function_name    = "entry_to_competition_function_name"
+entry_to_competition_handler          = "entry_competition_request.lambda_handler"
 function_src_dir                      = "../scripts/api_to_sqs_lambda/src"
 function_zip_output_path              = "archive/api_to_sqs_lambda_function.zip"
 layer_src_dir                         = "../scripts/api_to_sqs_lambda/layer/packages"
@@ -66,5 +68,5 @@ subnet_availability_zone = "ap-northeast-1c"
 /* 
 dynamodb
 */
-dynamodb_table_name = "tetris_score_table"
+dynamodb_table_name             = "tetris_score_table"
 dynamodb_competition_table_name = "tetris_competition_entry_table"

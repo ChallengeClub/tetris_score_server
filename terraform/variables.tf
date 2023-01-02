@@ -11,6 +11,8 @@ Lambda
 */
 variable "send_message_to_sqs_function_name" {}
 variable "send_message_to_sqs_handler" {}
+variable "entry_to_competition_function_name" {}
+variable "entry_to_competition_handler" {}
 variable "function_src_dir" {}
 variable "function_zip_output_path" {}
 variable "layer_src_dir" {}

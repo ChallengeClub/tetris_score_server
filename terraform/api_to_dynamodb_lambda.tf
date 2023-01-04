@@ -24,8 +24,11 @@ data "aws_iam_policy_document" "get_result_from_dynamodb_assume_role" {
 
 data "aws_iam_policy_document" "get_result_from_dynamodb_policy_doc" {
   statement {
-    actions   = ["dynamodb:Scan"]
-    resources = [aws_dynamodb_table.dynamodb-table.arn]
+    actions = ["dynamodb:Scan"]
+    resources = [
+      aws_dynamodb_table.dynamodb-table.arn,
+      aws_dynamodb_table.dynamodb-competition-table.arn
+    ]
   }
 }
 resource "aws_iam_policy" "get_result_from_dynamodb_policy" {
@@ -52,7 +55,21 @@ resource "aws_lambda_function" "get_result_from_dynamodb_function" {
       dynamodb_table_name = data.aws_dynamodb_table.dynamodb-table.name
     }
   }
+  filename         = data.archive_file.api_to_dynamodb_function_source.output_path
+  source_code_hash = data.archive_file.api_to_dynamodb_function_source.output_base64sha256
+  layers           = ["${aws_lambda_layer_version.api_to_dynamodb_lambda_layer.arn}"]
+}
 
+resource "aws_lambda_function" "get_competition_entries_function" {
+  function_name = var.get_competition_entries_from_dynamodb_function_name
+  handler       = var.get_competition_entries_from_dynamodb_handler
+  role          = aws_iam_role.get_result_from_dynamodb_lambda_role.arn
+  runtime       = "python3.9"
+  environment {
+    variables = {
+      dynamodb_competition_table_name = data.aws_dynamodb_table.dynamodb-competition-table.name
+    }
+  }
   filename         = data.archive_file.api_to_dynamodb_function_source.output_path
   source_code_hash = data.archive_file.api_to_dynamodb_function_source.output_base64sha256
   layers           = ["${aws_lambda_layer_version.api_to_dynamodb_lambda_layer.arn}"]
@@ -72,4 +89,12 @@ resource "aws_lambda_permission" "api_to_dynamodb_permission" {
   function_name = aws_lambda_function.get_result_from_dynamodb_function.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_apigatewayv2_api.tetris_api.execution_arn}/*/*/score_evaluation"
+}
+
+resource "aws_lambda_permission" "get_entries_from_dynamodb_lambda_permission" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.get_competition_entries_function.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.tetris_api.execution_arn}/*/GET/entries"
 }

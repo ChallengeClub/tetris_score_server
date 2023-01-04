@@ -57,3 +57,30 @@ resource "aws_dynamodb_table" "dynamodb-table" {
 data "aws_dynamodb_table" "dynamodb-table" {
   name = var.dynamodb_table_name
 }
+
+resource "aws_dynamodb_table" "dynamodb-competition-table" {
+  name           = var.dynamodb_competition_table_name
+  billing_mode   = "PROVISIONED"
+  read_capacity  = 1
+  write_capacity = 1
+  hash_key       = "RepositoryURL"
+  range_key      = "Level"
+
+  attribute {
+    name = "RepositoryURL"
+    type = "S"
+  }
+
+  attribute {
+    name = "Level"
+    type = "N"
+  }
+
+  tags = {
+    Name = var.dynamodb_competition_table_name
+  }
+}
+
+data "aws_dynamodb_table" "dynamodb-competition-table" {
+  name = var.dynamodb_competition_table_name
+}

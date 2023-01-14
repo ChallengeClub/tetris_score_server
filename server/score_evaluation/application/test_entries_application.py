@@ -7,11 +7,11 @@ from concurrent.futures import ThreadPoolExecutor
 
 from ..domain.model.entity import Evaluation
 
-class ScoreEvaluationApplication:
+class TestEntriesApplication:
     def __init__(self, evaluation: Evaluation) -> None:
         self.evaluation = evaluation
 
-    def evaluate(self, log_folder="/server/log")-> Evaluation:
+    def evaluate(self, log_folder="log")-> Evaluation:
         res = clone_repository(url=self.evaluation.repository_url, branch=self.evaluation.branch)
         if res.returncode:
             self.evaluation.status = "error"
@@ -67,19 +67,17 @@ class ScoreEvaluationApplication:
 
 def clone_repository(url: str, branch: str):
     """
-    clone repository in /home/tetris
+    clone repository in /tetris
     if tetris folder is already exists, git clone after removing
     """
-    os.chdir("/home")
     if os.path.exists("tetris"):
-        shutil.rmtree("tetris")
+        shutil.rmtree("tetris", ignore_errors=True)
     git_clone_command = f"git clone {url} -b {branch} tetris --depth=1" # --depth=1: clone only head
     result = subprocess.run(git_clone_command.split(), capture_output=True, encoding='utf-8')
     return result
 
 def tetris_start(level: int, game_time: int, drop_interval: int, game_mode: str, value_predict_weight: str, timeout: int, log_file="result.json"):
-    os.chdir("/home/tetris")
-    tetris_start_command = f"xvfb-run -a python start.py -l {level} -t {game_time} -d {drop_interval} -m {game_mode} -f {log_file}"
+    tetris_start_command = f"python start.py -l {level} -t {game_time} -d {drop_interval} -m {game_mode} -f {log_file}"
     if value_predict_weight != "":
         tetris_start_command += f" --predict_weight {value_predict_weight}"
     try:
@@ -99,7 +97,6 @@ def tetris_start(level: int, game_time: int, drop_interval: int, game_mode: str,
     return result
 
 def pip_install(requiments_file="requirements.txt"):
-    os.chdir("/home/tetris")
     pip_install_command = f"pip install -r {requiments_file}"
     result = subprocess.run(pip_install_command.split(), capture_output=True, encoding='utf-8')
     return result

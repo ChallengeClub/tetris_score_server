@@ -7,4 +7,4 @@ polling:
 	python manage.py polling 60
 
 test-entries:
-	python manage.py test_entries "C:/Users/eva_s/Downloads/entry.csv"
+	python manage.py test_entries entries.csv

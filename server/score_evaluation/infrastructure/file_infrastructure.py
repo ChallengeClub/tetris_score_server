@@ -38,8 +38,8 @@ class EntryTestRepositoryInterface(EntryTestRepository):
             "predict_weight_path",
             "error_message"
         ]
-        with open(csv_path) as f:
+        with open(csv_path, mode="w") as f:
             _writer = csv.DictWriter(f, fieldnames=_fields)
             _writer.writeheader()
-            _writer.writerows(results.map(lambda result: result.to_dict()))
+            _writer.writerows(map(lambda result: result.to_dict(), results))
         

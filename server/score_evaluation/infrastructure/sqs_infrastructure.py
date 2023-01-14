@@ -10,7 +10,7 @@ from ..domain.model.score_evaluation_message_pb2 import ScoreEvaluationMessage
 from ..domain.model.convert import protobuf_message_to_django_model
 
 class EvaluationMessageRepositoryInterface(EvaluationMessageRepository):
-    def __init__(self, sqs_url=os.environ["sqs_url"]) -> None:
+    def __init__(self, sqs_url=os.environ.get("sqs-url", "")) -> None:
         self.sqs = boto3.client('sqs', region_name='ap-northeast-1')
         self.sqs_url = sqs_url
         

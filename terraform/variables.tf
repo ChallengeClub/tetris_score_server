@@ -11,6 +11,8 @@ Lambda
 */
 variable "send_message_to_sqs_function_name" {}
 variable "send_message_to_sqs_handler" {}
+variable "entry_to_competition_function_name" {}
+variable "entry_to_competition_handler" {}
 variable "function_src_dir" {}
 variable "function_zip_output_path" {}
 variable "layer_src_dir" {}
@@ -21,6 +23,8 @@ variable "lambda_send_message_to_sqs_layer_name" {}
 
 variable "get_result_from_dynamodb_function_name" {}
 variable "get_result_from_dynamodb_function_handler" {}
+variable "get_competition_entries_from_dynamodb_function_name" {}
+variable "get_competition_entries_from_dynamodb_handler" {}
 variable "get_result_from_dynamodb_function_src_dir" {}
 variable "get_result_from_dynamodb_function_zip_output_path" {}
 variable "get_result_from_dynamodb_layer_name" {}
@@ -67,3 +71,4 @@ variable "subnet_availability_zone" {}
 dynamodb
 */
 variable "dynamodb_table_name" {}
+variable "dynamodb_competition_table_name" {}

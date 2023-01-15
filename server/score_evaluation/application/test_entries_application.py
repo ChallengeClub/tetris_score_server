@@ -11,7 +11,7 @@ class TestEntriesApplication:
     def __init__(self, evaluation: Evaluation) -> None:
         self.evaluation = evaluation
 
-    def evaluate(self, log_folder="log")-> Evaluation:
+    def evaluate(self)-> Evaluation:
         res = clone_repository(url=self.evaluation.repository_url, branch=self.evaluation.branch)
         if res.returncode:
             self.evaluation.status = "error"
@@ -24,43 +24,24 @@ class TestEntriesApplication:
             self.evaluation.error_message = res.stderr
             return self.evaluation
             
-        # execute tetris_start asynchronously
-        futures = []
-        with ThreadPoolExecutor() as pool:
-            for i in range(self.evaluation.trial_num):
-                future = pool.submit(
-                    tetris_start, 
-                    game_time=self.evaluation.game_time,
-                    log_file=f"{log_folder}/result-{i}.json", 
-                    level=self.evaluation.level,
-                    drop_interval=self.evaluation.drop_interval,
-                    game_mode=self.evaluation.game_mode,
-                    value_predict_weight=self.evaluation.value_predict_weight,
-                    timeout=self.evaluation.timeout
-                    )
-                futures.append(future)
-        scores = []
-        for i, future in enumerate(futures):
-            with open(f"{log_folder}/result-{i}.log", 'w', encoding='utf-8') as f:
-                result = future.result()
-                if result.stdout is not None:
-                    f.write(result.stdout)
-                else:
-                    f.write(result.stderr)
-                if result.returncode:
-                    self.evaluation.status = "error"
-                    self.evaluation.error_message = result.stdout
-                    return self.evaluation
-            with open(f"{log_folder}/result-{i}.json", 'r', encoding='utf-8') as f:
-                res = json.load(f)
-                scores.append(int(res["judge_info"]["score"]))
+        # execute tetris_start
+        res = tetris_start(
+            game_time=self.evaluation.game_time, 
+            level=self.evaluation.level,
+            drop_interval=self.evaluation.drop_interval,
+            game_mode=self.evaluation.game_mode,
+            value_predict_weight=self.evaluation.value_predict_weight,
+            timeout=self.evaluation.timeout
+        )
+        if res.returncode: # if error occured in the subprocess
+            self.evaluation.status = "error"
+            self.evaluation.error_message = res.stdout
+            return self.evaluation
 
         # calculate statics
-        self.evaluation.score_mean = mean(scores)
-        self.evaluation.score_max = max(scores)
-        self.evaluation.score_min = min(scores)
-        if len(scores) > 1:
-            self.evaluation.score_stdev = stdev(scores)
+        with open("tetris/result.json", mode="r") as f:
+            _dict = json.load(f)
+        self.evaluation.score_mean = int(_dict["judge_info"]["score"])
         self.evaluation.status = "succeeded"
         
         return self.evaluation
@@ -71,13 +52,17 @@ def clone_repository(url: str, branch: str):
     if tetris folder is already exists, git clone after removing
     """
     if os.path.exists("tetris"):
-        shutil.rmtree("tetris", ignore_errors=True)
+        # permission error would occurs, without write permission. `os.chmod` cannot give white permission in Windows OS`
+        # https://docs.python.org/ja/3/library/os.html 
+        subprocess.run("chmod -R 777 tetris".split(), encoding='utf-8')
+        shutil.rmtree("tetris")
     git_clone_command = f"git clone {url} -b {branch} tetris --depth=1" # --depth=1: clone only head
     result = subprocess.run(git_clone_command.split(), capture_output=True, encoding='utf-8')
     return result
 
-def tetris_start(level: int, game_time: int, drop_interval: int, game_mode: str, value_predict_weight: str, timeout: int, log_file="result.json"):
-    tetris_start_command = f"python start.py -l {level} -t {game_time} -d {drop_interval} -m {game_mode} -f {log_file}"
+def tetris_start(level: int, game_time: int, drop_interval: int, game_mode: str, value_predict_weight: str, timeout: int):
+    os.chdir("tetris")
+    tetris_start_command = f"python start.py -l {level} -t {game_time} -d {drop_interval} -m {game_mode}"
     if value_predict_weight != "":
         tetris_start_command += f" --predict_weight {value_predict_weight}"
     try:
@@ -94,6 +79,7 @@ def tetris_start(level: int, game_time: int, drop_interval: int, game_mode: str,
             cmd=tetris_start_command.split(),
             stderr=str(e)
         )
+    os.chdir("..")
     return result
 
 def pip_install(requiments_file="requirements.txt"):

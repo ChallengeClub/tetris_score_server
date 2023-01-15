@@ -39,7 +39,7 @@ class EntryTestRepositoryInterface(EntryTestRepository):
             "error_message"
         ]
         with open(csv_path, mode="w") as f:
-            _writer = csv.DictWriter(f, fieldnames=_fields)
+            _writer = csv.DictWriter(f, fieldnames=_fields, extrasaction='ignore')
             _writer.writeheader()
             _writer.writerows(map(lambda result: result.to_dict(), results))
         

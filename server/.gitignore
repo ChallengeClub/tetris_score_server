@@ -6,4 +6,4 @@ log/*.json
 __pycache__/
 db-volumes/
 db.sqlite3
-/tetris
+tetris/

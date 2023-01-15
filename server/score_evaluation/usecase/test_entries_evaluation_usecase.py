@@ -29,7 +29,8 @@ class TestEntriesEvaluationUsecase:
                 eval_app = TestEntriesApplication(_eval)
                 print("start evaluation:\t", _eval)
                 _eval.started_at = int(time())
-                _eval = eval_app.evaluate(log_folder="log")
+                _eval.game_time = 1
+                _eval = eval_app.evaluate()
                 _eval.ended_at = int(time())
                 print("finish evaluation:\t", _eval)
             _results.append(_eval)

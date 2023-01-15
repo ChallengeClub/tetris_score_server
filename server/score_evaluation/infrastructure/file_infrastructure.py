@@ -2,9 +2,9 @@ import pathlib
 import csv
 
 from ..domain.model.entity import Evaluation
-from ..domain.repository.entry_test_repository import EntryTestRepository
+from ..domain.repository.entry_test_repository import EntryTestFileRepository
 
-class EntryTestRepositoryInterface(EntryTestRepository):
+class EntryTestRepositoryInterface(EntryTestFileRepository):
     def read(self, csv_path: pathlib.Path) -> list[Evaluation]:
         with open(csv_path) as f:
             _reader = csv.DictReader(f)

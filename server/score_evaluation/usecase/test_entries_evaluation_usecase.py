@@ -34,5 +34,7 @@ class TestEntriesEvaluationUsecase:
                 _eval.ended_at = int(time())
                 print("finish evaluation:\t", _eval)
             _results.append(_eval)
+            self.evaluation_dynamodb_repository_interface.update_entry()
         
         self.entry_test_repository_interface.write(_results, csv_path)
+        

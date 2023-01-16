@@ -1,9 +1,7 @@
 import os
 import shutil
 import json
-from statistics import mean, stdev
 import subprocess
-from concurrent.futures import ThreadPoolExecutor
 
 from ..domain.model.entity import Evaluation
 
@@ -41,6 +39,7 @@ class TestEntriesApplication:
         # calculate statics
         with open("tetris/result.json", mode="r") as f:
             _dict = json.load(f)
+        self.evaluation.error = ""
         self.evaluation.score_mean = int(_dict["judge_info"]["score"])
         self.evaluation.status = "succeeded"
         

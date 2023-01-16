@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from dotenv import load_dotenv
 
 from django.core.management.base import BaseCommand
 
@@ -15,6 +16,11 @@ class Command(BaseCommand):
 
     # コマンドが実行された際に呼ばれるメソッド
     def handle(self, *args, **options):
+        self.load_config()
         csv_path = options["csv_path"][0]
         testEntriesEvaluationUsecase = TestEntriesEvaluationUsecase()
         testEntriesEvaluationUsecase.execute(csv_path)
+    
+    def load_config(self):
+        load_dotenv(override=True)
+        

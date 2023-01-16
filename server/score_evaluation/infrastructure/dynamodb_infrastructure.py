@@ -51,7 +51,7 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
         return response
 
 class EntriesResultDynamoDBRepositoryInterface(EntryTestResultRepository):
-    def __init__(self, dynamodb_table_name=os.environ.get("dynamodb_table", "")):
+    def __init__(self, dynamodb_table_name=os.environ.get("dynamodb_competition_table", "")):
         self.dynamo = boto3.resource('dynamodb')
         self.table = self.dynamo.Table(dynamodb_table_name)      
     
@@ -66,7 +66,7 @@ class EntriesResultDynamoDBRepositoryInterface(EntryTestResultRepository):
                 #EndedAt = :ended_at, \
                 #ErrorMessage = :error_message, \
                 #Status = :status, \
-                #MeanScore = :score_mean, \
+                #MeanScore = :score_mean \
                 ',
             ExpressionAttributeNames= {
                 '#StartedAt' : 'StartedAt',

@@ -10,3 +10,4 @@ torchaudio
 torchvision 
 tensorflow-tensorboard
 tensorboardx
+python-dotenv

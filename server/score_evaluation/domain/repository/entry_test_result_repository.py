@@ -4,5 +4,5 @@ from ..model.entity import Evaluation
 
 class EntryTestResultRepository(metaclass=ABCMeta):
     @abstractmethod
-    def update(self, evaluation: Evaluation):
+    def update_entry(self, evaluation: Evaluation):
         raise NotImplementedError

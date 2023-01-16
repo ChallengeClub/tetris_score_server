@@ -2,12 +2,12 @@ from time import time
 import pathlib
 
 from ..application.test_entries_application import TestEntriesApplication
-from ..infrastructure.dynamodb_infrastructure import EvaluationResultDynamoDBRepositoryInterface
+from ..infrastructure.dynamodb_infrastructure import EntriesResultDynamoDBRepositoryInterface
 from ..infrastructure.file_infrastructure import EntryTestRepositoryInterface
 
 class TestEntriesEvaluationUsecase:
     def __init__(self) -> None:
-        self.evaluation_dynamodb_repository_interface = EvaluationResultDynamoDBRepositoryInterface()
+        self.competition_dynamodb_repository_interface = EntriesResultDynamoDBRepositoryInterface()
         self.entry_test_repository_interface = EntryTestRepositoryInterface()
         
 
@@ -34,7 +34,7 @@ class TestEntriesEvaluationUsecase:
                 _eval.ended_at = int(time())
                 print("finish evaluation:\t", _eval)
             _results.append(_eval)
-            self.evaluation_dynamodb_repository_interface.update_entry()
+            self.competition_dynamodb_repository_interface.update_entry(_eval)
         
         self.entry_test_repository_interface.write(_results, csv_path)
         

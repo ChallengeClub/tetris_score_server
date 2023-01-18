@@ -1,0 +1,9 @@
+name,repository_url,status,branch,created_at,started_at,level,game_mode,predict_weight_path,error_message
+test1,https://github.com/seigot/tetris,succeeded,master,2023-01-04 20:39:57,1673867798,1,default,,
+test3,https://github.com/seigot/tetris,succeeded,master,2023-01-04 20:41:03,1673867807,3,default,,
+Endoo1,https://github.com/EndoNrak/tetris,succeeded,master,2023-01-04 20:41:24,1673867817,1,default,,
+Endoo3,https://github.com/EndoNrak/tetris,succeeded,master,2023-01-04 20:43:24,1673867826,3,default,,
+happy_new_year,https://github.com/seigot/tetris,error,use_hold_function,2023-01-06 00:43:04,1673867839,2,default,,"Cloning into 'tetris'...
+warning: Could not find remote branch use_hold_function to clone.
+fatal: Remote branch use_hold_function not found in upstream origin
+"

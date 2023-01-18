@@ -39,25 +39,25 @@ class Evaluation(models.Model):
     
     def to_dict(self):
         data = {
-            "Id": self.id, 
-            "Name": self.name,
-            "CreatedAt": self.created_at,
-            "StartedAt": self.started_at,
-            "EndedAt": self.ended_at,
-            "RepositoryURL": self.repository_url,
-            "Branch": self.branch,
-            "GameTime": self.game_time,
-            "Level": self.level,
-            "ErrorMessage": self.error_message,
-            "Status": self.status,
-            "DropInterval": self.drop_interval,
-            "GameMode": self.game_mode,
-            "ValuePredictWeight": self.value_predict_weight,
-            "TrialNum": self.trial_num,
-            "MeanScore": int(self.score_mean),
-            "StdDevScore": int(self.score_stdev),
-            "MaxScore": self.score_max,
-            "MinScore": self.score_min
+            "id": self.id, 
+            "name": self.name,
+            "created_at": self.created_at,
+            "started_at": self.started_at,
+            "ended_at": self.ended_at,
+            "repository_url": self.repository_url,
+            "branch": self.branch,
+            "game_time": self.game_time,
+            "level": self.level,
+            "error_message": self.error_message,
+            "status": self.status,
+            "drop_interval": self.drop_interval,
+            "game_mode": self.game_mode,
+            "predict_weight_path": self.value_predict_weight,
+            "trial_num": self.trial_num,
+            "mean_score": int(self.score_mean),
+            "std_dev_score": int(self.score_stdev),
+            "max_score": self.score_max,
+            "min_score": self.score_min
         }
         return data
     

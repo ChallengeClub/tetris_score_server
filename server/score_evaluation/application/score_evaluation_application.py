@@ -11,8 +11,7 @@ class ScoreEvaluationApplication:
     def __init__(self, evaluation: Evaluation) -> None:
         self.evaluation = evaluation
 
-    def evaluate(self)-> Evaluation:
-        log_folder = "/server/log"
+    def evaluate(self, log_folder="/server/log")-> Evaluation:
         res = clone_repository(url=self.evaluation.repository_url, branch=self.evaluation.branch)
         if res.returncode:
             self.evaluation.status = "error"

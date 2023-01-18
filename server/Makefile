@@ -5,3 +5,6 @@ test:
 # `python manage.py polling ${interval}`
 polling:
 	python manage.py polling 60
+
+test-entries:
+	python manage.py test_entries entries.csv

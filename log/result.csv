@@ -375,3 +375,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2022/09/19_1:55:28, https://github.com/yuin0/tetris, develop, 20442, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 1400, 600, 0, 15600, 0, 2842, 180, 10, 16473.80, 2842.45, 20442, 9783
 2022/09/19_1:55:44, https://github.com/yuin0/tetris, develop, 10210, 3, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 3300, 3000, 0, 2600, -500, 1810, 180, 10, 7971.70, 1822.57, 10210, 4330
 2022/09/19_19:36:40, https://github.com/usamin24/tetris, Lv2, 0, 2, python_start.py_NG, 1000, default, outputs/latest/best_weight.pt, -, -, -, -, -, -, -, -, -, -, -, -
+2023/01/22_17:52:37, https://github.com/cookie4869/tetris, cookie04_01, 14984, 3, SUCCESS, 1000, predict, outputs/latest/best_weight.pt, 2600, 2400, 2800, 5200, 0, 1984, 178, 10, 11844.20, 1857.16, 14984, 9098

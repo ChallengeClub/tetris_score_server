@@ -54,9 +54,9 @@ resource "aws_dynamodb_table" "dynamodb-table" {
   }
 }
 
-data "aws_dynamodb_table" "dynamodb-table" {
-  name = var.dynamodb_table_name
-}
+# data "aws_dynamodb_table" "dynamodb-table" {
+#   name = var.dynamodb_table_name
+# }
 
 resource "aws_dynamodb_table" "dynamodb-competition-table" {
   name           = var.dynamodb_competition_table_name
@@ -81,6 +81,6 @@ resource "aws_dynamodb_table" "dynamodb-competition-table" {
   }
 }
 
-data "aws_dynamodb_table" "dynamodb-competition-table" {
-  name = var.dynamodb_competition_table_name
-}
+# data "aws_dynamodb_table" "dynamodb-competition-table" {
+#   name = var.dynamodb_competition_table_name
+# }

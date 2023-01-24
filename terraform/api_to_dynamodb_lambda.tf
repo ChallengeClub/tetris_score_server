@@ -52,7 +52,7 @@ resource "aws_lambda_function" "get_result_from_dynamodb_function" {
   runtime       = "python3.9"
   environment {
     variables = {
-      dynamodb_table_name = data.aws_dynamodb_table.dynamodb-table.name
+      dynamodb_table_name = var.dynamodb_competition_table_name
     }
   }
   filename         = data.archive_file.api_to_dynamodb_function_source.output_path
@@ -67,7 +67,7 @@ resource "aws_lambda_function" "get_competition_entries_function" {
   runtime       = "python3.9"
   environment {
     variables = {
-      dynamodb_competition_table_name = data.aws_dynamodb_table.dynamodb-competition-table.name
+      dynamodb_competition_table_name = var.dynamodb_competition_table_name
     }
   }
   filename         = data.archive_file.api_to_dynamodb_function_source.output_path

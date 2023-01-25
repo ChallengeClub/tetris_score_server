@@ -5,8 +5,8 @@ terraform {
       version = "4.31.0"
     }
   }
-  backend "s3" {
-    bucket  = "tetris-score-server-terraform-state"
+  backend "s3" { # s3 bucket for tfstate was created on aws console 
+    bucket  = "tetris-score-server-terraform-state-dev"
     region  = "ap-northeast-1"
     key     = "terraform.tfstate"
     encrypt = true
@@ -15,8 +15,4 @@ terraform {
 
 provider "aws" {
   region = "ap-northeast-1"
-}
-
-resource "aws_s3_bucket" "terraform_state" {
-  bucket = "tetris-score-server-terraform-state"
 }

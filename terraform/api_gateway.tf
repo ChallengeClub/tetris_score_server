@@ -72,26 +72,26 @@ resource "aws_apigatewayv2_stage" "tetris_api_stage" {
 #   payload_format_version = "2.0"
 # }
 
-# resource "aws_apigatewayv2_route" "send_message_lambda" {
-#   api_id    = aws_apigatewayv2_api.tetris_api.id
-#   route_key = "POST /score_evaluation"
-#   target    = "integrations/${aws_apigatewayv2_integration.send_message_to_sqs_lambda_integration.id}"
-# }
+resource "aws_apigatewayv2_route" "send_message_lambda" {
+  api_id    = aws_apigatewayv2_api.tetris_api.id
+  route_key = "POST /score_evaluation"
+  # target    = "integrations/${aws_apigatewayv2_integration.send_message_to_sqs_lambda_integration.id}"
+}
 
-# resource "aws_apigatewayv2_route" "get_results_from_dynamodb_route" {
-#   api_id    = aws_apigatewayv2_api.tetris_api.id
-#   route_key = "GET /results"
-#   target    = "integrations/${aws_apigatewayv2_integration.get_results_from_dynamodb_lambda_integration.id}"
-# }
+resource "aws_apigatewayv2_route" "get_results_from_dynamodb_route" {
+  api_id    = aws_apigatewayv2_api.tetris_api.id
+  route_key = "GET /results"
+  # target    = "integrations/${aws_apigatewayv2_integration.get_results_from_dynamodb_lambda_integration.id}"
+}
 
-# resource "aws_apigatewayv2_route" "entry_competition_lambda" {
-#   api_id    = aws_apigatewayv2_api.tetris_api.id
-#   route_key = "POST /entry"
-#   target    = "integrations/${aws_apigatewayv2_integration.entry_competition_lambda_integration.id}"
-# }
+resource "aws_apigatewayv2_route" "entry_competition_lambda" {
+  api_id    = aws_apigatewayv2_api.tetris_api.id
+  route_key = "POST /entry"
+  # target    = "integrations/${aws_apigatewayv2_integration.entry_competition_lambda_integration.id}"
+}
 
-# resource "aws_apigatewayv2_route" "get_competition_entries_lambda" {
-#   api_id    = aws_apigatewayv2_api.tetris_api.id
-#   route_key = "GET /entries"
-#   target    = "integrations/${aws_apigatewayv2_integration.get_entries_lambda_integration.id}"
-# }
+resource "aws_apigatewayv2_route" "get_competition_entries_lambda" {
+  api_id    = aws_apigatewayv2_api.tetris_api.id
+  route_key = "GET /entries"
+  # target    = "integrations/${aws_apigatewayv2_integration.get_entries_lambda_integration.id}"
+}

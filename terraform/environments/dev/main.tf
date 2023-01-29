@@ -16,3 +16,10 @@ terraform {
 provider "aws" {
   region = "ap-northeast-1"
 }
+
+module "resouces" {
+  source = "../../resouces"
+  api_gateway_allow_origins = [
+    "https://d25ybu1lvw4x5b.cloudfront.net",
+  ]
+}

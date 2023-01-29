@@ -1,5 +1,5 @@
 resource "aws_ecs_cluster" "score_evaluation_cluster" {
-  name = var.ecs_cluster_score_evaluation_name
+  name = var.score_evaluation_ecs_cluster_name
 }
 
 data "aws_iam_policy_document" "ecs_exec_assume_role" {
@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "ecs_exec_assume_role" {
 }
 
 resource "aws_iam_role" "ecs_execution_role" {
-  name               = var.ecs_task_execution_role_name
+  name               = var.score_evaluation_ecs_task_execution_role_name
   assume_role_policy = data.aws_iam_policy_document.ecs_exec_assume_role.json
 }
 
@@ -49,12 +49,12 @@ data "aws_iam_policy_document" "score_evaluation_task_policy_doc" {
 }
 
 resource "aws_iam_policy" "score_evaluation_task_policy" {
-  name   = var.ecs_task_role_policy_name
+  name   = var.score_evaluation_ecs_task_role_policy
   policy = data.aws_iam_policy_document.score_evaluation_task_policy_doc.json
 }
 
 resource "aws_iam_role" "ecs_task_role" {
-  name               = var.ecs_task_role_name
+  name               = var.score_evaluation_ecs_task_role_name
   assume_role_policy = data.aws_iam_policy_document.ecs_task_assume_role.json
 }
 
@@ -64,7 +64,7 @@ resource "aws_iam_role_policy_attachment" "ecs_task_role_policy_attachment" {
 }
 
 resource "aws_ecs_task_definition" "score_evaluation_task" {
-  family                   = var.ecs_task_definition_family
+  family                   = var.score_evaluation_ecs_task_definition_family
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   cpu                      = 1024
@@ -73,8 +73,8 @@ resource "aws_ecs_task_definition" "score_evaluation_task" {
   task_role_arn            = aws_iam_role.ecs_task_role.arn
   container_definitions = jsonencode([
     {
-      name   = var.ecs_task_definition_family
-      image  = var.ecs_task_definition_image
+      name   = var.score_evaluation_ecs_task_definition_family
+      image  = var.score_evaluation_container_image
       cpu    = 1024
       memory = 2048
       environment = [
@@ -100,7 +100,7 @@ resource "aws_ecs_task_definition" "score_evaluation_task" {
 }
 
 resource "aws_ecs_service" "score_evaluation_service" {
-  name            = var.ecs_service_name
+  name            = var.score_evaluation_ecs_service
   cluster         = aws_ecs_cluster.score_evaluation_cluster.id
   task_definition = aws_ecs_task_definition.score_evaluation_task.arn
   desired_count   = 0
@@ -115,8 +115,8 @@ resource "aws_appautoscaling_target" "ecs_score_evaluation_autoscaling_target" {
   service_namespace  = "ecs"
   resource_id        = "service/${aws_ecs_cluster.score_evaluation_cluster.name}/${aws_ecs_service.score_evaluation_service.name}"
   scalable_dimension = "ecs:service:DesiredCount"
-  min_capacity       = 0
-  max_capacity       = 1
+  min_capacity       = var.score_evaluation_ecs_service_min_count
+  max_capacity       = var.score_evaluation_ecs_service_max_count
 }
 
 resource "aws_appautoscaling_policy" "ecs_score_evaluation_scaleout_policy" {

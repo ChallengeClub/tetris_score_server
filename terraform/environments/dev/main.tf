@@ -20,6 +20,11 @@ provider "aws" {
 module "resouces" {
   source = "../../resouces"
   api_gateway_allow_origins = [
-    "https://d25ybu1lvw4x5b.cloudfront.net",
+    var.tetris_frontend_origin,
   ]
+}
+
+variable "tetris_frontend_origin" {
+    type = string
+    sensitive = true
 }

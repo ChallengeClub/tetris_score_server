@@ -35,7 +35,7 @@ variable "register_evaluation_request_lambda_src_dir" {
 }
 variable "register_evaluation_request_lambda_zip_output_path" {
     type = string
-    default = "../archive/register_evaluation_request_lambda.zip"
+    default = "../../archive/register_evaluation_request_lambda.zip"
 }
 variable "register_evaluation_request_lambda_layer_src_dir" {
     type = string
@@ -43,7 +43,7 @@ variable "register_evaluation_request_lambda_layer_src_dir" {
 }
 variable "register_evaluation_request_lambda_layer_zip_output_path" {
     type = string
-    default = "../archive/register_evaluation_request_lambda_layer.zip"
+    default = "../../archive/register_evaluation_request_lambda_layer.zip"
 }
 variable "register_evaluation_request_lambda_policy" {
     type = string
@@ -88,7 +88,7 @@ variable "get_evaluation_results_lambda_src_dir" {
 }
 variable "get_evaluation_results_lambda_zip_output_path" {
     type = string
-    default = "../archive/get_evaluation_results_lambda.zip"
+    default = "../../archive/get_evaluation_results_lambda.zip"
 }
 variable "get_evaluation_results_lambda_layer_name" {
     type = string
@@ -100,7 +100,7 @@ variable "get_evaluation_results_lambda_layer_src_dir" {
 }
 variable "get_evaluation_results_lambda_layer_zip_output_path" {
     type = string
-    default = "../archive/get_evaluation_results_lambda_layer.zip"
+    default = "../../archive/get_evaluation_results_lambda_layer.zip"
 }
 variable "get_evaluation_results_lambda_policy" {
     type = string

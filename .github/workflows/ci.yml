@@ -13,7 +13,7 @@ jobs:
       contents: read
 
     env:
-      TETRIS_API: ${{ secrets.TETRIS_API_DEV }}
+      TETRIS_FRONT_ORIGIN: ${{ secrets.TETRIS_FRONT_ORIGIN_DEV }}
 
     steps:
       - name: Git clone the repository
@@ -31,8 +31,8 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: ./terraform
+        working-directory: ./terraform/environments/dev
 
       - name: Terraform plan
         run: terraform plan
-        working-directory: ./terraform
+        working-directory: ./terraform/environments/dev

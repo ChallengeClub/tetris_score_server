@@ -12,9 +12,6 @@ jobs:
       id-token: write
       contents: read
 
-    env:
-      TETRIS_FRONT_ORIGIN: ${{ secrets.TETRIS_FRONT_ORIGIN_DEV }}
-
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v3

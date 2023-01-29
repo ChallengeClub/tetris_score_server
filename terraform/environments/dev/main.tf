@@ -16,3 +16,15 @@ terraform {
 provider "aws" {
   region = "ap-northeast-1"
 }
+
+module "resouces" {
+  source = "../../resouces"
+  api_gateway_allow_origins = [
+    var.tetris_frontend_origin,
+  ]
+}
+
+variable "tetris_frontend_origin" {
+    type = string
+    sensitive = true
+}

@@ -1,8 +1,8 @@
-name: ci
+name: ci-prod
 
 on:
   pull_request:
-    branches: [dev]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_DEV_ACCOUNT_ID }}:role/aws-identity-providers-federation-github-actions
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_PROD_ACCOUNT_ID }}:role/aws-identity-providers-federation-github-actions
           role-session-name: github-actions-dev
           aws-region: ap-northeast-1
 
@@ -28,8 +28,8 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: ./terraform/environments/dev
+        working-directory: ./terraform/environments/prod
 
       - name: Terraform plan
-        run: terraform plan -var tetris_frontend_origin=${{ secrets.TETRIS_FRONT_ORIGIN_DEV }}
-        working-directory: ./terraform/environments/dev
+        run: terraform plan -var tetris_frontend_origin=${{ secrets.TETRIS_FRONT_ORIGIN_PROD }}
+        working-directory: ./terraform/environments/prod

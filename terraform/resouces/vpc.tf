@@ -1,7 +1,7 @@
 resource "aws_vpc" "tetris_score_server_vpc" {
-  cidr_block = var.vpc_cidr
+  cidr_block = var.score_evaluation_vpc_cidr
   tags = {
-    Name = var.vpc_tag
+    Name = var.score_evaluation_vpc_tag
   }
 }
 
@@ -11,7 +11,7 @@ resource "aws_subnet" "tetris_score_server_subnet" {
   availability_zone = var.subnet_availability_zone
 
   tags = {
-    Name = var.vpc_tag
+    Name = var.score_evaluation_vpc_tag
   }
 }
 
@@ -19,7 +19,7 @@ resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = aws_vpc.tetris_score_server_vpc.id
 
   tags = {
-    Name = var.vpc_tag
+    Name = var.score_evaluation_vpc_tag
   }
 }
 
@@ -30,6 +30,6 @@ resource "aws_route_table" "vpc_route_table" {
     gateway_id = aws_internet_gateway.internet_gateway.id
   }
   tags = {
-    Name = var.vpc_tag
+    Name = var.score_evaluation_vpc_tag
   }
 }

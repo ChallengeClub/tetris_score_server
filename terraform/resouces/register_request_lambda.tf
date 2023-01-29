@@ -1,17 +1,13 @@
-locals {
-  function_name = "api_to_sqs_lambda_function"
-}
-
 data "archive_file" "function_source" {
   type        = "zip"
-  source_dir  = var.function_src_dir
-  output_path = var.function_zip_output_path
+  source_dir  = var.register_evaluation_request_lambda_src_dir
+  output_path = var.register_evaluation_request_lambda_zip_output_path
 }
 
 data "archive_file" "layer_zip" {
   type        = "zip"
-  source_dir  = var.layer_src_dir
-  output_path = var.layer_zip_output_path
+  source_dir  = var.register_evaluation_request_lambda_layer_src_dir
+  output_path = var.register_evaluation_request_lambda_layer_zip_output_path
 }
 
 data "aws_iam_policy_document" "assume_role" {
@@ -40,11 +36,11 @@ data "aws_iam_policy_document" "message_to_sqs_policy_doc" {
   }
 }
 resource "aws_iam_policy" "send_message_to_sqs_policy" {
-  name   = var.lambda_policy_send_message_to_sqs
+  name   = var.register_evaluation_request_lambda_policy
   policy = data.aws_iam_policy_document.message_to_sqs_policy_doc.json
 }
 resource "aws_iam_role" "send_message_to_sqs_lambda_role" {
-  name               = var.lambda_role_send_message_to_sqs
+  name               = var.register_evaluation_request_lambda_role
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
@@ -54,8 +50,8 @@ resource "aws_iam_role_policy_attachment" "attachment" {
 }
 
 resource "aws_lambda_function" "function" {
-  function_name = var.send_message_to_sqs_function_name
-  handler       = var.send_message_to_sqs_handler
+  function_name = var.register_evaluation_request_lambda_name
+  handler       = var.register_evaluation_request_lambda_handler
   role          = aws_iam_role.send_message_to_sqs_lambda_role.arn
   runtime       = "python3.9"
   environment {
@@ -71,8 +67,8 @@ resource "aws_lambda_function" "function" {
 }
 
 resource "aws_lambda_function" "entry_competition_function" {
-  function_name = var.entry_to_competition_function_name
-  handler       = var.entry_to_competition_handler
+  function_name = var.entry_competition_lambda_name
+  handler       = var.entry_competition_lambda_handler
   role          = aws_iam_role.send_message_to_sqs_lambda_role.arn
   runtime       = "python3.9"
   environment {
@@ -87,7 +83,7 @@ resource "aws_lambda_function" "entry_competition_function" {
 }
 
 resource "aws_lambda_layer_version" "lambda_layer" {
-  layer_name               = var.lambda_send_message_to_sqs_layer_name
+  layer_name               = var.register_evaluation_request_lambda_layer_name
   filename                 = data.archive_file.layer_zip.output_path
   source_code_hash         = data.archive_file.layer_zip.output_base64sha256
   compatible_runtimes      = ["python3.9"]

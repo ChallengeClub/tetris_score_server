@@ -15,6 +15,7 @@ variable "api_gateway_access_log_format" {
 }
 variable "api_gateway_allow_origins" {
     type = list
+    sensitive = true
 }
 
 

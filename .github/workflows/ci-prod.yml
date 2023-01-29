@@ -34,5 +34,5 @@ jobs:
         working-directory: ./terraform/environments/prod
 
       - name: Terraform plan
-        run: terraform plan
+        run: terraform plan -var tetris_frontend_origin=${{ secrets.TETRIS_FRONT_ORIGIN_PROD }}
         working-directory: ./terraform/environments/prod

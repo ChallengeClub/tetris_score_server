@@ -12,9 +12,6 @@ jobs:
       id-token: write
       contents: read
 
-    env:
-      TETRIS_FRONT_ORIGIN: ${{ secrets.TETRIS_FRONT_ORIGIN_PROD }}
-
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v3
@@ -34,5 +31,5 @@ jobs:
         working-directory: ./terraform/environments/prod
 
       - name: Terraform apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -var tetris_frontend_origin=${{ secrets.TETRIS_FRONT_ORIGIN_PROD }}
         working-directory: ./terraform/environments/prod

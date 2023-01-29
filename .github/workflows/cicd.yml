@@ -34,5 +34,5 @@ jobs:
         working-directory: ./terraform/environments/dev
 
       - name: Terraform apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -var tetris_frontend_origin=${{ secrets.TETRIS_FRONT_ORIGIN_DEV }}
         working-directory: ./terraform/environments/dev

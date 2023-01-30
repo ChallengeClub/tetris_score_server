@@ -1,13 +1,13 @@
 resource "aws_sqs_queue" "score_evaluation_queue" {
-  name                      = var.sqs_score_evaluation_name
+  name                      = var.score_evaluation_sqs_queue_name
   redrive_policy = jsonencode({
     deadLetterTargetArn = aws_sqs_queue.score_evaluation_queue_deadletter.arn
-    maxReceiveCount     = 3
+    maxReceiveCount     = var.score_evaluation_queue_max_count
   })
 }
 
 resource "aws_sqs_queue" "score_evaluation_queue_deadletter" {
-  name = var.sqs_score_evaluation_deadletter_name
+  name = var.score_evaluation_sqs_deadletter_queue_name
 }
 
 data "aws_sqs_queue" "score_evaluation_queue_data" {

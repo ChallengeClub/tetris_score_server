@@ -28,3 +28,8 @@ variable "tetris_frontend_origin" {
     type = string
     sensitive = true
 }
+
+variable "score_evaluation_container_image"{
+  type = string
+  sensitive = true
+}

@@ -163,7 +163,6 @@ variable "score_evaluation_ecs_task_definition_family" {
 }
 variable "score_evaluation_container_image" {
     type = string
-    default = "public.ecr.aws/r2u8u6o1/tetris_score_evaluation:latest"
 }
 variable "score_evaluation_ecs_task_execution_role_name" {
     type = string

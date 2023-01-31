@@ -31,5 +31,5 @@ jobs:
         working-directory: ./terraform/environments/prod
 
       - name: Terraform plan
-        run: terraform plan -var tetris_frontend_origin=${{ secrets.TETRIS_FRONT_ORIGIN_PROD }} -var score_evaluation_container_image=${{ secrets.TETRIS_ECR_REPOSITORY_PROD }}
+        run: terraform plan -var tetris_frontend_origin=${{ secrets.TETRIS_FRONT_ORIGIN_PROD }} -var tetris_ecr_repository=${{ secrets.TETRIS_ECR_REPOSITORY_PROD }}
         working-directory: ./terraform/environments/prod

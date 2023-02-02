@@ -3,9 +3,8 @@ RUN apt-get update && apt-get install -y \
     xvfb
 ENV PYTHONUNBUFFERED 1
 ENV QT_QPA_PLATFORM offscreen
-RUN mkdir /app
-WORKDIR /app
-RUN git clone https://github.com/TetrisChallenge/tetris_score_server.git --depth 1 && pip install -r tetris_score_server/server/requirements.txt
-RUN mv /app/tetris_score_server/server /server
+RUN mkdir /server
 WORKDIR /server
-ENTRYPOINT make polling
+ADD ../server .
+RUN pip install -r requirements.txt
+ENTRYPOINT bash

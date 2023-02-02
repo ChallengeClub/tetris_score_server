@@ -7,7 +7,7 @@ from ..domain.repository.entry_test_result_repository import EntryTestResultRepo
 from ..domain.model.entity import Evaluation
 
 class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
-    def __init__(self, dynamodb_table_name=os.environ.get("dynamodb_table", "")):
+    def __init__(self, dynamodb_table_name=os.environ.get("DYNAMODB_TABLE")):
         self.dynamo = boto3.resource('dynamodb')
         self.table = self.dynamo.Table(dynamodb_table_name)      
     

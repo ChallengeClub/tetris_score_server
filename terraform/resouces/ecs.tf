@@ -79,11 +79,11 @@ resource "aws_ecs_task_definition" "score_evaluation_task" {
       memory = 2048
       environment = [
         {
-          "name" : "sqs_url",
+          "name" : "SQS_URL",
           "value" : data.aws_sqs_queue.score_evaluation_queue_data.url
         },
         {
-          "name" : "dynamodb_table",
+          "name" : "DYNAMODB_TABLE",
           "value" : var.dynamodb_table_name
         }
       ]

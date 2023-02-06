@@ -22,9 +22,15 @@ module "resouces" {
   api_gateway_allow_origins = [
     var.tetris_frontend_origin,
   ]
+  score_evaluation_container_image = var.tetris_ecr_repository
 }
 
 variable "tetris_frontend_origin" {
     type = string
     sensitive = true
+}
+
+variable "tetris_ecr_repository"{
+  type = string
+  sensitive = true
 }

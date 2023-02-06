@@ -29,7 +29,15 @@ jobs:
       - name: Terraform Init
         run: terraform init
         working-directory: ./terraform/environments/dev
+      
+      - name: Pip install for lambda layer 1
+        run: make
+        working-directory: ./scripts/api_to_dynamodb_lambda/layer
+
+      - name: Pip install for lambda layer 2
+        run: make
+        working-directory: ./scripts/api_to_sqs_lambda/layer
 
       - name: Terraform apply
-        run: terraform apply -auto-approve -var tetris_frontend_origin=${{ secrets.TETRIS_FRONT_ORIGIN_DEV }}
+        run: terraform apply -auto-approve -var tetris_frontend_origin=${{ secrets.TETRIS_FRONT_ORIGIN_DEV }} -var tetris_ecr_repository=${{ secrets.TETRIS_ECR_REPOSITORY_DEV }}
         working-directory: ./terraform/environments/dev

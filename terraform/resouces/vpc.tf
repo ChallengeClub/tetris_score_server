@@ -33,3 +33,8 @@ resource "aws_route_table" "vpc_route_table" {
     Name = var.score_evaluation_vpc_tag
   }
 }
+
+resource "aws_route_table_association" "ecs_subnet_route_table_association" {
+  subnet_id      = aws_subnet.tetris_score_server_subnet.id
+  route_table_id = aws_route_table.vpc_route_table.id
+}

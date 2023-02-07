@@ -388,3 +388,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 2023/02/05_14:11:16, https://github.com/cookie4869/tetris, cookie04_01, 17290, 2, SUCCESS, 1000, predict, outputs/latest/best_weight.pt, 2100, 2400, 2100, 7800, 0, 2890, 179, 10, 15697.50, 1033.36, 17290, 13933
 2023/02/05_17:34:17, https://github.com/cookie4869/tetris, cookie04_01, 19737, 2, SUCCESS, 1000, predict, outputs/2022-08-31-08-05-53/trained_model/tetris_epoch1701_score189000.pt, 1100, 1800, 2100, 11700, 0, 3037, 178, 10, 16237.30, 2016.01, 19737, 13559
 2023/02/05_20:14:47, https://github.com/cookie4869/tetris, cookie04_01, 17983, 2, SUCCESS, 1000, predict, outputs/latest/best_weight.pt, 1600, 2100, 2100, 9100, 0, 3083, 178, 10, 15843.30, 1722.87, 17983, 12894
+2023/02/07_23:47:53, https://github.com/mattshamrock/tetris, master, 25287, 1, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 0, 22100, 0, 3187, 180, 10, 25287.00, 0.00, 25287, 25287

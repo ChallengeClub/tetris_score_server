@@ -25,31 +25,28 @@ class ScoreEvaluationApplication:
             return self.evaluation
             
         # execute tetris_start asynchronously
-        futures = []
-        with ThreadPoolExecutor() as pool:
-            for i in range(self.evaluation.trial_num):
-                future = pool.submit(
-                    tetris_start, 
-                    game_time=self.evaluation.game_time,
-                    log_file=f"{log_folder}/result-{i}.json", 
-                    level=self.evaluation.level,
-                    drop_interval=self.evaluation.drop_interval,
-                    game_mode=self.evaluation.game_mode,
-                    value_predict_weight=self.evaluation.value_predict_weight,
-                    timeout=self.evaluation.timeout
-                    )
-                futures.append(future)
+        results = []
+        for i in range(self.evaluation.trial_num):
+            _result = tetris_start(
+                game_time=self.evaluation.game_time,
+                log_file=f"{log_folder}/result-{i}.json", 
+                level=self.evaluation.level,
+                drop_interval=self.evaluation.drop_interval,
+                game_mode=self.evaluation.game_mode,
+                value_predict_weight=self.evaluation.value_predict_weight,
+                timeout=self.evaluation.timeout
+            )
+            results.append(_result)
         scores = []
-        for i, future in enumerate(futures):
+        for i, _result in enumerate(results):
             with open(f"{log_folder}/result-{i}.log", 'w', encoding='utf-8') as f:
-                result = future.result()
-                if result.stdout is not None:
-                    f.write(result.stdout)
+                if _result.stdout is not None:
+                    f.write(_result.stdout)
                 else:
-                    f.write(result.stderr)
-                if result.returncode:
+                    f.write(_result.stderr)
+                if _result.returncode:
                     self.evaluation.status = "error"
-                    self.evaluation.error_message = result.stdout
+                    self.evaluation.error_message = _result.stdout
                     return self.evaluation
             with open(f"{log_folder}/result-{i}.json", 'r', encoding='utf-8') as f:
                 res = json.load(f)
@@ -62,7 +59,6 @@ class ScoreEvaluationApplication:
         if len(scores) > 1:
             self.evaluation.score_stdev = stdev(scores)
         self.evaluation.status = "succeeded"
-        
         return self.evaluation
 
 def clone_repository(url: str, branch: str):

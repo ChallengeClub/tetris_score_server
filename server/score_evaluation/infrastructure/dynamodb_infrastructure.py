@@ -49,6 +49,27 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
             },
         )
         return response
+    
+    def update_started_at(self, evaluation: Evaluation):
+        response = self.table.update_item(
+            Key = {
+                "Id": evaluation.id,
+                "CreatedAt": evaluation.created_at
+            },
+            UpdateExpression='set \
+                #StartedAt = :started_at, \
+                #Status = :status \
+                ',
+            ExpressionAttributeNames= {
+                '#StartedAt' : 'StartedAt',
+                '#Status' : 'Status',
+		    },
+            ExpressionAttributeValues={
+                ':started_at' : evaluation.started_at,
+                ':status' : evaluation.status,
+            },
+        )
+        return response
 
 class EntriesResultDynamoDBRepositoryInterface(EntryTestResultRepository):
     def __init__(self, dynamodb_table_name=os.environ.get("dynamodb_competition_table", "")):

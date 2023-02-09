@@ -58,7 +58,7 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
             },
             UpdateExpression='set \
                 #StartedAt = :started_at, \
-                #Status = :status, \
+                #Status = :status \
                 ',
             ExpressionAttributeNames= {
                 '#StartedAt' : 'StartedAt',

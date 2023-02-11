@@ -1,8 +1,10 @@
-name: cicd-prod
+name: cicd-infra-prod
 
 on:
   push:
     branches: [main]
+    paths:
+      - 'terraform/'
   workflow_dispatch:
 
 jobs:
@@ -32,11 +34,11 @@ jobs:
       
       - name: Pip install for lambda layer 1
         run: make
-        working-directory: ./scripts/api_to_dynamodb_lambda/layer
+        working-directory: ./terraform/scripts/api_to_dynamodb_lambda/layer
 
       - name: Pip install for lambda layer 2
         run: make
-        working-directory: ./scripts/api_to_sqs_lambda/layer
+        working-directory: ./terraform/scripts/api_to_sqs_lambda/layer
 
       - name: Terraform apply
         run: terraform apply -auto-approve -var tetris_frontend_origin=${{ secrets.TETRIS_FRONT_ORIGIN_PROD }} -var tetris_ecr_repository=${{ secrets.TETRIS_ECR_REPOSITORY_PROD }}

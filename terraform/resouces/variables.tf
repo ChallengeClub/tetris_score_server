@@ -130,7 +130,7 @@ variable "ecs_cloudwatch_log_group_name" {
 }
 variable "ecs_cloudwatch_scaleout_alarm" {
     type = string
-    default = "sqs_waiting_message_alarm"
+    default = "sqs_waiting_and_in_evaluation_message_alarm"
 }
 
 

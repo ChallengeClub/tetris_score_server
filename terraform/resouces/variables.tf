@@ -32,7 +32,7 @@ variable "register_evaluation_request_lambda_handler" {
 }
 variable "register_evaluation_request_lambda_src_dir" {
     type = string
-    default = "../../../scripts/api_to_sqs_lambda/src"
+    default = "../../scripts/api_to_sqs_lambda/src"
 }
 variable "register_evaluation_request_lambda_zip_output_path" {
     type = string
@@ -40,7 +40,7 @@ variable "register_evaluation_request_lambda_zip_output_path" {
 }
 variable "register_evaluation_request_lambda_layer_src_dir" {
     type = string
-    default = "../../../scripts/api_to_sqs_lambda/layer/packages"
+    default = "../../scripts/api_to_sqs_lambda/layer/packages"
 }
 variable "register_evaluation_request_lambda_layer_zip_output_path" {
     type = string
@@ -85,7 +85,7 @@ variable "get_competition_entries_lambda_handler" {
 }
 variable "get_evaluation_results_lambda_src_dir" {
     type = string
-    default = "../../../scripts/api_to_dynamodb_lambda/src"
+    default = "../../scripts/api_to_dynamodb_lambda/src"
 }
 variable "get_evaluation_results_lambda_zip_output_path" {
     type = string
@@ -97,7 +97,7 @@ variable "get_evaluation_results_lambda_layer_name" {
 }
 variable "get_evaluation_results_lambda_layer_src_dir" {
     type = string
-    default =  "../../../scripts/api_to_dynamodb_lambda/layer/packages"
+    default =  "../../scripts/api_to_dynamodb_lambda/layer/packages"
 }
 variable "get_evaluation_results_lambda_layer_zip_output_path" {
     type = string
@@ -130,7 +130,7 @@ variable "ecs_cloudwatch_log_group_name" {
 }
 variable "ecs_cloudwatch_scaleout_alarm" {
     type = string
-    default = "sqs_waiting_message_alarm"
+    default = "sqs_waiting_and_in_evaluation_message_alarm"
 }
 
 

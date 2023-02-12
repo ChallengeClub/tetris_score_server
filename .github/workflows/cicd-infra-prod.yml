@@ -1,8 +1,10 @@
-name: cicd
+name: cicd-infra-prod
 
 on:
   push:
-    branches: [dev]
+    branches: [main]
+    paths:
+      - 'terraform/**'
   workflow_dispatch:
 
 jobs:
@@ -19,7 +21,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_DEV_ACCOUNT_ID }}:role/aws-identity-providers-federation-github-actions
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_PROD_ACCOUNT_ID }}:role/aws-identity-providers-federation-github-actions
           role-session-name: github-actions-dev
           aws-region: ap-northeast-1
 
@@ -28,16 +30,16 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: ./terraform/environments/dev
+        working-directory: ./terraform/environments/prod
       
       - name: Pip install for lambda layer 1
         run: make
-        working-directory: ./scripts/api_to_dynamodb_lambda/layer
+        working-directory: ./terraform/scripts/api_to_dynamodb_lambda/layer
 
       - name: Pip install for lambda layer 2
         run: make
-        working-directory: ./scripts/api_to_sqs_lambda/layer
+        working-directory: ./terraform/scripts/api_to_sqs_lambda/layer
 
       - name: Terraform apply
-        run: terraform apply -auto-approve -var tetris_frontend_origin=${{ secrets.TETRIS_FRONT_ORIGIN_DEV }} -var tetris_ecr_repository=${{ secrets.TETRIS_ECR_REPOSITORY_DEV }}
-        working-directory: ./terraform/environments/dev
+        run: terraform apply -auto-approve -var tetris_frontend_origin=${{ secrets.TETRIS_FRONT_ORIGIN_PROD }} -var tetris_ecr_repository=${{ secrets.TETRIS_ECR_REPOSITORY_PROD }}
+        working-directory: ./terraform/environments/prod

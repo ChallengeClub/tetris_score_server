@@ -1,8 +1,10 @@
-name: ci
+name: ci-infra-dev
 
 on:
   pull_request:
     branches: [dev]
+    paths:
+      - 'terraform/**' # aws resources
   workflow_dispatch:
 
 jobs:
@@ -32,12 +34,12 @@ jobs:
 
       - name: Pip install for lambda layer 1
         run: make
-        working-directory: ./scripts/api_to_dynamodb_lambda/layer
+        working-directory: ./terraform/scripts/api_to_dynamodb_lambda/layer
 
       - name: Pip install for lambda layer 2
         run: make
-        working-directory: ./scripts/api_to_sqs_lambda/layer
-
+        working-directory: ./terraform/scripts/api_to_sqs_lambda/layer
+        
       - name: Terraform plan
         run: terraform plan -var tetris_frontend_origin=${{ secrets.TETRIS_FRONT_ORIGIN_DEV }} -var tetris_ecr_repository=${{ secrets.TETRIS_ECR_REPOSITORY_DEV }}
         working-directory: ./terraform/environments/dev

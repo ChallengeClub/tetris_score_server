@@ -39,10 +39,6 @@ resource "aws_cloudwatch_metric_alarm" "sqs_waiting_message_alarm" {
   alarm_name          = var.ecs_cloudwatch_scaleout_alarm
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = "1"
-  metric_name         = "ApproximateNumberOfMessagesVisible"
-  namespace           = "AWS/SQS"
-  period              = "30"
-  statistic           = "Sum"
   threshold           = "1"
 
   metric_query {

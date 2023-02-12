@@ -82,7 +82,7 @@ resource "aws_cloudwatch_metric_alarm" "sqs_waiting_message_alarm" {
     }
   }
 
-  alarm_description = "This metric monitors sqs message counts"
+  alarm_description = "This metric monitors sqs message counts, waiting for/ in progress evaluation"
   alarm_actions = [
     aws_appautoscaling_policy.ecs_score_evaluation_scaleout_policy.arn,
   ]

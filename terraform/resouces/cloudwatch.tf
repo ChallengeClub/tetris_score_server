@@ -41,11 +41,49 @@ resource "aws_cloudwatch_metric_alarm" "sqs_waiting_message_alarm" {
   evaluation_periods  = "1"
   metric_name         = "ApproximateNumberOfMessagesVisible"
   namespace           = "AWS/SQS"
-  period              = "60"
+  period              = "30"
   statistic           = "Sum"
   threshold           = "1"
-  dimensions = {
-    QueueName  = aws_sqs_queue.score_evaluation_queue.name
+
+  metric_query {
+    id          = "e1"
+    expression  = "m1+m2"
+    label       = "request count waiting/in progress"
+    return_data = "true" # if true, the metric_query is used for alarm
+  }
+
+  metric_query {
+    id = "m1"
+    label = "request count wating for evaluation"
+
+    metric {
+      metric_name = "ApproximateNumberOfMessagesVisible"
+      namespace   = "AWS/SQS"
+      period      = "30"
+      stat        = "Sum"
+      unit        = "Count"
+
+      dimensions = {
+        QueueName  = aws_sqs_queue.score_evaluation_queue.name
+      }
+    }
+  }
+
+  metric_query {
+    id = "m2"
+    label = "request count in evaluation"
+
+    metric {
+      metric_name = "ApproximateNumberOfMessagesNotVisible"
+      namespace   = "AWS/SQS"
+      period      = "30"
+      stat        = "Sum"
+      unit        = "Count"
+
+      dimensions = {
+        QueueName  = aws_sqs_queue.score_evaluation_queue.name
+      }
+    }
   }
 
   alarm_description = "This metric monitors sqs message counts"

@@ -36,8 +36,8 @@ class ScoreEvaluationMessage(_message.Message):
     level: ScoreEvaluationMessage.GameLevel
     name: str
     predict_weight_path: str
-    random_seed: str
+    random_seed: int
     repository_url: str
     timeout: int
     trial_num: int
-    def __init__(self, name: _Optional[str] = ..., id: _Optional[str] = ..., created_at: _Optional[int] = ..., repository_url: _Optional[str] = ..., branch: _Optional[str] = ..., drop_interval: _Optional[int] = ..., level: _Optional[_Union[ScoreEvaluationMessage.GameLevel, str]] = ..., game_mode: _Optional[str] = ..., game_time: _Optional[int] = ..., timeout: _Optional[int] = ..., predict_weight_path: _Optional[str] = ..., trial_num: _Optional[int] = ..., random_seed: _Optional[str] = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., id: _Optional[str] = ..., created_at: _Optional[int] = ..., repository_url: _Optional[str] = ..., branch: _Optional[str] = ..., drop_interval: _Optional[int] = ..., level: _Optional[_Union[ScoreEvaluationMessage.GameLevel, str]] = ..., game_mode: _Optional[str] = ..., game_time: _Optional[int] = ..., timeout: _Optional[int] = ..., predict_weight_path: _Optional[str] = ..., trial_num: _Optional[int] = ..., random_seed: _Optional[int] = ...) -> None: ...

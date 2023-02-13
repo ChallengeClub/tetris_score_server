@@ -34,6 +34,7 @@ def lambda_handler(event: dict, context):
         "CreatedAt": msg.created_at,
         "RepositoryURL": msg.repository_url,
         "Branch": msg.branch,
+        "RandomSeed": msg.random_seed,
         "GameTime": msg.game_time,
         "Level": msg.level,
         "Status": "waiting",

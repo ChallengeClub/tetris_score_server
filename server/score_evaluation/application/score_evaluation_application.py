@@ -3,7 +3,6 @@ import shutil
 import json
 from statistics import mean, stdev
 import subprocess
-from concurrent.futures import ThreadPoolExecutor
 
 from ..domain.model.entity import Evaluation
 
@@ -35,10 +34,11 @@ class ScoreEvaluationApplication:
                 game_mode=self.evaluation.game_mode,
                 value_predict_weight=self.evaluation.value_predict_weight,
                 timeout=self.evaluation.timeout,
-                seed=self.evaluation.random_seed,
+                seed=self.evaluation.random_seeds["values"][i],
             )
             results.append(_result)
         scores = []
+        random_seeds = []
         for i, _result in enumerate(results):
             with open(f"{log_folder}/result-{i}.log", 'w', encoding='utf-8') as f:
                 if _result.stdout is not None:
@@ -52,8 +52,11 @@ class ScoreEvaluationApplication:
             with open(f"{log_folder}/result-{i}.json", 'r', encoding='utf-8') as f:
                 res = json.load(f)
                 scores.append(int(res["judge_info"]["score"]))
+                random_seeds.append(int(res["debug_info"].get("random_seed", 0)))
 
         # calculate statics
+        self.evaluation.scores["values"] = scores
+        self.evaluation.random_seeds["values"] = random_seeds
         self.evaluation.score_mean = mean(scores)
         self.evaluation.score_max = max(scores)
         self.evaluation.score_min = min(scores)

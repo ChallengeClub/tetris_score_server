@@ -26,7 +26,8 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
                 #StdDevScore = :score_stddev, \
                 #MaxScore = :score_max, \
                 #MinScore = :score_min, \
-                #RandomSeed = :random_seed \
+                #Scores = :scores,\
+                #RandomSeeds = :random_seeds \
                 ',
             ExpressionAttributeNames= {
                 '#StartedAt' : 'StartedAt',
@@ -37,7 +38,8 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
                 '#StdDevScore' : 'StdDevScore',
                 '#MaxScore' : 'MaxScore',
                 '#MinScore' : 'MinScore',
-                '#RandomSeed' : 'RandomSeed'
+                '#Scores' : 'Scores',
+                '#RandomSeeds' : 'RandomSeeds'
 		    },
             ExpressionAttributeValues={
                 ':started_at' : evaluation.started_at,
@@ -48,7 +50,8 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
                 ':score_stddev' : Decimal(str(evaluation.score_stdev)),
                 ':score_max' : Decimal(str(evaluation.score_max)),
                 ':score_min' : Decimal(str(evaluation.score_min)),
-                ':random_seed' : Decimal(str(evaluation.random_seed))
+                ':scores' : ",".join(map(str, evaluation.scores["values"])),
+                ':random_seeds' : ",".join(map(str, evaluation.random_seeds["values"]))
             },
         )
         return response

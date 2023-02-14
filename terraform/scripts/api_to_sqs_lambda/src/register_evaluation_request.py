@@ -34,14 +34,14 @@ def lambda_handler(event: dict, context):
         "CreatedAt": msg.created_at,
         "RepositoryURL": msg.repository_url,
         "Branch": msg.branch,
-        "RandomSeed": msg.random_seed,
         "GameTime": msg.game_time,
         "Level": msg.level,
         "Status": "waiting",
         "DropInterval": msg.drop_interval,
         "GameMode": msg.game_mode,
         "ValuePredictWeight": msg.predict_weight_path,
-        "TrialNum": msg.trial_num
+        "TrialNum": msg.trial_num,
+        "RandomSeeds": ",".join(map(str, msg.random_seeds))
         }
     try:
         response = table.put_item(

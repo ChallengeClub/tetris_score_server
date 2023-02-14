@@ -29,7 +29,8 @@ class Evaluation(models.Model):
     score_stdev = models.FloatField(default=0)
     score_max = models.FloatField(default=0)
     score_min = models.FloatField(default=0)
-    random_seed = models.BigIntegerField(default=0)
+    scores = models.JSONField(default={"values": []})
+    random_seeds = models.JSONField(default={"values": []})
     
     def to_json(self):
         data = self.to_dict()
@@ -56,7 +57,8 @@ class Evaluation(models.Model):
             "std_dev_score": int(self.score_stdev),
             "max_score": self.score_max,
             "min_score": self.score_min,
-            "random_seed": self.random_seed
+            "scores": self.scores,
+            "random_seeds": self.random_seeds
         }
         return data
     

@@ -13,6 +13,6 @@ def protobuf_message_to_django_model(msg: ScoreEvaluationMessage)-> Evaluation:
     eval.drop_interval = msg.drop_interval
     eval.level = msg.level
     eval.trial_num = msg.trial_num
-    eval.random_seed = msg.random_seed
+    eval.random_seeds["values"] = msg.random_seeds
 
     return eval

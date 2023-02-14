@@ -7,7 +7,7 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Optional as _Op
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class ScoreEvaluationMessage(_message.Message):
-    __slots__ = ["branch", "created_at", "drop_interval", "game_mode", "game_time", "id", "level", "name", "predict_weight_path", "random_seed", "repository_url", "timeout", "trial_num"]
+    __slots__ = ["branch", "created_at", "drop_interval", "game_mode", "game_time", "id", "level", "name", "predict_weight_path", "random_seeds", "repository_url", "timeout", "trial_num"]
     class GameLevel(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = []
     BRANCH_FIELD_NUMBER: _ClassVar[int]
@@ -21,7 +21,7 @@ class ScoreEvaluationMessage(_message.Message):
     NAME_FIELD_NUMBER: _ClassVar[int]
     ONE: ScoreEvaluationMessage.GameLevel
     PREDICT_WEIGHT_PATH_FIELD_NUMBER: _ClassVar[int]
-    RANDOM_SEED_FIELD_NUMBER: _ClassVar[int]
+    RANDOM_SEEDS_FIELD_NUMBER: _ClassVar[int]
     REPOSITORY_URL_FIELD_NUMBER: _ClassVar[int]
     THREE: ScoreEvaluationMessage.GameLevel
     TIMEOUT_FIELD_NUMBER: _ClassVar[int]
@@ -37,8 +37,8 @@ class ScoreEvaluationMessage(_message.Message):
     level: ScoreEvaluationMessage.GameLevel
     name: str
     predict_weight_path: str
-    random_seed: _containers.RepeatedScalarFieldContainer[int]
+    random_seeds: _containers.RepeatedScalarFieldContainer[int]
     repository_url: str
     timeout: int
     trial_num: int
-    def __init__(self, name: _Optional[str] = ..., id: _Optional[str] = ..., created_at: _Optional[int] = ..., repository_url: _Optional[str] = ..., branch: _Optional[str] = ..., drop_interval: _Optional[int] = ..., level: _Optional[_Union[ScoreEvaluationMessage.GameLevel, str]] = ..., game_mode: _Optional[str] = ..., game_time: _Optional[int] = ..., timeout: _Optional[int] = ..., predict_weight_path: _Optional[str] = ..., trial_num: _Optional[int] = ..., random_seed: _Optional[_Iterable[int]] = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., id: _Optional[str] = ..., created_at: _Optional[int] = ..., repository_url: _Optional[str] = ..., branch: _Optional[str] = ..., drop_interval: _Optional[int] = ..., level: _Optional[_Union[ScoreEvaluationMessage.GameLevel, str]] = ..., game_mode: _Optional[str] = ..., game_time: _Optional[int] = ..., timeout: _Optional[int] = ..., predict_weight_path: _Optional[str] = ..., trial_num: _Optional[int] = ..., random_seeds: _Optional[_Iterable[int]] = ...) -> None: ...

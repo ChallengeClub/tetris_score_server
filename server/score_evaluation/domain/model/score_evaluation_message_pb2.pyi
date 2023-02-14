@@ -1,7 +1,8 @@
+from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
+from typing import ClassVar as _ClassVar, Iterable as _Iterable, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
@@ -36,8 +37,8 @@ class ScoreEvaluationMessage(_message.Message):
     level: ScoreEvaluationMessage.GameLevel
     name: str
     predict_weight_path: str
-    random_seed: int
+    random_seed: _containers.RepeatedScalarFieldContainer[int]
     repository_url: str
     timeout: int
     trial_num: int
-    def __init__(self, name: _Optional[str] = ..., id: _Optional[str] = ..., created_at: _Optional[int] = ..., repository_url: _Optional[str] = ..., branch: _Optional[str] = ..., drop_interval: _Optional[int] = ..., level: _Optional[_Union[ScoreEvaluationMessage.GameLevel, str]] = ..., game_mode: _Optional[str] = ..., game_time: _Optional[int] = ..., timeout: _Optional[int] = ..., predict_weight_path: _Optional[str] = ..., trial_num: _Optional[int] = ..., random_seed: _Optional[int] = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., id: _Optional[str] = ..., created_at: _Optional[int] = ..., repository_url: _Optional[str] = ..., branch: _Optional[str] = ..., drop_interval: _Optional[int] = ..., level: _Optional[_Union[ScoreEvaluationMessage.GameLevel, str]] = ..., game_mode: _Optional[str] = ..., game_time: _Optional[int] = ..., timeout: _Optional[int] = ..., predict_weight_path: _Optional[str] = ..., trial_num: _Optional[int] = ..., random_seed: _Optional[_Iterable[int]] = ...) -> None: ...

@@ -15,7 +15,7 @@ message ScoreEvaluationMessage {
   int32 timeout = 7;
   string predict_weight_path = 8;
   int32 trial_num = 9;
-  optional uint64 random_seed = 13;
+  repeated uint64 random_seed = 13; // dynamically sized array, length can be zero 
 
   enum GameLevel {
     ZERO = 0; // endless

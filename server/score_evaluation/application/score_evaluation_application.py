@@ -52,7 +52,9 @@ class ScoreEvaluationApplication:
             with open(f"{log_folder}/result-{i}.json", 'r', encoding='utf-8') as f:
                 res = json.load(f)
                 scores.append(int(res["judge_info"]["score"]))
-                random_seeds.append(int(res["debug_info"].get("random_seed", 0)))
+                _seed = int(res["debug_info"].get("random_seed", -1)) # if res["debug_info"]["random_seed"] is null, put invalid seed
+                if _seed != -1: # if valid seed, append to list
+                    random_seeds.append(_seed)
 
         # calculate statics
         self.evaluation.scores["values"] = scores

@@ -32,7 +32,7 @@ class EvaluationMessageRepositoryInterface(EvaluationMessageRepository):
         
         # if random seeds are not fully configured, set default values
         # ensure random_seeds count equals to trial_num
-        seeds = [0]*eval.trial_num
+        seeds = [-1]*eval.trial_num
         for i, x in enumerate(eval.random_seeds["values"]):
             seeds[i] = x
         eval.random_seeds["values"] = seeds

@@ -40,7 +40,8 @@ def lambda_handler(event: dict, context):
         "DropInterval": msg.drop_interval,
         "GameMode": msg.game_mode,
         "ValuePredictWeight": msg.predict_weight_path,
-        "TrialNum": msg.trial_num
+        "TrialNum": msg.trial_num,
+        "RandomSeeds": ",".join(map(str, msg.random_seeds))
         }
     try:
         response = table.put_item(

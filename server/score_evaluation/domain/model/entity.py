@@ -1,8 +1,6 @@
 from django.db import models
 import json
 from uuid import uuid4
-from time import time
-from datetime import datetime
 
 class Evaluation(models.Model):
     id = models.UUIDField(primary_key=True, default=str(uuid4()), editable=False) # Object of type UUID is not JSON serializable
@@ -31,8 +29,9 @@ class Evaluation(models.Model):
     score_stdev = models.FloatField(default=0)
     score_max = models.FloatField(default=0)
     score_min = models.FloatField(default=0)
+    scores = models.JSONField(default=dict)
+    random_seeds = models.JSONField(default=dict)
     
-
     def to_json(self):
         data = self.to_dict()
         return json.dumps(data)
@@ -57,7 +56,9 @@ class Evaluation(models.Model):
             "mean_score": int(self.score_mean),
             "std_dev_score": int(self.score_stdev),
             "max_score": self.score_max,
-            "min_score": self.score_min
+            "min_score": self.score_min,
+            "scores": self.scores,
+            "random_seeds": self.random_seeds
         }
         return data
     

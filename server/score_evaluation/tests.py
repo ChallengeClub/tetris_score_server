@@ -17,7 +17,8 @@ class ScoreEvaluationTests(TestCase):
             branch="master",
             trial_num=5,
             level=1,
-            game_time=2
+            game_time=2,
+            random_seeds={"values": [0, 0, 0, 0, 0]}
         )
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()
@@ -29,7 +30,21 @@ class ScoreEvaluationTests(TestCase):
             branch="master",
             trial_num=1,
             level=2,
-            game_time=5
+            game_time=5,
+            random_seeds={"values": [0]}
+        )
+        usecase = ScoreEvaluationApplication(eval)
+        eval = usecase.evaluate()
+        self.assertEqual(eval.status, "succeeded")
+    
+    def test_default_evaluation_level2_with_seeds(self):
+        eval = Evaluation(
+            repository_url="https://github.com/seigot/tetris",
+            branch="master",
+            trial_num=1,
+            level=2,
+            game_time=5,
+            random_seeds={"values": [1]}
         )
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()
@@ -41,7 +56,8 @@ class ScoreEvaluationTests(TestCase):
             branch="master",
             trial_num=1,
             level=3,
-            game_time=2
+            game_time=2,
+            random_seeds={"values": [0]}
         )
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()
@@ -58,7 +74,8 @@ class ScoreEvaluationTests(TestCase):
             game_mode="predict_sample",
             value_predict_weight="weight/DQN/sample_weight.pt",
             level=2,
-            game_time=5
+            game_time=5,
+            random_seeds={"values": [0]}
         )
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()
@@ -75,7 +92,8 @@ class ScoreEvaluationTests(TestCase):
             game_mode="predict_sample2",
             value_predict_weight="weight/MLP/sample_weight.pt",
             level=2,
-            game_time=5
+            game_time=5,
+            random_seeds={"values": [0]}
         )
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()
@@ -90,7 +108,8 @@ class ScoreEvaluationTests(TestCase):
             branch="masterrr",
             trial_num=1,
             level=1,
-            game_time=2
+            game_time=2,
+            random_seeds={"values": [0]}
         )
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()
@@ -106,7 +125,8 @@ class ScoreEvaluationTests(TestCase):
             game_mode = "",
             trial_num=1,
             level=1,
-            game_time=2
+            game_time=2,
+            random_seeds={"values": [0]}
         )
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()
@@ -122,7 +142,8 @@ class ScoreEvaluationTests(TestCase):
             trial_num=1,
             level=1,
             game_time=10,
-            timeout=1
+            timeout=1,
+            random_seeds={"values": [0]}
         )
         usecase = ScoreEvaluationApplication(eval)
         eval = usecase.evaluate()

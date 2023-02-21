@@ -3,7 +3,6 @@ import shutil
 import json
 from statistics import mean, stdev
 import subprocess
-from concurrent.futures import ThreadPoolExecutor
 
 from ..domain.model.entity import Evaluation
 
@@ -34,10 +33,12 @@ class ScoreEvaluationApplication:
                 drop_interval=self.evaluation.drop_interval,
                 game_mode=self.evaluation.game_mode,
                 value_predict_weight=self.evaluation.value_predict_weight,
-                timeout=self.evaluation.timeout
+                timeout=self.evaluation.timeout,
+                seed=self.evaluation.random_seeds["values"][i],
             )
             results.append(_result)
         scores = []
+        random_seeds = []
         for i, _result in enumerate(results):
             with open(f"{log_folder}/result-{i}.log", 'w', encoding='utf-8') as f:
                 if _result.stdout is not None:
@@ -51,8 +52,13 @@ class ScoreEvaluationApplication:
             with open(f"{log_folder}/result-{i}.json", 'r', encoding='utf-8') as f:
                 res = json.load(f)
                 scores.append(int(res["judge_info"]["score"]))
+                _seed = int(res["debug_info"].get("random_seed", -1)) # if res["debug_info"]["random_seed"] is null, put invalid seed
+                if _seed != -1: # if valid seed, append to list
+                    random_seeds.append(_seed)
 
         # calculate statics
+        self.evaluation.scores["values"] = scores
+        self.evaluation.random_seeds["values"] = random_seeds
         self.evaluation.score_mean = mean(scores)
         self.evaluation.score_max = max(scores)
         self.evaluation.score_min = min(scores)
@@ -73,11 +79,14 @@ def clone_repository(url: str, branch: str):
     result = subprocess.run(git_clone_command.split(), capture_output=True, encoding='utf-8')
     return result
 
-def tetris_start(level: int, game_time: int, drop_interval: int, game_mode: str, value_predict_weight: str, timeout: int, log_file="result.json"):
+def tetris_start(level: int, game_time: int, drop_interval: int, game_mode: str, value_predict_weight: str, timeout: int, seed: int, log_file="result.json"):
     os.chdir("/home/tetris")
     tetris_start_command = f"xvfb-run -a python start.py -l {level} -t {game_time} -d {drop_interval} -m {game_mode} -f {log_file}"
     if value_predict_weight != "":
         tetris_start_command += f" --predict_weight {value_predict_weight}"
+    if seed != 0:
+        tetris_start_command += f" -r {str(seed)}"
+
     try:
         result = subprocess.run(
             tetris_start_command.split(),

@@ -399,3 +399,4 @@ null, null, -, 0, -, github_url_string_NG, -, -, -, -, -, -, -, -, -, -, -, -, -
 -, -, -, 0, -, curl_google_speadsheet_NG, -, -, -, -, -, -, -, -, -, -, -, -, -, -, -
 -, -, -, 0, -, curl_google_speadsheet_NG, -, -, -, -, -, -, -, -, -, -, -, -, -, -, -
 -, -, -, 0, -, curl_google_speadsheet_NG, -, -, -, -, -, -, -, -, -, -, -, -, -, -, -
+2023/02/23_16:13:17, https://github.com/cookie4869/tetris, cookie04_01, 0, 2, python_start.py_NG, 1000, predict, outputs/2023-02-22-08-22-32/trained_model/tetris_epoch9961_score24800.pt, -, -, -, -, -, -, -, -, -, -, -, -

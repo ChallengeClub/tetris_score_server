@@ -2,6 +2,7 @@ import os
 import shutil
 import json
 from statistics import mean, stdev
+from collections import defaultdict
 import subprocess
 
 from ..domain.model.entity import Evaluation
@@ -37,8 +38,7 @@ class ScoreEvaluationApplication:
                 seed=self.evaluation.random_seeds["values"][i],
             )
             results.append(_result)
-        scores = []
-        random_seeds = []
+        infos = defaultdict(list)
         for i, _result in enumerate(results):
             with open(f"{log_folder}/result-{i}.log", 'w', encoding='utf-8') as f:
                 if _result.stdout is not None:
@@ -51,20 +51,29 @@ class ScoreEvaluationApplication:
                     return self.evaluation
             with open(f"{log_folder}/result-{i}.json", 'r', encoding='utf-8') as f:
                 res = json.load(f)
-                scores.append(int(res["judge_info"]["score"]))
+                infos["scores"].append(int(res["judge_info"]["score"]))
                 _seed = int(res["debug_info"].get("random_seed", -1)) # if res["debug_info"]["random_seed"] is null, put invalid seed
                 if _seed != -1: # if valid seed, append to list
-                    random_seeds.append(_seed)
+                    infos["random_seeds"].append(_seed)
+                infos["gameover_count"].append(int(res["judge_info"]["gameover_count"]))
+                infos["block_index"].append(int(res["judge_info"]["block_index"]))
+                infos["line_score_stat"].append(res["debug_info"]["line_score_stat"])
+                infos["shape_info_stat"].append(res["debug_info"]["shape_info_stat"])
 
         # calculate statics
-        self.evaluation.scores["values"] = scores
-        self.evaluation.random_seeds["values"] = random_seeds
-        self.evaluation.score_mean = mean(scores)
-        self.evaluation.score_max = max(scores)
-        self.evaluation.score_min = min(scores)
-        if len(scores) > 1:
-            self.evaluation.score_stdev = stdev(scores)
+        self.evaluation.scores["values"] = infos["scores"]
+        self.evaluation.random_seeds["values"] = infos["random_seeds"]
+        self.evaluation.score_mean = mean(infos["scores"])
+        self.evaluation.score_max = max(infos["scores"])
+        self.evaluation.score_min = min(infos["scores"])
+        if len(infos["scores"]) > 1:
+            self.evaluation.score_stdev = stdev(infos["scores"])
         self.evaluation.status = "succeeded"
+        self.evaluation.gameover_count["values"] = infos["gameover_count"]
+        self.evaluation.block_index["values"] = infos["block_index"]
+        self.evaluation.line_score_stat["values"] = infos["line_score_stat"]
+        self.evaluation.shape_info_stat["values"] = infos["shape_info_stat"]
+
         return self.evaluation
 
 def clone_repository(url: str, branch: str):

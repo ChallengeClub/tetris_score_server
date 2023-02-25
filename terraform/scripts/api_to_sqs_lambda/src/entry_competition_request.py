@@ -12,11 +12,11 @@ def lambda_handler(event: dict, context):
     data = base64.b64decode(event["body"].encode('utf-8'))
     try:
         msg.ParseFromString(data)
-    except:
+    except Exception as e:
         response = {
             "error": {
                 "message": "failed to parse request",
-                "body": event["body"],
+                "body": str(e),
                 "type": "ProtobufException",
             },
             "code": 401
@@ -45,11 +45,11 @@ def lambda_handler(event: dict, context):
                 "body": response,
                 "code": 200
         }
-    except:
+    except Exception as e:
         response = {
             "error": {
                 "message": "failed to register request to dynamodb",
-                "body": event["body"],
+                "body": str(e),
                 "type": "DynamodbException",
             },
             "code": 500

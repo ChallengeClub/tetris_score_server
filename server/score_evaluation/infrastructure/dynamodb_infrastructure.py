@@ -27,7 +27,11 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
                 #MaxScore = :score_max, \
                 #MinScore = :score_min, \
                 #Scores = :scores,\
-                #RandomSeeds = :random_seeds \
+                #RandomSeeds = :random_seeds, \
+                #GameOverCount = :gameover_count, \
+                #BlockIndex = :block_index, \
+                #LineScoreStat = :line_score_stat, \
+                #ShapeInfoStat = :shape_info_stat \
                 ',
             ExpressionAttributeNames= {
                 '#StartedAt' : 'StartedAt',
@@ -39,7 +43,11 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
                 '#MaxScore' : 'MaxScore',
                 '#MinScore' : 'MinScore',
                 '#Scores' : 'Scores',
-                '#RandomSeeds' : 'RandomSeeds'
+                '#RandomSeeds' : 'RandomSeeds',
+                '#GameOverCount' : 'GameOverCount',
+                '#BlockIndex' : 'BlockIndex',
+                '#LineScoreStat' : 'LineScoreStat',
+                '#ShapeInfoStat' : 'ShapeInfoStat',
 		    },
             ExpressionAttributeValues={
                 ':started_at' : evaluation.started_at,
@@ -50,8 +58,12 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
                 ':score_stddev' : Decimal(str(evaluation.score_stdev)),
                 ':score_max' : Decimal(str(evaluation.score_max)),
                 ':score_min' : Decimal(str(evaluation.score_min)),
-                ':scores' : ",".join(map(str, evaluation.scores["values"])),
-                ':random_seeds' : ",".join(map(str, evaluation.random_seeds["values"]))
+                ':scores' : evaluation.scores["values"],
+                ':random_seeds' : evaluation.random_seeds["values"],
+                ':gameover_count' : evaluation.gameover_count["values"],
+                ':block_index' : evaluation.block_index["values"],
+                ':line_score_stat' : evaluation.line_score_stat["values"],
+                ':shape_info_stat' : evaluation.shape_info_stat["values"],
             },
         )
         return response

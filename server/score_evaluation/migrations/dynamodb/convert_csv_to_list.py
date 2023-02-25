@@ -11,8 +11,6 @@ class Migrator:
             print(_result)
             _res = self.convert_csv_to_list(_result)
             print(_res)
-            # if _res["ResponseMetadata"]["HTTPStatusCode"] != 200:
-            #     break
 
     def convert_csv_to_list(self, _result: dict):
         if type(_result.get("RandomSeeds", [])) == list:

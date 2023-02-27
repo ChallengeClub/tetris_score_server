@@ -66,7 +66,7 @@ class Evaluation(models.Model):
             "gameover_count": self.gameover_count["values"],
             "block_index": self.block_index["values"],
             "line_score_stat": self.line_score_stat["values"],
-            "shape_info_stat": self.shape_info_stat["values"]
+            "shape_info_stat": self.shape_info_stat["values"],
         }
         return data
     

@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "get_result_from_dynamodb_assume_role" {
 
 data "aws_iam_policy_document" "get_result_from_dynamodb_policy_doc" {
   statement {
-    actions = ["dynamodb:Scan"]
+    actions = ["dynamodb:Scan", "dynamodb: GetItem"]
     resources = [
       aws_dynamodb_table.dynamodb-table.arn,
       aws_dynamodb_table.dynamodb-competition-table.arn
@@ -48,6 +48,21 @@ resource "aws_iam_role_policy_attachment" "get_result_from_dynamodb_attachment" 
 resource "aws_lambda_function" "get_result_from_dynamodb_function" {
   function_name = var.get_evaluation_results_lambda_name
   handler       = var.get_evaluation_results_lambda_handler
+  role          = aws_iam_role.get_result_from_dynamodb_lambda_role.arn
+  runtime       = "python3.9"
+  environment {
+    variables = {
+      dynamodb_table_name = var.dynamodb_table_name
+    }
+  }
+  filename         = data.archive_file.api_to_dynamodb_function_source.output_path
+  source_code_hash = data.archive_file.api_to_dynamodb_function_source.output_base64sha256
+  layers           = ["${aws_lambda_layer_version.api_to_dynamodb_lambda_layer.arn}"]
+}
+
+resource "aws_lambda_function" "get_result_detail_function" {
+  function_name = var.get_result_detail_lambda_name
+  handler       = var.get_result_detail_lambda_handler
   role          = aws_iam_role.get_result_from_dynamodb_lambda_role.arn
   runtime       = "python3.9"
   environment {

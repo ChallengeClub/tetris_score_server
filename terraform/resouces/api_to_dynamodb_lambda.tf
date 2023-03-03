@@ -60,7 +60,7 @@ resource "aws_lambda_function" "get_result_from_dynamodb_function" {
   layers           = ["${aws_lambda_layer_version.api_to_dynamodb_lambda_layer.arn}"]
 }
 
-resource "aws_lambda_function" "get_result_detail_function" {
+resource "aws_lambda_function" "get_result_detail_from_dynamodb_function" {
   function_name = var.get_result_detail_lambda_name
   handler       = var.get_result_detail_lambda_handler
   role          = aws_iam_role.get_result_from_dynamodb_lambda_role.arn
@@ -104,6 +104,14 @@ resource "aws_lambda_permission" "api_to_dynamodb_permission" {
   function_name = aws_lambda_function.get_result_from_dynamodb_function.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_apigatewayv2_api.tetris_api.execution_arn}/*/GET/results"
+}
+
+resource "aws_lambda_permission" "get_result_detail_from_dynamodb_permission" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.get_result_detail_function.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.tetris_api.execution_arn}/*/GET/result/*"
 }
 
 resource "aws_lambda_permission" "get_entries_from_dynamodb_lambda_permission" {

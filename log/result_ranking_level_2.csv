@@ -7,6 +7,7 @@ DATETIME, REPOSITORY_URL, BRANCH, SCORE, LEVEL, RESULT, DROP_INTERVAL, VALUE_MOD
 2023/02/09_9:26:52, https://github.com/mattshamrock/tetris, master, 25713, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 0, 700, 22100, 0, 2913, 180, 10, 23803.10, 2364.26, 25713, 18317
 2023/02/09_13:03:47, https://github.com/mattshamrock/tetris, master, 25515, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 300, 0, 22100, 0, 3115, 180, 10, 22861.00, 3235.44, 25515, 17317
 2023/02/09_13:03:35, https://github.com/mattshamrock/tetris, master, 25445, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 300, 0, 22100, 0, 3045, 180, 10, 24023.80, 2481.20, 25445, 17515
+2023/03/04_22:19:56, https://github.com/yuin0/tetris, develop, 23453, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 400, 600, 0, 19500, 0, 2953, 177, 10, 20357.30, 1652.72, 23453, 18381
 2022/03/15_23:12:09, https://github.com/yuin0/tetris, master, 22508, 2, SUCCESS, 1000, -, -, 800, 0, 700, 18200, 0, 2808, 180, 10, 18352.20, 1804.26, 22508, 16044
 2023/03/04_15:03:24, https://github.com/yuin0/tetris, develop, 22438, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 700, 600, 1400, 16900, 0, 2838, 180, 10, 18570.90, 2887.51, 22438, 12107
 2022/09/18_13:59:16, https://github.com/obo-koki/tetris, level2, 22185, 2, SUCCESS, 1000, default, outputs/latest/best_weight.pt, 0, 1500, 3500, 14300, 0, 2885, 179, 10, 19424.30, 2438.14, 22185, 14229

@@ -14,8 +14,7 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
     def update(self, evaluation: Evaluation):
         response = self.table.update_item(
             Key = {
-                "Id": evaluation.id,
-                "CreatedAt": evaluation.created_at
+                "Id": evaluation.id
             },
             UpdateExpression='set \
                 #StartedAt = :started_at, \
@@ -71,8 +70,7 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
     def update_started_at(self, evaluation: Evaluation):
         response = self.table.update_item(
             Key = {
-                "Id": evaluation.id,
-                "CreatedAt": evaluation.created_at
+                "Id": evaluation.id
             },
             UpdateExpression='set \
                 #StartedAt = :started_at, \

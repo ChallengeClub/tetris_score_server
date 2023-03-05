@@ -8,7 +8,7 @@ def lambda_handler(event: dict, context):
     table = dynamodb.Table(table_name)
     try:
         response = table.scan(
-            Limit=30,  
+            Limit=200,  
         )
     except Exception as e:
         response = {
@@ -28,7 +28,6 @@ def get_result_detail(event: dict, context):
         response = table.get_item(
             Key={
                 'Id': event["body"]["id"],
-                "CreatedAt": event["body"]["created_at"],
             }
         )
     except Exception as e:

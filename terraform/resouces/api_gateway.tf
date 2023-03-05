@@ -22,12 +22,12 @@ resource "aws_apigatewayv2_stage" "tetris_api_stage" {
     throttling_rate_limit  = 10
     throttling_burst_limit = 10
   }
-  route_settings {
-    route_key              = "GET /result/{id}"
-    logging_level          = "ERROR"
-    throttling_rate_limit  = 10
-    throttling_burst_limit = 10
-  }
+  # route_settings {
+  #   route_key              = "GET /result/{id}"
+  #   logging_level          = "ERROR"
+  #   throttling_rate_limit  = 10
+  #   throttling_burst_limit = 10
+  # }
   route_settings {
     route_key              = "POST /entry"
     logging_level          = "ERROR"

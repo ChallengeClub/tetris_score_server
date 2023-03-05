@@ -109,7 +109,7 @@ resource "aws_lambda_permission" "api_to_dynamodb_permission" {
 resource "aws_lambda_permission" "get_result_detail_from_dynamodb_permission" {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.get_result_detail_function.function_name
+  function_name = aws_lambda_function.get_result_detail_from_dynamodb_function.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_apigatewayv2_api.tetris_api.execution_arn}/*/GET/result/*"
 }

@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "get_result_from_dynamodb_assume_role" {
 
 data "aws_iam_policy_document" "get_result_from_dynamodb_policy_doc" {
   statement {
-    actions = ["dynamodb:Scan", "dynamodb: GetItem"]
+    actions = ["dynamodb:Scan", "dynamodb:GetItem"]
     resources = [
       aws_dynamodb_table.dynamodb-table.arn,
       aws_dynamodb_table.dynamodb-competition-table.arn

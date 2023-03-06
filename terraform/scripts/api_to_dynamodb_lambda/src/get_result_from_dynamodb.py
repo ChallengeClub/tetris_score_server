@@ -27,7 +27,7 @@ def get_result_detail(event: dict, context):
     try:
         response = table.get_item(
             Key={
-                'Id': event["body"]["id"],
+                'Id': event['pathParameters']['id'],
             }
         )
     except Exception as e:

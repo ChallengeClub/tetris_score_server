@@ -4,7 +4,6 @@ resource "aws_dynamodb_table" "dynamodb-table" {
   read_capacity  = 1
   write_capacity = 1
   hash_key       = "Id"
-  range_key      = "CreatedAt"
 
   attribute {
     name = "Id"

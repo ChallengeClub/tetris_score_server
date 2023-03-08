@@ -23,6 +23,12 @@ resource "aws_apigatewayv2_stage" "tetris_api_stage" {
     throttling_burst_limit = 10
   }
   route_settings {
+    route_key              = "GET /result/{id}"
+    logging_level          = "ERROR"
+    throttling_rate_limit  = 10
+    throttling_burst_limit = 10
+  }
+  route_settings {
     route_key              = "POST /entry"
     logging_level          = "ERROR"
     throttling_rate_limit  = 10
@@ -56,6 +62,14 @@ resource "aws_apigatewayv2_integration" "get_results_from_dynamodb_lambda_integr
   payload_format_version = "2.0"
 }
 
+resource "aws_apigatewayv2_integration" "get_result_detail_from_dynamodb_lambda_integration" {
+  api_id                 = aws_apigatewayv2_api.tetris_api.id
+  integration_uri        = aws_lambda_function.get_result_detail_from_dynamodb_function.invoke_arn
+  integration_type       = "AWS_PROXY"
+  integration_method     = "POST"
+  payload_format_version = "2.0"
+}
+
 resource "aws_apigatewayv2_integration" "entry_competition_lambda_integration" {
   api_id                 = aws_apigatewayv2_api.tetris_api.id
   integration_uri        = aws_lambda_function.entry_competition_function.invoke_arn
@@ -82,6 +96,12 @@ resource "aws_apigatewayv2_route" "get_results_from_dynamodb_route" {
   api_id    = aws_apigatewayv2_api.tetris_api.id
   route_key = "GET /results"
   target    = "integrations/${aws_apigatewayv2_integration.get_results_from_dynamodb_lambda_integration.id}"
+}
+
+resource "aws_apigatewayv2_route" "get_result_detail_from_dynamodb_route" {
+  api_id    = aws_apigatewayv2_api.tetris_api.id
+  route_key = "GET /result/{id}"
+  target    = "integrations/${aws_apigatewayv2_integration.get_result_detail_from_dynamodb_lambda_integration.id}"
 }
 
 resource "aws_apigatewayv2_route" "entry_competition_lambda" {

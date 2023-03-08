@@ -75,6 +75,14 @@ variable "get_evaluation_results_lambda_handler" {
     type = string
     default = "get_result_from_dynamodb.lambda_handler"
 }
+variable "get_result_detail_lambda_name" {
+    type = string
+    default = "get_result_detail_from_dynamodb_lambda"
+}
+variable "get_result_detail_lambda_handler" {
+    type = string
+    default = "get_result_from_dynamodb.get_result_detail"
+}
 variable "get_competition_entries_lambda_name" {
     type = string
     default = "get_competition_entries_lambda"

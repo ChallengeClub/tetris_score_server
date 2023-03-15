@@ -29,10 +29,12 @@ resource "aws_api_gateway_account" "score_evaluation_apigateway_account" {
 
 resource "aws_cloudwatch_log_group" "apigateway_accesslog" {
   name = var.api_gateway_cloudwatch_log_group_name
+  retention_in_days = 30
 }
 
 resource "aws_cloudwatch_log_group" "ecs_execution_log" {
   name = var.ecs_cloudwatch_log_group_name
+  retention_in_days = 30
 }
 
 resource "aws_cloudwatch_metric_alarm" "sqs_waiting_message_alarm" {

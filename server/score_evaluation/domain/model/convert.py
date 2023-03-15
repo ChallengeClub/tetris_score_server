@@ -14,5 +14,6 @@ def protobuf_message_to_django_model(msg: ScoreEvaluationMessage)-> Evaluation:
     eval.level = msg.level
     eval.trial_num = msg.trial_num
     eval.random_seeds["values"] = msg.random_seeds
+    eval.value_predict_weight = msg.predict_weight_path
 
     return eval

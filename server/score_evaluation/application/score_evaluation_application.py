@@ -95,7 +95,7 @@ def tetris_start(level: int, game_time: int, drop_interval: int, game_mode: str,
         tetris_start_command += f" --predict_weight {value_predict_weight}"
     if seed != 0:
         tetris_start_command += f" -r {str(seed)}"
-
+    print(tetris_start_command)
     try:
         result = subprocess.run(
             tetris_start_command.split(),

@@ -35,6 +35,12 @@ resource "aws_apigatewayv2_stage" "tetris_api_stage" {
     throttling_burst_limit = 10
   }
   route_settings {
+    route_key              = "DELETE /entry"
+    logging_level          = "ERROR"
+    throttling_rate_limit  = 10
+    throttling_burst_limit = 10
+  }
+  route_settings {
     route_key              = "GET /entries"
     logging_level          = "ERROR"
     throttling_rate_limit  = 10
@@ -44,6 +50,14 @@ resource "aws_apigatewayv2_stage" "tetris_api_stage" {
     destination_arn = aws_cloudwatch_log_group.apigateway_accesslog.arn
     format          = var.api_gateway_access_log_format
   }
+  depends_on = [
+    aws_apigatewayv2_route.send_message_lambda,
+    aws_apigatewayv2_route.get_results_from_dynamodb_route,
+    aws_apigatewayv2_route.get_result_detail_from_dynamodb_route,
+    aws_apigatewayv2_route.entry_competition_lambda,
+    aws_apigatewayv2_route.delete_competition_entry_lambda,
+    aws_apigatewayv2_route.get_competition_entries_lambda,
+  ]
 }
 
 resource "aws_apigatewayv2_integration" "send_message_to_sqs_lambda_integration" {
@@ -78,6 +92,14 @@ resource "aws_apigatewayv2_integration" "entry_competition_lambda_integration" {
   payload_format_version = "2.0"
 }
 
+resource "aws_apigatewayv2_integration" "delete_competition_entry_lambda_integration" {
+  api_id                 = aws_apigatewayv2_api.tetris_api.id
+  integration_uri        = aws_lambda_function.delete_competition_entry_function.invoke_arn
+  integration_type       = "AWS_PROXY"
+  integration_method     = "POST"
+  payload_format_version = "2.0"
+}
+
 resource "aws_apigatewayv2_integration" "get_entries_lambda_integration" {
   api_id                 = aws_apigatewayv2_api.tetris_api.id
   integration_uri        = aws_lambda_function.get_competition_entries_function.invoke_arn
@@ -90,28 +112,52 @@ resource "aws_apigatewayv2_route" "send_message_lambda" {
   api_id    = aws_apigatewayv2_api.tetris_api.id
   route_key = "POST /score_evaluation"
   target    = "integrations/${aws_apigatewayv2_integration.send_message_to_sqs_lambda_integration.id}"
+  depends_on = [
+    aws_apigatewayv2_integration.send_message_to_sqs_lambda_integration,
+  ]
 }
 
 resource "aws_apigatewayv2_route" "get_results_from_dynamodb_route" {
   api_id    = aws_apigatewayv2_api.tetris_api.id
   route_key = "GET /results"
   target    = "integrations/${aws_apigatewayv2_integration.get_results_from_dynamodb_lambda_integration.id}"
+  depends_on = [
+    aws_apigatewayv2_integration.get_results_from_dynamodb_lambda_integration
+  ]
 }
 
 resource "aws_apigatewayv2_route" "get_result_detail_from_dynamodb_route" {
   api_id    = aws_apigatewayv2_api.tetris_api.id
   route_key = "GET /result/{id}"
   target    = "integrations/${aws_apigatewayv2_integration.get_result_detail_from_dynamodb_lambda_integration.id}"
+  depends_on = [
+    aws_apigatewayv2_integration.get_result_detail_from_dynamodb_lambda_integration,
+  ]
 }
 
 resource "aws_apigatewayv2_route" "entry_competition_lambda" {
   api_id    = aws_apigatewayv2_api.tetris_api.id
   route_key = "POST /entry"
   target    = "integrations/${aws_apigatewayv2_integration.entry_competition_lambda_integration.id}"
+  depends_on = [
+    aws_apigatewayv2_integration.entry_competition_lambda_integration,
+  ]
+}
+
+resource "aws_apigatewayv2_route" "delete_competition_entry_lambda" {
+  api_id    = aws_apigatewayv2_api.tetris_api.id
+  route_key = "DELETE /entry"
+  target    = "integrations/${aws_apigatewayv2_integration.delete_competition_entry_lambda_integration.id}"
+  depends_on = [
+    aws_apigatewayv2_integration.delete_competition_entry_lambda_integration,
+  ]
 }
 
 resource "aws_apigatewayv2_route" "get_competition_entries_lambda" {
   api_id    = aws_apigatewayv2_api.tetris_api.id
   route_key = "GET /entries"
   target    = "integrations/${aws_apigatewayv2_integration.get_entries_lambda_integration.id}"
+  depends_on = [
+    aws_apigatewayv2_integration.get_entries_lambda_integration,
+  ]
 }

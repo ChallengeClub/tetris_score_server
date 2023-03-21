@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "get_result_from_dynamodb_assume_role" {
 
 data "aws_iam_policy_document" "get_result_from_dynamodb_policy_doc" {
   statement {
-    actions = ["dynamodb:Scan", "dynamodb:GetItem"]
+    actions = ["dynamodb:Scan", "dynamodb:GetItem", "dynamodb:DeleteItem"]
     resources = [
       aws_dynamodb_table.dynamodb-table.arn,
       aws_dynamodb_table.dynamodb-competition-table.arn
@@ -78,6 +78,21 @@ resource "aws_lambda_function" "get_result_detail_from_dynamodb_function" {
 resource "aws_lambda_function" "get_competition_entries_function" {
   function_name = var.get_competition_entries_lambda_name
   handler       = var.get_competition_entries_lambda_handler
+  role          = aws_iam_role.get_result_from_dynamodb_lambda_role.arn
+  runtime       = "python3.9"
+  environment {
+    variables = {
+      dynamodb_competition_table_name = var.dynamodb_competition_table_name
+    }
+  }
+  filename         = data.archive_file.api_to_dynamodb_function_source.output_path
+  source_code_hash = data.archive_file.api_to_dynamodb_function_source.output_base64sha256
+  layers           = ["${aws_lambda_layer_version.api_to_dynamodb_lambda_layer.arn}"]
+}
+
+resource "aws_lambda_function" "delete_competition_entry_function" {
+  function_name = var.delete_competition_entry_lambda_name
+  handler       = var.delete_competition_entry_lambda_handler
   role          = aws_iam_role.get_result_from_dynamodb_lambda_role.arn
   runtime       = "python3.9"
   environment {

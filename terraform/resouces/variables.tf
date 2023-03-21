@@ -66,6 +66,14 @@ variable "entry_competition_lambda_handler" {
     type = string
     default = "entry_competition_request.lambda_handler"
 }
+variable "delete_competition_entry_lambda_name" {
+    type = string
+    default = "delete_competition_entry_lambda"
+}
+variable "delete_competition_entry_lambda_handler" {
+    type = string
+    default = "delete_entry.lambda_handler"
+}
 
 variable "get_evaluation_results_lambda_name" {
     type = string

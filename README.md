@@ -7,7 +7,8 @@
 
 ### 以下にリポジトリ URL を入力して下さい
 
-[2022/3_Tetris スコアアタック用サーバ（Google フォームを使用しています）](https://docs.google.com/forms/d/e/1FAIpQLSdrJJlzrF0DWrHv9JYQTbsoYHws0mKdU-9LBbN3z1iHDuSzGg/viewform?vc=0&c=0&w=1&flr=0&usp=mail_form_link)
+新サーバはこちら --> [https://d3tf7pdepo037t.cloudfront.net/#/](https://d3tf7pdepo037t.cloudfront.net/#/)  
+~~2022/3_Tetris スコアアタック用サーバ（Google フォームを使用しています~~
 
 ### 評価結果は以下に出力されます
 

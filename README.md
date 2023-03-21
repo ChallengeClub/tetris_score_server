@@ -7,15 +7,16 @@
 
 ### 以下にリポジトリ URL を入力して下さい
 
-新サーバはこちら --> [https://d3tf7pdepo037t.cloudfront.net/#/](https://d3tf7pdepo037t.cloudfront.net/#/)  
+新サーバをご参照 --> [https://d3tf7pdepo037t.cloudfront.net/#/](https://d3tf7pdepo037t.cloudfront.net/#/)  
 ~~2022/3_Tetris スコアアタック用サーバ（Google フォームを使用しています~~
 
 ### 評価結果は以下に出力されます
 
-[評価結果一覧](./log/result.csv)  
-[level1 の評価結果](./log/result_ranking_level_1.csv)  
-[level2 の評価結果](./log/result_ranking_level_2.csv)  
-[level3 の評価結果](./log/result_ranking_level_3.csv)
+新サーバをご参照 --> [https://d3tf7pdepo037t.cloudfront.net/#/](https://d3tf7pdepo037t.cloudfront.net/#/)  
+~~[評価結果一覧](./log/result.csv)~~
+~~[level1 の評価結果](./log/result_ranking_level_1.csv)~~
+~~[level2 の評価結果](./log/result_ranking_level_2.csv)~~
+~~[level3 の評価結果](./log/result_ranking_level_3.csv)~~
 
 ※数十分ほど掛かることがあります
 

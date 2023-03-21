@@ -1,7 +1,7 @@
 # tetris_score_server
 
 スコアアタック用サーバ for https://github.com/seigot/tetris  
-総当たり戦用サーバへの登録も兼ねています https://github.com/seigot/tetris_battle_server
+~~総当たり戦用サーバへの登録も兼ねています https://github.com/seigot/tetris_battle_server~~ 廃止
 
 # 使い方
 

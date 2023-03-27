@@ -57,12 +57,12 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
                 ':score_stddev' : Decimal(str(evaluation.score_stdev)),
                 ':score_max' : Decimal(str(evaluation.score_max)),
                 ':score_min' : Decimal(str(evaluation.score_min)),
-                ':scores' : evaluation.scores["values"],
-                ':random_seeds' : evaluation.random_seeds["values"],
-                ':gameover_count' : evaluation.gameover_count["values"],
-                ':block_index' : evaluation.block_index["values"],
-                ':line_score_stat' : evaluation.line_score_stat["values"],
-                ':shape_info_stat' : evaluation.shape_info_stat["values"],
+                ':scores' : evaluation.scores.get("values", []),
+                ':random_seeds' : evaluation.random_seeds.get("values", []),
+                ':gameover_count' : evaluation.gameover_count.get("values", []),
+                ':block_index' : evaluation.block_index.get("values", []),
+                ':line_score_stat' : evaluation.line_score_stat.get("values", []),
+                ':shape_info_stat' : evaluation.shape_info_stat.get("values", []),
             },
         )
         return response

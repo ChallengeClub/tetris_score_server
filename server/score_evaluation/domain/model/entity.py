@@ -61,12 +61,12 @@ class Evaluation(models.Model):
             "std_dev_score": int(self.score_stdev),
             "max_score": self.score_max,
             "min_score": self.score_min,
-            "scores": self.scores["values"],
-            "random_seeds": self.random_seeds["values"],
-            "gameover_count": self.gameover_count["values"],
-            "block_index": self.block_index["values"],
-            "line_score_stat": self.line_score_stat["values"],
-            "shape_info_stat": self.shape_info_stat["values"],
+            "scores": self.scores.get("values", []),
+            "random_seeds": self.random_seeds.get("values", []),
+            "gameover_count": self.gameover_count.get("values", []),
+            "block_index": self.block_index.get("values", []),
+            "line_score_stat": self.line_score_stat.get("values", []),
+            "shape_info_stat": self.shape_info_stat.get("values", []),
         }
         return data
     

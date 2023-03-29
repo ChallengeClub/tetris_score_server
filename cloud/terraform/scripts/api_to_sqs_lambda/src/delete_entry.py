@@ -7,12 +7,16 @@ def lambda_handler(event: dict, context):
     dynamodb = boto3.resource("dynamodb")
     table = dynamodb.Table(table_name)
     try:
-        response = table.scan( 
+        response = table.delete_item(
+            Key = {
+                "RepositoryURL": event["body"]["repository_url"],
+                "Level": event["body"]["level"]
+            }
         )
     except Exception as e:
         response = {
             "error": {
-                "message": "failed to scan dynamodb: " + str(e),
+                "message": "failed to delete item: " + str(e),
                 "body": event,
                 "type": "dynamodb access exception",
             },

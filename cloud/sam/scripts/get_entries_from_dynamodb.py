@@ -1,7 +1,7 @@
 import boto3
 import os
 
-table_name = os.environ["dynamodb_competition_table_name"]
+table_name = os.environ["DYNAMODB_COMPETITION_TABLE_NAME"]
 
 def lambda_handler(event: dict, context):
     dynamodb = boto3.resource("dynamodb")

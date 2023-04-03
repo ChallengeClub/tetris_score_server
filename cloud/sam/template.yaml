@@ -7,6 +7,9 @@ Parameters:
     Type: String
     NoEcho: true
     Description: Enter frontend origin
+  DynamoDBCompetitionTableName:
+    Type: String
+    Description: Enter frontend origin
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -19,7 +22,7 @@ Globals:
     Tracing: Active
     Environment:
       Variables:
-        DYNAMODB_COMPETITION_TABLE_NAME: tetris_competition_entry_table
+        DYNAMODB_COMPETITION_TABLE_NAME: !Ref DynamoDBCompetitionTableName
   Api:
     TracingEnabled: true
 
@@ -29,20 +32,24 @@ Resources:
     Properties:
       Name: tetris_api
       StageName: tetris_api_stage
-      Cors: 
-        AllowOrigin: !Ref FrontendOrigin
+      # Cors: 
+      #   AllowOrigin: !Ref FrontendOrigin
 
   GetEntriesFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: scripts/
+      CodeUri: ./scripts
       Handler: get_entries_from_dynamodb.lambda_handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref DynamoDBCompetitionTableName
       Events:
         GetEntriesEndpoint:
           Type: Api
           Properties:
             Path: /entries
             Method: get
+            RestApiId: !Ref TetrisAPI
 
 # Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function

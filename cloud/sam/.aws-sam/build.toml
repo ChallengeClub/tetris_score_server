@@ -6,6 +6,7 @@ codeuri = "C:\\Users\\eva_s\\projects\\tetris_score_server\\cloud\\sam\\scripts"
 runtime = "python3.9"
 architecture = "x86_64"
 handler = "get_entries_from_dynamodb.lambda_handler"
+source_hash = "cc84fad8fd294f7a14c2f3a1ffb7c2a8d7d6ec2f7b6e67b9da2cafef5a6bf948"
 manifest_hash = "5c5142006875318ccf6754cde80c7cbf"
 packagetype = "Zip"
 functions = ["GetEntriesFunction"]

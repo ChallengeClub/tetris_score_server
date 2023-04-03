@@ -21,6 +21,13 @@ lint = true
 capabilities = "CAPABILITY_IAM"
 confirm_changeset = true
 resolve_s3 = true
+stack_name = "sam-dev"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1jcz5n00dhar0"
+s3_prefix = "sam-dev"
+region = "ap-northeast-1"
+disable_rollback = true
+image_repositories = []
+parameter_overrides = "DynamoDBCompetitionTableName=\"tetris_competition_entry_table\""
 
 [default.package]
 [default.package.parameters]

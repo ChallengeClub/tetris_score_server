@@ -27,7 +27,7 @@ s3_prefix = "sam-dev"
 region = "ap-northeast-1"
 disable_rollback = true
 image_repositories = []
-parameter_overrides = "DynamoDBCompetitionTableName=\"tetris_competition_entry_table\""
+parameter_overrides = "DynamoDBCompetitionTableName=\"tetris_competition_entry_table\" DynamoDBTableName=\"tetris_score_results_table\""
 
 [default.package]
 [default.package.parameters]

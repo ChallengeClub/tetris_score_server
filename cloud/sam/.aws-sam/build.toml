@@ -6,9 +6,18 @@ codeuri = "C:\\Users\\eva_s\\projects\\tetris_score_server\\cloud\\sam\\scripts"
 runtime = "python3.9"
 architecture = "x86_64"
 handler = "get_entries_from_dynamodb.lambda_handler"
-source_hash = "cc84fad8fd294f7a14c2f3a1ffb7c2a8d7d6ec2f7b6e67b9da2cafef5a6bf948"
+source_hash = "b4ef28f266406a6f18439d541f3460daefa463d7ee855fa1b19f06653c5b75ee"
 manifest_hash = "5c5142006875318ccf6754cde80c7cbf"
 packagetype = "Zip"
-functions = ["GetEntriesFunction"]
+functions = ["GetEntriesFunction", "GetResultsFunction"]
 
 [layer_build_definitions]
+[layer_build_definitions.c184f6cf-bd83-40b4-8328-0e0739969b32]
+layer_name = "Layer"
+codeuri = "C:\\Users\\eva_s\\projects\\tetris_score_server\\cloud\\sam\\layer"
+build_method = "python3.9"
+compatible_runtimes = ["python3.9"]
+architecture = "x86_64"
+source_hash = "7aa600d78aaa104d5b37b56c4f3859d72eb111c545a12298cc73d9af88d74e02"
+manifest_hash = ""
+layer = "Layer"

@@ -9,7 +9,8 @@ Parameters:
     Description: Enter frontend origin
   DynamoDBCompetitionTableName:
     Type: String
-    Description: Enter frontend origin
+  DynamoDBTableName:
+    Type: String
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -23,6 +24,7 @@ Globals:
     Environment:
       Variables:
         DYNAMODB_COMPETITION_TABLE_NAME: !Ref DynamoDBCompetitionTableName
+        DYNAMODB_TABLE_NAME: !Ref DynamoDBTableName
   Api:
     TracingEnabled: true
 
@@ -50,7 +52,30 @@ Resources:
             Path: /entries
             Method: get
             RestApiId: !Ref TetrisAPI
-
+            
+  GetResultsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts
+      Handler: get_results_from_dynamodb.lambda_handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref DynamoDBTableName
+      Events:
+        GetResultsEndpoint:
+          Type: Api
+          Properties:
+            Path: /results
+            Method: get
+            RestApiId: !Ref TetrisAPI
+  Layer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      ContentUri: ./layer
+      CompatibleRuntimes:
+        - python3.9
+    Metadata:
+      BuildMethod: python3.9
 # Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM

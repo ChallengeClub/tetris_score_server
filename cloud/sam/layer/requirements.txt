@@ -1,2 +1,1 @@
-boto3
 protobuf==3.20.3

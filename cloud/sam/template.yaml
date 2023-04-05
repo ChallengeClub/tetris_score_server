@@ -11,6 +11,12 @@ Parameters:
     Type: String
   DynamoDBTableName:
     Type: String
+  SQSUrl:
+    Type: String
+    NoEcho: true
+  SQSName:
+    Type: String
+    NoEcho: true
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -25,6 +31,8 @@ Globals:
       Variables:
         DYNAMODB_COMPETITION_TABLE_NAME: !Ref DynamoDBCompetitionTableName
         DYNAMODB_TABLE_NAME: !Ref DynamoDBTableName
+        SQS_URL: !Ref SQSUrl
+
   Api:
     TracingEnabled: true
 
@@ -98,6 +106,24 @@ Resources:
           Type: Api
           Properties:
             Path: /entry
+            Method: post
+            RestApiId: !Ref TetrisAPI
+
+  PostEvaluationRequestFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts
+      Handler: post_evaluation_request.lambda_handler
+      Policies:
+        - DynamoDBWritePolicy:
+            TableName: !Ref DynamoDBTableName
+        - SQSSendMessagePolicy:
+            QueueName: !Ref SQSName
+      Events:
+        PostEvaluationRequestEndpoint:
+          Type: Api
+          Properties:
+            Path: /evaluation
             Method: post
             RestApiId: !Ref TetrisAPI
 

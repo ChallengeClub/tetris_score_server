@@ -85,6 +85,22 @@ Resources:
             Method: get
             RestApiId: !Ref TetrisAPI
 
+  PostCompetitionEntryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts
+      Handler: post_competition_entry.lambda_handler
+      Policies:
+        - DynamoDBWritePolicy:
+            TableName: !Ref DynamoDBCompetitionTableName
+      Events:
+        PostCompetitionEtryEndpoint:
+          Type: Api
+          Properties:
+            Path: /entry
+            Method: post
+            RestApiId: !Ref TetrisAPI
+
   Layer:
     Type: AWS::Serverless::LayerVersion
     Properties:

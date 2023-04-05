@@ -6,10 +6,10 @@ codeuri = "C:\\Users\\eva_s\\projects\\tetris_score_server\\cloud\\sam\\scripts"
 runtime = "python3.9"
 architecture = "x86_64"
 handler = "get_entries_from_dynamodb.lambda_handler"
-source_hash = "b4ef28f266406a6f18439d541f3460daefa463d7ee855fa1b19f06653c5b75ee"
+source_hash = "8cd0d199aa5c61b51c34536f2b2bf646fd33bbf389d46d73cf4e3767dda205ca"
 manifest_hash = "5c5142006875318ccf6754cde80c7cbf"
 packagetype = "Zip"
-functions = ["GetEntriesFunction", "GetResultsFunction"]
+functions = ["GetEntriesFunction", "GetResultsFunction", "GetResultDetailFunction"]
 
 [layer_build_definitions]
 [layer_build_definitions.c184f6cf-bd83-40b4-8328-0e0739969b32]

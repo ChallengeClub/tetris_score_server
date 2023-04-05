@@ -3,10 +3,10 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   tetris score server resources
 Parameters:
-  FrontendOrigin:
-    Type: String
-    NoEcho: true
-    Description: Enter frontend origin
+  # FrontendOrigin:
+  #   Type: String
+  #   NoEcho: true
+  #   Description: Enter frontend origin
   DynamoDBCompetitionTableName:
     Type: String
   DynamoDBTableName:
@@ -68,6 +68,23 @@ Resources:
             Path: /results
             Method: get
             RestApiId: !Ref TetrisAPI
+
+  GetResultDetailFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts
+      Handler: get_result_detail_from_dynamodb.lambda_handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref DynamoDBTableName
+      Events:
+        GetResultDetailEndpoint:
+          Type: Api
+          Properties:
+            Path: /result/{id}
+            Method: get
+            RestApiId: !Ref TetrisAPI
+
   Layer:
     Type: AWS::Serverless::LayerVersion
     Properties:
@@ -76,6 +93,7 @@ Resources:
         - python3.9
     Metadata:
       BuildMethod: python3.9
+
 # Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM

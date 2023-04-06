@@ -48,7 +48,7 @@ Resources:
   GetEntriesFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./scripts
+      CodeUri: ./scripts/get_entries_from_dynamodb
       Handler: get_entries_from_dynamodb.lambda_handler
       Policies:
         - DynamoDBReadPolicy:
@@ -64,7 +64,7 @@ Resources:
   GetResultsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./scripts
+      CodeUri: ./scripts/get_results_from_dynamodb
       Handler: get_results_from_dynamodb.lambda_handler
       Policies:
         - DynamoDBReadPolicy:
@@ -80,7 +80,7 @@ Resources:
   GetResultDetailFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./scripts
+      CodeUri: ./scripts/get_result_detail_from_dynamodb
       Handler: get_result_detail_from_dynamodb.lambda_handler
       Policies:
         - DynamoDBReadPolicy:
@@ -96,7 +96,7 @@ Resources:
   PostCompetitionEntryFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./scripts
+      CodeUri: ./scripts/post_competition_entry
       Handler: post_competition_entry.lambda_handler
       Policies:
         - DynamoDBWritePolicy:
@@ -112,7 +112,7 @@ Resources:
   PostEvaluationRequestFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: ./scripts
+      CodeUri: ./scripts/post_evaluation_request
       Handler: post_evaluation_request.lambda_handler
       Policies:
         - DynamoDBWritePolicy:

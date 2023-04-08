@@ -98,6 +98,8 @@ Resources:
     Properties:
       CodeUri: ./scripts/post_competition_entry
       Handler: post_competition_entry.lambda_handler
+      Layers:
+        - Ref: Layer
       Policies:
         - DynamoDBWritePolicy:
             TableName: !Ref DynamoDBCompetitionTableName
@@ -114,6 +116,8 @@ Resources:
     Properties:
       CodeUri: ./scripts/post_evaluation_request
       Handler: post_evaluation_request.lambda_handler
+      Layers:
+        - Ref: Layer
       Policies:
         - DynamoDBWritePolicy:
             TableName: !Ref DynamoDBTableName

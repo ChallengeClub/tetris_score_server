@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'infrastructures/**'
+      - 'cloud/**'
   workflow_dispatch:
 
 jobs:
@@ -30,16 +30,16 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: ./infrastructures/terraform/environments/prod
+        working-directory: ./cloud/terraform/environments/prod
       
       - name: Pip install for lambda layer 1
         run: make
-        working-directory: ./infrastructures/terraform/scripts/api_to_dynamodb_lambda/layer
+        working-directory: ./cloud/terraform/scripts/api_to_dynamodb_lambda/layer
 
       - name: Pip install for lambda layer 2
         run: make
-        working-directory: ./infrastructures/terraform/scripts/api_to_sqs_lambda/layer
+        working-directory: ./cloud/terraform/scripts/api_to_sqs_lambda/layer
 
       - name: Terraform apply
         run: terraform apply -auto-approve -var tetris_frontend_origin=${{ secrets.TETRIS_FRONT_ORIGIN_PROD }} -var tetris_ecr_repository=${{ secrets.TETRIS_ECR_REPOSITORY_PROD }}
-        working-directory: ./infrastructures/terraform/environments/prod
+        working-directory: ./cloud/terraform/environments/prod

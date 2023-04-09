@@ -19,9 +19,6 @@ provider "aws" {
 
 module "resouces" {
   source = "../../resouces"
-  api_gateway_allow_origins = [
-    var.tetris_frontend_origin,
-  ]
   score_evaluation_container_image = var.tetris_ecr_repository
 }
 

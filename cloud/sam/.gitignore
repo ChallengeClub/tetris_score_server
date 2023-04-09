@@ -237,12 +237,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# Build folder
-
-*/build/*
-
-# Cache folder
-
-*/cache/
+# aws sam folder
+.aws-sam/
 
 # End of https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode

@@ -2,44 +2,28 @@
 # https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-config.html
 version = 0.1
 
-[default]
-[default.global]
-[default.global.parameters]
-stack_name = "sam"
-
-[default.build]
-[default.build.parameters]
-cached = true
-parallel = true
-
-[default.validate]
-[default.validate.parameters]
-lint = true
-
-[default.deploy]
-[default.deploy.parameters]
-capabilities = "CAPABILITY_IAM"
-confirm_changeset = true
-resolve_s3 = true
+[dev]
+[dev.deploy]
+[dev.deploy.parameters]
 stack_name = "sam-dev"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1jcz5n00dhar0"
 s3_prefix = "sam-dev"
 region = "ap-northeast-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
 disable_rollback = true
-image_repositories = []
 parameter_overrides = "DynamoDBCompetitionTableName=\"tetris_competition_entry_table\" DynamoDBTableName=\"tetris_score_results_table\" SQSName=\"score_evaluation_queue\""
+image_repositories = []
 
-[default.package]
-[default.package.parameters]
-resolve_s3 = true
-
-[default.sync]
-[default.sync.parameters]
-watch = true
-
-[default.local_start_api]
-[default.local_start_api.parameters]
-warm_containers = "EAGER"
-
-[default.local_start_lambda]
-[default.local_start_lambda.parameters]
-warm_containers = "EAGER"
+[prod]
+[prod.deploy]
+[prod.deploy.parameters]
+stack_name = "sam-prod"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-scqoc6c6uw6x"
+s3_prefix = "sam-prod"
+region = "ap-northeast-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+disable_rollback = true
+parameter_overrides = "DynamoDBCompetitionTableName=\"tetris_competition_entry_table\" DynamoDBTableName=\"tetris_score_results_table\" SQSName=\"score_evaluation_queue\""
+image_repositories = []

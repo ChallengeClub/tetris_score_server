@@ -46,6 +46,6 @@ jobs:
         run: sam build --use-container
         working-directory: ./cloud/sam
 
-      - name: Sam confirm changeset
+      - name: Sam deploy
         run: TETRIS_FRONT_ORIGIN=${{ secrets.TETRIS_FRONT_ORIGIN_DEV }} SQS_URL=${{ secrets.TETRIS_SQS_URL_DEV}} make deploy-dev
         working-directory: ./cloud/sam

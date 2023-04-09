@@ -3,10 +3,9 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   tetris score server resources
 Parameters:
-  # FrontendOrigin:
-  #   Type: String
-  #   NoEcho: true
-  #   Description: Enter frontend origin
+  FrontendOrigin:
+    Type: String
+    Description: Enter frontend origin
   DynamoDBCompetitionTableName:
     Type: String
   DynamoDBTableName:
@@ -31,6 +30,7 @@ Globals:
       Variables:
         DYNAMODB_COMPETITION_TABLE_NAME: !Ref DynamoDBCompetitionTableName
         DYNAMODB_TABLE_NAME: !Ref DynamoDBTableName
+        FRONTEND_ORIGIN: !Ref FrontendOrigin
         SQS_URL: !Ref SQSUrl
 
   Api:
@@ -42,8 +42,6 @@ Resources:
     Properties:
       Name: tetris_api
       StageName: tetris_api_stage
-      # Cors: 
-      #   AllowOrigin: !Ref FrontendOrigin
 
   GetEntriesFunction:
     Type: AWS::Serverless::Function

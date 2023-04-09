@@ -5,7 +5,7 @@ import base64
 from score_evaluation_message_pb2 import ScoreEvaluationMessage
 
 dynamodb_table_name = os.environ["DYNAMODB_COMPETITION_TABLE_NAME"]
-
+frontend_origin = os.environ["FRONTEND_ORIGIN"]
 
 def lambda_handler(event: dict, context):
     msg = ScoreEvaluationMessage()
@@ -15,6 +15,10 @@ def lambda_handler(event: dict, context):
     except Exception as e:
         response = {
             "statusCode": 401,
+            'headers': {
+                'Access-Control-Allow-Origin': frontend_origin,
+                'Access-Control-Allow-Methods': 'OPTIONS,POST'
+            },
             "body": "ProtobufException: failed to parse request" + str(e)
         }
         return response
@@ -38,12 +42,20 @@ def lambda_handler(event: dict, context):
         )
         response = {
             "body": "successfully registered competition entry to DynamoDB",
-            "statusCode": 200
+            "statusCode": 200,            
+            'headers': {
+                'Access-Control-Allow-Origin': frontend_origin,
+                'Access-Control-Allow-Methods': 'OPTIONS,POST'
+            },
         }
     except Exception as e:
         response = {
             "body": "failed to register competition entry to dynamodb, " + str(e),
-            "statusCode": 500
+            "statusCode": 500,
+            'headers': {
+                'Access-Control-Allow-Origin': frontend_origin,
+                'Access-Control-Allow-Methods': 'OPTIONS,POST'
+            },
         }
           
     return response

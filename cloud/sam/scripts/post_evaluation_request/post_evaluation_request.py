@@ -7,6 +7,7 @@ from score_evaluation_message_pb2 import ScoreEvaluationMessage
 
 sqs_url = os.environ["SQS_URL"]
 dynamodb_table_name = os.environ["DYNAMODB_TABLE_NAME"]
+frontend_origin = os.environ["FRONTEND_ORIGIN"]
 
 def lambda_handler(event: dict, context):
     client = boto3.client("sqs")
@@ -18,6 +19,10 @@ def lambda_handler(event: dict, context):
         response = {
             "statusCode": 401,
             "body": "ProtobufException: failed to parse message, " + str(e),
+            'headers': {
+                'Access-Control-Allow-Origin': frontend_origin,
+                'Access-Control-Allow-Methods': 'OPTIONS,POST'
+            },
         }
         return response
 
@@ -47,6 +52,10 @@ def lambda_handler(event: dict, context):
     except Exception as e:
         response = {
             "statusCode": 500,
+            'headers': {
+                'Access-Control-Allow-Origin': frontend_origin,
+                'Access-Control-Allow-Methods': 'OPTIONS,POST'
+            },
             "body": "failed to register request to dynamodb, " + str(e),
         }
         return response
@@ -59,11 +68,19 @@ def lambda_handler(event: dict, context):
         )
         response = {
             "statusCode": 200,
+            'headers': {
+                'Access-Control-Allow-Origin': frontend_origin,
+                'Access-Control-Allow-Methods': 'OPTIONS,POST'
+            },
             "body": "successfully sent message to SQS",
         }
     except Exception as e:
         response = {
             "statusCode": 500,
+            'headers': {
+                'Access-Control-Allow-Origin': frontend_origin,
+                'Access-Control-Allow-Methods': 'OPTIONS,POST'
+            },
             "body": "failed to send message to SQS, " + str(e),
         }
     return response

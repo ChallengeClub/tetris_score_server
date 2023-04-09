@@ -1,0 +1,153 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  tetris score server resources
+Parameters:
+  FrontendOrigin:
+    Type: String
+    NoEcho: true
+    Description: Enter frontend origin
+  DynamoDBCompetitionTableName:
+    Type: String
+  DynamoDBTableName:
+    Type: String
+  SQSUrl:
+    Type: String
+    NoEcho: true
+  SQSName:
+    Type: String
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+    MemorySize: 128
+    Runtime: python3.9
+    Architectures:
+      - x86_64
+    Tracing: Active
+    Environment:
+      Variables:
+        DYNAMODB_COMPETITION_TABLE_NAME: !Ref DynamoDBCompetitionTableName
+        DYNAMODB_TABLE_NAME: !Ref DynamoDBTableName
+        FRONTEND_ORIGIN: !Ref FrontendOrigin
+        SQS_URL: !Ref SQSUrl
+
+  Api:
+    TracingEnabled: true
+
+Resources:
+  TetrisAPI:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: tetris_api
+      StageName: tetris_api_stage
+
+  GetEntriesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts/get_entries_from_dynamodb
+      Handler: get_entries_from_dynamodb.lambda_handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref DynamoDBCompetitionTableName
+      Events:
+        GetEntriesEndpoint:
+          Type: Api
+          Properties:
+            Path: /entries
+            Method: get
+            RestApiId: !Ref TetrisAPI
+            
+  GetResultsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts/get_results_from_dynamodb
+      Handler: get_results_from_dynamodb.lambda_handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref DynamoDBTableName
+      Events:
+        GetResultsEndpoint:
+          Type: Api
+          Properties:
+            Path: /results
+            Method: get
+            RestApiId: !Ref TetrisAPI
+
+  GetResultDetailFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts/get_result_detail_from_dynamodb
+      Handler: get_result_detail_from_dynamodb.lambda_handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref DynamoDBTableName
+      Events:
+        GetResultDetailEndpoint:
+          Type: Api
+          Properties:
+            Path: /result/{id}
+            Method: get
+            RestApiId: !Ref TetrisAPI
+
+  PostCompetitionEntryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts/post_competition_entry
+      Handler: post_competition_entry.lambda_handler
+      Layers:
+        - Ref: Layer
+      Policies:
+        - DynamoDBWritePolicy:
+            TableName: !Ref DynamoDBCompetitionTableName
+      Events:
+        PostCompetitionEtryEndpoint:
+          Type: Api
+          Properties:
+            Path: /entry
+            Method: post
+            RestApiId: !Ref TetrisAPI
+
+  PostEvaluationRequestFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts/post_evaluation_request
+      Handler: post_evaluation_request.lambda_handler
+      Layers:
+        - Ref: Layer
+      Policies:
+        - DynamoDBWritePolicy:
+            TableName: !Ref DynamoDBTableName
+        - SQSSendMessagePolicy:
+            QueueName: !Ref SQSName
+      Events:
+        PostEvaluationRequestEndpoint:
+          Type: Api
+          Properties:
+            Path: /evaluation
+            Method: post
+            RestApiId: !Ref TetrisAPI
+
+  Layer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      ContentUri: ./layer
+      CompatibleRuntimes:
+        - python3.9
+    Metadata:
+      BuildMethod: python3.9
+
+# Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  # HelloWorldApi:
+  #   Description: API Gateway endpoint URL for Prod stage for Hello World function
+  #   Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+  # HelloWorldFunction:
+  #   Description: Hello World Lambda Function ARN
+  #   Value: !GetAtt HelloWorldFunction.Arn
+  # HelloWorldFunctionIamRole:
+  #   Description: Implicit IAM Role created for Hello World function
+  #   Value: !GetAtt HelloWorldFunctionRole.Arn

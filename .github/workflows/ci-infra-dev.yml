@@ -18,6 +18,12 @@ jobs:
       - name: Git clone the repository
         uses: actions/checkout@v3
 
+      - name: Setup python for sam
+        uses: actions/setup-python@v3
+
+      - name: Setup sam
+        uses: aws-actions/setup-sam@v2
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -43,3 +49,11 @@ jobs:
       - name: Terraform plan
         run: terraform plan -var tetris_frontend_origin=${{ secrets.TETRIS_FRONT_ORIGIN_DEV }} -var tetris_ecr_repository=${{ secrets.TETRIS_ECR_REPOSITORY_DEV }}
         working-directory: ./cloud/terraform/environments/dev
+
+      - name: Sam build
+        run: sam build --use-container
+        working-directory: ./cloud/sam
+
+      - name: Sam confirm changeset
+        run: make check-dev
+        working-directory: ./cloud/sam

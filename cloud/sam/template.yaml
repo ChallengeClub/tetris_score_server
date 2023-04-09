@@ -5,6 +5,7 @@ Description: >
 Parameters:
   FrontendOrigin:
     Type: String
+    NoEcho: true
     Description: Enter frontend origin
   DynamoDBCompetitionTableName:
     Type: String
@@ -15,7 +16,6 @@ Parameters:
     NoEcho: true
   SQSName:
     Type: String
-    NoEcho: true
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:

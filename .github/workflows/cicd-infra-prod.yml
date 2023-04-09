@@ -47,5 +47,5 @@ jobs:
         working-directory: ./cloud/sam
 
       - name: Sam deploy
-        run: TETRIS_FRONT_ORIGIN=${{ secrets.TETRIS_FRONT_ORIGIN_PROD }} SQS_URL=${{ secrets.TETRIS_SQS_URL_PROD}} make deploy-prod
+        run: TETRIS_FRONT_ORIGIN=${{ secrets.TETRIS_FRONT_ORIGIN_PROD }} SQS_URL=${{ secrets.TETRIS_SQS_URL_PROD}} ENV=prod make deploy
         working-directory: ./cloud/sam

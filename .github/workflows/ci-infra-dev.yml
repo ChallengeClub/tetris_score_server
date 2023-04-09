@@ -47,5 +47,5 @@ jobs:
         working-directory: ./cloud/sam
 
       - name: Sam confirm changeset
-        run: TETRIS_FRONT_ORIGIN=${{ secrets.TETRIS_FRONT_ORIGIN_DEV }} SQS_URL=${{ secrets.TETRIS_SQS_URL_DEV}} make check-dev
+        run: TETRIS_FRONT_ORIGIN=${{ secrets.TETRIS_FRONT_ORIGIN_DEV }} SQS_URL=${{ secrets.TETRIS_SQS_URL_DEV}} ENV=dev make check
         working-directory: ./cloud/sam

@@ -15,7 +15,7 @@ def lambda_handler(event: dict, context):
             _res = table.query(
                 IndexName = "CreatedAtIndex",
                 Select = 'ALL_PROJECTED_ATTRIBUTES',
-                Limit = event["queryStringParameters"]["limit"],
+                Limit = int(event["queryStringParameters"]["limit"]),
                 ScanIndexForward = False,
                 ExclusiveStartKey = event["queryStringParameters"]["exclusive_start_key"],
                 KeyConditionExpression=Key('Competition').eq(event["queryStringParameters"]["competition"]),
@@ -24,7 +24,7 @@ def lambda_handler(event: dict, context):
             _res = table.query(
                 IndexName = "CreatedAtIndex",
                 Select = 'ALL_PROJECTED_ATTRIBUTES',
-                Limit = event["queryStringParameters"]["limit"],
+                Limit = int(event["queryStringParameters"]["limit"]),
                 ScanIndexForward = False,
                 KeyConditionExpression=Key('Competition').eq(event["queryStringParameters"]["competition"]),
  

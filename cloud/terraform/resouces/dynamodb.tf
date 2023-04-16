@@ -16,36 +16,30 @@ resource "aws_dynamodb_table" "dynamodb-table" {
   }
 
   attribute {
-    name = "RepositoryURL"
+    name = "Competition"
     type = "S"
   }
 
-  attribute {
-    name = "Level"
-    type = "N"
-  }
-
-  attribute {
-    name = "MeanScore"
-    type = "N"
-  }
 
   global_secondary_index {
-    name            = "RepositoryIndex"
-    hash_key        = "RepositoryURL"
+    name            = "CreatedAtIndex"
+    hash_key        = "Competition"
     range_key       = "CreatedAt"
     write_capacity  = 1
     read_capacity   = 1
-    projection_type = "KEYS_ONLY"
-  }
-
-  global_secondary_index {
-    name            = "LevelScoreIndex"
-    hash_key        = "Level"
-    range_key       = "MeanScore"
-    write_capacity  = 1
-    read_capacity   = 1
-    projection_type = "KEYS_ONLY"
+    projection_type = "INCLUDE"
+    non_key_attributes = [
+      "Id",
+      "Status",
+      "Name",
+      "MeanScore",
+      "RepositoryURL",
+      "Branch",
+      "Trials",
+      "Level",
+      "GameMode",
+      "GameTime"
+    ]
   }
 
   tags = {

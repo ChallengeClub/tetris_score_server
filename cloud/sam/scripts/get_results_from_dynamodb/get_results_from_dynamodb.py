@@ -10,9 +10,25 @@ def lambda_handler(event: dict, context):
     dynamodb = boto3.resource("dynamodb")
     table = dynamodb.Table(table_name)
     try:
-        _res = table.scan(
-            Limit=200,  
-        )
+        if event["exclusive_start_key"]:
+            _res = table.query(
+                IndexName = "CreatedAtIndex",
+                Select = 'ALL_PROJECTED_ATTRIBUTES',
+                Limit = event["limit"],
+                ScanIndexForward = False,
+                ExclusiveStartKey = event["exclusive_start_key"],
+                KeyConditionExpression=Key('Competition').eq(event["competition"]),
+            )
+        else:
+            _res = table.query(
+                IndexName = "CreatedAtIndex",
+                Select = 'ALL_PROJECTED_ATTRIBUTES',
+                Limit = event["limit"],
+                ScanIndexForward = False,
+                KeyConditionExpression=Key('Competition').eq(event["competition"]),
+                Limit=event["limit"],  
+            )
+
         response = {
             "statusCode": 200,
             'headers': {

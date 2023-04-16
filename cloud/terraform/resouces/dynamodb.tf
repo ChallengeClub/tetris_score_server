@@ -35,7 +35,7 @@ resource "aws_dynamodb_table" "dynamodb-table" {
       "MeanScore",
       "RepositoryURL",
       "Branch",
-      "Trials",
+      "TrialNum",
       "Level",
       "GameMode",
       "GameTime"

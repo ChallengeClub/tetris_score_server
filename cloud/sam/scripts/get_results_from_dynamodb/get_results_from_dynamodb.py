@@ -11,22 +11,23 @@ def lambda_handler(event: dict, context):
     dynamodb = boto3.resource("dynamodb")
     table = dynamodb.Table(table_name)
     try:
-        if event["exclusive_start_key"]:
+        if event["pathParameters"].get("exclusive_start_key", ""):
             _res = table.query(
                 IndexName = "CreatedAtIndex",
                 Select = 'ALL_PROJECTED_ATTRIBUTES',
-                Limit = event["limit"],
+                Limit = event["pathParameters"]["limit"],
                 ScanIndexForward = False,
-                ExclusiveStartKey = event["exclusive_start_key"],
-                KeyConditionExpression=Key('Competition').eq(event["competition"]),
+                ExclusiveStartKey = event["pathParameters"]["exclusive_start_key"],
+                KeyConditionExpression=Key('Competition').eq(event["pathParameters"]["competition"]),
             )
         else:
             _res = table.query(
                 IndexName = "CreatedAtIndex",
                 Select = 'ALL_PROJECTED_ATTRIBUTES',
-                Limit = event["limit"],
+                Limit = event["pathParameters"]["limit"],
                 ScanIndexForward = False,
-                KeyConditionExpression=Key('Competition').eq(event["competition"]), 
+                KeyConditionExpression=Key('Competition').eq(event["pathParameters"]["competition"]),
+ 
             )
 
         response = {

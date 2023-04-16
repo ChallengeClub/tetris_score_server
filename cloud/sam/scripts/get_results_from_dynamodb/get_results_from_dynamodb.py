@@ -1,4 +1,5 @@
 import boto3
+from boto3.dynamodb.conditions import Key
 import os
 import json
 import decimal
@@ -25,8 +26,7 @@ def lambda_handler(event: dict, context):
                 Select = 'ALL_PROJECTED_ATTRIBUTES',
                 Limit = event["limit"],
                 ScanIndexForward = False,
-                KeyConditionExpression=Key('Competition').eq(event["competition"]),
-                Limit=event["limit"],  
+                KeyConditionExpression=Key('Competition').eq(event["competition"]), 
             )
 
         response = {

@@ -37,7 +37,7 @@ def lambda_handler(event: dict, context):
             },
             "body": {
                 "Items": json.dumps(_res["Items"], default=lambda x : float(x) if isinstance(x, decimal.Decimal) else TypeError),
-                "LastEvaluatedKey": json.dumps(_res["LastEvaluatedKey"], default=lambda x : float(x) if isinstance(x, decimal.Decimal) else TypeError)
+                "LastEvaluatedKey": json.dumps(_res.get("LastEvaluatedKey", ""),default=lambda x : float(x) if isinstance(x, decimal.Decimal) else TypeError)
             }
         }
     except Exception as e:

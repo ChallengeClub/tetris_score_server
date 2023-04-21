@@ -28,6 +28,11 @@ def lambda_handler(event: dict, context):
                 ScanIndexForward = False,
                 KeyConditionExpression=Key('Competition').eq(event["queryStringParameters"]["competition"]),
             )
+        
+        body = {
+            "Items": _res["Items"],
+            "LastEvaluatedKey": _res.get("LastEvaluatedKey", "")
+        }
 
         response = {
             "statusCode": 200,
@@ -35,10 +40,7 @@ def lambda_handler(event: dict, context):
                 'Access-Control-Allow-Origin': frontend_origin,
                 'Access-Control-Allow-Methods': 'OPTIONS,GET'
             },
-            "body": {
-                "Items": json.dumps(_res["Items"], default=lambda x : float(x) if isinstance(x, decimal.Decimal) else TypeError),
-                "LastEvaluatedKey": json.dumps(_res.get("LastEvaluatedKey", ""),default=lambda x : float(x) if isinstance(x, decimal.Decimal) else TypeError)
-            }
+            "body":  json.dumps(body, default=lambda x : float(x) if isinstance(x, decimal.Decimal) else TypeError)
         }
     except Exception as e:
         response = {

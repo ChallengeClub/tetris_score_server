@@ -31,7 +31,7 @@ def lambda_handler(event: dict, context):
 
         body = {
             "Items": _res["Items"],
-            "LastEvaluatedKey": _res["LastEvaluatedKey"],
+            "LastEvaluatedKey": _res.get("LastEvaluatedKey", ""),
         }
 
         response = {
@@ -42,7 +42,7 @@ def lambda_handler(event: dict, context):
             },
             "body":  json.dumps(body, default=lambda x : float(x) if isinstance(x, decimal.Decimal) else TypeError)
         }
-        
+
     except Exception as e:
         response = {
             "statusCode": 501,

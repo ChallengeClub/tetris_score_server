@@ -29,14 +29,20 @@ def lambda_handler(event: dict, context):
                 KeyConditionExpression=Key('Competition').eq(event["queryStringParameters"]["competition"]),
             )
 
+        body = {
+            "Items": _res["Items"],
+            "LastEvaluatedKey": _res["LastEvaluatedKey"],
+        }
+
         response = {
             "statusCode": 200,
             'headers': {
                 'Access-Control-Allow-Origin': frontend_origin,
                 'Access-Control-Allow-Methods': 'OPTIONS,GET'
             },
-            "body":  json.dumps(_res["Items"], default=lambda x : float(x) if isinstance(x, decimal.Decimal) else TypeError)
+            "body":  json.dumps(body, default=lambda x : float(x) if isinstance(x, decimal.Decimal) else TypeError)
         }
+        
     except Exception as e:
         response = {
             "statusCode": 501,

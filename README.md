@@ -1,63 +1,40 @@
 # tetris_score_server
 
 スコアアタック用サーバ for https://github.com/seigot/tetris  
-~~総当たり戦用サーバへの登録も兼ねています https://github.com/seigot/tetris_battle_server~~ 廃止
+フロントエンド開発リポジトリ  https://github.com/TetrisChallenge/tetris_score_server_frontend
+
 
 # 使い方
 
-### 以下にリポジトリ URL を入力して下さい
+## 専用webサイトからプログラム提出
+- 大会エントリー情報を入力してください→[大会エントリーフォーム入力ページ](https://tetris-server.challenge-club.org/#/entry)  
+- 開発したテトリスプログラムをサーバ上で評価できます→[スコア評価フォーム入力ページ](https://tetris-server.challenge-club.org/#/server)
 
-新サーバをご参照 --> [https://d3tf7pdepo037t.cloudfront.net/#/](https://d3tf7pdepo037t.cloudfront.net/#/)  
-~~2022/3_Tetris スコアアタック用サーバ（Google フォームを使用しています~~
-
-### 評価結果は以下に出力されます
-
-新サーバをご参照 --> [https://d3tf7pdepo037t.cloudfront.net/#/](https://d3tf7pdepo037t.cloudfront.net/#/)  
-~~[評価結果一覧](./log/result.csv)~~
-~~[level1 の評価結果](./log/result_ranking_level_1.csv)~~
-~~[level2 の評価結果](./log/result_ranking_level_2.csv)~~
-~~[level3 の評価結果](./log/result_ranking_level_3.csv)~~
-
-※数十分ほど掛かることがあります
+## APIを使ったプログラム提出
+- [protocol buffers](https://developers.google.com/protocol-buffers)をテンプレートとして用いたプログラム提出用のAPIを開発しております。coming soon...
 
 # システム構成
 
-```mermaid
-  graph TD
+![](./tetris_server.drawio.svg)
 
-  subgraph Google
-    A1[GoogleFrom] --new query--> A2[GoogleSpreadSheet]
-  end
-
-  subgraph Server
-    subgraph gameserver.sh
-        C1("polling(do_polling) 5min interval") ---->A2
-        C1 --> C2{is there new query?}
-        C2 --Yes--> C3("evaluate score(do_tetris)")
-        C3 --result--> C4("update result")
-    end
-  end
-
-  subgraph Github
-    C4 --result.csv-->D1[tetris_score_server/log]
-  end
-```
-
-# サーバ稼働期間
-
-2022/1/1-2022/9/30 とする予定
 
 # サーバスペック
+サーバ上ではスコア評価ジョブをECS Fargate上のコンテナで行っています。
+[Fargateタスクサイズに関するAWSドキュメント](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/AWS_Fargate.html#fargate-tasks-size)
 
-`2 cpu`, `2GB memory(swap 4GB)`, `40GB virtual storage`
-
+以下はECSのタスク定義です。また、[terraformのリソース定義ファイル](./cloud/terraform/resouces/ecs.tf)でも確認することができます。
 ```
-$ grep cpu.cores /proc/cpuinfo | sort -u
-cpu cores	: 2
-$ free -h
-              total        used        free      shared  buff/cache   available
-Mem:          1.9Gi       363Mi       103Mi       3.0Mi       1.5Gi       1.4Gi
-Swap:         4.0Gi        23Mi       4.0Gi
-$ df -h | grep /dev/vda1
-/dev/vda1        39G   12G   27G  31% /
+1 vCPU, 2GB
+```
+
+# 開発環境構築
+[こちら](./README_server.md)を参照してください。
+
+# APIを用いたプログラム提出方法（開発中）
+### --protocol bufffersの導入とAPI提出のテンプレート生成--
+[protobuf CLIのインストール](https://github.com/protocolbuffers/protobuf#protocol-compiler-installation)を行ったのち、  
+[.protoファイル](protobuf\score_evaluation_message.proto)をダウンロードしてそれぞれの開発言語に沿ったコンパイルファイルを作成してご利用ください。[参考ドキュメント](https://developers.google.com/protocol-buffers/docs/tutorials)  
+コンパイルの例↓  
+```
+protoc --python_out=[コンパイルファイルの出力先] [.protoファイルの格納フォルダ]/score_evaluation_message.proto
 ```

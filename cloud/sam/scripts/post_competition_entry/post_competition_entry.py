@@ -34,7 +34,8 @@ def lambda_handler(event: dict, context):
         "Level": msg.level,
         "Status": "waiting",
         "GameMode": msg.game_mode,
-        "ValuePredictWeight": msg.predict_weight_path
+        "ValuePredictWeight": msg.predict_weight_path,
+        "Competition": msg.competition,
     }
     try:
         _res = table.put_item(

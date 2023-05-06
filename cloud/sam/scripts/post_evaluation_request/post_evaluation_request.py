@@ -44,6 +44,7 @@ def lambda_handler(event: dict, context):
         "ValuePredictWeight": msg.predict_weight_path,
         "TrialNum": msg.trial_num,
         "RandomSeeds": list(map(int, msg.random_seeds)),
+        "Competition": msg.competition,
     }
     try:
         response = table.put_item(

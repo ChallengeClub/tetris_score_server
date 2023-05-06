@@ -33,7 +33,7 @@
 # APIを用いたプログラム提出方法（開発中）
 ### --protocol bufffersの導入とAPI提出のテンプレート生成--
 [protobuf CLIのインストール](https://github.com/protocolbuffers/protobuf#protocol-compiler-installation)を行ったのち、  
-[.protoファイル](protobuf\score_evaluation_message.proto)をダウンロードしてそれぞれの開発言語に沿ったコンパイルファイルを作成してご利用ください。[参考ドキュメント](https://developers.google.com/protocol-buffers/docs/tutorials)  
+[.protoファイル](protobuf/score_evaluation_message.proto)をダウンロードしてそれぞれの開発言語に沿ったコンパイルファイルを作成してご利用ください。[参考ドキュメント](https://developers.google.com/protocol-buffers/docs/tutorials)  
 コンパイルの例↓  
 ```
 protoc --python_out=[コンパイルファイルの出力先] [.protoファイルの格納フォルダ]/score_evaluation_message.proto

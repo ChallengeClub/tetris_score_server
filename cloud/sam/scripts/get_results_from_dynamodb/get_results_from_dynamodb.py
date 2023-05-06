@@ -17,7 +17,7 @@ def lambda_handler(event: dict, context):
                 Select = 'ALL_PROJECTED_ATTRIBUTES',
                 Limit = int(event["queryStringParameters"]["limit"]),
                 ScanIndexForward = False,
-                ExclusiveStartKey = event["queryStringParameters"]["exclusive_start_key"],
+                ExclusiveStartKey = json.loads(event["queryStringParameters"]["exclusive_start_key"]),
                 KeyConditionExpression=Key('Competition').eq(event["queryStringParameters"]["competition"]),
             )
         else:

@@ -129,6 +129,24 @@ Resources:
             Method: post
             RestApiId: !Ref TetrisAPI
 
+    StopEvaluationFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts/stop_evaluation
+      Handler: stop_evaluation.lambda_handler
+      Layers:
+        - Ref: Layer
+      Policies:
+        - DynamoDBWritePolicy:
+            TableName: !Ref DynamoDBTableName
+      Events:
+        PostEvaluationRequestEndpoint:
+          Type: Api
+          Properties:
+            Path: /evaluation/{id}
+            Method: delete
+            RestApiId: !Ref TetrisAPI
+
   Layer:
     Type: AWS::Serverless::LayerVersion
     Properties:

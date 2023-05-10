@@ -129,7 +129,7 @@ Resources:
             Method: post
             RestApiId: !Ref TetrisAPI
 
-    StopEvaluationFunction:
+  StopEvaluationFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./scripts/stop_evaluation

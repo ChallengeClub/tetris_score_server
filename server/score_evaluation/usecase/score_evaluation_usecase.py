@@ -1,6 +1,6 @@
 from time import sleep, time
 
-from ..application.score_evaluation_application import ScoreEvaluationApplication
+from ..service.score_evaluation_service import ScoreEvaluationService
 from ..infrastructure.sqs_infrastructure import EvaluationMessageRepositoryInterface
 from ..infrastructure.dynamodb_infrastructure import EvaluationResultDynamoDBRepositoryInterface
 
@@ -18,7 +18,7 @@ class ScoreEvaluationUsecase:
             _eval.error_message = "level 0, endless mode is not supported now"
             _eval.status = "error"
         else:
-            eval_app = ScoreEvaluationApplication(_eval)
+            eval_app = ScoreEvaluationService(_eval)
             print("start evaluation:\t", _eval)
             _eval.started_at = int(time())
             _eval.status = "evaluating"

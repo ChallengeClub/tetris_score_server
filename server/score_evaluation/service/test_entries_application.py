@@ -5,7 +5,7 @@ import subprocess
 
 from ..domain.model.entity import Evaluation
 
-class TestEntriesApplication:
+class TestEntriesService:
     def __init__(self, evaluation: Evaluation) -> None:
         self.evaluation = evaluation
 

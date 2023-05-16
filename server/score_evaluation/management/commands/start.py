@@ -2,7 +2,7 @@
 
 from django.core.management.base import BaseCommand
 
-from ...usecase.score_evaluation_usecase import ScoreEvaluationUsecase
+from ...usecase.score_evaluation_application import ScoreEvaluationApplication
 
 
 # python manage.py から呼び出す自作コマンドを登録するためのクラス
@@ -16,5 +16,5 @@ class Command(BaseCommand):
     # コマンドが実行された際に呼ばれるメソッド
     def handle(self, *args, **options):
         interval = options["interval"]
-        scoreEvaluationUsecase = ScoreEvaluationUsecase()
-        scoreEvaluationUsecase.polling(time=interval)
+        score_evaluation_application = ScoreEvaluationApplication()
+        score_evaluation_application.start(time=interval)

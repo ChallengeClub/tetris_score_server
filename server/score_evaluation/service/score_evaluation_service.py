@@ -6,6 +6,8 @@ from collections import defaultdict
 import subprocess
 
 from ..domain.model.entity import Evaluation
+from status_monitor_service import StatusMonitorService
+status_monitor_service = StatusMonitorService()
 
 class ScoreEvaluationService:
     def __init__(self, evaluation: Evaluation) -> None:
@@ -27,6 +29,8 @@ class ScoreEvaluationService:
         # execute tetris_start asynchronously
         results = []
         for i in range(self.evaluation.trial_num):
+            if status_monitor_service.check_is_status_canceled(self.evaluation):
+                break
             _result = tetris_start(
                 game_time=self.evaluation.game_time,
                 log_file=f"{log_folder}/result-{i}.json", 

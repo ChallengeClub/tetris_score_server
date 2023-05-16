@@ -37,12 +37,3 @@ class ScoreEvaluationUsecase:
         
         return _eval
 
-    def polling(self, time):
-        print("start polling")
-        while True:
-            _eval = self.execute()
-            if _eval is not None:                
-                print("result\t", _eval.to_json()) 
-                continue
-            print(f"no message in sqs, wait for {time} s")
-            sleep(time)

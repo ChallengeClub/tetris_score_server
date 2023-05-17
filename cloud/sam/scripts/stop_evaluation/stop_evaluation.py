@@ -64,9 +64,17 @@ def lambda_handler(event: dict, context):
                 '#Status' : 'Status',
 		    },
             ExpressionAttributeValues={
-                ':status' : 'stopping',
+                ':status' : 'interrupted',
             },
         )
+        response = {
+            "statusCode": 200,
+            'headers': {
+                'Access-Control-Allow-Origin': frontend_origin,
+                'Access-Control-Allow-Methods': 'OPTIONS,GET'
+            },
+            "body": "successfully interrupted evaluation",
+        }
 
     except Exception as e:
         response = {

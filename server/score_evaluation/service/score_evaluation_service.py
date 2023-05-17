@@ -29,8 +29,11 @@ class ScoreEvaluationService:
         # execute tetris_start asynchronously
         results = []
         for i in range(self.evaluation.trial_num):
-            if status_monitor_service.check_is_status_canceled(self.evaluation):
-                break
+            if status_monitor_service.check_is_status_interrupted(self.evaluation):
+                self.evaluation.status = "canceled"
+                print("evaluation was successfully canceled")
+                return self.evaluation
+            
             _result = tetris_start(
                 game_time=self.evaluation.game_time,
                 log_file=f"{log_folder}/result-{i}.json", 

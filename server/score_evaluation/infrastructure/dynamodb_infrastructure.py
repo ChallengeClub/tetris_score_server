@@ -96,7 +96,7 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
                 'Status',
             ],
         )
-        return response
+        return response["Item"]["Status"]
 
 class EntriesResultDynamoDBRepositoryInterface(EntryTestResultRepository):
     def __init__(self, dynamodb_table_name=os.environ.get("dynamodb_competition_table", "")):

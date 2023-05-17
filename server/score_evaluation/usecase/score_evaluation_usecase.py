@@ -1,8 +1,10 @@
 from time import sleep, time
 
 from ..service.score_evaluation_service import ScoreEvaluationService
+from ..service.status_monitor_service import StatusMonitorService
 from ..infrastructure.sqs_infrastructure import EvaluationMessageRepositoryInterface
 from ..infrastructure.dynamodb_infrastructure import EvaluationResultDynamoDBRepositoryInterface
+status_monitor_service = StatusMonitorService()
 
 class ScoreEvaluationUsecase:
     def __init__(self) -> None:
@@ -18,17 +20,21 @@ class ScoreEvaluationUsecase:
             _eval.error_message = "level 0, endless mode is not supported now"
             _eval.status = "error"
         else:
-            eval_app = ScoreEvaluationService(_eval)
-            print("start evaluation:\t", _eval)
-            _eval.started_at = int(time())
-            _eval.status = "evaluating"
-            res = self.evaluation_dynamodb_repository_interface.update_started_at(_eval)
-            if res['ResponseMetadata']['HTTPStatusCode'] != 200:
-                print("failed update to dynamodb:\t", res)
+            if status_monitor_service.check_is_status_interrupted(_eval):
+                _eval.status = "canceled"
+                print("evaluation was successfully canceled")
+            else:
+                score_evaluation_service = ScoreEvaluationService(_eval)
+                print("start evaluation:\t", _eval)
+                _eval.started_at = int(time())
+                _eval.status = "evaluating"
+                res = self.evaluation_dynamodb_repository_interface.update_started_at(_eval)
+                if res['ResponseMetadata']['HTTPStatusCode'] != 200:
+                    print("failed update to dynamodb:\t", res)
 
-            _eval = eval_app.evaluate(log_folder="/server/log")
-            _eval.ended_at = int(time())
-            print("finish evaluation:\t", _eval)
+                _eval = score_evaluation_service.evaluate(log_folder="/server/log")
+                _eval.ended_at = int(time())
+                print("finish evaluation:\t", _eval)
         
         res = self.evaluation_dynamodb_repository_interface.update(_eval)
         if res['ResponseMetadata']['HTTPStatusCode'] != 200:

@@ -28,8 +28,8 @@ def lambda_handler(event: dict, context):
         }
         return response
     
-    status = _res.get("Status", "")
-    if not status:
+    item = _res.get("Item", "")
+    if not item:
         response = {
             "statusCode": 404,
             'headers': {
@@ -39,7 +39,8 @@ def lambda_handler(event: dict, context):
             "body": "No such record, id: " + id,
         }
         return response
-    
+        
+    status = item.get("Status", "")
     if status not in ("evaluating", "waiting"):
         response = {
             "statusCode": 204,

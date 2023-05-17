@@ -1,5 +1,5 @@
 from time import sleep
-from ..service.score_evaluation_usecase import ScoreEvaluationUsecase
+from ..usecase.score_evaluation_usecase import ScoreEvaluationUsecase
 
 class ScoreEvaluationApplication:
     def __init__(self):

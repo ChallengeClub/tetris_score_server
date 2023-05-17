@@ -2,7 +2,7 @@
 
 from django.core.management.base import BaseCommand
 
-from ...usecase.score_evaluation_application import ScoreEvaluationApplication
+from ...application.score_evaluation_application import ScoreEvaluationApplication
 
 
 # python manage.py から呼び出す自作コマンドを登録するためのクラス

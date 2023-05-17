@@ -6,5 +6,5 @@ class StatusMonitorService:
         self.dynamodb_repository_interface = EvaluationResultDynamoDBRepositoryInterface()
     
     def check_is_status_canceled(self, evaluation: Evaluation)->bool:
-        status = self.dynamodb_repository_interface.get_status(evaluation.id)
+        status = self.dynamodb_repository_interface.get_status(evaluation)
         return status == "canceled"

@@ -6,7 +6,7 @@ from collections import defaultdict
 import subprocess
 
 from ..domain.model.entity import Evaluation
-from status_monitor_service import StatusMonitorService
+from .status_monitor_service import StatusMonitorService
 status_monitor_service = StatusMonitorService()
 
 class ScoreEvaluationService:

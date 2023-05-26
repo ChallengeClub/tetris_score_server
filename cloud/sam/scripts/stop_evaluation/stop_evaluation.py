@@ -22,7 +22,7 @@ def lambda_handler(event: dict, context):
             "statusCode": 500,
             'headers': {
                 'Access-Control-Allow-Origin': frontend_origin,
-                'Access-Control-Allow-Methods': 'OPTIONS,GET'
+                'Access-Control-Allow-Methods': 'OPTIONS,DELETE'
             },
             "body": "failed to get item from dynamodb: " + str(e),
         }
@@ -34,7 +34,7 @@ def lambda_handler(event: dict, context):
             "statusCode": 404,
             'headers': {
                 'Access-Control-Allow-Origin': frontend_origin,
-                'Access-Control-Allow-Methods': 'OPTIONS,GET'
+                'Access-Control-Allow-Methods': 'OPTIONS,DELETE'
             },
             "body": "No such record, id: " + id,
         }
@@ -46,7 +46,7 @@ def lambda_handler(event: dict, context):
             "statusCode": 204,
             'headers': {
                 'Access-Control-Allow-Origin': frontend_origin,
-                'Access-Control-Allow-Methods': 'OPTIONS,GET'
+                'Access-Control-Allow-Methods': 'OPTIONS,DELETE'
             },
             "body": "stop request was rejected, current status was " + status,
         }
@@ -71,7 +71,7 @@ def lambda_handler(event: dict, context):
             "statusCode": 200,
             'headers': {
                 'Access-Control-Allow-Origin': frontend_origin,
-                'Access-Control-Allow-Methods': 'OPTIONS,GET'
+                'Access-Control-Allow-Methods': 'OPTIONS,DELETE'
             },
             "body": "successfully interrupted evaluation",
         }
@@ -81,7 +81,7 @@ def lambda_handler(event: dict, context):
             "statusCode": 500,
             'headers': {
                 'Access-Control-Allow-Origin': frontend_origin,
-                'Access-Control-Allow-Methods': 'OPTIONS,GET'
+                'Access-Control-Allow-Methods': 'OPTIONS,DELETE'
             },
             "body": "failed to update item on dynamodb: " + str(e),
         }

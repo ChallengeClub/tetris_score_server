@@ -143,8 +143,8 @@ Resources:
         PostEvaluationRequestEndpoint:
           Type: Api
           Properties:
-            Path: /evaluation/{id}
-            Method: delete
+            Path: /stop-evaluation/{id}
+            Method: post
             RestApiId: !Ref TetrisAPI
 
   Layer:

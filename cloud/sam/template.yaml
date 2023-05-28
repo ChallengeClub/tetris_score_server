@@ -140,11 +140,29 @@ Resources:
         - DynamoDBCrudPolicy:
             TableName: !Ref DynamoDBTableName
       Events:
-        PostEvaluationRequestEndpoint:
+        StopEvaluationRequestEndpoint:
+          Type: Api
+          Properties:
+            Path: /evaluation/cancel/{id}
+            Method: post
+            RestApiId: !Ref TetrisAPI
+
+  StopEvaluationFunctionChanged:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts/stop_evaluation
+      Handler: stop_evaluation.lambda_handler
+      Layers:
+        - Ref: Layer
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref DynamoDBTableName
+      Events:
+        StopEvaluationChangedRequestEndpoint:
           Type: Api
           Properties:
             Path: /stop-evaluation/{id}
-            Method: post
+            Method: put
             RestApiId: !Ref TetrisAPI
 
   Layer:

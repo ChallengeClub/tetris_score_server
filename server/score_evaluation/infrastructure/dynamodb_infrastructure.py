@@ -87,6 +87,17 @@ class EvaluationResultDynamoDBRepositoryInterface(EvaluationResultRepository):
         )
         return response
 
+    def get_status(self, evaluation: Evaluation):
+        response = self.table.get_item(
+            Key = {
+                "Id": evaluation.id
+            },
+            AttributesToGet = [
+                'Status',
+            ],
+        )
+        return response["Item"]["Status"]
+
 class EntriesResultDynamoDBRepositoryInterface(EntryTestResultRepository):
     def __init__(self, dynamodb_table_name=os.environ.get("dynamodb_competition_table", "")):
         self.dynamo = boto3.resource('dynamodb')

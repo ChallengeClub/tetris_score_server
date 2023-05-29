@@ -32,7 +32,7 @@ class ScoreEvaluationService:
             if status_monitor_service.check_is_status_interrupted(self.evaluation):
                 self.evaluation.status = "canceled"
                 print("evaluation was successfully canceled")
-                return self.evaluation
+                break
             
             _result = tetris_start(
                 game_time=self.evaluation.game_time,
@@ -75,7 +75,8 @@ class ScoreEvaluationService:
         self.evaluation.score_min = min(infos["scores"])
         if len(infos["scores"]) > 1:
             self.evaluation.score_stdev = stdev(infos["scores"])
-        self.evaluation.status = "succeeded"
+        if self.evaluation.status=="evaluating": # if finished without interruption
+            self.evaluation.status = "succeeded"
         self.evaluation.gameover_count["values"] = infos["gameover_count"]
         self.evaluation.block_index["values"] = infos["block_index"]
         self.evaluation.line_score_stat["values"] = infos["line_score_stat"]

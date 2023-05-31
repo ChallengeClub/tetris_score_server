@@ -42,6 +42,9 @@ Resources:
     Properties:
       Name: tetris_api
       StageName: tetris_api_stage
+      Cors:
+        AllowMethods: "'POST, GET, PUT, OPTIONS'"
+        AllowOrigin: !Sub "'${FrontendOrigin}'"
 
   GetEntriesFunction:
     Type: AWS::Serverless::Function
@@ -127,6 +130,24 @@ Resources:
           Properties:
             Path: /evaluation
             Method: post
+            RestApiId: !Ref TetrisAPI
+
+  StopEvaluationFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts/stop_evaluation
+      Handler: stop_evaluation.lambda_handler
+      Layers:
+        - Ref: Layer
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref DynamoDBTableName
+      Events:
+        StopEvaluationRequestEndpoint:
+          Type: Api
+          Properties:
+            Path: /evaluation/cancel/{id}
+            Method: put
             RestApiId: !Ref TetrisAPI
 
   Layer:

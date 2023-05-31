@@ -1,7 +1,7 @@
 from time import time
 import pathlib
 
-from ..application.test_entries_application import TestEntriesApplication
+from ..service.test_entries_service import TestEntriesService
 from ..infrastructure.dynamodb_infrastructure import EntriesResultDynamoDBRepositoryInterface
 from ..infrastructure.file_infrastructure import EntryTestRepositoryInterface
 
@@ -26,7 +26,7 @@ class TestEntriesEvaluationUsecase:
                 _eval.error_message = "level 0, endless mode is not supported now"
                 _eval.status = "error"
             else:
-                eval_app = TestEntriesApplication(_eval)
+                eval_app = TestEntriesService(_eval)
                 print("start evaluation:\t", _eval)
                 _eval.started_at = int(time())
                 _eval.game_time = 1

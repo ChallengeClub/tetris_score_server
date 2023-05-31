@@ -39,7 +39,8 @@ data "aws_iam_policy_document" "score_evaluation_task_policy_doc" {
     actions = [
       "sqs:ReceiveMessage",
       "sqs:DeleteMessage",
-      "dynamodb:UpdateItem"
+      "dynamodb:UpdateItem",
+      "dynamodb:GetItem"
     ]
     resources = [
       aws_sqs_queue.score_evaluation_queue.arn,

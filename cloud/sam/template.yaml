@@ -80,7 +80,24 @@ Resources:
             Path: /news
             Method: get
             RestApiId: !Ref TetrisAPI
-            
+
+  GetNewsDetailFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts/get_news_detail_from_dynamodb
+      Handler: get_news_detail_from_dynamodb.lambda_handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref DynamoDBNewsTableName
+      Events:
+        GetNewsDetailEndpoint:
+          Type: Api
+          Properties:
+            Path: /news/{id}
+            Method: get
+            RestApiId: !Ref TetrisAPI
+
+
   GetResultsFunction:
     Type: AWS::Serverless::Function
     Properties:

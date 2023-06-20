@@ -69,3 +69,21 @@ resource "aws_dynamodb_table" "dynamodb-competition-table" {
     Name = var.dynamodb_competition_table_name
   }
 }
+
+
+resource "aws_dynamodb_table" "dynamodb-news-table" {
+  name           = var.dynamodb_news_table_name
+  billing_mode   = "PROVISIONED"
+  read_capacity  = 1
+  write_capacity = 1
+  hash_key       = "Id"
+
+  attribute {
+    name = "Id"
+    type = "S"
+  }
+
+  tags = {
+    Name = var.dynamodb_news_table_name
+  }
+}

@@ -12,7 +12,7 @@ region = "ap-northeast-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
 disable_rollback = true
-parameter_overrides = "DynamoDBCompetitionTableName=\"tetris_competition_entry_table\" DynamoDBTableName=\"tetris_score_results_table\" SQSName=\"score_evaluation_queue\""
+parameter_overrides = "DynamoDBCompetitionTableName=\"tetris_competition_entry_table\" DynamoDBTableName=\"tetris_score_results_table\" DynamoDBNewsTableName=\"tetris_news_table\" SQSName=\"score_evaluation_queue\""
 image_repositories = []
 
 [prod]
@@ -25,5 +25,5 @@ region = "ap-northeast-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
 disable_rollback = true
-parameter_overrides = "DynamoDBCompetitionTableName=\"tetris_competition_entry_table\" DynamoDBTableName=\"tetris_score_results_table\" SQSName=\"score_evaluation_queue\""
+parameter_overrides = "DynamoDBCompetitionTableName=\"tetris_competition_entry_table\" DynamoDBTableName=\"tetris_score_results_table\" DynamoDBNewsTableName=\"tetris_news_table\" SQSName=\"score_evaluation_queue\""
 image_repositories = []

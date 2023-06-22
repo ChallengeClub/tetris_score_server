@@ -105,3 +105,7 @@ variable "dynamodb_competition_table_name" {
     type = string
     default = "tetris_competition_entry_table"
 }
+variable "dynamodb_news_table_name" {
+    type = string
+    default = "tetris_news_table"
+}

@@ -11,6 +11,8 @@ Parameters:
     Type: String
   DynamoDBTableName:
     Type: String
+  DynamoDBNewsTableName:
+    Type: String
   SQSUrl:
     Type: String
     NoEcho: true
@@ -30,6 +32,7 @@ Globals:
       Variables:
         DYNAMODB_COMPETITION_TABLE_NAME: !Ref DynamoDBCompetitionTableName
         DYNAMODB_TABLE_NAME: !Ref DynamoDBTableName
+        DYNAMODB_NEWS_TABLE_NAME: !Ref DynamoDBNewsTableName
         FRONTEND_ORIGIN: !Ref FrontendOrigin
         SQS_URL: !Ref SQSUrl
 
@@ -61,7 +64,40 @@ Resources:
             Path: /entries
             Method: get
             RestApiId: !Ref TetrisAPI
-            
+
+  GetNewsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts/get_news_from_dynamodb
+      Handler: get_news_from_dynamodb.lambda_handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref DynamoDBNewsTableName
+      Events:
+        GetNewsEndpoint:
+          Type: Api
+          Properties:
+            Path: /news
+            Method: get
+            RestApiId: !Ref TetrisAPI
+
+  GetNewsDetailFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts/get_news_detail_from_dynamodb
+      Handler: get_news_detail_from_dynamodb.lambda_handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref DynamoDBNewsTableName
+      Events:
+        GetNewsDetailEndpoint:
+          Type: Api
+          Properties:
+            Path: /news/{id}
+            Method: get
+            RestApiId: !Ref TetrisAPI
+
+
   GetResultsFunction:
     Type: AWS::Serverless::Function
     Properties:

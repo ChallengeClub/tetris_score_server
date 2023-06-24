@@ -18,6 +18,8 @@ Parameters:
     NoEcho: true
   SQSName:
     Type: String
+  TetrisTrainingBucketName:
+    Type: String
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -35,6 +37,7 @@ Globals:
         DYNAMODB_NEWS_TABLE_NAME: !Ref DynamoDBNewsTableName
         FRONTEND_ORIGIN: !Ref FrontendOrigin
         SQS_URL: !Ref SQSUrl
+        TETRIS_TRAINING_BUCKET_NAME: !Ref TetrisTrainingBucketName
 
   Api:
     TracingEnabled: true
@@ -184,6 +187,22 @@ Resources:
           Properties:
             Path: /evaluation/cancel/{id}
             Method: put
+            RestApiId: !Ref TetrisAPI
+
+  PostTetrisTrainingCodeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts/post_tetris_training_code
+      Handler: post_tetris_training_code.lambda_handler
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Ref TetrisTrainingBucketName
+      Events:
+        PostTetrisTrainingCodeEndpoint:
+          Type: Api
+          Properties:
+            Path: /training/{section}/{id}
+            Method: post
             RestApiId: !Ref TetrisAPI
 
   Layer:

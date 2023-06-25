@@ -13,6 +13,8 @@ Parameters:
     Type: String
   DynamoDBNewsTableName:
     Type: String
+  DynamoDBTrainingTableName:
+    Type: String
   SQSUrl:
     Type: String
     NoEcho: true
@@ -35,6 +37,7 @@ Globals:
         DYNAMODB_COMPETITION_TABLE_NAME: !Ref DynamoDBCompetitionTableName
         DYNAMODB_TABLE_NAME: !Ref DynamoDBTableName
         DYNAMODB_NEWS_TABLE_NAME: !Ref DynamoDBNewsTableName
+        DYNAMODB_TRAINING_TABLE_NAME: !Ref DynamoDBTrainingTableName
         FRONTEND_ORIGIN: !Ref FrontendOrigin
         SQS_URL: !Ref SQSUrl
         TETRIS_TRAINING_BUCKET_NAME: !Ref TetrisTrainingBucketName
@@ -205,6 +208,38 @@ Resources:
             Method: post
             RestApiId: !Ref TetrisAPI
 
+  GetTrainingDetailFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts/get_training_detail_from_dynamodb
+      Handler: get_training_detail_from_dynamodb.lambda_handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref DynamoDBTrainingTableName
+      Events:
+        GetTrainingDetailEndpoint:
+          Type: Api
+          Properties:
+            Path: /training/{section}/{id}
+            Method: get
+            RestApiId: !Ref TetrisAPI
+
+  GetSectionTrainingsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./scripts/get_trainings_in_section
+      Handler: get_trainings_in_section.lambda_handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref DynamoDBTrainingTableName
+      Events:
+        GetSectionTrainingsEndpoint:
+          Type: Api
+          Properties:
+            Path: /trainings/{section}
+            Method: get
+            RestApiId: !Ref TetrisAPI
+  
   Layer:
     Type: AWS::Serverless::LayerVersion
     Properties:

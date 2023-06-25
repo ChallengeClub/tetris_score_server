@@ -51,8 +51,7 @@ def lambda_handler(event: dict, context):
             proc.kill()
             outs, errs = proc.communicate()
         expected_outs = output_text.decode('utf-8') + "\n"
-        
-        results.append(expected_outs==outs)
+        results.append("AC" if expected_outs==outs else "WA")
         
     if os.path.exists(python_file_path):
         os.remove(python_file_path)

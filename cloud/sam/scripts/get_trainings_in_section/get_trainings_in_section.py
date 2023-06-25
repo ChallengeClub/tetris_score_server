@@ -4,7 +4,8 @@ import os
 import json
 import decimal
 
-table_name = os.environ["DYNAMODB_TRAINIG_TABLE_NAME"]
+table_name = os.environ["DYNAMODB_TRAINING_TABLE_NAME"]
+frontend_origin = os.environ["FRONTEND_ORIGIN"]
 
 def lambda_handler(event: dict, context):
     dynamodb = boto3.resource("dynamodb")
@@ -14,7 +15,7 @@ def lambda_handler(event: dict, context):
             IndexName = "TrainingSetionIndex",
             Select = 'ALL_PROJECTED_ATTRIBUTES',
             ScanIndexForward = False,
-            KeyConditionExpression=Key('Section').eq(event["queryStringParameters"]["section"]),
+            KeyConditionExpression=Key('Section').eq(event['pathParameters']["section"]),
         )
 
         body = {

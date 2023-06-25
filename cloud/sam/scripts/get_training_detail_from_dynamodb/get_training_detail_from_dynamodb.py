@@ -3,7 +3,7 @@ import os
 import json
 import decimal
 
-table_name = os.environ["DYNAMODB_TABLE_TRAINING_NAME"]
+table_name = os.environ["DYNAMODB_TRAINING_TABLE_NAME"]
 frontend_origin = os.environ["FRONTEND_ORIGIN"]
 
 def lambda_handler(event: dict, context):

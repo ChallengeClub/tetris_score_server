@@ -2,9 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from PyQt5.QtWidgets import QMainWindow, QFrame, QDesktopWidget, QApplication, QHBoxLayout, QLabel
-from PyQt5.QtCore import Qt, QBasicTimer, pyqtSignal
-from PyQt5.QtGui import QPainter, QColor
 
 from board_manager import BOARD_DATA, Shape
 from block_controller import BLOCK_CONTROLLER
@@ -70,7 +67,7 @@ def get_option(game_time, mode, nextShapeMode, drop_interval, random_seed, obsta
 # Game Manager
 #####################################################################
 #####################################################################
-class Game_Manager(QMainWindow):
+class Game_Manager():
 
     # a[n] = n^2 - n + 1
     LINE_SCORE_1 = 100
@@ -162,7 +159,6 @@ class Game_Manager(QMainWindow):
         self.NextShapeMaxAppear = min(4, self.ShapeListMax - 1)
 
         self.speed = self.drop_interval # block drop speed
-        self.timer = QBasicTimer()
 
         random_seed_Nextshape = self.random_seed
         self.tboard = Board(self.gridSize,
@@ -189,7 +185,6 @@ class Game_Manager(QMainWindow):
         BOARD_DATA.clear()
         ## 新しい予告テトリミノ配列作成
         BOARD_DATA.createNewPiece()
-        self.timer.start(self.speed, self)
 
     ###############################################
     # ゲームリセット (ゲームオーバー)
@@ -229,54 +224,52 @@ class Game_Manager(QMainWindow):
         self.tboard.updateData()
 
     ###############################################
-    # タイマーイベント
+    # ループイベント
     ###############################################
-    def timerEvent(self, event):
-        # callback function for user control
+    def exec(self):
+        next_x = 0
+        next_y_moveblocknum = 0
+        y_operation = -1
 
-        if event.timerId() == self.timer.timerId():
-            next_x = 0
-            next_y_moveblocknum = 0
-            y_operation = -1
+        if BLOCK_CONTROLLER and not self.nextMove:
+            # update CurrentBlockIndex
+            if BOARD_DATA.currentY <= 1:
+                self.block_index = self.block_index + 1
 
-            if BLOCK_CONTROLLER and not self.nextMove:
-                # update CurrentBlockIndex
-                if BOARD_DATA.currentY <= 1:
-                    self.block_index = self.block_index + 1
-
-                # nextMove data structure
-                nextMove = {"strategy":
-                                {
-                                  "direction": "none",    # next shape direction ( 0 - 3 )
-                                  "x": "none",            # next x position (range: 0 - (witdh-1) )
-                                  "y_operation": "none",  # movedown or dropdown (0:movedown, 1:dropdown)
-                                  "y_moveblocknum": "none", # amount of next y movement
-                                  "use_hold_function": "n", # use hold function (y:yes, n:no)
-                                },
-                            "option":
-                                { "reset_callback_function_addr":None,
-                                  "reset_all_field": None,
-                                  "force_reset_field": None,
-                                }
+            # nextMove data structure
+            nextMove = {"strategy":
+                            {
+                                "direction": "none",    # next shape direction ( 0 - 3 )
+                                "x": "none",            # next x position (range: 0 - (witdh-1) )
+                                "y_operation": "none",  # movedown or dropdown (0:movedown, 1:dropdown)
+                                "y_moveblocknum": "none", # amount of next y movement
+                                "use_hold_function": "n", # use hold function (y:yes, n:no)
+                            },
+                        "option":
+                            { "reset_callback_function_addr":None,
+                                "reset_all_field": None,
+                                "force_reset_field": None,
                             }
-                # get nextMove from GameController
-                GameStatus = self.getGameStatus()
+                        }
+            # get nextMove from GameController
+            GameStatus = self.getGameStatus()
 
-                if self.mode == "art":
-                    # art
-                    # print GameStatus
-                    import pprint
-                    print("=================================================>")
-                    pprint.pprint(GameStatus, width = 61, compact = True)
-                    # get direction/x/y from art_config
-                    d,x,y = BOARD_DATA.getnextShapeIndexListDXY(self.block_index-1)
-                    nextMove["strategy"]["direction"] = d
-                    nextMove["strategy"]["x"] = x
-                    nextMove["strategy"]["y_operation"] = y
-                    nextMove["strategy"]["y_moveblocknum"] = 1
-                    self.nextMove = nextMove
-                else:
-                    self.nextMove = BLOCK_CONTROLLER.GetNextMove(nextMove, GameStatus)
+            if self.mode == "art":
+                # art
+                # print GameStatus
+                import pprint
+                print("=================================================>")
+                pprint.pprint(GameStatus, width = 61, compact = True)
+                # get direction/x/y from art_config
+                d,x,y = BOARD_DATA.getnextShapeIndexListDXY(self.block_index-1)
+                nextMove["strategy"]["direction"] = d
+                nextMove["strategy"]["x"] = x
+                nextMove["strategy"]["y_operation"] = y
+                nextMove["strategy"]["y_moveblocknum"] = 1
+                self.nextMove = nextMove
+            else:
+                self.nextMove = BLOCK_CONTROLLER.GetNextMove(nextMove, GameStatus)
+
 
             #######################
             ## 次の手を動かす
@@ -372,9 +365,11 @@ class Game_Manager(QMainWindow):
             # update window
             self.updateWindow()
             return
-        else:
-            super(Game_Manager, self).timerEvent(event)
 
+    def loop(self, counts):
+        for _ in range(counts):
+            self.exec()
+        
     ###############################################
     # 消去ライン数と落下数によりスコア計算
     ###############################################
@@ -679,33 +674,6 @@ class Game_Manager(QMainWindow):
         status["judge_info"]["mode"] = self.mode
         return json.dumps(status)
 
-###############################################
-# 四角形の描画
-###############################################
-def drawSquare(painter, x, y, val, s):
-    colorTable = BOARD_DATA.getcolorTable()
-
-    # treat values as integer explicitly
-    x = int(x)
-    y = int(y)
-    val = int(val)
-    s = int(s)
-
-    if val == 0:
-        return
-
-    color = QColor(colorTable[val])
-    painter.fillRect(x + 1, y + 1, s - 2, s - 2, color)
-
-    painter.setPen(color.lighter())
-    painter.drawLine(x, y + s - 1, x, y)
-    painter.drawLine(x, y, x + s - 1, y)
-
-    painter.setPen(color.darker())
-    painter.drawLine(x + 1, y + s - 1, x + s - 1, y + s - 1)
-    painter.drawLine(x + s - 1, y + s - 1, x + s - 1, y + 1)
-
-
 #####################################################################
 #####################################################################
 # 画面ボード描画
@@ -789,6 +757,5 @@ class Board:
             sys.exit(0)
 
 if __name__ == '__main__':
-    app = QApplication([])
     GAME_MANEGER = Game_Manager()
-    sys.exit(app.exec_())
+    GAME_MANEGER.loop(10)

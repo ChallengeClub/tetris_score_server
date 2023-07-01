@@ -5,14 +5,11 @@ import sys
 import subprocess
 from argparse import ArgumentParser
 
-def get_option(game_level, game_time, mode, nextShapeMode, random_seed, drop_interval, resultlogjson, train_yaml, predict_weight, user_name, ShapeListMax, BlockNumMax, art_config_filepath):
+def get_option(game_level, mode, nextShapeMode, random_seed, drop_interval, resultlogjson, train_yaml, predict_weight, user_name, ShapeListMax, BlockNumMax, art_config_filepath):
     argparser = ArgumentParser()
     argparser.add_argument('-l', '--game_level', type=int,
                            default=game_level,
                            help='Specify game level')
-    argparser.add_argument('-t', '--game_time', type=int,
-                           default=game_time,
-                           help='Specify game time(s), if specify -1, do endless loop')
     argparser.add_argument('-m', '--mode', type=str,
                            default=mode,
                            help='Specify mode (keyboard/gamepad/sample/art/train/predict/train_sample/predict_sample/train_sample2/predict_sample2) if necessary')
@@ -61,7 +58,6 @@ def get_python_cmd():
 def start():
     ## default value
     GAME_LEVEL = 1
-    GAME_TIME = 180
     IS_MODE = "default"
     IS_NEXTSHAPEMODE = "default"
     IS_SAMPLE_CONTROLL = "n"
@@ -78,7 +74,6 @@ def start():
 
     ## update value if args are given
     args = get_option(GAME_LEVEL,
-                      GAME_TIME,
                       IS_MODE,
                       IS_NEXTSHAPEMODE,
                       INPUT_RANDOM_SEED,
@@ -92,8 +87,6 @@ def start():
                       ART_CONFIG)
     if args.game_level >= 0:
         GAME_LEVEL = args.game_level
-    if args.game_time >= 0 or args.game_time == -1:
-        GAME_TIME = args.game_time
     if args.mode in ("keyboard", "gamepad", "sample", "art", "train", "predict", "train_sample", "predict_sample", "train_sample2", "predict_sample2"):
         IS_MODE = args.mode
     if args.nextShapeMode in ("default", "hate"):
@@ -123,9 +116,7 @@ def start():
     OBSTACLE_PROBABILITY = 0   # obstacle probability (percent)
 
     ## update field parameter level
-    if GAME_LEVEL == 0:   # level0
-        GAME_TIME = -1
-    elif GAME_LEVEL == 1: # level1
+    if GAME_LEVEL == 1: # level1
         RANDOM_SEED = 0
         BLOCK_NUM_MAX = 180
     elif GAME_LEVEL == 2: # level2
@@ -155,7 +146,6 @@ def start():
 
     ## print
     print('game_level: ' + str(GAME_LEVEL))
-    print('game_time: ' + str(GAME_TIME))
     print('RANDOM_SEED: ' + str(RANDOM_SEED))
     print('IS_MODE :' + str(IS_MODE))
     print('IS_NEXTSHAPEMODE :' + str(IS_NEXTSHAPEMODE))
@@ -172,7 +162,6 @@ def start():
     ## start game
     PYTHON_CMD = get_python_cmd()
     cmd = PYTHON_CMD + ' ' + 'game_manager.py' \
-        + ' ' + '--game_time' + ' ' + str(GAME_TIME) \
         + ' ' + '--seed' + ' ' + str(RANDOM_SEED) \
         + ' ' + '--obstacle_height' + ' ' + str(OBSTACLE_HEIGHT) \
         + ' ' + '--obstacle_probability' + ' ' + str(OBSTACLE_PROBABILITY) \

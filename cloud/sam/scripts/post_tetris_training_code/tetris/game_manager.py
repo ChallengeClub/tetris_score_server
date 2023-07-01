@@ -14,11 +14,8 @@ import pprint
 ################################
 # Option 取得
 ###############################
-def get_option(game_time, mode, nextShapeMode, drop_interval, random_seed, obstacle_height, obstacle_probability, resultlogjson, train_yaml, predict_weight, user_name, ShapeListMax, BlockNumMax, art_config_filepath):
+def get_option(mode, nextShapeMode, drop_interval, random_seed, obstacle_height, obstacle_probability, resultlogjson, train_yaml, predict_weight, user_name, ShapeListMax, BlockNumMax, art_config_filepath):
     argparser = ArgumentParser()
-    argparser.add_argument('--game_time', type=int,
-                           default=game_time,
-                           help='Specify game time(s)')
     argparser.add_argument('--mode', type=str,
                            default=mode,
                            help='Specify mode (keyboard/gamepad/sample/train/art) if necessary')
@@ -84,7 +81,6 @@ class Game_Manager:
         self.nextMove = None
         self.lastShape = Shape.shapeNone
 
-        self.game_time = -1
         self.block_index = 0
         self.mode = "default"
         self.nextShapeMode = "default"
@@ -100,7 +96,7 @@ class Game_Manager:
         self.predict_weight = None
         self.art_config_filepath = None
         
-        args = get_option(self.game_time,
+        args = get_option(
                           self.mode,
                           self.nextShapeMode,
                           self.drop_interval,
@@ -114,8 +110,6 @@ class Game_Manager:
                           self.ShapeListMax,
                           self.BlockNumMax,
                           self.art_config_filepath)
-        if args.game_time >= 0:
-            self.game_time = args.game_time
         if args.mode in ("keyboard", "gamepad", "sample", "art", "train", "predict", "train_sample", "predict_sample", "train_sample2", "predict_sample2"):
             self.mode = args.mode
         if args.nextShapeMode in ("default", "hate"):
@@ -160,7 +154,6 @@ class Game_Manager:
 
         random_seed_Nextshape = self.random_seed
         self.tboard = Board(self.gridSize,
-                            self.game_time,
                             self.nextShapeMode,
                             random_seed_Nextshape,
                             self.obstacle_height,
@@ -433,7 +426,6 @@ class Game_Manager:
                   "judge_info":
                       {
                         "elapsed_time":"none",
-                        "game_time":"none",
                         "gameover_count":"none",
                         "score":"none",
                         "line":"none",
@@ -530,7 +522,6 @@ class Game_Manager:
         ### next shape
         ## judge_info
         status["judge_info"]["elapsed_time"] = round(time.time() - self.tboard.start_time, 3)
-        status["judge_info"]["game_time"] = self.game_time
         status["judge_info"]["gameover_count"] = self.tboard.reset_cnt
         status["judge_info"]["score"] = self.tboard.score
         status["judge_info"]["line"] = self.tboard.line
@@ -624,7 +615,6 @@ class Game_Manager:
                   "judge_info":
                       {
                         "elapsed_time":"none",
-                        "game_time":"none",
                         "gameover_count":"none",
                         "score":"none",
                         "line":"none",
@@ -662,7 +652,6 @@ class Game_Manager:
         status["debug_info"]["obstacle_probability"] = self.obstacle_probability
         ## judge_info
         status["judge_info"]["elapsed_time"] = round(time.time() - self.tboard.start_time, 3)
-        status["judge_info"]["game_time"] = self.game_time
         status["judge_info"]["gameover_count"] = self.tboard.reset_cnt
         status["judge_info"]["score"] = self.tboard.score
         status["judge_info"]["line"] = self.tboard.line
@@ -680,9 +669,8 @@ class Board:
     ###############################################
     # 初期化
     ###############################################
-    def __init__(self, gridSize, game_time, nextShapeMode, random_seed, obstacle_height, obstacle_probability, ShapeListMax, art_config_filepath):
+    def __init__(self, gridSize, nextShapeMode, random_seed, obstacle_height, obstacle_probability, ShapeListMax, art_config_filepath):
         self.gridSize = gridSize
-        self.game_time = game_time
         self.initBoard(nextShapeMode, random_seed, obstacle_height, obstacle_probability, ShapeListMax, art_config_filepath)
 
     ###############################################
@@ -719,39 +707,30 @@ class Board:
         current_block_index = GameStatus["judge_info"]["block_index"]
         BlockNumMax = GameStatus["judge_info"]["block_num_max"]
 
-        if self.game_time == -1:
-            pass
-            #print("game_time: {}".format(self.game_time))
-            #print("endless loop")
-        elif (self.game_time >= 0 and elapsed_time >= self.game_time) or (current_block_index == BlockNumMax):
-            # finish game.
-            # 1. if elapsed_time beyonds given game_time.
-            # 2. if current_block_index beyonds given BlockNumMax.
-            print("game finish!! elapsed time: " + elapsed_time_str + "/game_time: " + str(self.game_time) \
-                  + ", " + "current_block_index: " + str(current_block_index) + "/BlockNumMax: " + str(BlockNumMax))
-            print("")
-            print("##### YOUR_RESULT #####")
-            print(status_str)
-            print("")
-            print("##### SCORE DETAIL #####")
-            GameStatus = GAME_MANEGER.getGameStatus()
-            line_score_stat = GameStatus["debug_info"]["line_score_stat"]
-            line_Score = GameStatus["debug_info"]["line_score"]
-            gameover_count = GameStatus["judge_info"]["gameover_count"]
-            score = GameStatus["judge_info"]["score"]
-            dropdownscore = GameStatus["debug_info"]["dropdownscore"]
-            print("  1 line: " + str(line_Score["line1"]) + " * " + str(line_score_stat[0]) + " = " + str(line_Score["line1"] * line_score_stat[0]))
-            print("  2 line: " + str(line_Score["line2"]) + " * " + str(line_score_stat[1]) + " = " + str(line_Score["line2"] * line_score_stat[1]))
-            print("  3 line: " + str(line_Score["line3"]) + " * " + str(line_score_stat[2]) + " = " + str(line_Score["line3"] * line_score_stat[2]))
-            print("  4 line: " + str(line_Score["line4"]) + " * " + str(line_score_stat[3]) + " = " + str(line_Score["line4"] * line_score_stat[3]))
-            print("  dropdownscore: " + str(dropdownscore))
-            print("  gameover: : " + str(line_Score["gameover"]) + " * " + str(gameover_count) + " = " + str(line_Score["gameover"] * gameover_count))
+        print("game finish!! elapsed time: " + elapsed_time_str \
+                + ", " + "current_block_index: " + str(current_block_index) + "/BlockNumMax: " + str(BlockNumMax))
+        print("")
+        print("##### YOUR_RESULT #####")
+        print(status_str)
+        print("")
+        print("##### SCORE DETAIL #####")
+        GameStatus = GAME_MANEGER.getGameStatus()
+        line_score_stat = GameStatus["debug_info"]["line_score_stat"]
+        line_Score = GameStatus["debug_info"]["line_score"]
+        gameover_count = GameStatus["judge_info"]["gameover_count"]
+        score = GameStatus["judge_info"]["score"]
+        dropdownscore = GameStatus["debug_info"]["dropdownscore"]
+        print("  1 line: " + str(line_Score["line1"]) + " * " + str(line_score_stat[0]) + " = " + str(line_Score["line1"] * line_score_stat[0]))
+        print("  2 line: " + str(line_Score["line2"]) + " * " + str(line_score_stat[1]) + " = " + str(line_Score["line2"] * line_score_stat[1]))
+        print("  3 line: " + str(line_Score["line3"]) + " * " + str(line_score_stat[2]) + " = " + str(line_Score["line3"] * line_score_stat[2]))
+        print("  4 line: " + str(line_Score["line4"]) + " * " + str(line_score_stat[3]) + " = " + str(line_Score["line4"] * line_score_stat[3]))
+        print("  dropdownscore: " + str(dropdownscore))
+        print("  gameover: : " + str(line_Score["gameover"]) + " * " + str(gameover_count) + " = " + str(line_Score["gameover"] * gameover_count))
 
-            print("##### ###### #####")
-            print("")
+        print("##### ###### #####")
+        print("")
 
-            #sys.exit(app.exec_())
-            sys.exit(0)
+        #sys.exit(app.exec_())
 
 if __name__ == '__main__':
     GAME_MANEGER = Game_Manager()

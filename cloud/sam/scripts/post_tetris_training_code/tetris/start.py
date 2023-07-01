@@ -5,14 +5,11 @@ import sys
 import subprocess
 from argparse import ArgumentParser
 
-def get_option(random_seed, drop_interval, resultlogjson, train_yaml, predict_weight, user_name, ShapeListMax, BlockNumMax, art_config_filepath):
+def get_option(random_seed, resultlogjson, train_yaml, predict_weight, user_name, ShapeListMax, BlockNumMax, art_config_filepath):
     argparser = ArgumentParser()
     argparser.add_argument('-r', '--random_seed', type=int,
                            default=random_seed,
                            help='Specify random seed if necessary') 
-    argparser.add_argument('-d', '--drop_interval', type=int,
-                           default=drop_interval,
-                           help='Specify drop interval (msec) if necessary') 
     argparser.add_argument('-f', '--resultlogjson', type=str,
                            default=resultlogjson,
                            help='Specigy result log file path if necessary')
@@ -39,8 +36,6 @@ def get_option(random_seed, drop_interval, resultlogjson, train_yaml, predict_we
 def start():
     ## default value
     INPUT_RANDOM_SEED = -1
-    INPUT_DROP_INTERVAL = -1
-    DROP_INTERVAL = 1000          # drop interval
     RESULT_LOG_JSON = "result.json"
     USER_NAME = "window_sample"
     SHAPE_LIST_MAX = 6
@@ -51,7 +46,6 @@ def start():
 
     ## update value if args are given
     args = get_option(INPUT_RANDOM_SEED,
-                      INPUT_DROP_INTERVAL,
                       RESULT_LOG_JSON,
                       TRAIN_YAML,
                       PREDICT_WEIGHT,
@@ -61,8 +55,6 @@ def start():
                       ART_CONFIG)
     if args.random_seed >= 0:
         INPUT_RANDOM_SEED = args.random_seed
-    if args.drop_interval > 0:
-        INPUT_DROP_INTERVAL = args.drop_interval
     if len(args.resultlogjson) != 0:
         RESULT_LOG_JSON = args.resultlogjson
     if len(args.user_name) != 0:
@@ -90,9 +82,6 @@ def start():
     ## update random seed
     if INPUT_RANDOM_SEED >= 0:
         RANDOM_SEED = INPUT_RANDOM_SEED
-    ## update drop interval
-    if INPUT_DROP_INTERVAL > 0:
-        DROP_INTERVAL = INPUT_DROP_INTERVAL
 
     ## print
     print('RANDOM_SEED: ' + str(RANDOM_SEED))
@@ -111,7 +100,6 @@ def start():
         + ' ' + '--seed' + ' ' + str(RANDOM_SEED) \
         + ' ' + '--obstacle_height' + ' ' + str(OBSTACLE_HEIGHT) \
         + ' ' + '--obstacle_probability' + ' ' + str(OBSTACLE_PROBABILITY) \
-        + ' ' + '--drop_interval' + ' ' + str(DROP_INTERVAL) \
         + ' ' + '--user_name' + ' ' + str(USER_NAME) \
         + ' ' + '--resultlogjson' + ' ' + str(RESULT_LOG_JSON) \
         + ' ' + '--train_yaml' + ' ' + str(TRAIN_YAML) \

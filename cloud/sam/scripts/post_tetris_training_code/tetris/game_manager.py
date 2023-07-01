@@ -14,11 +14,8 @@ import pprint
 ################################
 # Option 取得
 ###############################
-def get_option(drop_interval, random_seed, obstacle_height, obstacle_probability, resultlogjson, train_yaml, predict_weight, user_name, ShapeListMax, BlockNumMax, art_config_filepath):
+def get_option(random_seed, obstacle_height, obstacle_probability, resultlogjson, train_yaml, predict_weight, user_name, ShapeListMax, BlockNumMax, art_config_filepath):
     argparser = ArgumentParser()
-    argparser.add_argument('--drop_interval', type=int,
-                           default=drop_interval,
-                           help='Specify drop_interval(s)')
     argparser.add_argument('--seed', type=int,
                            default=random_seed,
                            help='Specify random seed')
@@ -76,7 +73,6 @@ class Game_Manager:
         self.lastShape = Shape.shapeNone
 
         self.block_index = 0
-        self.drop_interval = 1000
         self.random_seed = time.time() * 10000000 # 0
         self.obstacle_height = 0
         self.obstacle_probability = 0
@@ -89,7 +85,6 @@ class Game_Manager:
         self.art_config_filepath = None
         
         args = get_option(
-                          self.drop_interval,
                           self.random_seed,
                           self.obstacle_height,
                           self.obstacle_probability,
@@ -100,8 +95,6 @@ class Game_Manager:
                           self.ShapeListMax,
                           self.BlockNumMax,
                           self.art_config_filepath)
-        if args.drop_interval >= 0:
-            self.drop_interval = args.drop_interval
         if args.seed >= 0:
             self.random_seed = args.seed
         if args.obstacle_height >= 0:
@@ -135,8 +128,6 @@ class Game_Manager:
         self.NextShapeYOffset = 90
         # display maximum 4 next blocks
         self.NextShapeMaxAppear = min(4, self.ShapeListMax - 1)
-
-        self.speed = self.drop_interval # block drop speed
 
         random_seed_Nextshape = self.random_seed
         self.tboard = Board(self.gridSize,

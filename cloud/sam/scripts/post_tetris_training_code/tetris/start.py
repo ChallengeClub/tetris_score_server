@@ -5,11 +5,8 @@ import sys
 import subprocess
 from argparse import ArgumentParser
 
-def get_option(game_level, mode, nextShapeMode, random_seed, drop_interval, resultlogjson, train_yaml, predict_weight, user_name, ShapeListMax, BlockNumMax, art_config_filepath):
+def get_option(mode, nextShapeMode, random_seed, drop_interval, resultlogjson, train_yaml, predict_weight, user_name, ShapeListMax, BlockNumMax, art_config_filepath):
     argparser = ArgumentParser()
-    argparser.add_argument('-l', '--game_level', type=int,
-                           default=game_level,
-                           help='Specify game level')
     argparser.add_argument('-m', '--mode', type=str,
                            default=mode,
                            help='Specify mode (keyboard/gamepad/sample/art/train/predict/train_sample/predict_sample/train_sample2/predict_sample2) if necessary')
@@ -45,19 +42,8 @@ def get_option(game_level, mode, nextShapeMode, random_seed, drop_interval, resu
                            help='art_config file path')
     return argparser.parse_args()
 
-def get_python_cmd():
-    ret = subprocess.run("python --version", shell=True, \
-                         stderr=subprocess.PIPE, encoding="utf-8")
-    print(ret)
-    if "not found" in ret.stderr:
-        return "python3"
-    if "Python 2" in ret.stderr:
-        return "python3"
-    return "python"
-
 def start():
     ## default value
-    GAME_LEVEL = 1
     IS_MODE = "default"
     IS_NEXTSHAPEMODE = "default"
     IS_SAMPLE_CONTROLL = "n"
@@ -73,8 +59,7 @@ def start():
     ART_CONFIG = "default.json"
 
     ## update value if args are given
-    args = get_option(GAME_LEVEL,
-                      IS_MODE,
+    args = get_option(IS_MODE,
                       IS_NEXTSHAPEMODE,
                       INPUT_RANDOM_SEED,
                       INPUT_DROP_INTERVAL,
@@ -85,8 +70,6 @@ def start():
                       SHAPE_LIST_MAX,
                       BLOCK_NUM_MAX,
                       ART_CONFIG)
-    if args.game_level >= 0:
-        GAME_LEVEL = args.game_level
     if args.mode in ("keyboard", "gamepad", "sample", "art", "train", "predict", "train_sample", "predict_sample", "train_sample2", "predict_sample2"):
         IS_MODE = args.mode
     if args.nextShapeMode in ("default", "hate"):
@@ -116,23 +99,8 @@ def start():
     OBSTACLE_PROBABILITY = 0   # obstacle probability (percent)
 
     ## update field parameter level
-    if GAME_LEVEL == 1: # level1
-        RANDOM_SEED = 0
-        BLOCK_NUM_MAX = 180
-    elif GAME_LEVEL == 2: # level2
-        RANDOM_SEED = -1
-        BLOCK_NUM_MAX = 180
-    elif GAME_LEVEL == 3 or GAME_LEVEL == 4: # level3 or level4
-        RANDOM_SEED = -1
-        BLOCK_NUM_MAX = 180
-        OBSTACLE_HEIGHT = 10
-        OBSTACLE_PROBABILITY = 40
-        if GAME_LEVEL == 4:
-            BLOCK_NUM_MAX = -1
-            DROP_INTERVAL=1
-    else:
-        print('invalid level: ' + str(GAME_LEVEL), file=sys.stderr)
-        sys.exit(1)
+    RANDOM_SEED = 0
+    BLOCK_NUM_MAX = 180
 
     ## update random seed
     if INPUT_RANDOM_SEED >= 0:
@@ -145,7 +113,6 @@ def start():
         SHAPE_LIST_MAX = 2
 
     ## print
-    print('game_level: ' + str(GAME_LEVEL))
     print('RANDOM_SEED: ' + str(RANDOM_SEED))
     print('IS_MODE :' + str(IS_MODE))
     print('IS_NEXTSHAPEMODE :' + str(IS_NEXTSHAPEMODE))
@@ -160,8 +127,7 @@ def start():
     print('ART_CONFIG: ' + str(ART_CONFIG))
 
     ## start game
-    PYTHON_CMD = get_python_cmd()
-    cmd = PYTHON_CMD + ' ' + 'game_manager.py' \
+    cmd = 'python game_manager.py' \
         + ' ' + '--seed' + ' ' + str(RANDOM_SEED) \
         + ' ' + '--obstacle_height' + ' ' + str(OBSTACLE_HEIGHT) \
         + ' ' + '--obstacle_probability' + ' ' + str(OBSTACLE_PROBABILITY) \
@@ -179,12 +145,6 @@ def start():
     ret = subprocess.run(cmd, shell=True, stderr=subprocess.PIPE, text=True)
     if ret.returncode != 0:
         raise Exception(ret.stderr)
-    #p = subprocess.Popen(cmd, shell=True)
-    #try:
-    #    p.wait()
-    #except KeyboardInterrupt:
-    #    print("KeyboardInterrupt, call p.terminate()")
-    #    p.terminate()
 
 if __name__ == '__main__':
     start()

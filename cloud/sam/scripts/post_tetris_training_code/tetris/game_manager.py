@@ -14,7 +14,7 @@ import pprint
 ################################
 # Option 取得
 ###############################
-def get_option(random_seed, obstacle_height, obstacle_probability, resultlogjson, train_yaml, predict_weight, user_name, ShapeListMax, BlockNumMax, art_config_filepath):
+def get_option(random_seed, obstacle_height, obstacle_probability, resultlogjson, train_yaml, predict_weight, ShapeListMax, BlockNumMax, art_config_filepath):
     argparser = ArgumentParser()
     argparser.add_argument('--seed', type=int,
                            default=random_seed,
@@ -34,9 +34,6 @@ def get_option(random_seed, obstacle_height, obstacle_probability, resultlogjson
     argparser.add_argument('--predict_weight', type=str,
                            default=predict_weight,
                            help='weight file for machine learning')
-    argparser.add_argument('-u', '--user_name', type=str,
-                           default=user_name,
-                           help='Specigy user name if necessary')
     argparser.add_argument('--ShapeListMax', type=int,
                            default=ShapeListMax,
                            help='Specigy NextShapeNumberMax if necessary')
@@ -79,7 +76,6 @@ class Game_Manager:
         self.ShapeListMax = 6
         self.BlockNumMax = -1
         self.resultlogjson = ""
-        self.user_name = ""
         self.train_yaml = None
         self.predict_weight = None
         self.art_config_filepath = None
@@ -91,7 +87,6 @@ class Game_Manager:
                           self.resultlogjson,
                           self.train_yaml,
                           self.predict_weight,
-                          self.user_name,
                           self.ShapeListMax,
                           self.BlockNumMax,
                           self.art_config_filepath)
@@ -103,8 +98,6 @@ class Game_Manager:
             self.obstacle_probability = args.obstacle_probability
         if len(args.resultlogjson) != 0:
             self.resultlogjson = args.resultlogjson
-        if len(args.user_name) != 0:
-            self.user_name = args.user_name
         if args.ShapeListMax > 0:
             self.ShapeListMax = args.ShapeListMax
         

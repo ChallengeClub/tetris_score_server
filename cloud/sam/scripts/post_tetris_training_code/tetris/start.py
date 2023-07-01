@@ -5,7 +5,7 @@ import sys
 import subprocess
 from argparse import ArgumentParser
 
-def get_option(random_seed, resultlogjson, train_yaml, predict_weight, user_name, ShapeListMax, BlockNumMax, art_config_filepath):
+def get_option(random_seed, resultlogjson, train_yaml, predict_weight, ShapeListMax, BlockNumMax, art_config_filepath):
     argparser = ArgumentParser()
     argparser.add_argument('-r', '--random_seed', type=int,
                            default=random_seed,
@@ -19,9 +19,6 @@ def get_option(random_seed, resultlogjson, train_yaml, predict_weight, user_name
     argparser.add_argument('--predict_weight', type=str,
                            default=predict_weight,
                            help='weight file for machine learning')
-    argparser.add_argument('-u', '--user_name', type=str,
-                           default=user_name,
-                           help='Specigy user name if necessary')
     argparser.add_argument('--ShapeListMax', type=int,
                            default=ShapeListMax,
                            help='Specigy ShapeListMax if necessary')
@@ -37,7 +34,6 @@ def start():
     ## default value
     INPUT_RANDOM_SEED = -1
     RESULT_LOG_JSON = "result.json"
-    USER_NAME = "window_sample"
     SHAPE_LIST_MAX = 6
     BLOCK_NUM_MAX = -1
     TRAIN_YAML = "config/default.yaml"
@@ -49,7 +45,6 @@ def start():
                       RESULT_LOG_JSON,
                       TRAIN_YAML,
                       PREDICT_WEIGHT,
-                      USER_NAME,
                       SHAPE_LIST_MAX,
                       BLOCK_NUM_MAX,
                       ART_CONFIG)
@@ -57,8 +52,6 @@ def start():
         INPUT_RANDOM_SEED = args.random_seed
     if len(args.resultlogjson) != 0:
         RESULT_LOG_JSON = args.resultlogjson
-    if len(args.user_name) != 0:
-        USER_NAME = args.user_name
     if args.ShapeListMax > 1:
         SHAPE_LIST_MAX = args.ShapeListMax
     if args.BlockNumMax > 1:
@@ -87,7 +80,6 @@ def start():
     print('RANDOM_SEED: ' + str(RANDOM_SEED))
     print('OBSTACLE_HEIGHT: ' + str(OBSTACLE_HEIGHT))
     print('OBSTACLE_PROBABILITY: ' + str(OBSTACLE_PROBABILITY))
-    print('USER_NAME: ' + str(USER_NAME))
     print('SHAPE_LIST_MAX: ' + str(SHAPE_LIST_MAX))
     print('BLOCK_NUM_MAX: ' + str(BLOCK_NUM_MAX))
     print('RESULT_LOG_JSON: ' + str(RESULT_LOG_JSON))
@@ -100,7 +92,6 @@ def start():
         + ' ' + '--seed' + ' ' + str(RANDOM_SEED) \
         + ' ' + '--obstacle_height' + ' ' + str(OBSTACLE_HEIGHT) \
         + ' ' + '--obstacle_probability' + ' ' + str(OBSTACLE_PROBABILITY) \
-        + ' ' + '--user_name' + ' ' + str(USER_NAME) \
         + ' ' + '--resultlogjson' + ' ' + str(RESULT_LOG_JSON) \
         + ' ' + '--train_yaml' + ' ' + str(TRAIN_YAML) \
         + ' ' + '--predict_weight' + ' ' + str(PREDICT_WEIGHT) \

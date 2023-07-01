@@ -150,31 +150,6 @@ class BoardData(object):
         #  ...
         self.ShapeList = []
 
-
-    #######################################
-    ## art用configを利用してcolorTable/nextShapeIndexListを初期化
-    #######################################
-    def init_art_config(self, art_config):
-        # open colorTable, nextShapeIndexList config file for art
-        try:
-            import json
-            art_config_filepath = art_config
-            with open(art_config_filepath, 'r') as json_open:
-                json_load = json.load(json_open)
-            self.colorTable[1] = int(json_load['color']['shapeI'],16)
-            self.colorTable[2] = int(json_load['color']['shapeL'],16)
-            self.colorTable[3] = int(json_load['color']['shapeJ'],16)
-            self.colorTable[4] = int(json_load['color']['shapeT'],16)
-            self.colorTable[5] = int(json_load['color']['shapeO'],16)
-            self.colorTable[6] = int(json_load['color']['shapeS'],16)
-            self.colorTable[7] = int(json_load['color']['shapeZ'],16)
-            block_order = list(json_load['block_order'])
-            self.nextShapeIndexList = [ block_order[ii][0] for ii in range(len(block_order))]
-            self.nextShapeIndexListDXY = [[block_order[ii][1],block_order[ii][2],block_order[ii][3]] for ii in range(len(block_order))]
-        except Exception as e:
-            #print(e)
-            pass
-
     #######################################
     ## 画面ボードデータを返す
     #######################################

@@ -4,19 +4,8 @@
 from board_manager import BOARD_DATA, Shape
 from block_controller import BLOCK_CONTROLLER
 
-from argparse import ArgumentParser
 import time
 
-################################
-# Option 取得
-###############################
-def get_option(art_config_filepath):
-    argparser = ArgumentParser()
-    argparser.add_argument('--art_config_filepath', type=str,
-                           default=art_config_filepath,
-                           help='art_config file path')
-
-    return argparser.parse_args()
 
 #####################################################################
 #####################################################################
@@ -42,12 +31,6 @@ class Game_Manager:
         self.lastShape = Shape.shapeNone
 
         self.block_index = 0
-        self.art_config_filepath = None
-        
-        args = get_option(
-                          self.art_config_filepath)
-        if args.art_config_filepath.endswith('.json'):
-            self.art_config_filepath = args.art_config_filepath      
             
         self.initUI()
         
@@ -60,8 +43,7 @@ class Game_Manager:
         # display maximum 4 next blocks
         self.NextShapeMaxAppear = 4
 
-        self.tboard = Board(self.gridSize,
-                            self.art_config_filepath)
+        self.tboard = Board(self.gridSize)
 
         self.start()
 
@@ -111,12 +93,6 @@ class Game_Manager:
         BOARD_DATA.createNewPiece()
 
     ###############################################
-    # Window 情報 UPDATE
-    ###############################################
-    def updateWindow(self):
-        self.tboard.updateData()
-
-    ###############################################
     # ループイベント
     ###############################################
     def exec(self):
@@ -145,19 +121,6 @@ class Game_Manager:
                     }
         # get nextMove from GameController
         GameStatus = self.getGameStatus()
-
-            # # art
-            # # print GameStatus
-            # import pprint
-            # print("=================================================>")
-            # pprint.pprint(GameStatus, width = 61, compact = True)
-            # # get direction/x/y from art_config
-            # d,x,y = BOARD_DATA.getnextShapeIndexListDXY(self.block_index-1)
-            # nextMove["strategy"]["direction"] = d
-            # nextMove["strategy"]["x"] = x
-            # nextMove["strategy"]["y_operation"] = y
-            # nextMove["strategy"]["y_moveblocknum"] = 1
-            # self.nextMove = nextMove
         self.nextMove = BLOCK_CONTROLLER.GetNextMove(nextMove, GameStatus)
 
 
@@ -251,9 +214,6 @@ class Game_Manager:
 
         # init nextMove
         self.nextMove = None
-
-        # update window
-        self.updateWindow()
         return
 
     def loop(self):
@@ -467,14 +427,14 @@ class Board:
     ###############################################
     # 初期化
     ###############################################
-    def __init__(self, gridSize, art_config_filepath):
+    def __init__(self, gridSize):
         self.gridSize = gridSize
-        self.initBoard( art_config_filepath)
+        self.initBoard()
 
     ###############################################
     # 画面ボード初期化
     ###############################################
-    def initBoard(self, art_config_filepath):
+    def initBoard(self):
         self.score = 0
         self.dropdownscore = 0
         self.linescore = 0
@@ -484,47 +444,7 @@ class Board:
         self.start_time = time.time() 
         ##画面ボードと現テトリミノ情報をクリア
         BOARD_DATA.clear()
-        BOARD_DATA.init_art_config(art_config_filepath)
 
-    ###############################################
-    # データ更新
-    ###############################################
-    def updateData(self):
-        score_str = str(self.score)
-        line_str = str(self.line)
-        reset_cnt_str = str(self.reset_cnt)
-        elapsed_time = round(time.time() - self.start_time, 3)
-        elapsed_time_str = str(elapsed_time)
-        status_str = "score:" + score_str + ",line:" + line_str + ",gameover:" + reset_cnt_str + ",time[s]:" + elapsed_time_str
-
-        # get gamestatus info
-        GameStatus = GAME_MANEGER.getGameStatus()
-        current_block_index = GameStatus["judge_info"]["block_index"]
-
-        print("game finish!! elapsed time: " + elapsed_time_str \
-                + ", " + "current_block_index: " + str(current_block_index))
-        print("")
-        print("##### YOUR_RESULT #####")
-        print(status_str)
-        print("")
-        print("##### SCORE DETAIL #####")
-        GameStatus = GAME_MANEGER.getGameStatus()
-        line_score_stat = GameStatus["debug_info"]["line_score_stat"]
-        line_Score = GameStatus["debug_info"]["line_score"]
-        gameover_count = GameStatus["judge_info"]["gameover_count"]
-        score = GameStatus["judge_info"]["score"]
-        dropdownscore = GameStatus["debug_info"]["dropdownscore"]
-        print("  1 line: " + str(line_Score["line1"]) + " * " + str(line_score_stat[0]) + " = " + str(line_Score["line1"] * line_score_stat[0]))
-        print("  2 line: " + str(line_Score["line2"]) + " * " + str(line_score_stat[1]) + " = " + str(line_Score["line2"] * line_score_stat[1]))
-        print("  3 line: " + str(line_Score["line3"]) + " * " + str(line_score_stat[2]) + " = " + str(line_Score["line3"] * line_score_stat[2]))
-        print("  4 line: " + str(line_Score["line4"]) + " * " + str(line_score_stat[3]) + " = " + str(line_Score["line4"] * line_score_stat[3]))
-        print("  dropdownscore: " + str(dropdownscore))
-        print("  gameover: : " + str(line_Score["gameover"]) + " * " + str(gameover_count) + " = " + str(line_Score["gameover"] * gameover_count))
-
-        print("##### ###### #####")
-        print("")
-
-        #sys.exit(app.exec_())
 
 if __name__ == '__main__':
     GAME_MANEGER = Game_Manager()

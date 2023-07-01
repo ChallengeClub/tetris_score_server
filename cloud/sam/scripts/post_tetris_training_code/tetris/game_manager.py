@@ -14,7 +14,7 @@ import pprint
 ################################
 # Option 取得
 ###############################
-def get_option(random_seed, obstacle_height, obstacle_probability, resultlogjson, train_yaml, predict_weight, ShapeListMax, BlockNumMax, art_config_filepath):
+def get_option(random_seed, obstacle_height, obstacle_probability, resultlogjson, train_yaml, predict_weight, ShapeListMax, art_config_filepath):
     argparser = ArgumentParser()
     argparser.add_argument('--seed', type=int,
                            default=random_seed,
@@ -37,9 +37,6 @@ def get_option(random_seed, obstacle_height, obstacle_probability, resultlogjson
     argparser.add_argument('--ShapeListMax', type=int,
                            default=ShapeListMax,
                            help='Specigy NextShapeNumberMax if necessary')
-    argparser.add_argument('--BlockNumMax', type=int,
-                           default=BlockNumMax,
-                           help='Specigy BlockNumMax if necessary')
     argparser.add_argument('--art_config_filepath', type=str,
                            default=art_config_filepath,
                            help='art_config file path')
@@ -74,7 +71,6 @@ class Game_Manager:
         self.obstacle_height = 0
         self.obstacle_probability = 0
         self.ShapeListMax = 6
-        self.BlockNumMax = -1
         self.resultlogjson = ""
         self.train_yaml = None
         self.predict_weight = None
@@ -88,7 +84,6 @@ class Game_Manager:
                           self.train_yaml,
                           self.predict_weight,
                           self.ShapeListMax,
-                          self.BlockNumMax,
                           self.art_config_filepath)
         if args.seed >= 0:
             self.random_seed = args.seed
@@ -100,9 +95,6 @@ class Game_Manager:
             self.resultlogjson = args.resultlogjson
         if args.ShapeListMax > 0:
             self.ShapeListMax = args.ShapeListMax
-        
-        if args.BlockNumMax > 0:
-            self.BlockNumMax = args.BlockNumMax
         if args.train_yaml.endswith('.yaml'):
 
             self.train_yaml = args.train_yaml        
@@ -495,7 +487,6 @@ class Game_Manager:
         status["judge_info"]["score"] = self.tboard.score
         status["judge_info"]["line"] = self.tboard.line
         status["judge_info"]["block_index"] = self.block_index
-        status["judge_info"]["block_num_max"] = self.BlockNumMax
         ## debug_info
         status["debug_info"]["dropdownscore"] = self.tboard.dropdownscore
         status["debug_info"]["linescore"] = self.tboard.linescore
@@ -628,7 +619,6 @@ class Game_Manager:
         status["judge_info"]["score"] = self.tboard.score
         status["judge_info"]["line"] = self.tboard.line
         status["judge_info"]["block_index"] = self.block_index
-        status["judge_info"]["block_num_max"] = self.BlockNumMax
         return json.dumps(status)
 
 #####################################################################
@@ -676,10 +666,9 @@ class Board:
         # get gamestatus info
         GameStatus = GAME_MANEGER.getGameStatus()
         current_block_index = GameStatus["judge_info"]["block_index"]
-        BlockNumMax = GameStatus["judge_info"]["block_num_max"]
 
         print("game finish!! elapsed time: " + elapsed_time_str \
-                + ", " + "current_block_index: " + str(current_block_index) + "/BlockNumMax: " + str(BlockNumMax))
+                + ", " + "current_block_index: " + str(current_block_index))
         print("")
         print("##### YOUR_RESULT #####")
         print(status_str)

@@ -5,7 +5,7 @@ import sys
 import subprocess
 from argparse import ArgumentParser
 
-def get_option(random_seed, resultlogjson, train_yaml, predict_weight, ShapeListMax, BlockNumMax, art_config_filepath):
+def get_option(random_seed, resultlogjson, train_yaml, predict_weight, ShapeListMax, art_config_filepath):
     argparser = ArgumentParser()
     argparser.add_argument('-r', '--random_seed', type=int,
                            default=random_seed,
@@ -22,9 +22,6 @@ def get_option(random_seed, resultlogjson, train_yaml, predict_weight, ShapeList
     argparser.add_argument('--ShapeListMax', type=int,
                            default=ShapeListMax,
                            help='Specigy ShapeListMax if necessary')
-    argparser.add_argument('--BlockNumMax', type=int,
-                           default=BlockNumMax,
-                           help='Specigy BlockNumMax if necessary')
     argparser.add_argument('--art_config_filepath', type=str,
                            default=art_config_filepath,
                            help='art_config file path')
@@ -35,7 +32,6 @@ def start():
     INPUT_RANDOM_SEED = -1
     RESULT_LOG_JSON = "result.json"
     SHAPE_LIST_MAX = 6
-    BLOCK_NUM_MAX = -1
     TRAIN_YAML = "config/default.yaml"
     PREDICT_WEIGHT = "outputs/latest/best_weight.pt"
     ART_CONFIG = "default.json"
@@ -46,7 +42,6 @@ def start():
                       TRAIN_YAML,
                       PREDICT_WEIGHT,
                       SHAPE_LIST_MAX,
-                      BLOCK_NUM_MAX,
                       ART_CONFIG)
     if args.random_seed >= 0:
         INPUT_RANDOM_SEED = args.random_seed
@@ -54,8 +49,6 @@ def start():
         RESULT_LOG_JSON = args.resultlogjson
     if args.ShapeListMax > 1:
         SHAPE_LIST_MAX = args.ShapeListMax
-    if args.BlockNumMax > 1:
-        BLOCK_NUM_MAX = args.BlockNumMax
     if len(args.train_yaml) != 0:
         TRAIN_YAML = args.train_yaml
     if args.predict_weight != None:
@@ -70,7 +63,6 @@ def start():
 
     ## update field parameter level
     RANDOM_SEED = 0
-    BLOCK_NUM_MAX = 180
 
     ## update random seed
     if INPUT_RANDOM_SEED >= 0:
@@ -81,7 +73,6 @@ def start():
     print('OBSTACLE_HEIGHT: ' + str(OBSTACLE_HEIGHT))
     print('OBSTACLE_PROBABILITY: ' + str(OBSTACLE_PROBABILITY))
     print('SHAPE_LIST_MAX: ' + str(SHAPE_LIST_MAX))
-    print('BLOCK_NUM_MAX: ' + str(BLOCK_NUM_MAX))
     print('RESULT_LOG_JSON: ' + str(RESULT_LOG_JSON))
     print('TRAIN_YAML: ' + str(TRAIN_YAML))
     print('PREDICT_WEIGHT: ' + str(PREDICT_WEIGHT))
@@ -96,7 +87,6 @@ def start():
         + ' ' + '--train_yaml' + ' ' + str(TRAIN_YAML) \
         + ' ' + '--predict_weight' + ' ' + str(PREDICT_WEIGHT) \
         + ' ' + '--ShapeListMax' + ' ' + str(SHAPE_LIST_MAX) \
-        + ' ' + '--BlockNumMax' + ' ' + str(BLOCK_NUM_MAX) \
         + ' ' + '--art_config_filepath' + ' ' + str(ART_CONFIG)
 
     ret = subprocess.run(cmd, shell=True, stderr=subprocess.PIPE, text=True)

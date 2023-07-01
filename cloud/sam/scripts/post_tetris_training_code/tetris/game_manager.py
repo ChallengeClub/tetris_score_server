@@ -169,7 +169,7 @@ class Game_Manager(QMainWindow):
         hLayout = QHBoxLayout()
 
         random_seed_Nextshape = self.random_seed
-        self.tboard = Board(self, self.gridSize,
+        self.tboard = Board(self.gridSize,
                             self.game_time,
                             self.nextShapeMode,
                             random_seed_Nextshape,
@@ -177,10 +177,10 @@ class Game_Manager(QMainWindow):
                             self.obstacle_probability,
                             self.ShapeListMax,
                             self.art_config_filepath)
-        hLayout.addWidget(self.tboard)
+        # hLayout.addWidget(self.tboard)
 
         self.statusbar = self.statusBar()
-        self.tboard.msg2Statusbar[str].connect(self.statusbar.showMessage)
+        # self.tboard.msg2Statusbar[str].connect(self.statusbar.showMessage)
 
         self.start()
 
@@ -192,7 +192,7 @@ class Game_Manager(QMainWindow):
         self.setWindowTitle(WindowTitle)
         self.show()
 
-        self.setFixedSize(self.tboard.width(), self.statusbar.height())
+        # self.setFixedSize(self.tboard.width(), self.statusbar.height())
 
     ###############################################
     # Window を中心へ移動
@@ -215,7 +215,6 @@ class Game_Manager(QMainWindow):
         BOARD_DATA.clear()
         ## 新しい予告テトリミノ配列作成
         BOARD_DATA.createNewPiece()
-        self.tboard.msg2Statusbar.emit(str(self.tboard.score))
         self.timer.start(self.speed, self)
 
     ###############################################
@@ -229,7 +228,6 @@ class Game_Manager(QMainWindow):
 
         if self.isPaused:
             self.timer.stop()
-            self.tboard.msg2Statusbar.emit("paused")
         else:
             self.timer.start(self.speed, self)
 
@@ -837,15 +835,11 @@ def drawSquare(painter, x, y, val, s):
 # 画面ボード描画
 #####################################################################
 #####################################################################
-class Board(QFrame):
-    msg2Statusbar = pyqtSignal(str)
-
+class Board:
     ###############################################
     # 初期化
     ###############################################
-    def __init__(self, parent, gridSize, game_time, nextShapeMode, random_seed, obstacle_height, obstacle_probability, ShapeListMax, art_config_filepath):
-        super().__init__(parent)
-        self.setFixedSize(gridSize * BOARD_DATA.width, gridSize * BOARD_DATA.height)
+    def __init__(self, gridSize, game_time, nextShapeMode, random_seed, obstacle_height, obstacle_probability, ShapeListMax, art_config_filepath):
         self.gridSize = gridSize
         self.game_time = game_time
         self.initBoard(nextShapeMode, random_seed, obstacle_height, obstacle_probability, ShapeListMax, art_config_filepath)
@@ -869,42 +863,6 @@ class Board(QFrame):
         BOARD_DATA.init_art_config(art_config_filepath)
 
     ###############################################
-    # 描画イベント
-    ###############################################
-    def paintEvent(self, event):
-        painter = QPainter(self)
-
-        # Draw backboard
-        for x in range(BOARD_DATA.width):
-            for y in range(BOARD_DATA.height):
-                val = BOARD_DATA.getValue(x, y)
-                drawSquare(painter, x * self.gridSize, y * self.gridSize, val, self.gridSize)
-
-        # Draw current shape
-        for x, y in BOARD_DATA.getCurrentShapeCoord():
-            val = BOARD_DATA.currentShape.shape
-            drawSquare(painter, x * self.gridSize, y * self.gridSize, val, self.gridSize)
-
-        # Draw a border
-        painter.setPen(QColor(0x777777))
-        painter.drawLine(self.width()-1, 0, self.width()-1, self.height())
-        painter.setPen(QColor(0xCCCCCC))
-        painter.drawLine(self.width(), 0, self.width(), self.height())
-
-    ###############################################
-    # ログファイル出力
-    ###############################################
-    def OutputLogData(self, isPrintLog):
-        log_file_path = GAME_MANEGER.resultlogjson
-        if len(log_file_path) != 0:
-            if isPrintLog:
-                print("##### OUTPUT_RESULT_LOG_FILE #####")
-                print(log_file_path)
-            with open(log_file_path, "w") as f:
-                GameStatusJson = GAME_MANEGER.getGameStatusJson()
-                f.write(GameStatusJson)
-
-    ###############################################
     # データ更新
     ###############################################
     def updateData(self):
@@ -919,11 +877,6 @@ class Board(QFrame):
         GameStatus = GAME_MANEGER.getGameStatus()
         current_block_index = GameStatus["judge_info"]["block_index"]
         BlockNumMax = GameStatus["judge_info"]["block_num_max"]
-
-        # print string to status bar
-        self.msg2Statusbar.emit(status_str)
-        self.update()
-        self.OutputLogData(isPrintLog = False)
 
         if self.game_time == -1:
             pass
@@ -955,7 +908,6 @@ class Board(QFrame):
 
             print("##### ###### #####")
             print("")
-            self.OutputLogData(isPrintLog = True)
 
             #sys.exit(app.exec_())
             sys.exit(0)

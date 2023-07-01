@@ -1,20 +1,16 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import sys
-
 from board_manager import BOARD_DATA, Shape
 from block_controller import BLOCK_CONTROLLER
 
 from argparse import ArgumentParser
 import time
-import json
-import pprint
 
 ################################
 # Option 取得
 ###############################
-def get_option(random_seed, obstacle_height, obstacle_probability, resultlogjson, art_config_filepath):
+def get_option(random_seed, obstacle_height, obstacle_probability, art_config_filepath):
     argparser = ArgumentParser()
     argparser.add_argument('--seed', type=int,
                            default=random_seed,
@@ -25,9 +21,6 @@ def get_option(random_seed, obstacle_height, obstacle_probability, resultlogjson
     argparser.add_argument('--obstacle_probability', type=int,
                            default=obstacle_probability,
                            help='Specify obstacle probability')
-    argparser.add_argument('--resultlogjson', type=str,
-                           default=resultlogjson,
-                           help='result json log file path')
     argparser.add_argument('--art_config_filepath', type=str,
                            default=art_config_filepath,
                            help='art_config file path')
@@ -61,14 +54,12 @@ class Game_Manager:
         self.random_seed = time.time() * 10000000 # 0
         self.obstacle_height = 0
         self.obstacle_probability = 0
-        self.resultlogjson = ""
         self.art_config_filepath = None
         
         args = get_option(
                           self.random_seed,
                           self.obstacle_height,
                           self.obstacle_probability,
-                          self.resultlogjson,
                           self.art_config_filepath)
         if args.seed >= 0:
             self.random_seed = args.seed
@@ -76,8 +67,6 @@ class Game_Manager:
             self.obstacle_height = args.obstacle_height
         if args.obstacle_probability >= 0:
             self.obstacle_probability = args.obstacle_probability
-        if len(args.resultlogjson) != 0:
-            self.resultlogjson = args.resultlogjson 
         if args.art_config_filepath.endswith('.json'):
             self.art_config_filepath = args.art_config_filepath      
             
@@ -496,107 +485,6 @@ class Game_Manager:
             print("warning: current shape is none !!!")
 
         return status
-
-    def getGameStatusJson(self):
-        status = {
-                  "debug_info":
-                      {
-                        "line_score": {
-                          "line1":"none",
-                          "line2":"none",
-                          "line3":"none",
-                          "line4":"none",
-                          "gameover":"none",
-                        },
-                        "shape_info": {
-                          "shapeNone": {
-                             "index" : "none",
-                             "color" : "none",
-                          },
-                          "shapeI": {
-                             "index" : "none",
-                             "color" : "none",
-                          },
-                          "shapeL": {
-                             "index" : "none",
-                             "color" : "none",
-                          },
-                          "shapeJ": {
-                             "index" : "none",
-                             "color" : "none",
-                          },
-                          "shapeT": {
-                             "index" : "none",
-                             "color" : "none",
-                          },
-                          "shapeO": {
-                             "index" : "none",
-                             "color" : "none",
-                          },
-                          "shapeS": {
-                             "index" : "none",
-                             "color" : "none",
-                          },
-                          "shapeZ": {
-                             "index" : "none",
-                             "color" : "none",
-                          },
-                        },
-                        "line_score_stat":"none",
-                        "line_score_stat_len":"none",
-                        "shape_info_stat":"none",
-                        "hold_isdone":"none",
-                        "allblockclear_isdone":"none",
-                        "random_seed":"none",
-                        "obstacle_height":"none",
-                        "obstacle_probability":"none",
-                      },
-                  "judge_info":
-                      {
-                        "elapsed_time":"none",
-                        "game_time":"none",
-                        "gameover_count":"none",
-                        "score":"none",
-                        "line":"none",
-                        "block_index":"none",
-                        "block_num_max":"none",
-                        "mode":"none",
-                      },
-                  }
-        # update status
-        ## debug_info
-        status["debug_info"]["line_score_stat"] = self.tboard.line_score_stat
-        status["debug_info"]["shape_info_stat"] = BOARD_DATA.shape_info_stat
-        status["debug_info"]["line_score"]["line1"] = Game_Manager.LINE_SCORE_1
-        status["debug_info"]["line_score"]["line2"] = Game_Manager.LINE_SCORE_2
-        status["debug_info"]["line_score"]["line3"] = Game_Manager.LINE_SCORE_3
-        status["debug_info"]["line_score"]["line4"] = Game_Manager.LINE_SCORE_4
-        status["debug_info"]["line_score"]["gameover"] = Game_Manager.GAMEOVER_SCORE
-        status["debug_info"]["shape_info"]["shapeNone"]["index"] = Shape.shapeNone
-        status["debug_info"]["shape_info"]["shapeI"]["index"] = Shape.shapeI
-        status["debug_info"]["shape_info"]["shapeI"]["color"] = "red"
-        status["debug_info"]["shape_info"]["shapeL"]["index"] = Shape.shapeL
-        status["debug_info"]["shape_info"]["shapeL"]["color"] = "green"
-        status["debug_info"]["shape_info"]["shapeJ"]["index"] = Shape.shapeJ
-        status["debug_info"]["shape_info"]["shapeJ"]["color"] = "purple"
-        status["debug_info"]["shape_info"]["shapeT"]["index"] = Shape.shapeT
-        status["debug_info"]["shape_info"]["shapeT"]["color"] = "gold"
-        status["debug_info"]["shape_info"]["shapeO"]["index"] = Shape.shapeO
-        status["debug_info"]["shape_info"]["shapeO"]["color"] = "pink"
-        status["debug_info"]["shape_info"]["shapeS"]["index"] = Shape.shapeS
-        status["debug_info"]["shape_info"]["shapeS"]["color"] = "blue"
-        status["debug_info"]["shape_info"]["shapeZ"]["index"] = Shape.shapeZ
-        status["debug_info"]["shape_info"]["shapeZ"]["color"] = "yellow"
-        status["debug_info"]["random_seed"] = self.random_seed
-        status["debug_info"]["obstacle_height"] = self.obstacle_height
-        status["debug_info"]["obstacle_probability"] = self.obstacle_probability
-        ## judge_info
-        status["judge_info"]["elapsed_time"] = round(time.time() - self.tboard.start_time, 3)
-        status["judge_info"]["gameover_count"] = self.tboard.reset_cnt
-        status["judge_info"]["score"] = self.tboard.score
-        status["judge_info"]["line"] = self.tboard.line
-        status["judge_info"]["block_index"] = self.block_index
-        return json.dumps(status)
 
 #####################################################################
 #####################################################################

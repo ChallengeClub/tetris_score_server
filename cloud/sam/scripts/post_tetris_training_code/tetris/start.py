@@ -5,14 +5,11 @@ import sys
 import subprocess
 from argparse import ArgumentParser
 
-def get_option(random_seed, resultlogjson, art_config_filepath):
+def get_option(random_seed, art_config_filepath):
     argparser = ArgumentParser()
     argparser.add_argument('-r', '--random_seed', type=int,
                            default=random_seed,
                            help='Specify random seed if necessary') 
-    argparser.add_argument('-f', '--resultlogjson', type=str,
-                           default=resultlogjson,
-                           help='Specigy result log file path if necessary')
     argparser.add_argument('--art_config_filepath', type=str,
                            default=art_config_filepath,
                            help='art_config file path')
@@ -21,17 +18,13 @@ def get_option(random_seed, resultlogjson, art_config_filepath):
 def start():
     ## default value
     INPUT_RANDOM_SEED = -1
-    RESULT_LOG_JSON = "result.json"
     ART_CONFIG = "default.json"
 
     ## update value if args are given
     args = get_option(INPUT_RANDOM_SEED,
-                      RESULT_LOG_JSON,
                       ART_CONFIG)
     if args.random_seed >= 0:
         INPUT_RANDOM_SEED = args.random_seed
-    if len(args.resultlogjson) != 0:
-        RESULT_LOG_JSON = args.resultlogjson
     if len(args.art_config_filepath) != 0:
         ART_CONFIG = args.art_config_filepath
 
@@ -51,7 +44,6 @@ def start():
     print('RANDOM_SEED: ' + str(RANDOM_SEED))
     print('OBSTACLE_HEIGHT: ' + str(OBSTACLE_HEIGHT))
     print('OBSTACLE_PROBABILITY: ' + str(OBSTACLE_PROBABILITY))
-    print('RESULT_LOG_JSON: ' + str(RESULT_LOG_JSON))
     print('ART_CONFIG: ' + str(ART_CONFIG))
 
     ## start game
@@ -59,7 +51,6 @@ def start():
         + ' ' + '--seed' + ' ' + str(RANDOM_SEED) \
         + ' ' + '--obstacle_height' + ' ' + str(OBSTACLE_HEIGHT) \
         + ' ' + '--obstacle_probability' + ' ' + str(OBSTACLE_PROBABILITY) \
-        + ' ' + '--resultlogjson' + ' ' + str(RESULT_LOG_JSON) \
         + ' ' + '--art_config_filepath' + ' ' + str(ART_CONFIG)
 
     ret = subprocess.run(cmd, shell=True, stderr=subprocess.PIPE, text=True)

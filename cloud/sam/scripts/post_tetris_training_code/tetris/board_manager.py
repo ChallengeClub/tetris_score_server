@@ -1,9 +1,5 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-
-import numpy as np_randomShape
-import numpy as np_randomObstacle
-import numpy as np_randomObstaclePiece
 import copy
 
 #####################################
@@ -130,7 +126,7 @@ class BoardData(object):
     #######################################
     ##  board manager 初期化
     #######################################
-    def __init__(self):
+    def __init__(self, block_list: list):
         self.backBoard = [0] * BoardData.width * BoardData.height # initialize board matrix
 
         self.currentX = -1
@@ -140,9 +136,8 @@ class BoardData(object):
         self.nextShape = None
         self.holdShape = None
         self.shape_info_stat = [0] * 8
-        self.random_seed = 0
         self.nextShapeIndexCnt = 0
-        self.nextShapeIndexList = [1,2,3,4,5,6,7]
+        self.nextShapeIndexList = [1,1,1,1,1,1,1,1,1,1]
         self.nextShapeIndexListDXY = [[0,0,1] for _ in range(len(self.nextShapeIndexList))] # for art DXY config data
         self.colorTable = [0x000000, 0xCC6666, 0x66CC66, 0x6666CC,
                            0xCCCC66, 0xCC66CC, 0x66CCCC, 0xDAAA00]
@@ -155,14 +150,6 @@ class BoardData(object):
         #  ...
         self.ShapeList = []
 
-    #######################################
-    ## 乱数初期化
-    #######################################
-    def init_randomseed(self, num):
-        self.random_seed = int(num % (2**32-1))
-        np_randomShape.random.seed(self.random_seed)
-        np_randomObstacle.random.seed(self.random_seed)
-        np_randomObstaclePiece.random.seed(self.random_seed)
 
     #######################################
     ## art用configを利用してcolorTable/nextShapeIndexListを初期化
@@ -288,15 +275,11 @@ class BoardData(object):
     # 次のテトリミノの取得
     #################################################
     def getNewShapeIndex(self):
-        if self.random_seed == 0:
-            # static value
-            nextShapeIndex = self.nextShapeIndexList[self.nextShapeIndexCnt]
-            self.nextShapeIndexCnt += 1
-            if self.nextShapeIndexCnt >= len(self.nextShapeIndexList):
-                self.nextShapeIndexCnt = 0
-        else:
-            # random value
-            nextShapeIndex = np_randomShape.random.randint(1, 8)
+        # static value
+        nextShapeIndex = self.nextShapeIndexList[self.nextShapeIndexCnt]
+        self.nextShapeIndexCnt += 1
+        if self.nextShapeIndexCnt >= len(self.nextShapeIndexList):
+            self.nextShapeIndexCnt = 0
         return nextShapeIndex
 
     #####################################
@@ -656,4 +639,4 @@ class BoardData(object):
         score = score - maxHeight * 1                # maxHeight
         return score
 
-BOARD_DATA = BoardData()
+BOARD_DATA = BoardData([1,1,1,1,1,1,1,1,1,1])

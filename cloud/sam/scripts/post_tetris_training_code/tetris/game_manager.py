@@ -10,11 +10,8 @@ import time
 ################################
 # Option 取得
 ###############################
-def get_option(random_seed, art_config_filepath):
+def get_option(art_config_filepath):
     argparser = ArgumentParser()
-    argparser.add_argument('--seed', type=int,
-                           default=random_seed,
-                           help='Specify random seed')
     argparser.add_argument('--art_config_filepath', type=str,
                            default=art_config_filepath,
                            help='art_config file path')
@@ -45,14 +42,10 @@ class Game_Manager:
         self.lastShape = Shape.shapeNone
 
         self.block_index = 0
-        self.random_seed = time.time() * 10000000 # 0
         self.art_config_filepath = None
         
         args = get_option(
-                          self.random_seed,
                           self.art_config_filepath)
-        if args.seed >= 0:
-            self.random_seed = args.seed
         if args.art_config_filepath.endswith('.json'):
             self.art_config_filepath = args.art_config_filepath      
             
@@ -67,9 +60,7 @@ class Game_Manager:
         # display maximum 4 next blocks
         self.NextShapeMaxAppear = 4
 
-        random_seed_Nextshape = self.random_seed
         self.tboard = Board(self.gridSize,
-                            random_seed_Nextshape,
                             self.art_config_filepath)
 
         self.start()
@@ -265,8 +256,8 @@ class Game_Manager:
         self.updateWindow()
         return
 
-    def loop(self, counts):
-        for _ in range(counts):
+    def loop(self):
+        for _ in range(len(BOARD_DATA.nextShapeIndexList)):
             self.exec()
         
     ###############################################
@@ -462,7 +453,6 @@ class Game_Manager:
         status["debug_info"]["shape_info"]["shapeS"]["color"] = "blue"
         status["debug_info"]["shape_info"]["shapeZ"]["index"] = Shape.shapeZ
         status["debug_info"]["shape_info"]["shapeZ"]["color"] = "yellow"
-        status["debug_info"]["random_seed"] = self.random_seed
         if currentShapeIdx == Shape.shapeNone:
             print("warning: current shape is none !!!")
 
@@ -477,14 +467,14 @@ class Board:
     ###############################################
     # 初期化
     ###############################################
-    def __init__(self, gridSize, random_seed, art_config_filepath):
+    def __init__(self, gridSize, art_config_filepath):
         self.gridSize = gridSize
-        self.initBoard(random_seed, art_config_filepath)
+        self.initBoard( art_config_filepath)
 
     ###############################################
     # 画面ボード初期化
     ###############################################
-    def initBoard(self, random_seed_Nextshape, art_config_filepath):
+    def initBoard(self, art_config_filepath):
         self.score = 0
         self.dropdownscore = 0
         self.linescore = 0
@@ -494,7 +484,6 @@ class Board:
         self.start_time = time.time() 
         ##画面ボードと現テトリミノ情報をクリア
         BOARD_DATA.clear()
-        BOARD_DATA.init_randomseed(random_seed_Nextshape)
         BOARD_DATA.init_art_config(art_config_filepath)
 
     ###############################################
@@ -539,4 +528,4 @@ class Board:
 
 if __name__ == '__main__':
     GAME_MANEGER = Game_Manager()
-    GAME_MANEGER.loop(10)
+    GAME_MANEGER.loop()

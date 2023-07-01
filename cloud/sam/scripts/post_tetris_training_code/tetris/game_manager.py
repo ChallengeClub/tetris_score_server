@@ -753,56 +753,6 @@ class Game_Manager(QMainWindow):
         status["judge_info"]["mode"] = self.mode
         return json.dumps(status)
 
-    ###############################################
-    # キー入力イベント処理 -m keyboard, gamepad
-    # QMainWindow 継承
-    ###############################################
-    def keyPressEvent(self, event):
-        # for keyboard/gamepad control
-
-        # スタート前はキーキャプチャしない
-        if not self.isStarted or BOARD_DATA.currentShape == Shape.shapeNone:
-            super(Game_Manager, self).keyPressEvent(event)
-            return
-
-        key = event.key()
-        
-        # key event handle process.
-        # depends on self.mode, it's better to make key config file.
-        #  "keyboard" : PC keyboard controller
-        #  "gamepad" : game controller. KeyUp, space are different
-
-        if key == Qt.Key_P:
-            self.pause()
-            return
-            
-        if self.isPaused:
-            return
-        elif key == Qt.Key_Left:
-            BOARD_DATA.moveLeft()
-        elif key == Qt.Key_Right:
-            BOARD_DATA.moveRight()
-        elif (key == Qt.Key_Up and self.mode == 'keyboard') or (key == Qt.Key_Space and self.mode == 'gamepad'):
-            BOARD_DATA.rotateLeft()
-        elif key == Qt.Key_M:
-            ## テノリミノを1つ落とし消去ラインとテトリミノ落下数を返す
-            removedlines, movedownlines = BOARD_DATA.moveDown()
-            # 消去ライン数によりスコア計算
-            self.UpdateScore(removedlines, 0)
-        elif (key == Qt.Key_Space and self.mode == 'keyboard') or (key == Qt.Key_Up and self.mode == 'gamepad'):
-            ## テトリミノを一番下まで落とす
-            removedlines, dropdownlines = BOARD_DATA.dropDown()
-            # 消去ライン数と落下数によりスコア計算
-            self.UpdateScore(removedlines, dropdownlines)
-        elif key == Qt.Key_C:
-            BOARD_DATA.exchangeholdShape()
-        else:
-            # スタート前はキーキャプチャしない
-            super(Game_Manager, self).keyPressEvent(event)
-
-        self.updateWindow()
-
-
 ###############################################
 # 四角形の描画
 ###############################################

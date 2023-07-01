@@ -137,7 +137,7 @@ class BoardData(object):
         self.holdShape = None
         self.shape_info_stat = [0] * 8
         self.nextShapeIndexCnt = 0
-        self.nextShapeIndexList = [1,1,1,1,1,1,1,1,1,1]
+        self.nextShapeIndexList = block_list
         self.nextShapeIndexListDXY = [[0,0,1] for _ in range(len(self.nextShapeIndexList))] # for art DXY config data
         self.colorTable = [0x000000, 0xCC6666, 0x66CC66, 0x6666CC,
                            0xCCCC66, 0xCC66CC, 0x66CCCC, 0xDAAA00]
@@ -613,5 +613,3 @@ class BoardData(object):
         score = score - nIsolatedBlocks * 1.0        # try not to make isolated block
         score = score - maxHeight * 1                # maxHeight
         return score
-
-BOARD_DATA = BoardData([1,1,1,1,1,1,1,1,1,1])

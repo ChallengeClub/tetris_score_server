@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from board_manager import BOARD_DATA, Shape
+from board_manager import BoardData, Shape
+
 from block_controller import BLOCK_CONTROLLER
 
 import time
@@ -12,7 +13,7 @@ import time
 # Game Manager
 #####################################################################
 #####################################################################
-class Game_Manager:
+class GameManager:
 
     # a[n] = n^2 - n + 1
     LINE_SCORE_1 = 100
@@ -25,26 +26,12 @@ class Game_Manager:
     # 初期化
     ###############################################
     def __init__(self):
+        self.tboard = Board(block_list=[1,1,1,1,1,1,1,1,1,1])
         self.isStarted = False
         self.isPaused = False
         self.nextMove = None
         self.lastShape = Shape.shapeNone
-
-        self.block_index = 0
-            
-        self.initUI()
-        
-    ###############################################
-    # UI 初期化
-    ###############################################
-    def initUI(self):
-        self.gridSize = 22
-        self.NextShapeYOffset = 90
-        # display maximum 4 next blocks
-        self.NextShapeMaxAppear = 4
-
-        self.tboard = Board(self.gridSize)
-
+        self.block_index = 0            
         self.start()
 
     ###############################################
@@ -57,9 +44,9 @@ class Game_Manager:
         self.isStarted = True
         self.tboard.score = 0
         ##画面ボードと現テトリミノ情報をクリア
-        BOARD_DATA.clear()
+        self.tboard.board_data.clear()
         ## 新しい予告テトリミノ配列作成
-        BOARD_DATA.createNewPiece()
+        self.tboard.board_data.createNewPiece()
 
     ###############################################
     # ゲームリセット (ゲームオーバー)
@@ -67,11 +54,11 @@ class Game_Manager:
     def resetfield(self):
         # self.tboard.score = 0
         self.tboard.reset_cnt += 1
-        self.tboard.score += Game_Manager.GAMEOVER_SCORE
+        self.tboard.score += GameManager.GAMEOVER_SCORE
         ##画面ボードと現テトリミノ情報をクリア
-        BOARD_DATA.clear()
+        self.tboard.board_data.clear()
         ## 新しい予告テトリミノ配列作成
-        BOARD_DATA.createNewPiece()
+        self.tboard.board_data.createNewPiece()
         
 
     ###############################################
@@ -88,9 +75,9 @@ class Game_Manager:
         self.tboard.line_score_stat = [0, 0, 0, 0]
         self.tboard.start_time = time.time()
         ##画面ボードと現テトリミノ情報をクリア
-        BOARD_DATA.clear()
+        self.tboard.board_data.clear()
         ## 新しい予告テトリミノ配列作成
-        BOARD_DATA.createNewPiece()
+        self.tboard.board_data.createNewPiece()
 
     ###############################################
     # ループイベント
@@ -101,7 +88,7 @@ class Game_Manager:
         y_operation = -1
 
         # update CurrentBlockIndex
-        if BOARD_DATA.currentY <= 1:
+        if self.tboard.board_data.currentY <= 1:
             self.block_index = self.block_index + 1
 
         # nextMove data structure
@@ -139,7 +126,7 @@ class Game_Manager:
 
             # if use_hold_function
             if use_hold_function == "y":
-                isExchangeHoldShape = BOARD_DATA.exchangeholdShape()
+                isExchangeHoldShape = self.tboard.board_data.exchangeholdShape()
                 if isExchangeHoldShape == False:
                     # if isExchangeHoldShape is False, this means no holdshape exists. 
                     # so it needs to return immediately to use new shape.
@@ -148,22 +135,22 @@ class Game_Manager:
                     return
 
             k = 0
-            while BOARD_DATA.currentDirection != next_direction and k < 4:
-                ret = BOARD_DATA.rotateRight()
+            while self.tboard.board_data.currentDirection != next_direction and k < 4:
+                ret = self.tboard.board_data.rotateRight()
                 if ret == False:
                     #print("cannot rotateRight")
                     break
                 k += 1
             # x operation
             k = 0
-            while BOARD_DATA.currentX != next_x and k < 5:
-                if BOARD_DATA.currentX > next_x:
-                    ret = BOARD_DATA.moveLeft()
+            while self.tboard.board_data.currentX != next_x and k < 5:
+                if self.tboard.board_data.currentX > next_x:
+                    ret = self.tboard.board_data.moveLeft()
                     if ret == False:
                         #print("cannot moveLeft")
                         break
-                elif BOARD_DATA.currentX < next_x:
-                    ret = BOARD_DATA.moveRight()
+                elif self.tboard.board_data.currentX < next_x:
+                    ret = self.tboard.board_data.moveRight()
                     if ret == False:
                         #print("cannot moveRight")
                         break
@@ -174,13 +161,13 @@ class Game_Manager:
         removedlines = 0
         if y_operation == 1: # dropdown
             ## テトリミノを一番下まで落とす
-            removedlines, dropdownlines = BOARD_DATA.dropDown()
+            removedlines, dropdownlines = self.tboard.board_data.dropDown()
         else: # movedown, with next_y_moveblocknum lines
             k = 0
             # Move down を1つずつ処理
             while True:
                 ## テノリミノを1つ落とし消去ラインとテトリミノ落下数を返す
-                removedlines, movedownlines = BOARD_DATA.moveDown()
+                removedlines, movedownlines = self.tboard.board_data.moveDown()
                 # Drop してたら除外 (テトリミノが1つも落下していない場合)
                 if movedownlines < 1:
                     # if already dropped
@@ -197,7 +184,7 @@ class Game_Manager:
         #
         # check reset field
         #if BOARD_DATA.currentY < 1: 
-        if BOARD_DATA.currentY < 1 or self.nextMove["option"]["force_reset_field"] == True:
+        if self.tboard.board_data.currentY < 1 or self.nextMove["option"]["force_reset_field"] == True:
             # if Piece cannot movedown and stack, reset field
             if self.nextMove["option"]["reset_callback_function_addr"] != None:
                 # if necessary, call reset_callback_function
@@ -217,7 +204,7 @@ class Game_Manager:
         return
 
     def loop(self):
-        for _ in range(len(BOARD_DATA.nextShapeIndexList)):
+        for _ in range(len(self.tboard.board_data.nextShapeIndexList)):
             self.exec()
         
     ###############################################
@@ -227,13 +214,13 @@ class Game_Manager:
         # calculate and update current score
         # 消去ライン数で計算
         if removedlines == 1:
-            linescore = Game_Manager.LINE_SCORE_1
+            linescore = GameManager.LINE_SCORE_1
         elif removedlines == 2:
-            linescore = Game_Manager.LINE_SCORE_2
+            linescore = GameManager.LINE_SCORE_2
         elif removedlines == 3:
-            linescore = Game_Manager.LINE_SCORE_3
+            linescore = GameManager.LINE_SCORE_3
         elif removedlines == 4:
-            linescore = Game_Manager.LINE_SCORE_4
+            linescore = GameManager.LINE_SCORE_4
         else:
             linescore = 0
         # 落下スコア計算
@@ -349,35 +336,35 @@ class Game_Manager:
                   }
         # update status
         ## board
-        status["field_info"]["width"] = BOARD_DATA.width
-        status["field_info"]["height"] = BOARD_DATA.height
-        status["field_info"]["backboard"] = BOARD_DATA.getData()
-        status["field_info"]["withblock"] = BOARD_DATA.getDataWithCurrentBlock()
+        status["field_info"]["width"] = self.tboard.board_data.width
+        status["field_info"]["height"] = self.tboard.board_data.height
+        status["field_info"]["backboard"] = self.tboard.board_data.getData()
+        status["field_info"]["withblock"] = self.tboard.board_data.getDataWithCurrentBlock()
         ## shape
-        status["block_info"]["currentX"] = BOARD_DATA.currentX
-        status["block_info"]["currentY"] = BOARD_DATA.currentY
-        status["block_info"]["currentDirection"] = BOARD_DATA.currentDirection
+        status["block_info"]["currentX"] = self.tboard.board_data.currentX
+        status["block_info"]["currentY"] = self.tboard.board_data.currentY
+        status["block_info"]["currentDirection"] = self.tboard.board_data.currentDirection
         ### current shape
-        currentShapeClass, currentShapeIdx, currentShapeRange = BOARD_DATA.getShapeData(0)
+        currentShapeClass, currentShapeIdx, currentShapeRange = self.tboard.board_data.getShapeData(0)
         status["block_info"]["currentShape"]["class"] = currentShapeClass
         status["block_info"]["currentShape"]["index"] = currentShapeIdx
         status["block_info"]["currentShape"]["direction_range"] = currentShapeRange
         ### next shape
-        nextShapeClass, nextShapeIdx, nextShapeRange = BOARD_DATA.getShapeData(1)
+        nextShapeClass, nextShapeIdx, nextShapeRange = self.tboard.board_data.getShapeData(1)
         status["block_info"]["nextShape"]["class"] = nextShapeClass
         status["block_info"]["nextShape"]["index"] = nextShapeIdx
         status["block_info"]["nextShape"]["direction_range"] = nextShapeRange
         ### next shape list
-        for i in range(BOARD_DATA.getShapeListLength()):
+        for i in range(self.tboard.board_data.getShapeListLength()):
             ElementNo="element" + str(i)
-            ShapeClass, ShapeIdx, ShapeRange = BOARD_DATA.getShapeData(i)
+            ShapeClass, ShapeIdx, ShapeRange = self.tboard.board_data.getShapeData(i)
             status["block_info"]["nextShapeList"][ElementNo] = {
                 "class":ShapeClass,
                 "index":ShapeIdx,
                 "direction_range":ShapeRange,
             }
         ### hold shape
-        holdShapeClass, holdShapeIdx, holdShapeRange = BOARD_DATA.getholdShapeData()
+        holdShapeClass, holdShapeIdx, holdShapeRange = self.tboard.board_data.getholdShapeData()
         status["block_info"]["holdShape"]["class"] = holdShapeClass
         status["block_info"]["holdShape"]["index"] = holdShapeIdx
         status["block_info"]["holdShape"]["direction_range"] = holdShapeRange
@@ -392,12 +379,12 @@ class Game_Manager:
         status["debug_info"]["dropdownscore"] = self.tboard.dropdownscore
         status["debug_info"]["linescore"] = self.tboard.linescore
         status["debug_info"]["line_score_stat"] = self.tboard.line_score_stat
-        status["debug_info"]["shape_info_stat"] = BOARD_DATA.shape_info_stat
-        status["debug_info"]["line_score"]["line1"] = Game_Manager.LINE_SCORE_1
-        status["debug_info"]["line_score"]["line2"] = Game_Manager.LINE_SCORE_2
-        status["debug_info"]["line_score"]["line3"] = Game_Manager.LINE_SCORE_3
-        status["debug_info"]["line_score"]["line4"] = Game_Manager.LINE_SCORE_4
-        status["debug_info"]["line_score"]["gameover"] = Game_Manager.GAMEOVER_SCORE
+        status["debug_info"]["shape_info_stat"] = self.tboard.board_data.shape_info_stat
+        status["debug_info"]["line_score"]["line1"] = GameManager.LINE_SCORE_1
+        status["debug_info"]["line_score"]["line2"] = GameManager.LINE_SCORE_2
+        status["debug_info"]["line_score"]["line3"] = GameManager.LINE_SCORE_3
+        status["debug_info"]["line_score"]["line4"] = GameManager.LINE_SCORE_4
+        status["debug_info"]["line_score"]["gameover"] = GameManager.GAMEOVER_SCORE
         status["debug_info"]["shape_info"]["shapeNone"]["index"] = Shape.shapeNone
         status["debug_info"]["shape_info"]["shapeI"]["index"] = Shape.shapeI
         status["debug_info"]["shape_info"]["shapeI"]["color"] = "red"
@@ -420,32 +407,23 @@ class Game_Manager:
 
 #####################################################################
 #####################################################################
-# 画面ボード描画
+# ボード情報
 #####################################################################
 #####################################################################
 class Board:
     ###############################################
     # 初期化
     ###############################################
-    def __init__(self, gridSize):
-        self.gridSize = gridSize
-        self.initBoard()
-
-    ###############################################
-    # 画面ボード初期化
-    ###############################################
-    def initBoard(self):
+    def __init__(self, block_list: list):
         self.score = 0
         self.dropdownscore = 0
         self.linescore = 0
         self.line = 0
         self.line_score_stat = [0, 0, 0, 0]
         self.reset_cnt = 0
-        self.start_time = time.time() 
-        ##画面ボードと現テトリミノ情報をクリア
-        BOARD_DATA.clear()
-
+        self.start_time = time.time()
+        self.board_data = BoardData(block_list)
 
 if __name__ == '__main__':
-    GAME_MANEGER = Game_Manager()
+    GAME_MANEGER = GameManager()
     GAME_MANEGER.loop()

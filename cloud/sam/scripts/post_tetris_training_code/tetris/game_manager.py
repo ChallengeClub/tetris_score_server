@@ -27,8 +27,6 @@ class GameManager:
     ###############################################
     def __init__(self):
         self.tboard = Board(block_list=[1,1,1,1,1,1,1,1,1,1])
-        self.isStarted = False
-        self.isPaused = False
         self.nextMove = None
         self.lastShape = Shape.shapeNone
         self.block_index = 0            
@@ -38,10 +36,6 @@ class GameManager:
     # 開始
     ###############################################
     def start(self):
-        if self.isPaused:
-            return
-
-        self.isStarted = True
         self.tboard.score = 0
         ##画面ボードと現テトリミノ情報をクリア
         self.tboard.board_data.clear()

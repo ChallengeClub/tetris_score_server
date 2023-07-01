@@ -146,7 +146,6 @@ class BoardData(object):
         self.nextShapeIndexCnt = 0
         self.nextShapeIndexList = [1,2,3,4,5,6,7]
         self.nextShapeIndexListDXY = [[0,0,1] for _ in range(len(self.nextShapeIndexList))] # for art DXY config data
-        self.nextShapeMode = "default"
         self.colorTable = [0x000000, 0xCC6666, 0x66CC66, 0x6666CC,
                            0xCCCC66, 0xCC66CC, 0x66CCCC, 0xDAAA00]
         self.tryMoveNextCnt = 0
@@ -170,9 +169,8 @@ class BoardData(object):
     #######################################
     ## テトリミノ形状初期化
     #######################################
-    def init_shape_parameter(self, ShapeListMax, nextShapeMode):
+    def init_shape_parameter(self, ShapeListMax):
         self.ShapeListMax = ShapeListMax
-        self.nextShapeMode = nextShapeMode
 
     #######################################
     ## 障害ブロック初期化
@@ -332,21 +330,6 @@ class BoardData(object):
         minX, maxX, minY, maxY = self.nextShape.getBoundingOffsets(0)
         result = False
 
-        # nextShapeMode == "hate" mode
-        if self.nextShapeMode == "hate":
-            self.currentX = 5
-            self.currentY = -minY
-            self.currentDirection = 0
-            # get nextShape
-            self.ShapeList.pop(0)
-            self.ShapeList.append(Shape(self.getNewShapeIndexForHateMode()))
-            self.currentShape = self.ShapeList[1]
-            self.nextShape = self.ShapeList[1]
-            result = True
-            self.shape_info_stat[self.currentShape.shape] += 1
-            return result
-
-        # nextShapeMode == "default" mode
         # check if nextShape can appear
         if self.tryMoveNext(0, 5, -minY):
             self.currentX = 5

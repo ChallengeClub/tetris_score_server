@@ -568,34 +568,6 @@ class BoardData(object):
                 if tmp_num <= obstacle_probability:
                     self.backBoard[x + y * BoardData.width] = np_randomObstaclePiece.random.randint(1, 8)
 
-    #################################################
-    # 次のテトリミノの取得(HateMode用)
-    #################################################
-    def getNewShapeIndexForHateMode(self):
-        # テトリミノの現状形状取得
-
-        LatestHateEvalValue = 100000000
-        for ShapeIndex in range(1,8):
-            LatestEvalValue = 0
-            Shape_class = Shape(ShapeIndex)
-            _, _, CurrentShapeDirectionRange = self.getShapeDataFromShapeClass(Shape_class)
-            # search with current block Shape
-            for direction0 in CurrentShapeDirectionRange:
-                # search with x range
-                x0Min, x0Max = self.getSearchXRange(Shape_class, direction0)
-                for x0 in range(x0Min, x0Max):
-                    # get board data, as if dropdown block
-                    board = self.getBoard(self.backBoard, Shape_class, direction0, x0)
-                    EvalValue = self.calcEvaluationValueSample(board)
-                    if EvalValue > LatestEvalValue:
-                        strategy = (direction0, x0, 1, 1)
-                        LatestEvalValue = EvalValue
-            # save worst shape
-            if LatestEvalValue < LatestHateEvalValue:
-                HateShapeIndex = Shape_class.shape
-                LatestHateEvalValue = LatestEvalValue
-        return HateShapeIndex
-
     def getSearchXRange(self, Shape_class, direction):
         # get x range from shape direction.
         width = self.width

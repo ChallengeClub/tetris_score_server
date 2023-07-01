@@ -14,11 +14,8 @@ import pprint
 ################################
 # Option 取得
 ###############################
-def get_option(mode, drop_interval, random_seed, obstacle_height, obstacle_probability, resultlogjson, train_yaml, predict_weight, user_name, ShapeListMax, BlockNumMax, art_config_filepath):
+def get_option(drop_interval, random_seed, obstacle_height, obstacle_probability, resultlogjson, train_yaml, predict_weight, user_name, ShapeListMax, BlockNumMax, art_config_filepath):
     argparser = ArgumentParser()
-    argparser.add_argument('--mode', type=str,
-                           default=mode,
-                           help='Specify mode (keyboard/gamepad/sample/train/art) if necessary')
     argparser.add_argument('--drop_interval', type=int,
                            default=drop_interval,
                            help='Specify drop_interval(s)')
@@ -79,7 +76,6 @@ class Game_Manager:
         self.lastShape = Shape.shapeNone
 
         self.block_index = 0
-        self.mode = "default"
         self.drop_interval = 1000
         self.random_seed = time.time() * 10000000 # 0
         self.obstacle_height = 0
@@ -93,7 +89,6 @@ class Game_Manager:
         self.art_config_filepath = None
         
         args = get_option(
-                          self.mode,
                           self.drop_interval,
                           self.random_seed,
                           self.obstacle_height,
@@ -105,8 +100,6 @@ class Game_Manager:
                           self.ShapeListMax,
                           self.BlockNumMax,
                           self.art_config_filepath)
-        if args.mode in ("keyboard", "gamepad", "sample", "art", "train", "predict", "train_sample", "predict_sample", "train_sample2", "predict_sample2"):
-            self.mode = args.mode
         if args.drop_interval >= 0:
             self.drop_interval = args.drop_interval
         if args.seed >= 0:
@@ -236,21 +229,19 @@ class Game_Manager:
         # get nextMove from GameController
         GameStatus = self.getGameStatus()
 
-        if self.mode == "art":
-            # art
-            # print GameStatus
-            import pprint
-            print("=================================================>")
-            pprint.pprint(GameStatus, width = 61, compact = True)
-            # get direction/x/y from art_config
-            d,x,y = BOARD_DATA.getnextShapeIndexListDXY(self.block_index-1)
-            nextMove["strategy"]["direction"] = d
-            nextMove["strategy"]["x"] = x
-            nextMove["strategy"]["y_operation"] = y
-            nextMove["strategy"]["y_moveblocknum"] = 1
-            self.nextMove = nextMove
-        else:
-            self.nextMove = BLOCK_CONTROLLER.GetNextMove(nextMove, GameStatus)
+            # # art
+            # # print GameStatus
+            # import pprint
+            # print("=================================================>")
+            # pprint.pprint(GameStatus, width = 61, compact = True)
+            # # get direction/x/y from art_config
+            # d,x,y = BOARD_DATA.getnextShapeIndexListDXY(self.block_index-1)
+            # nextMove["strategy"]["direction"] = d
+            # nextMove["strategy"]["x"] = x
+            # nextMove["strategy"]["y_operation"] = y
+            # nextMove["strategy"]["y_moveblocknum"] = 1
+            # self.nextMove = nextMove
+        self.nextMove = BLOCK_CONTROLLER.GetNextMove(nextMove, GameStatus)
 
 
         #######################
@@ -418,6 +409,7 @@ class Game_Manager:
                   "judge_info":
                       {
                         "elapsed_time":"none",
+                        "game_time":"none",
                         "gameover_count":"none",
                         "score":"none",
                         "line":"none",
@@ -471,6 +463,7 @@ class Game_Manager:
                           },
                         },
                         "line_score_stat":"none",
+                        "line_score_stat_len":"none",
                         "shape_info_stat":"none",
                         "random_seed":"none",
                         "obstacle_height":"none",
@@ -519,7 +512,6 @@ class Game_Manager:
         status["judge_info"]["line"] = self.tboard.line
         status["judge_info"]["block_index"] = self.block_index
         status["judge_info"]["block_num_max"] = self.BlockNumMax
-        status["judge_info"]["mode"] = self.mode
         ## debug_info
         status["debug_info"]["dropdownscore"] = self.tboard.dropdownscore
         status["debug_info"]["linescore"] = self.tboard.linescore
@@ -599,7 +591,10 @@ class Game_Manager:
                           },
                         },
                         "line_score_stat":"none",
+                        "line_score_stat_len":"none",
                         "shape_info_stat":"none",
+                        "hold_isdone":"none",
+                        "allblockclear_isdone":"none",
                         "random_seed":"none",
                         "obstacle_height":"none",
                         "obstacle_probability":"none",
@@ -607,6 +602,7 @@ class Game_Manager:
                   "judge_info":
                       {
                         "elapsed_time":"none",
+                        "game_time":"none",
                         "gameover_count":"none",
                         "score":"none",
                         "line":"none",
@@ -649,7 +645,6 @@ class Game_Manager:
         status["judge_info"]["line"] = self.tboard.line
         status["judge_info"]["block_index"] = self.block_index
         status["judge_info"]["block_num_max"] = self.BlockNumMax
-        status["judge_info"]["mode"] = self.mode
         return json.dumps(status)
 
 #####################################################################

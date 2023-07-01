@@ -5,11 +5,8 @@ import sys
 import subprocess
 from argparse import ArgumentParser
 
-def get_option(mode, random_seed, drop_interval, resultlogjson, train_yaml, predict_weight, user_name, ShapeListMax, BlockNumMax, art_config_filepath):
+def get_option(random_seed, drop_interval, resultlogjson, train_yaml, predict_weight, user_name, ShapeListMax, BlockNumMax, art_config_filepath):
     argparser = ArgumentParser()
-    argparser.add_argument('-m', '--mode', type=str,
-                           default=mode,
-                           help='Specify mode (keyboard/gamepad/sample/art/train/predict/train_sample/predict_sample/train_sample2/predict_sample2) if necessary')
     argparser.add_argument('-r', '--random_seed', type=int,
                            default=random_seed,
                            help='Specify random seed if necessary') 
@@ -41,7 +38,6 @@ def get_option(mode, random_seed, drop_interval, resultlogjson, train_yaml, pred
 
 def start():
     ## default value
-    IS_MODE = "default"
     INPUT_RANDOM_SEED = -1
     INPUT_DROP_INTERVAL = -1
     DROP_INTERVAL = 1000          # drop interval
@@ -54,8 +50,7 @@ def start():
     ART_CONFIG = "default.json"
 
     ## update value if args are given
-    args = get_option(IS_MODE,
-                      INPUT_RANDOM_SEED,
+    args = get_option(INPUT_RANDOM_SEED,
                       INPUT_DROP_INTERVAL,
                       RESULT_LOG_JSON,
                       TRAIN_YAML,
@@ -64,8 +59,6 @@ def start():
                       SHAPE_LIST_MAX,
                       BLOCK_NUM_MAX,
                       ART_CONFIG)
-    if args.mode in ("keyboard", "gamepad", "sample", "art", "train", "predict", "train_sample", "predict_sample", "train_sample2", "predict_sample2"):
-        IS_MODE = args.mode
     if args.random_seed >= 0:
         INPUT_RANDOM_SEED = args.random_seed
     if args.drop_interval > 0:
@@ -103,7 +96,6 @@ def start():
 
     ## print
     print('RANDOM_SEED: ' + str(RANDOM_SEED))
-    print('IS_MODE :' + str(IS_MODE))
     print('OBSTACLE_HEIGHT: ' + str(OBSTACLE_HEIGHT))
     print('OBSTACLE_PROBABILITY: ' + str(OBSTACLE_PROBABILITY))
     print('USER_NAME: ' + str(USER_NAME))
@@ -120,7 +112,6 @@ def start():
         + ' ' + '--obstacle_height' + ' ' + str(OBSTACLE_HEIGHT) \
         + ' ' + '--obstacle_probability' + ' ' + str(OBSTACLE_PROBABILITY) \
         + ' ' + '--drop_interval' + ' ' + str(DROP_INTERVAL) \
-        + ' ' + '--mode' + ' ' + str(IS_MODE) \
         + ' ' + '--user_name' + ' ' + str(USER_NAME) \
         + ' ' + '--resultlogjson' + ' ' + str(RESULT_LOG_JSON) \
         + ' ' + '--train_yaml' + ' ' + str(TRAIN_YAML) \

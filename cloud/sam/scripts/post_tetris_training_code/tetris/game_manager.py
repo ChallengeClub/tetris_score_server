@@ -14,7 +14,7 @@ import pprint
 ################################
 # Option 取得
 ###############################
-def get_option(random_seed, obstacle_height, obstacle_probability, resultlogjson, train_yaml, predict_weight, art_config_filepath):
+def get_option(random_seed, obstacle_height, obstacle_probability, resultlogjson, art_config_filepath):
     argparser = ArgumentParser()
     argparser.add_argument('--seed', type=int,
                            default=random_seed,
@@ -28,12 +28,6 @@ def get_option(random_seed, obstacle_height, obstacle_probability, resultlogjson
     argparser.add_argument('--resultlogjson', type=str,
                            default=resultlogjson,
                            help='result json log file path')
-    argparser.add_argument('--train_yaml', type=str,
-                           default=train_yaml,
-                           help='yaml file for machine learning')
-    argparser.add_argument('--predict_weight', type=str,
-                           default=predict_weight,
-                           help='weight file for machine learning')
     argparser.add_argument('--art_config_filepath', type=str,
                            default=art_config_filepath,
                            help='art_config file path')
@@ -68,8 +62,6 @@ class Game_Manager:
         self.obstacle_height = 0
         self.obstacle_probability = 0
         self.resultlogjson = ""
-        self.train_yaml = None
-        self.predict_weight = None
         self.art_config_filepath = None
         
         args = get_option(
@@ -77,8 +69,6 @@ class Game_Manager:
                           self.obstacle_height,
                           self.obstacle_probability,
                           self.resultlogjson,
-                          self.train_yaml,
-                          self.predict_weight,
                           self.art_config_filepath)
         if args.seed >= 0:
             self.random_seed = args.seed
@@ -87,12 +77,7 @@ class Game_Manager:
         if args.obstacle_probability >= 0:
             self.obstacle_probability = args.obstacle_probability
         if len(args.resultlogjson) != 0:
-            self.resultlogjson = args.resultlogjson
-        if args.train_yaml.endswith('.yaml'):
-
-            self.train_yaml = args.train_yaml        
-        if args.predict_weight != "default":
-            self.predict_weight = args.predict_weight
+            self.resultlogjson = args.resultlogjson 
         if args.art_config_filepath.endswith('.json'):
             self.art_config_filepath = args.art_config_filepath      
             

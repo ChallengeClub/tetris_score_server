@@ -10,17 +10,11 @@ import time
 ################################
 # Option 取得
 ###############################
-def get_option(random_seed, obstacle_height, obstacle_probability, art_config_filepath):
+def get_option(random_seed, art_config_filepath):
     argparser = ArgumentParser()
     argparser.add_argument('--seed', type=int,
                            default=random_seed,
                            help='Specify random seed')
-    argparser.add_argument('--obstacle_height', type=int,
-                           default=obstacle_height,
-                           help='Specify obstacle height')
-    argparser.add_argument('--obstacle_probability', type=int,
-                           default=obstacle_probability,
-                           help='Specify obstacle probability')
     argparser.add_argument('--art_config_filepath', type=str,
                            default=art_config_filepath,
                            help='art_config file path')
@@ -52,21 +46,13 @@ class Game_Manager:
 
         self.block_index = 0
         self.random_seed = time.time() * 10000000 # 0
-        self.obstacle_height = 0
-        self.obstacle_probability = 0
         self.art_config_filepath = None
         
         args = get_option(
                           self.random_seed,
-                          self.obstacle_height,
-                          self.obstacle_probability,
                           self.art_config_filepath)
         if args.seed >= 0:
             self.random_seed = args.seed
-        if args.obstacle_height >= 0:
-            self.obstacle_height = args.obstacle_height
-        if args.obstacle_probability >= 0:
-            self.obstacle_probability = args.obstacle_probability
         if args.art_config_filepath.endswith('.json'):
             self.art_config_filepath = args.art_config_filepath      
             
@@ -84,8 +70,6 @@ class Game_Manager:
         random_seed_Nextshape = self.random_seed
         self.tboard = Board(self.gridSize,
                             random_seed_Nextshape,
-                            self.obstacle_height,
-                            self.obstacle_probability,
                             self.art_config_filepath)
 
         self.start()
@@ -479,8 +463,6 @@ class Game_Manager:
         status["debug_info"]["shape_info"]["shapeZ"]["index"] = Shape.shapeZ
         status["debug_info"]["shape_info"]["shapeZ"]["color"] = "yellow"
         status["debug_info"]["random_seed"] = self.random_seed
-        status["debug_info"]["obstacle_height"] = self.obstacle_height
-        status["debug_info"]["obstacle_probability"] = self.obstacle_probability
         if currentShapeIdx == Shape.shapeNone:
             print("warning: current shape is none !!!")
 
@@ -495,14 +477,14 @@ class Board:
     ###############################################
     # 初期化
     ###############################################
-    def __init__(self, gridSize, random_seed, obstacle_height, obstacle_probability, art_config_filepath):
+    def __init__(self, gridSize, random_seed, art_config_filepath):
         self.gridSize = gridSize
-        self.initBoard(random_seed, obstacle_height, obstacle_probability, art_config_filepath)
+        self.initBoard(random_seed, art_config_filepath)
 
     ###############################################
     # 画面ボード初期化
     ###############################################
-    def initBoard(self, random_seed_Nextshape, obstacle_height, obstacle_probability, art_config_filepath):
+    def initBoard(self, random_seed_Nextshape, art_config_filepath):
         self.score = 0
         self.dropdownscore = 0
         self.linescore = 0
@@ -513,7 +495,6 @@ class Board:
         ##画面ボードと現テトリミノ情報をクリア
         BOARD_DATA.clear()
         BOARD_DATA.init_randomseed(random_seed_Nextshape)
-        BOARD_DATA.init_obstacle_parameter(obstacle_height, obstacle_probability)
         BOARD_DATA.init_art_config(art_config_filepath)
 
     ###############################################

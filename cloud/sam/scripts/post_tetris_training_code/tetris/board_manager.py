@@ -140,8 +140,6 @@ class BoardData(object):
         self.nextShape = None
         self.holdShape = None
         self.shape_info_stat = [0] * 8
-        self.obstacle_height = 0
-        self.obstacle_probability = 0
         self.random_seed = 0
         self.nextShapeIndexCnt = 0
         self.nextShapeIndexList = [1,2,3,4,5,6,7]
@@ -165,13 +163,6 @@ class BoardData(object):
         np_randomShape.random.seed(self.random_seed)
         np_randomObstacle.random.seed(self.random_seed)
         np_randomObstaclePiece.random.seed(self.random_seed)
-
-    #######################################
-    ## 障害ブロック初期化
-    #######################################
-    def init_obstacle_parameter(self, height, probability):
-        self.obstacle_height = height
-        self.obstacle_probability = probability
 
     #######################################
     ## art用configを利用してcolorTable/nextShapeIndexListを初期化
@@ -542,25 +533,6 @@ class BoardData(object):
         self.currentDirection = 0
         self.currentShape = Shape()
         self.backBoard = [0] * BoardData.width * BoardData.height
-        self.addobstacle()
-
-    #####################################
-    ## 障害物配置
-    #####################################
-    def addobstacle(self):
-        obstacle_height = self.obstacle_height
-        obstacle_probability = self.obstacle_probability
-
-        for y in range(BoardData.height):
-            for x in range(BoardData.width):
-
-                if y < (BoardData.height - obstacle_height):
-                    continue
-
-                # create obstacle
-                tmp_num = np_randomObstacle.random.randint(1, 100)
-                if tmp_num <= obstacle_probability:
-                    self.backBoard[x + y * BoardData.width] = np_randomObstaclePiece.random.randint(1, 8)
 
     def getSearchXRange(self, Shape_class, direction):
         # get x range from shape direction.

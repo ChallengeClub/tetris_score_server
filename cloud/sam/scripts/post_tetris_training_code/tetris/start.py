@@ -30,8 +30,6 @@ def start():
 
     ## set field parameter for level 1
     RANDOM_SEED = 0            # random seed for field
-    OBSTACLE_HEIGHT = 0        # obstacle height (blocks)
-    OBSTACLE_PROBABILITY = 0   # obstacle probability (percent)
 
     ## update field parameter level
     RANDOM_SEED = 0
@@ -42,15 +40,11 @@ def start():
 
     ## print
     print('RANDOM_SEED: ' + str(RANDOM_SEED))
-    print('OBSTACLE_HEIGHT: ' + str(OBSTACLE_HEIGHT))
-    print('OBSTACLE_PROBABILITY: ' + str(OBSTACLE_PROBABILITY))
     print('ART_CONFIG: ' + str(ART_CONFIG))
 
     ## start game
     cmd = 'python game_manager.py' \
         + ' ' + '--seed' + ' ' + str(RANDOM_SEED) \
-        + ' ' + '--obstacle_height' + ' ' + str(OBSTACLE_HEIGHT) \
-        + ' ' + '--obstacle_probability' + ' ' + str(OBSTACLE_PROBABILITY) \
         + ' ' + '--art_config_filepath' + ' ' + str(ART_CONFIG)
 
     ret = subprocess.run(cmd, shell=True, stderr=subprocess.PIPE, text=True)

@@ -14,7 +14,7 @@ import pprint
 ################################
 # Option 取得
 ###############################
-def get_option(random_seed, obstacle_height, obstacle_probability, resultlogjson, train_yaml, predict_weight, ShapeListMax, art_config_filepath):
+def get_option(random_seed, obstacle_height, obstacle_probability, resultlogjson, train_yaml, predict_weight, art_config_filepath):
     argparser = ArgumentParser()
     argparser.add_argument('--seed', type=int,
                            default=random_seed,
@@ -34,9 +34,6 @@ def get_option(random_seed, obstacle_height, obstacle_probability, resultlogjson
     argparser.add_argument('--predict_weight', type=str,
                            default=predict_weight,
                            help='weight file for machine learning')
-    argparser.add_argument('--ShapeListMax', type=int,
-                           default=ShapeListMax,
-                           help='Specigy NextShapeNumberMax if necessary')
     argparser.add_argument('--art_config_filepath', type=str,
                            default=art_config_filepath,
                            help='art_config file path')
@@ -70,7 +67,6 @@ class Game_Manager:
         self.random_seed = time.time() * 10000000 # 0
         self.obstacle_height = 0
         self.obstacle_probability = 0
-        self.ShapeListMax = 6
         self.resultlogjson = ""
         self.train_yaml = None
         self.predict_weight = None
@@ -83,7 +79,6 @@ class Game_Manager:
                           self.resultlogjson,
                           self.train_yaml,
                           self.predict_weight,
-                          self.ShapeListMax,
                           self.art_config_filepath)
         if args.seed >= 0:
             self.random_seed = args.seed
@@ -93,8 +88,6 @@ class Game_Manager:
             self.obstacle_probability = args.obstacle_probability
         if len(args.resultlogjson) != 0:
             self.resultlogjson = args.resultlogjson
-        if args.ShapeListMax > 0:
-            self.ShapeListMax = args.ShapeListMax
         if args.train_yaml.endswith('.yaml'):
 
             self.train_yaml = args.train_yaml        
@@ -112,14 +105,13 @@ class Game_Manager:
         self.gridSize = 22
         self.NextShapeYOffset = 90
         # display maximum 4 next blocks
-        self.NextShapeMaxAppear = min(4, self.ShapeListMax - 1)
+        self.NextShapeMaxAppear = 4
 
         random_seed_Nextshape = self.random_seed
         self.tboard = Board(self.gridSize,
                             random_seed_Nextshape,
                             self.obstacle_height,
                             self.obstacle_probability,
-                            self.ShapeListMax,
                             self.art_config_filepath)
 
         self.start()
@@ -630,14 +622,14 @@ class Board:
     ###############################################
     # 初期化
     ###############################################
-    def __init__(self, gridSize, random_seed, obstacle_height, obstacle_probability, ShapeListMax, art_config_filepath):
+    def __init__(self, gridSize, random_seed, obstacle_height, obstacle_probability, art_config_filepath):
         self.gridSize = gridSize
-        self.initBoard(random_seed, obstacle_height, obstacle_probability, ShapeListMax, art_config_filepath)
+        self.initBoard(random_seed, obstacle_height, obstacle_probability, art_config_filepath)
 
     ###############################################
     # 画面ボード初期化
     ###############################################
-    def initBoard(self, random_seed_Nextshape, obstacle_height, obstacle_probability, ShapeListMax, art_config_filepath):
+    def initBoard(self, random_seed_Nextshape, obstacle_height, obstacle_probability, art_config_filepath):
         self.score = 0
         self.dropdownscore = 0
         self.linescore = 0
@@ -649,7 +641,6 @@ class Board:
         BOARD_DATA.clear()
         BOARD_DATA.init_randomseed(random_seed_Nextshape)
         BOARD_DATA.init_obstacle_parameter(obstacle_height, obstacle_probability)
-        BOARD_DATA.init_shape_parameter(ShapeListMax)
         BOARD_DATA.init_art_config(art_config_filepath)
 
     ###############################################

@@ -149,7 +149,7 @@ class BoardData(object):
         self.colorTable = [0x000000, 0xCC6666, 0x66CC66, 0x6666CC,
                            0xCCCC66, 0xCC66CC, 0x66CCCC, 0xDAAA00]
         self.tryMoveNextCnt = 0
-        self.ShapeListMax = 2
+        self.ShapeListMax = 6
         # ShapeList
         #  ShapeNumber 0: currentShape
         #  ShapeNumber 1: nextShape
@@ -165,12 +165,6 @@ class BoardData(object):
         np_randomShape.random.seed(self.random_seed)
         np_randomObstacle.random.seed(self.random_seed)
         np_randomObstaclePiece.random.seed(self.random_seed)
-
-    #######################################
-    ## テトリミノ形状初期化
-    #######################################
-    def init_shape_parameter(self, ShapeListMax):
-        self.ShapeListMax = ShapeListMax
 
     #######################################
     ## 障害ブロック初期化

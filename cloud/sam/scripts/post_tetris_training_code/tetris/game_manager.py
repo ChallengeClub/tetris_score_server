@@ -162,11 +162,7 @@ class Game_Manager(QMainWindow):
         self.NextShapeMaxAppear = min(4, self.ShapeListMax - 1)
 
         self.speed = self.drop_interval # block drop speed
-
         self.timer = QBasicTimer()
-        self.setFocusPolicy(Qt.StrongFocus)
-
-        hLayout = QHBoxLayout()
 
         random_seed_Nextshape = self.random_seed
         self.tboard = Board(self.gridSize,
@@ -177,30 +173,8 @@ class Game_Manager(QMainWindow):
                             self.obstacle_probability,
                             self.ShapeListMax,
                             self.art_config_filepath)
-        # hLayout.addWidget(self.tboard)
-
-        self.statusbar = self.statusBar()
-        # self.tboard.msg2Statusbar[str].connect(self.statusbar.showMessage)
 
         self.start()
-
-        self.center()
-
-        WindowTitle = "Tetris"
-        if len(self.user_name) != 0:
-            WindowTitle = "Tetris_" + self.user_name
-        self.setWindowTitle(WindowTitle)
-        self.show()
-
-        # self.setFixedSize(self.tboard.width(), self.statusbar.height())
-
-    ###############################################
-    # Window を中心へ移動
-    ###############################################
-    def center(self):
-        screen = QDesktopWidget().screenGeometry()
-        size = self.geometry()
-        self.move((screen.width() - size.width()) // 2, (screen.height() - size.height()) // 2)
 
     ###############################################
     # 開始
@@ -216,22 +190,6 @@ class Game_Manager(QMainWindow):
         ## 新しい予告テトリミノ配列作成
         BOARD_DATA.createNewPiece()
         self.timer.start(self.speed, self)
-
-    ###############################################
-    # ポーズ
-    ###############################################
-    def pause(self):
-        if not self.isStarted:
-            return
-
-        self.isPaused = not self.isPaused
-
-        if self.isPaused:
-            self.timer.stop()
-        else:
-            self.timer.start(self.speed, self)
-
-        self.updateWindow()
 
     ###############################################
     # ゲームリセット (ゲームオーバー)
@@ -269,7 +227,6 @@ class Game_Manager(QMainWindow):
     ###############################################
     def updateWindow(self):
         self.tboard.updateData()
-        self.update()
 
     ###############################################
     # タイマーイベント
@@ -305,28 +262,7 @@ class Game_Manager(QMainWindow):
                 # get nextMove from GameController
                 GameStatus = self.getGameStatus()
 
-                if self.mode == "sample":
-                    # sample
-                    self.nextMove = BLOCK_CONTROLLER_SAMPLE.GetNextMove(nextMove, GameStatus)
-
-                elif self.mode == "train_sample" or self.mode == "predict_sample":
-                    # sample train/predict
-                    # import block_controller_train_sample, it's necessary to install pytorch to use.
-                    from machine_learning.block_controller_train_sample import BLOCK_CONTROLLER_TRAIN_SAMPLE as BLOCK_CONTROLLER_TRAIN
-                    self.nextMove = BLOCK_CONTROLLER_TRAIN.GetNextMove(nextMove, GameStatus,yaml_file=self.train_yaml,weight=self.predict_weight)
-                    
-                elif self.mode == "train_sample2" or self.mode == "predict_sample2":
-                    # sample train/predict
-                    # import block_controller_train_sample, it's necessary to install pytorch to use.
-                    from machine_learning.block_controller_train_sample2 import BLOCK_CONTROLLER_TRAIN_SAMPLE2 as BLOCK_CONTROLLER_TRAIN
-                    self.nextMove = BLOCK_CONTROLLER_TRAIN.GetNextMove(nextMove, GameStatus,yaml_file="config/train_sample2.yaml",weight=self.predict_weight)
-                    
-                elif self.mode == "train" or self.mode == "predict":
-                    # train/predict
-                    # import block_controller_train, it's necessary to install pytorch to use.
-                    from machine_learning.block_controller_train import BLOCK_CONTROLLER_TRAIN
-                    self.nextMove = BLOCK_CONTROLLER_TRAIN.GetNextMove(nextMove, GameStatus,yaml_file=self.train_yaml,weight=self.predict_weight)
-                elif self.mode == "art":
+                if self.mode == "art":
                     # art
                     # print GameStatus
                     import pprint
@@ -341,16 +277,6 @@ class Game_Manager(QMainWindow):
                     self.nextMove = nextMove
                 else:
                     self.nextMove = BLOCK_CONTROLLER.GetNextMove(nextMove, GameStatus)
-
-                if self.mode in ("keyboard", "gamepad"):
-                    # ignore nextMove, for keyboard/gamepad controll
-                    self.nextMove["strategy"]["x"] = BOARD_DATA.currentX
-                    # Move Down 数
-                    self.nextMove["strategy"]["y_moveblocknum"] = 1
-                    # Drop Down:1, Move Down:0
-                    self.nextMove["strategy"]["y_operation"] = 0
-                    # テトリミノ回転数
-                    self.nextMove["strategy"]["direction"] = BOARD_DATA.currentDirection
 
             #######################
             ## 次の手を動かす

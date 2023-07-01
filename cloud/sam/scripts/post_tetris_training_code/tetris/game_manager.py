@@ -179,9 +179,6 @@ class Game_Manager(QMainWindow):
                             self.art_config_filepath)
         hLayout.addWidget(self.tboard)
 
-        self.sidePanel = SidePanel(self, self.gridSize, self.NextShapeYOffset, self.NextShapeMaxAppear)
-        hLayout.addWidget(self.sidePanel)
-
         self.statusbar = self.statusBar()
         self.tboard.msg2Statusbar[str].connect(self.statusbar.showMessage)
 
@@ -195,8 +192,7 @@ class Game_Manager(QMainWindow):
         self.setWindowTitle(WindowTitle)
         self.show()
 
-        self.setFixedSize(self.tboard.width() + self.sidePanel.width(),
-                          self.sidePanel.height() + self.statusbar.height())
+        self.setFixedSize(self.tboard.width(), self.statusbar.height())
 
     ###############################################
     # Window を中心へ移動
@@ -275,7 +271,6 @@ class Game_Manager(QMainWindow):
     ###############################################
     def updateWindow(self):
         self.tboard.updateData()
-        self.sidePanel.updateData()
         self.update()
 
     ###############################################
@@ -836,76 +831,6 @@ def drawSquare(painter, x, y, val, s):
     painter.drawLine(x + 1, y + s - 1, x + s - 1, y + s - 1)
     painter.drawLine(x + s - 1, y + s - 1, x + s - 1, y + 1)
 
-
-###############################################
-###############################################
-# 横画面描画
-###############################################
-###############################################
-class SidePanel(QFrame):
-    ###############################################
-    # 初期化
-    ###############################################
-    def __init__(self, parent, gridSize, NextShapeYOffset, NextShapeMaxAppear):
-        super().__init__(parent)
-        self.setFixedSize(gridSize * 5, gridSize * BOARD_DATA.height)
-        self.move(gridSize * BOARD_DATA.width, 0)
-        self.gridSize = gridSize
-        self.NextShapeYOffset = NextShapeYOffset
-        self.NextShapeMaxAppear = NextShapeMaxAppear
-
-    ###############################################
-    # UPDATE
-    ###############################################
-    def updateData(self):
-        self.update()
-
-    ###############################################
-    # 描画イベント
-    ###############################################
-    def paintEvent(self, event):
-        painter = QPainter(self)
-
-        ShapeListLength = BOARD_DATA.getShapeListLength()
-        
-        # draw next shape
-        for i in range(ShapeListLength):
-            if i == 0:
-                # skip current shape
-                continue
-            if i > self.NextShapeMaxAppear:
-                break
-
-            ShapeClass, ShapeIdx, ShapeRange = BOARD_DATA.getShapeData(i) # nextShape
-
-            # テトリミノが原点から x,y 両方向に最大何マス占有するのか取得
-            minX, maxX, minY, maxY = ShapeClass.getBoundingOffsets(0)
-
-            dy = 1 * self.gridSize
-            dx = (self.width() - (maxX - minX) * self.gridSize) / 2
-            
-            val = ShapeClass.shape
-            y_offset = self.NextShapeYOffset * (i - 1) #(self.NextShapeMaxAppear - i)
-            # テトリミノを配置すべき座標リストを取得していく
-            for x, y in ShapeClass.getCoords(0, 0, -minY):
-                drawSquare(painter, x * self.gridSize + dx, y * self.gridSize + dy + y_offset, val, self.gridSize)
-
-        # draw hold block area
-        painter.setPen(QColor(0x777777))
-        height_offset = self.height() - int(self.gridSize*4.65)
-        painter.drawLine(0, height_offset,
-                         self.width(), height_offset)
-        painter.drawText(0, self.height(), 'HOLD');
-        holdShapeClass, holdShapeIdx, holdShapeRange = BOARD_DATA.getholdShapeData()
-        if holdShapeClass != None:
-            # if holdShape exists, try to draw
-            minX, maxX, minY, maxY = holdShapeClass.getBoundingOffsets(0)
-            dy = 1 * self.gridSize
-            dx = (self.width() - (maxX - minX) * self.gridSize) / 2
-            val = holdShapeClass.shape
-            y_offset = self.NextShapeYOffset * 4
-            for x, y in holdShapeClass.getCoords(0, 0, -minY):
-                drawSquare(painter, x * self.gridSize + dx, y * self.gridSize + dy + y_offset, val, self.gridSize)
 
 #####################################################################
 #####################################################################

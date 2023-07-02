@@ -11,7 +11,7 @@ s3 = boto3.resource('s3')
 
 def lambda_handler(event: dict, context):
     section = event['pathParameters']['section']
-    if section.startWith("tetris"):
+    if section.startswith("tetris"):
         response = tetris_evaluation(event, context)
     else:
         response = evaluation(event, context)

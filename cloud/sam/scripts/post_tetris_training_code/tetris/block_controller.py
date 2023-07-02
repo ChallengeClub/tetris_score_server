@@ -42,6 +42,9 @@ class Block_Controller(object):
         print("===", datetime.now() - t1)
         print(nextMove)
         return nextMove
+    
+    def GetLastOutput(GameStatus):
+        print(GameStatus)
 
 BLOCK_CONTROLLER = Block_Controller()
 

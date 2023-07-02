@@ -26,8 +26,8 @@ class GameManager:
     ###############################################
     # 初期化
     ###############################################
-    def __init__(self):
-        self.board = Board(block_list=[1,1,1,1,1,1,1,1,1,1])
+    def __init__(self, block_list:list, initial_board: list):
+        self.board = Board(block_list, initial_board)
         self.nextMove = None
         self.lastShape = Shape.shapeNone
         self.block_index = 0            
@@ -201,7 +201,9 @@ class GameManager:
     def loop(self):
         for _ in range(len(self.board.board_data.nextShapeIndexList)):
             self.exec()
-        
+        GameStatus = self.getGameStatus()
+        BLOCK_CONTROLLER.GetLastOutput(GameStatus)
+
     ###############################################
     # 消去ライン数と落下数によりスコア計算
     ###############################################
@@ -409,7 +411,7 @@ class Board:
     ###############################################
     # 初期化
     ###############################################
-    def __init__(self, block_list: list):
+    def __init__(self, block_list: list, initial_board:list):
         self.score = 0
         self.dropdownscore = 0
         self.linescore = 0
@@ -417,8 +419,10 @@ class Board:
         self.line_score_stat = [0, 0, 0, 0]
         self.reset_cnt = 0
         self.start_time = time.time()
-        self.board_data = BoardData(block_list)
+        self.board_data = BoardData(block_list, initial_board)
 
 if __name__ == '__main__':
-    GAME_MANEGER = GameManager()
+    block_list = input()
+    initial_board =input()
+    GAME_MANEGER = GameManager(block_list, initial_board)
     GAME_MANEGER.loop()

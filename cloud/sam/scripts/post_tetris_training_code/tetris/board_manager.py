@@ -3,133 +3,24 @@
 import copy
 from tetrimino import Shape
 
-#####################################
-#####################################
-# テトリミノ形状
-# Shape manager
-#####################################
-#####################################
-# class Shape(object):
-#     shapeNone = 0
-#     shapeI = 1
-#     shapeL = 2
-#     shapeJ = 3
-#     shapeT = 4
-#     shapeO = 5
-#     shapeS = 6
-#     shapeZ = 7
-
-#     # shape1 : ****
-#     #          ----
-#     #          ----
-#     #
-#     # shape2 : -*--
-#     #          -*--
-#     #          -**-
-#     #
-#     # shape3 : --*-
-#     #          --*-
-#     #          -**-
-#     #
-#     # shape4 : -*--
-#     #          -**-
-#     #          -*--
-#     #
-#     # shape5 : -**-
-#     #          -**-
-#     #          ----
-#     #
-#     # shape6 : -**-
-#     #          **--
-#     #          ----
-#     #
-#     # shape7 : **--
-#     #          -**-
-#     #          ----
-#     #
-#     #テトリミノ形状座標タプル
-#     shapeCoord = (
-#         ((0, 0), (0, 0), (0, 0), (0, 0)),
-#         ((0, -1), (0, 0), (0, 1), (0, 2)),
-#         ((0, -1), (0, 0), (0, 1), (1, 1)),
-#         ((0, -1), (0, 0), (0, 1), (-1, 1)),
-#         ((0, -1), (0, 0), (0, 1), (1, 0)),
-#         ((0, 0), (0, -1), (1, 0), (1, -1)),
-#         ((0, 0), (0, -1), (-1, 0), (1, -1)),
-#         ((0, 0), (0, -1), (1, 0), (-1, -1))
-#     )
-
-#     def __init__(self, shape=0):
-#         self.shape = shape
-
-#     ##############################
-#     # テトリミノ形状を回転した座標を返す
-#     # direction: テトリミノ回転方向
-#     ##############################
-#     def getRotatedOffsets(self, direction):
-#         # テトリミノ形状座標タプルを取得
-#         tmpCoords = Shape.shapeCoord[self.shape]
-#         # 方向によってテトリミノ形状座標タプルを回転させる
-#         if direction == 0 or self.shape == Shape.shapeO:
-#             return ((x, y) for x, y in tmpCoords)
-
-#         if direction == 1:
-#             return ((-y, x) for x, y in tmpCoords)
-
-#         if direction == 2:
-#             if self.shape in (Shape.shapeI, Shape.shapeZ, Shape.shapeS):
-#                 return ((x, y) for x, y in tmpCoords)
-#             else:
-#                 return ((-x, -y) for x, y in tmpCoords)
-
-#         if direction == 3:
-#             if self.shape in (Shape.shapeI, Shape.shapeZ, Shape.shapeS):
-#                 return ((-y, x) for x, y in tmpCoords)
-#             else:
-#                 return ((y, -x) for x, y in tmpCoords)
-
-#     ###################
-#     # direction (回転状態)のテトリミノ座標配列を取得し、それをx,yに配置した場合の座標配列を返す
-#     ###################
-#     def getCoords(self, direction, x, y):
-#         return ((x + xx, y + yy) for xx, yy in self.getRotatedOffsets(direction))
-
-#     ###################
-#     # テトリミノが原点から x,y 両方向に最大何マス占有するのか返す
-#     ###################
-#     def getBoundingOffsets(self, direction):
-#         # テトリミノ形状を回転した座標を返す
-#         tmpCoords = self.getRotatedOffsets(direction)
-#         # 
-#         minX, maxX, minY, maxY = 0, 0, 0, 0
-#         for x, y in tmpCoords:
-#             if minX > x:
-#                 minX = x
-#             if maxX < x:
-#                 maxX = x
-#             if minY > y:
-#                 minY = y
-#             if maxY < y:
-#                 maxY = y
-#         return (minX, maxX, minY, maxY)
-
-
 #####################################################################
 #####################################################################
 # board manager
 #####################################################################
 #####################################################################
+BOARD_WIDTH=10
+BOARD_HEIGHT=22
+
 class BoardData(object):
 
-    width = 10
-    height = 22
+    width = BOARD_WIDTH
+    height = BOARD_HEIGHT
 
     #######################################
     ##  board manager 初期化
     #######################################
-    def __init__(self, block_list: list):
-        self.backBoard = [0] * BoardData.width * BoardData.height # initialize board matrix
-
+    def __init__(self, block_list: list, initial_board:list=[0]*BOARD_WIDTH*BOARD_HEIGHT):
+        self.backBoard = initial_board
         self.currentX = -1
         self.currentY = -1
         self.currentDirection = 0
@@ -140,8 +31,6 @@ class BoardData(object):
         self.nextShapeIndexCnt = 0
         self.nextShapeIndexList = block_list
         self.nextShapeIndexListDXY = [[0,0,1] for _ in range(len(self.nextShapeIndexList))] # for art DXY config data
-        self.colorTable = [0x000000, 0xCC6666, 0x66CC66, 0x6666CC,
-                           0xCCCC66, 0xCC66CC, 0x66CCCC, 0xDAAA00]
         self.tryMoveNextCnt = 0
         self.ShapeListMax = 6
         # ShapeList
@@ -224,12 +113,6 @@ class BoardData(object):
     ################################
     def getholdShapeData(self):
         return self.getShapeDataFromShapeClass(self.holdShape)
-
-    ################################
-    # getcolorTableを返す
-    ################################
-    def getcolorTable(self):
-        return self.colorTable
 
     ################################
     # nextShapeIndexListDXYを返す
@@ -382,7 +265,6 @@ class BoardData(object):
         if self.tryMoveCurrent(self.currentDirection, self.currentX - 1, self.currentY):
             self.currentX -= 1
         else:
-            #print("failed to moveLeft..")
             return False
         return True
 
@@ -394,7 +276,6 @@ class BoardData(object):
         if self.tryMoveCurrent(self.currentDirection, self.currentX + 1, self.currentY):
             self.currentX += 1
         else:
-            #print("failed to moveRight..")
             return False
         return True
 
@@ -406,7 +287,6 @@ class BoardData(object):
             self.currentDirection += 1
             self.currentDirection %= 4
         else:
-            #print("failed to rotateRight..")
             return False
         return True
 
@@ -418,7 +298,6 @@ class BoardData(object):
             self.currentDirection -= 1
             self.currentDirection %= 4
         else:
-            #print("failed to rotateLeft..")
             return False
         return True
 
@@ -540,77 +419,3 @@ class BoardData(object):
         for _x, _y in coordArray:
             _board[(_y + dy) * width + _x] = Shape_class.shape
         return _board
-
-    def calcEvaluationValueSample(self, board):
-        # sample function of evaluate board.
-        width = self.width
-        height = self.height
-
-        # evaluation paramters
-        ## lines to be removed
-        fullLines = 0
-        ## number of holes or blocks in the line.
-        nHoles, nIsolatedBlocks = 0, 0
-        ## absolute differencial value of MaxY
-        absDy = 0
-        ## how blocks are accumlated
-        BlockMaxY = [0] * width
-        holeCandidates = [0] * width
-        holeConfirm = [0] * width
-
-        ### check board
-        # each y line
-        for y in range(height - 1, 0, -1):
-            hasHole = False
-            hasBlock = False
-            # each x line
-            for x in range(width):
-                ## check if hole or block..
-                if board[y * self.width + x] == 0:
-                    # hole
-                    hasHole = True
-                    holeCandidates[x] += 1  # just candidates in each column..
-                else:
-                    # block
-                    hasBlock = True
-                    BlockMaxY[x] = height - y                # update blockMaxY
-                    if holeCandidates[x] > 0:
-                        holeConfirm[x] += holeCandidates[x]  # update number of holes in target column..
-                        holeCandidates[x] = 0                # reset
-                    if holeConfirm[x] > 0:
-                        nIsolatedBlocks += 1                 # update number of isolated blocks
-
-            if hasBlock == True and hasHole == False:
-                # filled with block
-                fullLines += 1
-            elif hasBlock == True and hasHole == True:
-                # do nothing
-                pass
-            elif hasBlock == False:
-                # no block line (and ofcourse no hole)
-                pass
-
-        # nHoles
-        for x in holeConfirm:
-            nHoles += abs(x)
-
-        ### absolute differencial value of MaxY
-        BlockMaxDy = []
-        for i in range(len(BlockMaxY) - 1):
-            val = BlockMaxY[i] - BlockMaxY[i+1]
-            BlockMaxDy += [val]
-        for x in BlockMaxDy:
-            absDy += abs(x)
-
-        #### maxDy
-        maxDy = max(BlockMaxY) - min(BlockMaxY)
-        #### maxHeight
-        maxHeight = max(BlockMaxY) - fullLines
-
-        # calc Evaluation Value
-        score = 0
-        score = score + fullLines * 100.0            # try to delete line 
-        score = score - nHoles * 1.0                 # try not to make hole
-        score = score - nIsolatedBlocks * 1.0        # try not to make isolated block
-        score = score - maxHeight * 1                # maxHeight
-        return score

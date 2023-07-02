@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-from board_manager import BoardData, Shape
+from board_manager import BoardData
+from tetrimino import Shape
 
 from block_controller import BLOCK_CONTROLLER
 

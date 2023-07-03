@@ -123,7 +123,7 @@ def tetris_evaluation(event, context):
     for input_json, output_json in zip(input_jsons, output_jsons):
         proc = subprocess.Popen(["python", "tetris/game_manager.py"], text=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         try:
-            input_text = input_json["block_list"] + "\n" + input_json["initial_board"] + "\n"
+            input_text = ",".join(input_json["block_list"]) + "\n" + ",".join(input_json["initial_board"]) + "\n"
             outs, errs = proc.communicate(input=input_text.decode('utf-8'), timeout=3)
         except subprocess.TimeoutExpired:
             proc.kill()

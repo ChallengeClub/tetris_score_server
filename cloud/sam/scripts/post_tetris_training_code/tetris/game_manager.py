@@ -422,7 +422,7 @@ class Board:
         self.board_data = BoardData(block_list, initial_board)
 
 if __name__ == '__main__':
-    block_list = input()
-    initial_board =input()
+    block_list = input().split(",")
+    initial_board =input().split(",")
     GAME_MANEGER = GameManager(block_list, initial_board)
     GAME_MANEGER.loop()

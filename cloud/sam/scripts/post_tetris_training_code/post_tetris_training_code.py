@@ -116,7 +116,7 @@ def tetris_evaluation(event, context):
         }
         return response
     
-    with open("tmp/block_controller.py" , mode='w') as f:
+    with open("/tmp/block_controller.py" , mode='w') as f:
         f.write(event["body"])
     
     results = []

@@ -67,6 +67,13 @@ def evaluation(event: dict, context):
         except subprocess.TimeoutExpired:
             proc.kill()
             outs, errs = proc.communicate()
+            results.append("TLE")
+            continue
+        except subprocess.CalledProcessError:
+            proc.kill()
+            outs, errs = proc.communicate()
+            results.append("RE")
+            continue
         expected_outs = output_text.decode('utf-8') + "\n"
         results.append("AC" if expected_outs==outs else "WA")
         
@@ -123,12 +130,19 @@ def tetris_evaluation(event, context):
     for input_json, output_json in zip(input_jsons, output_jsons):
         proc = subprocess.Popen(["python", "tetris/game_manager.py"], text=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         try:
-            input_text = ",".join(input_json["block_list"]) + "\n" + ",".join(input_json["initial_board"]) + "\n"
-            outs, errs = proc.communicate(input=input_text.decode('utf-8'), timeout=3)
+            input_text = ",".join(map(str, input_json["block_list"])) + "\n" + ",".join(map(str, input_json["initial_board"])) + "\n"
+            outs, errs = proc.communicate(input=input_text, timeout=3)
         except subprocess.TimeoutExpired:
             proc.kill()
             outs, errs = proc.communicate()
-        expected_outs = output_json.decode('utf-8') + "\n"
+            results.append("TLE")
+            continue
+        except subprocess.CalledProcessError:
+            proc.kill()
+            outs, errs = proc.communicate()
+            results.append("RE")
+            continue
+        expected_outs = output_json + "\n"
         results.append("AC" if expected_outs==outs else "WA")
 
     response = {

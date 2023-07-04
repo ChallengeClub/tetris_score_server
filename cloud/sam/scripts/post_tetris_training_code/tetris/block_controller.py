@@ -23,27 +23,15 @@ class Block_Controller(object):
     #    nextMove : this data include next shape position and the other,
     #               if return None, do nothing to nextMove.
     def GetNextMove(self, nextMove, GameStatus):
-
         t1 = datetime.now()
-
-        # print GameStatus
-        print("=================================================>")
-        pprint.pprint(GameStatus, width = 61, compact = True)
-
-        # search best nextMove -->
-        # random sample
         nextMove["strategy"]["direction"] = random.randint(0,4)
         nextMove["strategy"]["x"] = random.randint(0,9)
         nextMove["strategy"]["y_operation"] = 1
         nextMove["strategy"]["y_moveblocknum"] = random.randint(1,8)
-        # search best nextMove <--
 
-        # return nextMove
-        print("===", datetime.now() - t1)
-        print(nextMove)
         return nextMove
     
-    def GetLastOutput(GameStatus):
+    def GetLastOutput(self, GameStatus):
         print(GameStatus)
 
 BLOCK_CONTROLLER = Block_Controller()

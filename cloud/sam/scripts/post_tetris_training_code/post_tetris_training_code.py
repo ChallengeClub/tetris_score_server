@@ -142,7 +142,7 @@ def tetris_evaluation(event, context):
             outs, errs = proc.communicate()
             results.append("RE")
             continue
-        expected_outs = output_json + "\n"
+        expected_outs = output_json
         results.append("AC" if expected_outs==outs else "WA")
 
     response = {

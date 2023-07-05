@@ -61,21 +61,14 @@ def evaluation(event: dict, context):
     
     results = []
     for input_text, output_text in zip(input_generator, output_generator):
-        proc = subprocess.Popen(["python", python_file_path], text=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         try:
-            outs, errs = proc.communicate(input=input_text.decode('utf-8')+"\n", timeout=1)
+            proc = subprocess.run(["python", python_file_path], input=input_text+b"\n", capture_output=True, timeout=1, check=True)
+            expected_outs = output_text + b"\n"
+            results.append("AC" if expected_outs==proc.stdout else "WA")
         except subprocess.TimeoutExpired:
-            proc.kill()
-            outs, errs = proc.communicate()
             results.append("TLE")
-            continue
         except subprocess.CalledProcessError:
-            proc.kill()
-            outs, errs = proc.communicate()
             results.append("RE")
-            continue
-        expected_outs = output_text.decode('utf-8') + "\n"
-        results.append("AC" if expected_outs==outs else "WA")
         
     if os.path.exists(python_file_path):
         os.remove(python_file_path)
@@ -142,6 +135,7 @@ def tetris_evaluation(event, context):
             outs, errs = proc.communicate()
             results.append("RE")
             continue
+        print(outs)
         expected_outs = output_json
         results.append("AC" if expected_outs==outs else "WA")
 

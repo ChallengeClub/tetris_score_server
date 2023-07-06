@@ -197,6 +197,7 @@ Resources:
     Properties:
       CodeUri: ./scripts/post_tetris_training_code
       Handler: post_tetris_training_code.lambda_handler
+      Timeout: 60
       Policies:
         - S3ReadPolicy:
             BucketName: !Ref TetrisTrainingBucketName

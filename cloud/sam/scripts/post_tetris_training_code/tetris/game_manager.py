@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
+import sys
+sys.path.append("/tmp")
+from block_controller import BLOCK_CONTROLLER # import block_controller.py in /tmp on aws lambda runtime
 
 from board_manager import BoardData
 from tetrimino import Shape
 
-from block_controller import BLOCK_CONTROLLER
 
 import time
 

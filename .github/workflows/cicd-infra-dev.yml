@@ -47,5 +47,5 @@ jobs:
         working-directory: ./cloud/sam
 
       - name: Sam deploy
-        run: TETRIS_FRONT_ORIGIN=${{ secrets.TETRIS_FRONT_ORIGIN_DEV }} SQS_URL=${{ secrets.TETRIS_SQS_URL_DEV}} ENV=dev make deploy
+        run: TETRIS_FRONT_ORIGIN=${{ secrets.TETRIS_FRONT_ORIGIN_DEV }} SQS_URL=${{ secrets.TETRIS_SQS_URL_DEV}} TETRIS_TRAINING_BUCKET_NAME=${{ secrets.TETRIS_TRAINING_BUCKET_NAME_DEV }} ENV=dev make deploy
         working-directory: ./cloud/sam

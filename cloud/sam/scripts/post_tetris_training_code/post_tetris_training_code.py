@@ -4,7 +4,7 @@ import subprocess
 import json
 import glob
 
-frontend_origin = os.environ["FRONTEND_ORIGIN"]
+FRONTEND_ORIGIN = os.environ["FRONTEND_ORIGIN"]
 BUCKET_NAME = os.environ["TETRIS_TRAINING_BUCKET_NAME"]
 
 s3 = boto3.resource('s3')
@@ -36,7 +36,7 @@ def evaluation(event: dict, context):
         response = {
             "statusCode": 400,
             'headers': {
-                'Access-Control-Allow-Origin': frontend_origin,
+                'Access-Control-Allow-Origin': FRONTEND_ORIGIN,
                 'Access-Control-Allow-Methods': 'OPTIONS,POST'
             },
             "body": "could not find input object",
@@ -49,7 +49,7 @@ def evaluation(event: dict, context):
         response = {
             "statusCode": 400,
             'headers': {
-                'Access-Control-Allow-Origin': frontend_origin,
+                'Access-Control-Allow-Origin': FRONTEND_ORIGIN,
                 'Access-Control-Allow-Methods': 'OPTIONS,POST'
             },
             "body": "could not find output object",
@@ -76,7 +76,7 @@ def evaluation(event: dict, context):
     response = {
         "statusCode": 200,
         'headers': {
-            'Access-Control-Allow-Origin': frontend_origin,
+            'Access-Control-Allow-Origin': FRONTEND_ORIGIN,
             'Access-Control-Allow-Methods': 'OPTIONS,POST'
         },
         "body": json.dumps(results),
@@ -96,7 +96,7 @@ def tetris_evaluation(event, context):
         response = {
             "statusCode": 400,
             'headers': {
-                'Access-Control-Allow-Origin': frontend_origin,
+                'Access-Control-Allow-Origin': FRONTEND_ORIGIN,
                 'Access-Control-Allow-Methods': 'OPTIONS,POST'
             },
             "body": "could not read input object",
@@ -109,7 +109,7 @@ def tetris_evaluation(event, context):
         response = {
             "statusCode": 400,
             'headers': {
-                'Access-Control-Allow-Origin': frontend_origin,
+                'Access-Control-Allow-Origin': FRONTEND_ORIGIN,
                 'Access-Control-Allow-Methods': 'OPTIONS,POST'
             },
             "body": "could not read output object",
@@ -121,28 +121,20 @@ def tetris_evaluation(event, context):
     
     results = []
     for input_json, output_json in zip(input_jsons, output_jsons):
-        proc = subprocess.Popen(["python", "tetris/game_manager.py"], text=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         try:
             input_text = ",".join(map(str, input_json["block_list"])) + "\n" + ",".join(map(str, input_json["initial_board"])) + "\n"
-            outs, errs = proc.communicate(input=input_text, timeout=3)
+            proc = subprocess.run(["python", "tetris/game_manager.py"],text=True, input=input_text, capture_output=True, timeout=3, check=True)
+            expected_outs = ",".join(map(str, output_json["output"])) + "\n"
+            results.append("AC" if expected_outs==proc.stdout else "WA")
         except subprocess.TimeoutExpired:
-            proc.kill()
-            outs, errs = proc.communicate()
             results.append("TLE")
-            continue
         except subprocess.CalledProcessError:
-            proc.kill()
-            outs, errs = proc.communicate()
             results.append("RE")
-            continue
-        print(outs)
-        expected_outs = output_json
-        results.append("AC" if expected_outs==outs else "WA")
-
+    
     response = {
         "statusCode": 200,
         'headers': {
-            'Access-Control-Allow-Origin': frontend_origin,
+            'Access-Control-Allow-Origin': FRONTEND_ORIGIN,
             'Access-Control-Allow-Methods': 'OPTIONS,POST'
         },
         "body": json.dumps(results),

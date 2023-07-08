@@ -24,7 +24,7 @@ Title,Description,InputDescription,InputSample,InputTemplate,OutputDescription,O
 ```
 
 ## テストケース
-いずれの形式でもテストケースはinputとoutputを記載したファイルから構成される。  
+いずれの形式でもテストケースはinputとoutputを記載したファイルから構成されています。  
 1.Atcoderっぽい形式  
 input.txt  
 改行区切りで記載。1行が1ケース  

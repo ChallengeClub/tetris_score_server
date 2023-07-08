@@ -17,13 +17,18 @@ https://gituhb.com/seigot/tetris に準拠し、問題文に応じてBlock_Contr
 問題文は以下の要素から構成されています。  
 二つの形式で問題文を構成する要素は共通です。
 ![image](training_page_table.png)
+以下はテンプレートのCSVです
+```
+Title,Description,InputDescription,InputSample,InputTemplate,OutputDescription,OutputSample
+
+```
 
 ## テストケース
-いずれの形式でもテストケースはinputとoutputを記載したファイルから構成される。
-1. Atcoderっぽい形式  
+いずれの形式でもテストケースはinputとoutputを記載したファイルから構成される。  
+1.Atcoderっぽい形式  
 input.txt  
 改行区切りで記載。1行が1ケース  
-```txt:input.txt
+```
 1
 2
 3
@@ -33,8 +38,9 @@ output.txt
 2
 4
 6
-```
-2. テトリスっぽい形式  
+```  
+
+2.テトリスっぽい形式  
 input.json  
 json形式の配列として記載。配列の一要素が1ケース  
 block_list: 落とすブロックのインデックス配列  

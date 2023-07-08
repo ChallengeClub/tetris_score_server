@@ -25,7 +25,7 @@ Title,Description,InputDescription,InputSample,InputTemplate,OutputDescription,O
 
 ## テストケース
 いずれの形式でもテストケースはinputとoutputを記載したファイルから構成されています。  
-1.Atcoderっぽい形式  
+### Atcoderっぽい形式  
 input.txt  
 改行区切りで記載。1行が1ケース  
 ```
@@ -40,7 +40,7 @@ output.txt
 6
 ```  
 
-2.テトリスっぽい形式  
+### テトリスっぽい形式  
 input.json  
 json形式の配列として記載。配列の一要素が1ケース  
 block_list: 落とすブロックのインデックス配列  

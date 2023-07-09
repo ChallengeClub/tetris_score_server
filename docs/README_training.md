@@ -19,7 +19,7 @@ https://gituhb.com/seigot/tetris に準拠し、問題文に応じてBlock_Contr
 ![image](training_page_table.png)
 以下はテンプレートのCSVです
 ```
-Title,Description,InputDescription,InputSample,InputTemplate,OutputDescription,OutputSample
+"Section-Id","Constraints","Description","Id","InitialFormValue","InputDescription","InputSample","InputSample2","InputTemplate","OutputDescription","OutputSample","OutputSample2","SampleDescription","SampleDescription2","Section","Title"
 
 ```
 

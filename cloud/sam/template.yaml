@@ -142,7 +142,7 @@ Resources:
       CodeUri: ./scripts/post_competition_entry
       Handler: post_competition_entry.lambda_handler
       Layers:
-        - Ref: Layer
+        - Ref: TetrisApiLayer
       Policies:
         - DynamoDBWritePolicy:
             TableName: !Ref DynamoDBCompetitionTableName
@@ -160,7 +160,7 @@ Resources:
       CodeUri: ./scripts/post_evaluation_request
       Handler: post_evaluation_request.lambda_handler
       Layers:
-        - Ref: Layer
+        - Ref: TetrisApiLayer
       Policies:
         - DynamoDBWritePolicy:
             TableName: !Ref DynamoDBTableName
@@ -180,7 +180,7 @@ Resources:
       CodeUri: ./scripts/stop_evaluation
       Handler: stop_evaluation.lambda_handler
       Layers:
-        - Ref: Layer
+        - Ref: TetrisApiLayer
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref DynamoDBTableName
@@ -197,7 +197,9 @@ Resources:
     Properties:
       CodeUri: ./scripts/post_tetris_training_code
       Handler: post_tetris_training_code.lambda_handler
-      Timeout: 60
+      Timeout: 60      
+      Layers:
+        - Ref: TrainingLayer
       Policies:
         - S3ReadPolicy:
             BucketName: !Ref TetrisTrainingBucketName
@@ -241,10 +243,19 @@ Resources:
             Method: get
             RestApiId: !Ref TetrisAPI
   
-  Layer:
+  TetrisApiLayer:
     Type: AWS::Serverless::LayerVersion
     Properties:
-      ContentUri: ./layer
+      ContentUri: ./layers/tetris-api
+      CompatibleRuntimes:
+        - python3.9
+    Metadata:
+      BuildMethod: python3.9
+
+  TrainingLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      ContentUri: ./layers/training
       CompatibleRuntimes:
         - python3.9
     Metadata:

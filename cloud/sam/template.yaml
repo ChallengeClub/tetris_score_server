@@ -240,7 +240,48 @@ Resources:
             Path: /trainings/{section}
             Method: get
             RestApiId: !Ref TetrisAPI
-  
+
+  ChatFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      ImageUri: 132308390451.dkr.ecr.ap-northeast-1.amazonaws.com/chat
+      Timeout: 120
+      MemorySize: 512
+      Policies:
+        - AmazonDynamoDBFullAccess
+        - SecretsManagerReadWrite
+      Events:
+        ChatAPP:
+          Type: Api
+          Properties:
+            Path: /chat
+            Method: get
+            RestApiId: !Ref TetrisAPI
+        ChatAPPPost:
+          Type: Api 
+          Properties:
+            Path: /chat
+            Method: post
+            RestApiId: !Ref TetrisAPI
+        ChatAPPPut:
+          Type: Api 
+          Properties:
+            Path: /chat
+            Method: put
+            RestApiId: !Ref TetrisAPI
+        ChatAPPDelete:
+          Type: Api 
+          Properties:
+            Path: /chat
+            Method: delete
+            RestApiId: !Ref TetrisAPI
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./scripts/chat_function
+      DockerTag: python3.9-v1
+        
+
   Layer:
     Type: AWS::Serverless::LayerVersion
     Properties:

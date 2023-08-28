@@ -6,6 +6,9 @@ from llama_index import VectorStoreIndex, SimpleDirectoryReader
 from llama_index import StorageContext, load_index_from_storage
 
 # ローカルで辞書を作成し、storageに保存する
+# .envにopenaiのAPIkeyを記述する
+# ./dataに.txtや.md等のテキストファイルを格納し、ローカル環境で実行する
+# ./storageに辞書データを出力し、そのデータを用いて辞書検索を行う
 def main():
     # APIkeyの設定
     load_dotenv()
@@ -17,6 +20,7 @@ def main():
 
     # モデルの読み込み
     if(1):
+        # 辞書データを作成する
         documents = SimpleDirectoryReader(input_dir="./data").load_data()
         print("documents: ", documents)
         index = VectorStoreIndex.from_documents(documents)

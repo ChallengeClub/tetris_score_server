@@ -67,7 +67,7 @@ class OpenAIManager:
 
     @staticmethod
     def get_secret():
-        secret_name = "openai"
+        secret_name = "openai-key"
         region_name = "ap-northeast-1"
         session = boto3.session.Session()
         client = session.client(
@@ -83,7 +83,7 @@ class OpenAIManager:
 
         secret = get_secret_value_response['SecretString']
         key_value = json.loads(secret)
-        openai.api_key = key_value['openai']
+        openai.api_key = key_value['openai-key']
 
     def get_chat_response(self, messages):
         return openai.ChatCompletion.create(

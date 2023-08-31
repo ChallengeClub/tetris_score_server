@@ -51,7 +51,8 @@ Resources:
       Name: tetris_api
       StageName: tetris_api_stage
       Cors:
-        AllowMethods: "'POST, GET, PUT, OPTIONS'"
+        AllowMethods: "'POST, GET, PUT, DELETE, OPTIONS'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'"
         AllowOrigin: !Sub "'${FrontendOrigin}'"
 
   GetEntriesFunction:

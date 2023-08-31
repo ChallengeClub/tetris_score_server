@@ -2,10 +2,17 @@ import json
 
 class HttpResponse:
 
+    DEFAULT_HEADERS = {
+        'Access-Control-Allow-Origin': 'frontend_origin',
+        'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS'
+    }
+
     @staticmethod
     def generate_response(status_code, message):
+        headers = HttpResponse.DEFAULT_HEADERS
         return {
             "statusCode": status_code,
+            "headers": headers,
             "body": json.dumps({
                 "message": message,
             }),

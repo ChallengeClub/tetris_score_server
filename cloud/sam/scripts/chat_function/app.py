@@ -139,5 +139,6 @@ class ChatHandler:
 
 
 def lambda_handler(event, context):
+    print("Log:handler called")
     handler = ChatHandler(event)
     return handler.handle()

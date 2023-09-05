@@ -129,16 +129,16 @@ class ChatHandler:
     def handle(self):
         http_method = self.event.get('httpMethod', '')
         if http_method == 'GET':
-            print("Log:Get method started")
+            logger.info("Log:Get method started")
             return self.handle_get_request()
         elif http_method == 'DELETE':
             return self.handle_delete_request()
         elif http_method == 'POST':
-            print("Log:Post method started")
+            logger.info("Log:Post method started")
             return self.handle_post_request()
 
 
 def lambda_handler(event, context):
-    print("Log:handler called")
+    logger.info("Log:handler called")
     handler = ChatHandler(event)
     return handler.handle()

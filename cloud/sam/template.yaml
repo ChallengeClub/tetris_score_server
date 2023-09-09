@@ -207,6 +207,7 @@ Resources:
       DockerTag: latest
     Properties:
       PackageType: Image
+      ImageUri: 868265869441.dkr.ecr.ap-northeast-1.amazonaws.com/tetris-training
       Policies:
         - S3ReadPolicy:
             BucketName: !Ref TetrisTrainingBucketName

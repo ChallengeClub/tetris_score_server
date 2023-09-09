@@ -7,7 +7,7 @@ COPY requirements.subprocess.txt ${LAMBDA_TASK_ROOT}
 COPY post_tetris_training_code.py ${LAMBDA_TASK_ROOT}
 
 # Install the specified packages
-RUN pip install -r requirements.subprocess.txt -t /var/lang/lib/python3.9/site-packages
+RUN pip install -r requirements.subprocess.txt
 
 RUN pip show numpy
 

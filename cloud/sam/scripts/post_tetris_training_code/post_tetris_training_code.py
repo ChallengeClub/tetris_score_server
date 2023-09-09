@@ -67,8 +67,9 @@ def evaluation(event: dict, context):
             results.append("AC" if expected_outs==proc.stdout else "WA")
         except subprocess.TimeoutExpired:
             results.append("TLE")
-        except subprocess.CalledProcessError:
+        except subprocess.CalledProcessError as e:
             results.append("RE")
+            print("Error message:", e.stderr.decode())
         
     if os.path.exists(python_file_path):
         os.remove(python_file_path)

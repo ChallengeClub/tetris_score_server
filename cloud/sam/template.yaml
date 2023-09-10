@@ -26,7 +26,6 @@ Parameters:
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
     MemorySize: 128
     Architectures:
       - x86_64
@@ -60,6 +59,7 @@ Resources:
       CodeUri: ./scripts/get_entries_from_dynamodb
       Handler: get_entries_from_dynamodb.lambda_handler
       Runtime: python3.9
+      Timeout: 3
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref DynamoDBCompetitionTableName
@@ -77,6 +77,7 @@ Resources:
       CodeUri: ./scripts/get_news_from_dynamodb
       Handler: get_news_from_dynamodb.lambda_handler
       Runtime: python3.9
+      Timeout: 3
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref DynamoDBNewsTableName
@@ -94,6 +95,7 @@ Resources:
       CodeUri: ./scripts/get_news_detail_from_dynamodb
       Handler: get_news_detail_from_dynamodb.lambda_handler
       Runtime: python3.9
+      Timeout: 3
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref DynamoDBNewsTableName
@@ -112,6 +114,7 @@ Resources:
       CodeUri: ./scripts/get_results_from_dynamodb
       Handler: get_results_from_dynamodb.lambda_handler
       Runtime: python3.9
+      Timeout: 3
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref DynamoDBTableName
@@ -129,6 +132,7 @@ Resources:
       CodeUri: ./scripts/get_result_detail_from_dynamodb
       Handler: get_result_detail_from_dynamodb.lambda_handler
       Runtime: python3.9
+      Timeout: 3
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref DynamoDBTableName
@@ -146,6 +150,7 @@ Resources:
       CodeUri: ./scripts/post_competition_entry
       Handler: post_competition_entry.lambda_handler
       Runtime: python3.9
+      Timeout: 3
       Layers:
         - Ref: TetrisApiLayer
       Policies:
@@ -165,6 +170,7 @@ Resources:
       CodeUri: ./scripts/post_evaluation_request
       Handler: post_evaluation_request.lambda_handler
       Runtime: python3.9
+      Timeout: 3
       Layers:
         - Ref: TetrisApiLayer
       Policies:
@@ -186,6 +192,7 @@ Resources:
       CodeUri: ./scripts/stop_evaluation
       Handler: stop_evaluation.lambda_handler
       Runtime: python3.9
+      Timeout: 3
       Layers:
         - Ref: TetrisApiLayer
       Policies:
@@ -207,6 +214,7 @@ Resources:
       DockerTag: latest
     Properties:
       PackageType: Image
+      Timeout: 60
       Policies:
         - S3ReadPolicy:
             BucketName: !Ref TetrisTrainingBucketName
@@ -224,6 +232,7 @@ Resources:
       CodeUri: ./scripts/get_training_detail_from_dynamodb
       Handler: get_training_detail_from_dynamodb.lambda_handler
       Runtime: python3.9
+      Timeout: 3
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref DynamoDBTrainingTableName
@@ -241,6 +250,7 @@ Resources:
       CodeUri: ./scripts/get_trainings_in_section
       Handler: get_trainings_in_section.lambda_handler
       Runtime: python3.9
+      Timeout: 3
       Policies:
         - DynamoDBReadPolicy:
             TableName: !Ref DynamoDBTrainingTableName
@@ -256,15 +266,6 @@ Resources:
     Type: AWS::Serverless::LayerVersion
     Properties:
       ContentUri: ./layers/tetris-api
-      CompatibleRuntimes:
-        - python3.9
-    Metadata:
-      BuildMethod: python3.9
-
-  TrainingLayer:
-    Type: AWS::Serverless::LayerVersion
-    Properties:
-      ContentUri: ./layers/training
       CompatibleRuntimes:
         - python3.9
     Metadata:

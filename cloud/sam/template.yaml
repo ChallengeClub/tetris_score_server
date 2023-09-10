@@ -199,24 +199,24 @@ Resources:
             Method: put
             RestApiId: !Ref TetrisAPI
 
-  # PostTetrisTrainingCodeFunction:
-  #   Type: AWS::Serverless::Function
-  #   Metadata:
-  #     Dockerfile: Dockerfile
-  #     DockerContext: ./scripts/post_tetris_training_code
-  #     DockerTag: latest
-  #   Properties:
-  #     PackageType: Image
-  #     Policies:
-  #       - S3ReadPolicy:
-  #           BucketName: !Ref TetrisTrainingBucketName
-  #     Events:
-  #       PostTetrisTrainingCodeEndpoint:
-  #         Type: Api
-  #         Properties:
-  #           Path: /training/{section}/{id}
-  #           Method: post
-  #           RestApiId: !Ref TetrisAPI
+  PostTetrisTrainingCodeFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./scripts/post_tetris_training_code
+      DockerTag: latest
+    Properties:
+      PackageType: Image
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Ref TetrisTrainingBucketName
+      Events:
+        PostTetrisTrainingCodeEndpoint:
+          Type: Api
+          Properties:
+            Path: /training/{section}/{id}
+            Method: post
+            RestApiId: !Ref TetrisAPI
 
   GetTrainingDetailFunction:
     Type: AWS::Serverless::Function

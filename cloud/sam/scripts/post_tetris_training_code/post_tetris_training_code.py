@@ -6,6 +6,8 @@ import glob
 
 FRONTEND_ORIGIN = os.environ["FRONTEND_ORIGIN"]
 BUCKET_NAME = os.environ["TETRIS_TRAINING_BUCKET_NAME"]
+LAMBDA_TASK_ROOT = os.environ["LAMBDA_TASK_ROOT"]
+SUBPROCESS_TIMEOUT_LIMIT = 30
 
 s3 = boto3.resource('s3')
 
@@ -62,7 +64,7 @@ def evaluation(event: dict, context):
     results = []
     for input_text, output_text in zip(input_generator, output_generator):
         try:
-            proc = subprocess.run(["python", python_file_path], input=input_text+b"\n", capture_output=True, timeout=1, check=True)
+            proc = subprocess.run(["python", python_file_path], input=input_text+b"\n", capture_output=True, timeout=SUBPROCESS_TIMEOUT_LIMIT, check=True)
             expected_outs = output_text + b"\n"
             results.append("AC" if expected_outs==proc.stdout else "WA")
         except subprocess.TimeoutExpired:
@@ -123,13 +125,15 @@ def tetris_evaluation(event, context):
     for input_json, output_json in zip(input_jsons, output_jsons):
         try:
             input_text = ",".join(map(str, input_json["block_list"])) + "\n" + ",".join(map(str, input_json["initial_board"])) + "\n"
-            proc = subprocess.run(["python", "tetris/game_manager.py"],text=True, input=input_text, capture_output=True, timeout=3, check=True)
+            proc = subprocess.run(["python", "tetris/game_manager.py"],text=True, input=input_text, capture_output=True, timeout=SUBPROCESS_TIMEOUT_LIMIT, check=True)
             expected_outs = ",".join(map(str, output_json["output"])) + "\n"
             results.append("AC" if expected_outs==proc.stdout else "WA")
         except subprocess.TimeoutExpired:
             results.append("TLE")
-        except subprocess.CalledProcessError:
+        except subprocess.CalledProcessError as e:
             results.append("RE")
+            print("Stdout:", e.stdout)
+            print("Error message:", e.stderr)
     
     response = {
         "statusCode": 200,

@@ -6,6 +6,7 @@ import glob
 
 FRONTEND_ORIGIN = os.environ["FRONTEND_ORIGIN"]
 BUCKET_NAME = os.environ["TETRIS_TRAINING_BUCKET_NAME"]
+LAMBDA_TASK_ROOT = os.environ["LAMBDA_TASK_ROOT"]
 SUBPROCESS_TIMEOUT_LIMIT = 30
 
 s3 = boto3.resource('s3')
@@ -129,8 +130,10 @@ def tetris_evaluation(event, context):
             results.append("AC" if expected_outs==proc.stdout else "WA")
         except subprocess.TimeoutExpired:
             results.append("TLE")
-        except subprocess.CalledProcessError:
+        except subprocess.CalledProcessError as e:
             results.append("RE")
+            print("Stdout:", e.stdout)
+            print("Error message:", e.stderr)
     
     response = {
         "statusCode": 200,

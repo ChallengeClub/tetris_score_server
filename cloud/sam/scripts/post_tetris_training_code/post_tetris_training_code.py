@@ -64,13 +64,11 @@ def evaluation(event: dict, context):
         try:
             proc = subprocess.run(["python", python_file_path], input=input_text+b"\n", capture_output=True, timeout=60, check=True)
             expected_outs = output_text + b"\n"
-            print(proc.stdout)
             results.append("AC" if expected_outs==proc.stdout else "WA")
         except subprocess.TimeoutExpired:
             results.append("TLE")
         except subprocess.CalledProcessError as e:
             results.append("RE")
-            print("Error message:", e.stderr.decode())
         
     if os.path.exists(python_file_path):
         os.remove(python_file_path)

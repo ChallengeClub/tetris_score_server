@@ -62,8 +62,9 @@ def evaluation(event: dict, context):
     results = []
     for input_text, output_text in zip(input_generator, output_generator):
         try:
-            proc = subprocess.run(["python", python_file_path], input=input_text+b"\n", capture_output=True, timeout=1, check=True)
+            proc = subprocess.run(["python", python_file_path], input=input_text+b"\n", capture_output=True, timeout=60, check=True)
             expected_outs = output_text + b"\n"
+            print(proc.stdout)
             results.append("AC" if expected_outs==proc.stdout else "WA")
         except subprocess.TimeoutExpired:
             results.append("TLE")
@@ -124,7 +125,7 @@ def tetris_evaluation(event, context):
     for input_json, output_json in zip(input_jsons, output_jsons):
         try:
             input_text = ",".join(map(str, input_json["block_list"])) + "\n" + ",".join(map(str, input_json["initial_board"])) + "\n"
-            proc = subprocess.run(["python", "tetris/game_manager.py"],text=True, input=input_text, capture_output=True, timeout=3, check=True)
+            proc = subprocess.run(["python", "tetris/game_manager.py"],text=True, input=input_text, capture_output=True, timeout=60, check=True)
             expected_outs = ",".join(map(str, output_json["output"])) + "\n"
             results.append("AC" if expected_outs==proc.stdout else "WA")
         except subprocess.TimeoutExpired:

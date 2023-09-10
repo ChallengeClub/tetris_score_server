@@ -12,6 +12,4 @@ RUN pip install -r requirements.subprocess.txt
 COPY requirements.txt ${LAMBDA_TASK_ROOT}
 RUN pip install -r requirements.txt
 
-
-# Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
 CMD [ "post_tetris_training_code.lambda_handler" ]

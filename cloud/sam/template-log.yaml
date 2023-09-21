@@ -1,0 +1,12 @@
+Parameters:
+  StackName:
+    Type: String
+  GetEntriesFunction:
+    Type: String
+
+Resources:
+  GetEntriesFunctionFuncLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${GetEntriesFunction}
+      RetentionInDays: 7

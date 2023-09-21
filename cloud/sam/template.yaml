@@ -53,6 +53,15 @@ Resources:
         AllowMethods: "'POST, GET, PUT, OPTIONS'"
         AllowOrigin: !Sub "'${FrontendOrigin}'"
 
+  FunctionLogStack:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: template-log.yaml
+      Parameters:
+        StackName: !Ref AWS::StackName
+        GetEntriesFunction: !Ref GetEntriesFunction
+
+
   GetEntriesFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -70,12 +79,6 @@ Resources:
             Path: /entries
             Method: get
             RestApiId: !Ref TetrisAPI
-  
-  GetEntriesFunctionFuncLogGroup:
-    Type: AWS::Logs::LogGroup
-    Properties:
-      LogGroupName: !Sub /aws/lambda/${GetEntriesFunction}
-      RetentionInDays: 14
 
   GetNewsFunction:
     Type: AWS::Serverless::Function

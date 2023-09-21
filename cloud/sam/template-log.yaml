@@ -3,10 +3,90 @@ Parameters:
     Type: String
   GetEntriesFunction:
     Type: String
+  GetNewsFunction:
+    Type: String
+  GetNewsDetailFunction:
+    Type: String
+  GetResultsFunction:
+    Type: String
+  GetResultDetailFunction:
+    Type: String
+  PostCompetitionEntryFunction:
+    Type: String
+  PostEvaluationRequestFunction:
+    Type: String
+  StopEvaluationFunction:
+    Type: String
+  PostTetrisTrainingCodeFunction:
+    Type: String
+  GetTrainingDetailFunction:
+    Type: String
+  GetSectionTrainingsFunction:
+    Type: String
 
 Resources:
-  GetEntriesFunctionFuncLogGroup:
+  GetEntriesFunctionLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Sub /aws/lambda/${GetEntriesFunction}
+      RetentionInDays: 7
+  
+  GetNewsFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${GetNewsFunction}
+      RetentionInDays: 7
+
+  GetNewsDetailFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${GetNewsDetailFunction}
+      RetentionInDays: 7
+
+  GetResultsFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${GetResultsFunction}
+      RetentionInDays: 7
+  
+  GetResultDetailFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${GetResultDetailFunction}
+      RetentionInDays: 7
+  
+  PostCompetitionEntryFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${PostCompetitionEntryFunction}
+      RetentionInDays: 7
+  
+  PostEvaluationRequestFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${PostEvaluationRequestFunction}
+      RetentionInDays: 7
+  
+  StopEvaluationFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${StopEvaluationFunction}
+      RetentionInDays: 7
+  
+  PostTetrisTrainingCodeFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${PostTetrisTrainingCodeFunction}
+      RetentionInDays: 7
+  
+  GetTrainingDetailFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${GetTrainingDetailFunction}
+      RetentionInDays: 7
+
+  GetSectionTrainingsFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${GetSectionTrainingsFunction}
       RetentionInDays: 7

@@ -70,6 +70,12 @@ Resources:
             Path: /entries
             Method: get
             RestApiId: !Ref TetrisAPI
+  
+  GetEntriesFunctionFuncLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${GetEntriesFunction}
+      RetentionInDays: 14
 
   GetNewsFunction:
     Type: AWS::Serverless::Function

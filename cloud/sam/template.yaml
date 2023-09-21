@@ -60,7 +60,16 @@ Resources:
       Parameters:
         StackName: !Ref AWS::StackName
         GetEntriesFunction: !Ref GetEntriesFunction
-
+          GetNewsFunction: !Ref GetNewsFunction
+          GetNewsDetailFunction: !Ref GetNewsDetailFunction
+          GetResultsFunction: !Ref GetResultsFunction
+          GetResultDetailFunction: !Ref GetResultDetailFunction
+          PostCompetitionEntryFunction: !Ref PostCompetitionEntryFunction
+          PostEvaluationRequestFunction: !Ref PostEvaluationRequestFunction
+          StopEvaluationFunction: !Ref StopEvaluationFunction
+          PostTetrisTrainingCodeFunction: !Ref PostTetrisTrainingCodeFunction
+          GetTrainingDetailFunction: !Ref GetTrainingDetailFunction
+          GetSectionTrainingsFunction: !Ref GetSectionTrainingsFunction
 
   GetEntriesFunction:
     Type: AWS::Serverless::Function

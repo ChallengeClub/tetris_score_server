@@ -104,7 +104,9 @@ class ChatHandler:
         # 過去の応答を取得
         try:
             messages = self.tetris_assistant.get_chat_messages()
+            logger.info('messages: %s', messages)
             functions = self.tetris_assistant.get_chat_functions()
+            logger.info('functions: %s', functions)
             max_order_id,items = self.db_manager.get_max_conversation_id(user_id, char_name)
 
             #今までの対話をmessagesに並べる
@@ -120,7 +122,9 @@ class ChatHandler:
             messages.append({"role": "user", "content": data['input_text']})
             
             #openAIのAPIを叩く
+            logger.info('before call_openai_api')
             response_content = self.call_openai_api(messages, functions, user_id, char_name, input_text, max_order_id)
+            logger.info('complete call_openai_api')
             return self.http_response.success(response_content)
             
         except Exception as e:

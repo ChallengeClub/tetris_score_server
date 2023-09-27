@@ -51,9 +51,10 @@ Resources:
       Name: tetris_api
       StageName: tetris_api_stage
       Cors:
-        AllowMethods: "'POST, GET, PUT, DELETE, OPTIONS'"
-        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'"
+        AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS,PATCH,HEAD'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Origin,Accept,X-Custom-Header'"
         AllowOrigin: !Sub "'${FrontendOrigin}'"
+        MaxAge: "'-1'"
 
   GetEntriesFunction:
     Type: AWS::Serverless::Function

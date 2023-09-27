@@ -3,7 +3,7 @@ import json
 class HttpResponse:
 
     DEFAULT_HEADERS = {
-        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Amz-Date, X-Api-Key, X-Amz-Security-Token, ,X-Amz-User-Agent,Origin, Accept, token, id, HEAD,X-CSRF-TOKEN',
         'Access-Control-Allow-Origin': 'http://localhost:8080',
         'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS'
     }

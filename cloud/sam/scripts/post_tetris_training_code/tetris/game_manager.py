@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 import sys
 sys.path.append("/tmp")
-from block_controller import BLOCK_CONTROLLER # import block_controller.py in /tmp on aws lambda runtime
+import block_controller  # import block_controller.py in /tmp on aws lambda runtime
+BLOCK_CONTROLLER_ = block_controller.Block_Controller()
 
 from board_manager import BoardData
 from tetrimino import Shape
@@ -105,8 +106,7 @@ class GameManager:
                     }
         # get nextMove from GameController
         GameStatus = self.getGameStatus()
-        self.nextMove = BLOCK_CONTROLLER.GetNextMove(nextMove, GameStatus)
-
+        self.nextMove = BLOCK_CONTROLLER_.GetNextMove(nextMove, GameStatus)
 
         #######################
         ## 次の手を動かす
@@ -204,7 +204,7 @@ class GameManager:
         for _ in range(len(self.board.board_data.nextShapeIndexList)):
             self.exec()
         GameStatus = self.getGameStatus()
-        BLOCK_CONTROLLER.GetLastOutput(GameStatus)
+        BLOCK_CONTROLLER_.GetLastOutput(GameStatus)
 
     ###############################################
     # 消去ライン数と落下数によりスコア計算

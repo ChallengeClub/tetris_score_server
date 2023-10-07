@@ -39,6 +39,7 @@ Globals:
         FRONTEND_ORIGIN: !Ref FrontendOrigin
         SQS_URL: !Ref SQSUrl
         TETRIS_TRAINING_BUCKET_NAME: !Ref TetrisTrainingBucketName
+        # TURTLE_TRAINING_BUCKET_NAME: !Ref TurtleTrainingBucketName
 
   Api:
     TracingEnabled: true
@@ -70,6 +71,7 @@ Resources:
         PostTetrisTrainingCodeFunction: !Ref PostTetrisTrainingCodeFunction
         GetTrainingDetailFunction: !Ref GetTrainingDetailFunction
         GetSectionTrainingsFunction: !Ref GetSectionTrainingsFunction
+        PostTurtleTrainingCodeFunction: !Ref PostTurtleTrainingCodeFunction
 
   GetEntriesFunction:
     Type: AWS::Serverless::Function
@@ -241,6 +243,23 @@ Resources:
           Type: Api
           Properties:
             Path: /training/{section}/{id}
+            Method: post
+            RestApiId: !Ref TetrisAPI
+
+  PostTurtleTrainingCodeFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./scripts/post_turtle_training_code
+      DockerTag: latest
+    Properties:
+      PackageType: Image
+      Timeout: 5
+      Events:
+        PostTetrisTrainingCodeEndpoint:
+          Type: Api
+          Properties:
+            Path: /turtle-training
             Method: post
             RestApiId: !Ref TetrisAPI
 

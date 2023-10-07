@@ -253,7 +253,7 @@ Resources:
       DockerTag: latest
     Properties:
       PackageType: Image
-      Timeout: 10
+      Timeout: 60
       Events:
         PostTetrisTrainingCodeEndpoint:
           Type: Api

@@ -6,7 +6,7 @@ import shutil
 
 FRONTEND_ORIGIN = os.environ["FRONTEND_ORIGIN"]
 LAMBDA_TASK_ROOT = os.environ["LAMBDA_TASK_ROOT"]
-SUBPROCESS_TIMEOUT_LIMIT = 30
+SUBPROCESS_TIMEOUT_LIMIT = 60
 
 
 def lambda_handler(event: dict, context):
@@ -45,10 +45,10 @@ def evaluation(event: dict, context):
                 "Content-Type": "text/plain",
             },
         }
-    except subprocess.CalledProcessError:
+    except subprocess.CalledProcessError as e:
         response = {
             "statusCode": 400,
-            "body": "Runtime error",
+            "body": f"Runtime error\n{e.stderr.decode('utf-8')}",
             "headers": {
                 "Content-Type": "text/plain",
             },

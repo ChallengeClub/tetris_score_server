@@ -127,7 +127,6 @@ Resources:
             Method: get
             RestApiId: !Ref TetrisAPI
 
-
   GetResultsFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -254,7 +253,7 @@ Resources:
       DockerTag: latest
     Properties:
       PackageType: Image
-      Timeout: 5
+      Timeout: 10
       Events:
         PostTetrisTrainingCodeEndpoint:
           Type: Api

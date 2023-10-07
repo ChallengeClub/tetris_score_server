@@ -49,8 +49,13 @@ def evaluation(event: dict, context):
                 "Content-Type": "text/plain",
             },
         }
-    dir = "/tmp"
-    for f in os.listdir(dir):
-        os.remove(os.path.join(dir, f))
+    directory = "/tmp"
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            file_path = os.path.join(root, file)
+            os.remove(file_path)
+        for dir in dirs:
+            dir_path = os.path.join(root, dir)
+            os.rmdir(dir_path)
 
     return response

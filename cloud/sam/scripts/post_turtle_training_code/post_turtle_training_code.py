@@ -6,7 +6,7 @@ import shutil
 
 FRONTEND_ORIGIN = os.environ["FRONTEND_ORIGIN"]
 LAMBDA_TASK_ROOT = os.environ["LAMBDA_TASK_ROOT"]
-SUBPROCESS_TIMEOUT_LIMIT = 3
+SUBPROCESS_TIMEOUT_LIMIT = 30
 
 
 def lambda_handler(event: dict, context):

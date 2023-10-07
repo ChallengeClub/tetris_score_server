@@ -13,7 +13,13 @@ def lambda_handler(event: dict, context):
     response = evaluation(event, context)
     
     directory = "/tmp"
-    shutil.rmtree(directory)
+    _list = os.listdir(directory)
+    for f in _list:
+        l = os.path.join(directory, f)
+        if os.path.isdir(l):
+            shutil.rmtree(l)
+        else:
+            os.remove(l)
            
     return response
 

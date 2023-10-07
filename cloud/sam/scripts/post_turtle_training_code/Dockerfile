@@ -7,7 +7,7 @@ ENV PYTHONUNBUFFERED 1
 # Install the function's dependencies
 RUN pip install \
     --target ${FUNCTION_DIR} \
-        awslambdaric CairoSVG
+        -r requirements.txt
 
 # Set working directory to function root directory
 WORKDIR ${FUNCTION_DIR}

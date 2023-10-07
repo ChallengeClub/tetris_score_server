@@ -10,7 +10,6 @@ SUBPROCESS_TIMEOUT_LIMIT = 3
 
 
 def lambda_handler(event: dict, context):
-    section = event['pathParameters']['section']
     response = evaluation(event, context)
     
     for p in glob.glob("/tmp/*"):
@@ -21,9 +20,6 @@ def lambda_handler(event: dict, context):
 
 
 def evaluation(event: dict, context):
-    section = event['pathParameters']['section']
-    id = event['pathParameters']['id']
-
     python_file_path = "/tmp/main.py"
     with open(python_file_path , mode='w') as f:
         f.write(event["body"])

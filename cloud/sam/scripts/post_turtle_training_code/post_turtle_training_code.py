@@ -2,7 +2,7 @@ import boto3
 import os
 import subprocess
 import json
-import glob
+import shutil   
 
 FRONTEND_ORIGIN = os.environ["FRONTEND_ORIGIN"]
 LAMBDA_TASK_ROOT = os.environ["LAMBDA_TASK_ROOT"]
@@ -12,12 +12,10 @@ SUBPROCESS_TIMEOUT_LIMIT = 3
 def lambda_handler(event: dict, context):
     response = evaluation(event, context)
     
-    for p in glob.glob("/tmp/*"):
-       if os.path.isfile(p):
-           os.remove(p)
+    directory = "/tmp"
+    shutil.rmtree(directory)
            
     return response
-
 
 def evaluation(event: dict, context):
     python_file_path = "/tmp/main.py"
@@ -49,13 +47,5 @@ def evaluation(event: dict, context):
                 "Content-Type": "text/plain",
             },
         }
-    directory = "/tmp"
-    for root, dirs, files in os.walk(directory):
-        for file in files:
-            file_path = os.path.join(root, file)
-            os.remove(file_path)
-        for dir in dirs:
-            dir_path = os.path.join(root, dir)
-            os.rmdir(dir_path)
 
     return response

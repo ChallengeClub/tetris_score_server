@@ -31,8 +31,7 @@ def evaluation(event: dict, context):
             "headers": {
                 "Content-Type": "text/plain",
             },
-            "isBase64Encoded": True,
-            "body": open('/tmp/canvas.svg', 'rb').read().encode('base64')
+            "body": open('/tmp/canvas.svg', 'rb').read()
         }
     except subprocess.TimeoutExpired:
         response = {
@@ -50,8 +49,8 @@ def evaluation(event: dict, context):
                 "Content-Type": "text/plain",
             },
         }
-
-    for f in os.listdir("/tmp"):
+    dir = "/tmp"
+    for f in os.listdir(dir):
         os.remove(os.path.join(dir, f))
 
     return response

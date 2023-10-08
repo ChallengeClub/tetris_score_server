@@ -1,7 +1,7 @@
 FROM python:3.10-slim-bullseye
 ARG FUNCTION_DIR="/function"
 RUN apt-get update && apt-get install -y \
-    xvfb python-tk
+    xvfb python-tk libcairo2-dev
 ENV PYTHONUNBUFFERED 1
 
 # Install the function's dependencies

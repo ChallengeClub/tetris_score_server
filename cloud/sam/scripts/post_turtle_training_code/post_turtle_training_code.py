@@ -34,6 +34,8 @@ def evaluation(event: dict, context):
             "statusCode": 200,
             "headers": {
                 "Content-Type": "image/jpeg",
+                'Access-Control-Allow-Origin': FRONTEND_ORIGIN,
+                'Access-Control-Allow-Methods': 'OPTIONS,POST',
             },
             "isBase64Encoded": True, 
             "body": base64.b64encode(open('/tmp/canvas.jpg', 'rb').read()).decode('utf-8')
@@ -44,6 +46,8 @@ def evaluation(event: dict, context):
             "body": "Time expired error",
             "headers": {
                 "Content-Type": "text/plain",
+                'Access-Control-Allow-Origin': FRONTEND_ORIGIN,
+                'Access-Control-Allow-Methods': 'OPTIONS,POST',
             },
         }
     except subprocess.CalledProcessError as e:
@@ -52,6 +56,8 @@ def evaluation(event: dict, context):
             "body": f"Runtime error\n{e.stderr.decode('utf-8')}",
             "headers": {
                 "Content-Type": "text/plain",
+                'Access-Control-Allow-Origin': FRONTEND_ORIGIN,
+                'Access-Control-Allow-Methods': 'OPTIONS,POST',
             },
         }
 

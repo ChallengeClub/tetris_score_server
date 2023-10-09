@@ -1,8 +1,8 @@
 import boto3
 import os
 import subprocess
-import json
-import shutil   
+import shutil
+import base64
 
 FRONTEND_ORIGIN = os.environ["FRONTEND_ORIGIN"]
 LAMBDA_TASK_ROOT = os.environ["LAMBDA_TASK_ROOT"]
@@ -33,9 +33,10 @@ def evaluation(event: dict, context):
         response = {
             "statusCode": 200,
             "headers": {
-                "Content-Type": "text/plain",
+                "Content-Type": "image/jpeg",
             },
-            "body": open('/tmp/canvas.jpg', 'rb').read()
+            "isBase64Encoded": True, 
+            "body": base64.b64encode(open('/tmp/canvas.jpg', 'rb').read()).decode('utf-8')
         }
     except subprocess.TimeoutExpired:
         response = {

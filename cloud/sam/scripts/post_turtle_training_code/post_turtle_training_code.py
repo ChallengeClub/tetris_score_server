@@ -35,7 +35,7 @@ def evaluation(event: dict, context):
             "headers": {
                 "Content-Type": "text/plain",
             },
-            "body": open('/tmp/canvas.svg', 'rb').read()
+            "body": open('/tmp/canvas.jpg', 'rb').read()
         }
     except subprocess.TimeoutExpired:
         response = {

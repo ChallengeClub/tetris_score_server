@@ -72,7 +72,7 @@ Resources:
         GetTrainingDetailFunction: !Ref GetTrainingDetailFunction
         GetSectionTrainingsFunction: !Ref GetSectionTrainingsFunction
         PostTurtleTrainingCodeFunction: !Ref PostTurtleTrainingCodeFunction
-        PostAlrithmTrainingCodeFunction: !Ref PostAlrithmTrainingCodeFunction
+        PostAlgorithmTrainingCodeFunction: !Ref PostAlgorithmTrainingCodeFunction
 
   GetEntriesFunction:
     Type: AWS::Serverless::Function
@@ -226,7 +226,7 @@ Resources:
             Method: put
             RestApiId: !Ref TetrisAPI
 
-  PostAlrithmTrainingCodeFunction:
+  PostAlgorithmTrainingCodeFunction:
     Type: AWS::Serverless::Function
     Metadata:
       Dockerfile: Dockerfile

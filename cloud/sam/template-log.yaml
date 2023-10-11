@@ -25,7 +25,7 @@ Parameters:
     Type: String
   PostTurtleTrainingCodeFunction:
     Type: String
-  PostAlrithmTrainingCodeFunction:
+  PostAlgorithmTrainingCodeFunction:
     Type: String
 
 Resources:

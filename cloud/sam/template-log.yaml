@@ -25,6 +25,8 @@ Parameters:
     Type: String
   PostTurtleTrainingCodeFunction:
     Type: String
+  PostAlrithmTrainingCodeFunction:
+    Type: String
 
 Resources:
   GetEntriesFunctionLogGroup:
@@ -86,7 +88,13 @@ Resources:
     Properties:
       LogGroupName: !Sub /aws/lambda/${PostTurtleTrainingCodeFunction}
       RetentionInDays: 7
-  
+
+  PostAlgorithmTrainingCodeFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${PostAlgorithmTrainingCodeFunction}
+      RetentionInDays: 7
+
   GetTrainingDetailFunctionLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:

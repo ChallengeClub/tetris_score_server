@@ -72,6 +72,7 @@ Resources:
         GetTrainingDetailFunction: !Ref GetTrainingDetailFunction
         GetSectionTrainingsFunction: !Ref GetSectionTrainingsFunction
         PostTurtleTrainingCodeFunction: !Ref PostTurtleTrainingCodeFunction
+        PostAlrithmTrainingCodeFunction: !Ref PostAlrithmTrainingCodeFunction
 
   GetEntriesFunction:
     Type: AWS::Serverless::Function
@@ -225,6 +226,26 @@ Resources:
             Method: put
             RestApiId: !Ref TetrisAPI
 
+  PostAlrithmTrainingCodeFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./scripts/post_algorithm_training_code
+      DockerTag: latest
+    Properties:
+      PackageType: Image
+      Timeout: 10
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Ref TetrisTrainingBucketName
+      Events:
+        PostAlgorithmTrainingCodeEndpoint:
+          Type: Api
+          Properties:
+            Path: /trainings/algorithm/{id}
+            Method: post
+            RestApiId: !Ref TetrisAPI
+
   PostTetrisTrainingCodeFunction:
     Type: AWS::Serverless::Function
     Metadata:
@@ -233,7 +254,7 @@ Resources:
       DockerTag: latest
     Properties:
       PackageType: Image
-      Timeout: 60
+      Timeout: 30
       Policies:
         - S3ReadPolicy:
             BucketName: !Ref TetrisTrainingBucketName
@@ -241,7 +262,7 @@ Resources:
         PostTetrisTrainingCodeEndpoint:
           Type: Api
           Properties:
-            Path: /training/{section}/{id}
+            Path: /trainings/tetris/{id}
             Method: post
             RestApiId: !Ref TetrisAPI
 
@@ -258,7 +279,7 @@ Resources:
         PostTetrisTrainingCodeEndpoint:
           Type: Api
           Properties:
-            Path: /turtle-training
+            Path: /trainings/turtle
             Method: post
             RestApiId: !Ref TetrisAPI
 

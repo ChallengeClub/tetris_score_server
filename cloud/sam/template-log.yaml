@@ -17,14 +17,14 @@ Parameters:
     Type: String
   StopEvaluationFunction:
     Type: String
-  # PostTetrisTrainingCodeFunction:
-  #   Type: String
+  PostTetrisTrainingCodeFunction:
+    Type: String
   GetTrainingDetailFunction:
     Type: String
   GetSectionTrainingsFunction:
     Type: String
-  # PostTurtleTrainingCodeFunction:
-  #   Type: String
+  PostTurtleTrainingCodeFunction:
+    Type: String
   PostAlgorithmTrainingCodeFunction:
     Type: String
 
@@ -77,17 +77,17 @@ Resources:
       LogGroupName: !Sub /aws/lambda/${StopEvaluationFunction}
       RetentionInDays: 7
   
-  # PostTetrisTrainingCodeFunctionLogGroup:
-  #   Type: AWS::Logs::LogGroup
-  #   Properties:
-  #     LogGroupName: !Sub /aws/lambda/${PostTetrisTrainingCodeFunction}
-  #     RetentionInDays: 7
+  PostTetrisTrainingCodeFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${PostTetrisTrainingCodeFunction}
+      RetentionInDays: 7
 
-  # PostTurtleTrainingCodeFunctionLogGroup:
-  #   Type: AWS::Logs::LogGroup
-  #   Properties:
-  #     LogGroupName: !Sub /aws/lambda/${PostTurtleTrainingCodeFunction}
-  #     RetentionInDays: 7
+  PostTurtleTrainingCodeFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${PostTurtleTrainingCodeFunction}
+      RetentionInDays: 7
 
   PostAlgorithmTrainingCodeFunctionLogGroup:
     Type: AWS::Logs::LogGroup

@@ -68,10 +68,10 @@ Resources:
         PostCompetitionEntryFunction: !Ref PostCompetitionEntryFunction
         PostEvaluationRequestFunction: !Ref PostEvaluationRequestFunction
         StopEvaluationFunction: !Ref StopEvaluationFunction
-        # PostTetrisTrainingCodeFunction: !Ref PostTetrisTrainingCodeFunction
+        PostTetrisTrainingCodeFunction: !Ref PostTetrisTrainingCodeFunction
         GetTrainingDetailFunction: !Ref GetTrainingDetailFunction
         GetSectionTrainingsFunction: !Ref GetSectionTrainingsFunction
-        # PostTurtleTrainingCodeFunction: !Ref PostTurtleTrainingCodeFunction
+        PostTurtleTrainingCodeFunction: !Ref PostTurtleTrainingCodeFunction
         PostAlgorithmTrainingCodeFunction: !Ref PostAlgorithmTrainingCodeFunction
 
   GetEntriesFunction:
@@ -246,42 +246,42 @@ Resources:
             Method: post
             RestApiId: !Ref TetrisAPI
 
-  # PostTetrisTrainingCodeFunction:
-  #   Type: AWS::Serverless::Function
-  #   Metadata:
-  #     Dockerfile: Dockerfile
-  #     DockerContext: ./scripts/post_tetris_training_code
-  #     DockerTag: latest
-  #   Properties:
-  #     PackageType: Image
-  #     Timeout: 30
-  #     Policies:
-  #       - S3ReadPolicy:
-  #           BucketName: !Ref TetrisTrainingBucketName
-  #     Events:
-  #       PostTetrisTrainingCodeEndpoint:
-  #         Type: Api
-  #         Properties:
-  #           Path: /trainings/tetris/{id}
-  #           Method: post
-  #           RestApiId: !Ref TetrisAPI
+  PostTetrisTrainingCodeFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./scripts/post_tetris_training_code
+      DockerTag: latest
+    Properties:
+      PackageType: Image
+      Timeout: 30
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Ref TetrisTrainingBucketName
+      Events:
+        PostTetrisTrainingCodeEndpoint:
+          Type: Api
+          Properties:
+            Path: /trainings/tetris/{id}
+            Method: post
+            RestApiId: !Ref TetrisAPI
 
-  # PostTurtleTrainingCodeFunction:
-  #   Type: AWS::Serverless::Function
-  #   Metadata:
-  #     Dockerfile: Dockerfile
-  #     DockerContext: ./scripts/post_turtle_training_code
-  #     DockerTag: latest
-  #   Properties:
-  #     PackageType: Image
-  #     Timeout: 60
-  #     Events:
-  #       PostTetrisTrainingCodeEndpoint:
-  #         Type: Api
-  #         Properties:
-  #           Path: /trainings/turtle
-  #           Method: post
-  #           RestApiId: !Ref TetrisAPI
+  PostTurtleTrainingCodeFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./scripts/post_turtle_training_code
+      DockerTag: latest
+    Properties:
+      PackageType: Image
+      Timeout: 60
+      Events:
+        PostTetrisTrainingCodeEndpoint:
+          Type: Api
+          Properties:
+            Path: /trainings/turtle
+            Method: post
+            RestApiId: !Ref TetrisAPI
 
   GetTrainingDetailFunction:
     Type: AWS::Serverless::Function

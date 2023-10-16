@@ -51,8 +51,10 @@ Resources:
       Name: tetris_api
       StageName: tetris_api_stage
       Cors:
-        AllowMethods: "'POST, GET, PUT, OPTIONS'"
+        AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS,PATCH,HEAD'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,Origin,Accept,X-Custom-Header'"
         AllowOrigin: !Sub "'${FrontendOrigin}'"
+        MaxAge: "'-1'"
 
   FunctionLogStack:
     Type: AWS::Serverless::Application
@@ -318,7 +320,48 @@ Resources:
             Path: /trainings/{section}
             Method: get
             RestApiId: !Ref TetrisAPI
-  
+
+  ChatFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      ImageUri: 868265869441.dkr.ecr.ap-northeast-1.amazonaws.com/chat
+      Timeout: 120
+      MemorySize: 512
+      Policies:
+        - AmazonDynamoDBFullAccess
+        - SecretsManagerReadWrite
+      Events:
+        ChatAPP:
+          Type: Api
+          Properties:
+            Path: /chat
+            Method: get
+            RestApiId: !Ref TetrisAPI
+        ChatAPPPost:
+          Type: Api 
+          Properties:
+            Path: /chat
+            Method: post
+            RestApiId: !Ref TetrisAPI
+        ChatAPPPut:
+          Type: Api 
+          Properties:
+            Path: /chat
+            Method: put
+            RestApiId: !Ref TetrisAPI
+        ChatAPPDelete:
+          Type: Api 
+          Properties:
+            Path: /chat
+            Method: delete
+            RestApiId: !Ref TetrisAPI
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./scripts/chat_function
+      DockerTag: python3.9-v1
+        
+
   TetrisApiLayer:
     Type: AWS::Serverless::LayerVersion
     Properties:

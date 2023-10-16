@@ -1,0 +1,6 @@
+{
+  "httpMethod": "POST",
+  "body": "{\"identity_id\": \"id_hoge\", \"input_text\": \"Rustはどんな言語ですか？\", \"character_name\": \"test_user\"}",
+  "resource": "/ask",
+  "path": "/ask"
+}

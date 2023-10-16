@@ -1,0 +1,6 @@
+{
+  "httpMethod": "DELETE",
+  "body": "{\"identity_id\": \"id_hoge\", \"character_name\": \"test_user\"}",
+  "resource": "/ask",
+  "path": "/ask"
+}

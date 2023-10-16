@@ -1,0 +1,7 @@
+{
+    "httpMethod": "POST",
+    "body": "{\"identity_id\": \"id_hoge\", \"input_text\": \"ミノを消した時の点数は？\", \"character_name\": \"test_user\"}",
+    "resource": "/ask",
+    "path": "/ask"
+  }
+  
